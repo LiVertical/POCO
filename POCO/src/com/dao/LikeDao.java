@@ -21,7 +21,7 @@ public class LikeDao extends BaseDao{
 		likes.setUserId(userId);
 		likes.setProductId(productId);
 		likes.setProductName(productName);
-		likes.setCreteTime(new Date());
+		likes.setCreateTime(new Date());
 		this.getSession().save(likes);
 	}
 

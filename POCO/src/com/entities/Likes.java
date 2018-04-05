@@ -16,7 +16,7 @@ public class Likes implements java.io.Serializable {
 	private String productName;
 	private String notifiactionId;
 	private String notifiactionName;
-	private Date creteTime;
+	private Date createTime;
 
 	// Constructors
 
@@ -27,7 +27,7 @@ public class Likes implements java.io.Serializable {
 
 	public Likes(String userId, String id, String productId,
 			String productName, String notifiactionId, String notifiactionName,
-			Date creteTime) {
+			Date createTime) {
 		super();
 		this.userId = userId;
 		this.id = id;
@@ -35,7 +35,7 @@ public class Likes implements java.io.Serializable {
 		this.productName = productName;
 		this.notifiactionId = notifiactionId;
 		this.notifiactionName = notifiactionName;
-		this.creteTime = creteTime;
+		this.createTime = createTime;
 	}
 
 	// Property accessors
@@ -89,13 +89,13 @@ public class Likes implements java.io.Serializable {
 	}
 
 
-	public Date getCreteTime() {
-		return creteTime;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
 
-	public void setCreteTime(Date creteTime) {
-		this.creteTime = creteTime;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 }

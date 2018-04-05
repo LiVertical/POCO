@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	
+	<bean id="userDao" class="com.dao.UserDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="userService" class="com.services.impl.UserService">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	
+	<!-- 注册 -->	
+	<bean id="registDao" class="com.dao.RegistDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="registService" class="com.services.impl.RegistService">
+		<property name="registDao" ref="registDao"></property>
+	</bean>
+	
+	
+	<!-- 登录 -->
+	<bean id="loginDao" class="com.dao.LoginDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="loginService" class="com.services.impl.LoginService">
+		<property name="loginDao" ref="loginDao"></property>
+	</bean>
+	
+	<!-- 验证码的校验 -->
+	
+	<bean id="securityCodeAction" class="com.actions.SecurityCodeAction" scope="prototype">
+	</bean>
+	
+	<!-- 上传图片 -->
+	<bean id="productOperatorDao" class="com.dao.ProductOperatorDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="productOperatorService" class="com.services.impl.ProductOperatorService">
+		<property name="productOperatorDao" ref="productOperatorDao"></property>
+	</bean>
+	
+	<!-- 点赞 -->
+	<bean id="likeDao" class="com.dao.LikeDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="likeService" class="com.services.impl.LikeService">
+		<property name="likeDao" ref="likeDao"></property>
+	</bean>
+	
+	<!-- 收藏 -->
+		<bean id="collectDao" class="com.dao.CollectDao">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+	
+		<bean id="collectService" class="com.services.impl.CollectService">
+		<property name="collectDao" ref="collectDao"></property>
+		</bean>
+	
+	<!-- 评论 -->
+		<bean id="commentsDao" class="com.dao.CommentsDao">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+	
+		<bean id="commentsService" class="com.services.impl.CommentsService">
+		<property name="commentsDao" ref="commentsDao"></property>
+		</bean>
+
+</beans>
+

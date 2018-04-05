@@ -1,0 +1,36 @@
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	background:#464854;
+}
+.regist_box{
+	height:500px;
+	width:500px;
+	background:#fff;
+	margin:50px auto;
+	border-radius:10px;
+	text-align:center;
+}
+.regist{
+	width:100%;
+	padding-top:20px;
+}
+.regist h3{
+	color: #F0F0F0;
+}
+.regist_box input{
+	height:40px;
+	width:300px;
+	border-radius:7px;
+	margin-top:19px;
+	padding-left:9px;
+}
+.btn{
+	width:300px;
+	background:#00BFFF;
+	margin-top:60px;
+	font-size:19px;
+	color:#fff;
+}

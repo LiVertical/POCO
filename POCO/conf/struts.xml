@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 设置浏览器是否缓存静态内容,默认值为true(生产环境下使用),开发阶段最好关闭 -->
+    <constant name="struts.serve.static.browserCache" value="false" />
+    <!-- 当struts的配置文件修改后,系统是否自动重新加载该文件,默认值为false(生产环境下使用),开发阶段最好打开 -->
+    <constant name="struts.configuration.xml.reload" value="true" />
+    <!-- 默认的视图主题 -->
+    <!-- <constant name="struts.ui.theme" value="simple" /> -->
+     <!--解决乱码    -->
+    <constant name="struts.i18n.encoding" value="UTF-8" />
+    <!-- 指定放置临时文件的文件夹 -->
+    <constant name="struts.multipart.saveDir" value="/tmp"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <!-- 开发模式下使用,这样可以打印出更详细的错误信息 -->
+    <constant name="struts.devMode" value="true" />
+	<constant name="struts.action.extension" value="action"></constant>
+    <package name="default2"  extends="struts-default,json-default">
+  	
+ 	 <interceptors>
+ 	 	<!--定义拦截器 -->
+ 	 	<interceptor name="loginInterceptor" class="com.interceptor.AuthenticationInterceptor">
+ 	 		<param name="excludeMethods">
+ 	 		login-adminUserLogin,login-userLogin,check,getCode,generateCode,product-queryProductByCondition
+ 	 		</param>
+ 	 	</interceptor>
+  		<interceptor-stack name="pocoStack">
+  		<interceptor-ref name="loginInterceptor"></interceptor-ref>
+  			
+    	<!-- 定义新的拦截器栈，配置prepare拦截器的alwaysInvokePrepare的参数值为false -->
+  		<interceptor-ref name="paramsPrepareParamsStack">
+  			<param name="prepare.alwaysInvokePrepare">false</param>
+  		</interceptor-ref>
+  		</interceptor-stack>
+  	</interceptors> 
+	 <!-- 重写默认拦截器 -->
+  	 <default-interceptor-ref name="pocoStack"></default-interceptor-ref>  	
+  	 <!-- 定义全局变量，跳转到登录页面 -->
+  	 	<global-results>  
+    		<result name="adminLogin" type="redirectAction">/login-adminLogin</result> 
+    		<result name="userLogin">/login-userLogin</result>
+		</global-results> 
+ 	</package>
+ 	
+ 	<!-- 未登录用户 -->
+ 	<package name="vistor" extends="default2" namespace="/vistor">
+ 		 
+ 		 <action name="queryProductByCondition" class="com.actions.ProductOperatorAction" method="queryProductByCondition">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
+  		 <action name="queryPorductInfosByProductId" class="com.actions.ProductOperatorAction" method="queryPorductInfosByProductId">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
+  		  <action name="queryAllComments" class="com.actions.CommentsAction" method="queryAllComments">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
+  		 <action name="getLikesNum" class="com.actions.LikesAction" method="getLikesNum">
+ 		<result name="success"  type="json">
+			<param name="root">result</param>
+			<param name="excludeNullProperties">true</param>
+		</result> 
+ 	</action>
+  		 
+ 	</package>
+ 	
+ <!-- 普通用户 -->
+ <package name="users" extends="default2" namespace="/user"> 
+  	<!-- 注册 -->
+  	<action name="regist-*" class="com.actions.RegistAction" method="{1}">
+  		<result type="json">
+			<param name="root">result</param>
+			<param name="excludeNullProperties">true</param>
+		</result> 
+  		<interceptor-ref name="pocoStack"></interceptor-ref>
+  	</action> 
+  	
+  	<!--登录 -->
+  	 <action name="login-*" class="com.actions.LoginAction" method="{1}">
+  		<result name="admin">/login/admin.jsp</result>
+  		<result name="success"  type="json">
+			<param name="root">result</param>
+			<param name="excludeNullProperties">true</param>
+		</result> 
+  		<result name="userLogin">/views/userLogin.jsp</result>
+  		<result name="user">/views/mySpace.jsp</result>
+  		<result name="index">/index.jsp</result>
+  		<interceptor-ref name="pocoStack"></interceptor-ref>
+  	</action>
+  	
+  	
+  	<!-- 上传文件 -->   
+    <action name="product-*" class="com.actions.ProductOperatorAction" method="{1}">                  
+	    <result name="upload">views/product-upload.jsp</result>
+	    <result name="preview">views/product-show.jsp</result>
+	    <result name="queryProductByCondition">views/product-show.jsp</result>
+	    <result name="indroduce">/views/product-indroduce.jsp</result>
+  		<result  type="json" name="success">
+			<param name="root">result</param>
+			<param name="excludeNullProperties">true</param>
+		</result> 
+  	    <interceptor-ref name="pocoStack"></interceptor-ref>
+    </action>
+        
+ 
+ 	<!-- 评论 -->
+ 	<action name="addComments" class="com.actions.CommentsAction" method="addComments">
+ 		<result name="success"  type="json">
+			<param name="root">result</param>
+			<param name="excludeNullProperties">true</param>
+		</result> 
+ 	</action>
+ 	
+ 	<!-- 点赞 -->
+ 	<action name="getTags" class="com.actions.LikesAction" method="getTags">
+ 		<result name="success"  type="json">
+			<param name="root">result</param>
+			<param name="excludeNullProperties">true</param>
+		</result> 
+ 	</action>
+	
+	<action name="cancleLike" class="com.actions.LikesAction" method="cancleLike">
+ 		<result name="success"  type="json">
+			<param name="root">result</param>
+			<param name="excludeNullProperties">true</param>
+		</result> 
+ 	</action>
+ 	
+ 	<action name="getProductByUserId" class="com.actions.LikesAction" method="getProductByUserId">
+ 		<result name="success"  type="json">
+			<param name="root">result</param>
+			<param name="excludeNullProperties">true</param>
+		</result> 
+ 	</action>
+ 	
+ 	
+ 	<!-- 收藏 -->
+ 		<action name="addToCollect" class="com.actions.CollectAction" method="addToCollect">
+ 			<result name="success"  type="json">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+ 		</action>
+ 	
+ 		<action name="deleteCollect" class="com.actions.CollectAction" method="deleteCollect">
+ 			<result name="success"  type="json">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+ 		</action>
+ 	
+ 		<action name="queryCollectByUserId" class="com.actions.CollectAction" method="queryCollectByUserId">
+ 			<result name="success"  type="json">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+ 		</action>
+ 		
+ 		<!-- 评论 -->
+ 		<action name="deleteCommentByCommentId" class="com.actions.CommentsAction" method="deleteCommentByCommentId">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
+ 			 <action name="queryAllCommentsByUser" class="com.actions.CommentsAction" method="queryAllCommentsByUser">                  
+  				<result  type="json" name="success">
+					<param name="root">result</param>
+					<param name="excludeNullProperties">true</param>
+				</result> 
+  		 </action>
+   </package>  
+ 
+ 
+ 
+   
+ <!-- 管理员    -->
+   <package name="admins" extends="default2" namespace="/admin">
+   		<action name="user-*" class="com.actions.UserAction" method="{1}">
+	  		<result name="list">/pages/user-list.jsp</result>
+	  		<result name="update">/pages/user-edit.jsp</result>
+	  		<result name="complete">/pages/user-manage.jsp</result>
+	  		<result name="upload">/pages/user-list.jsp</result>
+	  		<result name="person">/pages/user-search.jsp</result>
+	  		<result name="search">/pages/user-info.jsp</result>
+	  		<result name="input">/block/success.jsp</result>
+	  		<result name="delete" type="stream">
+	  			<param name="ContentType">text/html</param>
+	  			<param name="inputName">inputStream</param>
+	  		</result>
+			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+	  		<interceptor-ref name="pocoStack"></interceptor-ref> 
+  		</action>
+  		
+  		<!-- 管理员后台登录 -->
+  		 <action name="login-*" class="com.actions.LoginAction" method="{1}">
+	  		<result name="success"  type="json">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  			<result name="adminUserJsp">/system/sysIndex.jsp</result>
+  			<result name="sys">/admin/admin.jsp</result>
+  		</action>
+  	
+  		<!-- 验证码 -->
+  		<action name="generateCode" class="com.actions.SecurityCodeAction" method="generateCode">
+  			<result name="code" type="stream">
+  				<param name="contentType">image/jpeg</param>
+  				<param name="inputName">imageStream</param>
+  				<param name="bufferSize">2048</param>
+  			</result>
+  		</action>
+ 
+   </package>
+</struts>
+
+
+
+
+
+
+
+

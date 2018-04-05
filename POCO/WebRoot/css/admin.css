@@ -1,0 +1,53 @@
+.ac_article {
+	width: 60%;
+	float: left;
+	min-height: 445px;
+	border-top: 0px;
+}
+.userImg{
+	height:30px;
+	width:30px;
+	margin-top:9px;
+}
+table{
+  border-collapse:collapse;
+  text-align:center;
+}
+
+table,th, td{
+  border: 1px solid black;
+}
+.delBtn{
+	color:#CD8C95;
+}
+.pagination {
+	margin:60px;
+	text-align:center;
+    font-size: 80%;
+    width:90%;
+    float:left;
+}     
+.pagination a {
+    text-decoration: none;
+	border: solid 1px #DDD;
+	color: #CE0C0C;
+}
+
+.pagination a, .pagination span {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.pagination .current {
+    background: #06438f;
+    color: #fff;
+	border: solid 1px #DDD;
+}
+
+.pagination .current.prev, .pagination .current.next{
+	color:#999;
+	border-color:#999;
+	background:#fff;
+}

@@ -6,7 +6,7 @@
 -->
 <hibernate-mapping>
     <class name="com.entities.Users" table="users" catalog="bywork">
-        <id name="userId" type="integer">
+        <id name="userId" type="String">
             <column name="userId" />
             <generator class="native" />
         </id>

@@ -17,7 +17,7 @@ public class ProductInfo implements java.io.Serializable {
 	private String productDesc;
 	private Integer productTypes;
 	private Integer productOrder;
-	private Integer workId;
+	private String workId;
 	private String productUser;
 	private String productRemark;
 	private Integer productDel;
@@ -102,11 +102,11 @@ public class ProductInfo implements java.io.Serializable {
 		this.productOrder = productOrder;
 	}
 
-	public Integer getWorkId() {
+	public String getWorkId() {
 		return this.workId;
 	}
 
-	public void setWorkId(Integer workId) {
+	public void setWorkId(String workId) {
 		this.workId = workId;
 	}
 

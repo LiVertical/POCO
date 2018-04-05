@@ -11,7 +11,6 @@ public class Notifiaction implements java.io.Serializable {
 	// Fields
 
 	private String notifiactionId;
-	private String notifiactionTitle;
 	private String notifiactionInfo;
 	private String userId;
 	private Date createTime;
@@ -30,9 +29,8 @@ public class Notifiaction implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Notifiaction(String notifiactionTitle, String notifiactionInfo,
-			String userId, Date createTime, Integer usefulLife, String curStatus) {
-		this.notifiactionTitle = notifiactionTitle;
+	public Notifiaction(String notifiactionInfo, String userId,
+			Date createTime, Integer usefulLife, String curStatus) {
 		this.notifiactionInfo = notifiactionInfo;
 		this.userId = userId;
 		this.createTime = createTime;
@@ -48,14 +46,6 @@ public class Notifiaction implements java.io.Serializable {
 
 	public void setNotifiactionId(String notifiactionId) {
 		this.notifiactionId = notifiactionId;
-	}
-
-	public String getNotifiactionTitle() {
-		return this.notifiactionTitle;
-	}
-
-	public void setNotifiactionTitle(String notifiactionTitle) {
-		this.notifiactionTitle = notifiactionTitle;
 	}
 
 	public String getNotifiactionInfo() {

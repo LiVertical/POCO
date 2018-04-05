@@ -10,7 +10,7 @@ public class Users implements java.io.Serializable {
 
 	// Fields
 
-	private Integer userId;
+	private String userId;
 	private String userName;
 	private String loginName;
 	private String loginPass;
@@ -53,11 +53,11 @@ public class Users implements java.io.Serializable {
 
 	// Property accessors
 
-	public Integer getUserId() {
+	public String getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

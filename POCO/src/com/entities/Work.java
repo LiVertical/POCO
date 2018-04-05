@@ -10,12 +10,12 @@ public class Work implements java.io.Serializable {
 
 	// Fields
 
-	private Integer workId;
+	private String workId;
 	private String workName;
 	private Date workUploadTime;
 	private String workComment;
 	private String workPath;
-	private Integer productId;
+	private String productId;
 
 	// Constructors
 
@@ -25,7 +25,7 @@ public class Work implements java.io.Serializable {
 
 	/** full constructor */
 	public Work(String workName, Date workUploadTime, String workComment,
-			String workPath, Integer productId) {
+			String workPath, String productId) {
 		this.workName = workName;
 		this.workUploadTime = workUploadTime;
 		this.workComment = workComment;
@@ -35,11 +35,11 @@ public class Work implements java.io.Serializable {
 
 	// Property accessors
 
-	public Integer getWorkId() {
+	public String getWorkId() {
 		return this.workId;
 	}
 
-	public void setWorkId(Integer workId) {
+	public void setWorkId(String workId) {
 		this.workId = workId;
 	}
 
@@ -75,11 +75,11 @@ public class Work implements java.io.Serializable {
 		this.workPath = workPath;
 	}
 
-	public Integer getProductId() {
+	public String getProductId() {
 		return this.productId;
 	}
 
-	public void setProductId(Integer productId) {
+	public void setProductId(String productId) {
 		this.productId = productId;
 	}
 

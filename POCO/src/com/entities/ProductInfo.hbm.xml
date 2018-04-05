@@ -6,7 +6,7 @@
 -->
 <hibernate-mapping>
     <class name="com.entities.ProductInfo" table="productinfo" catalog="bywork">
-        <id name="productId" type="integer">
+        <id name="productId" type="String">
             <column name="product_id" />
             <generator class="native" />
         </id>
@@ -35,7 +35,7 @@
                 <comment>图片顺序</comment>
             </column>
         </property>
-        <property name="workId" type="integer">
+        <property name="workId" type="String">
             <column name="work_id">
                 <comment>作品id</comment>
             </column>

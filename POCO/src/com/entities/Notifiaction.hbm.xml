@@ -10,11 +10,6 @@
             <column name="notifiactionId" length="32" />
             <generator class="native" />
         </id>
-        <property name="notifiactionTitle" type="string">
-            <column name="notifiactionTitle" length="65535">
-                <comment>通知消息的标题</comment>
-            </column>
-        </property>
         <property name="notifiactionInfo" type="string">
             <column name="notifiactionInfo" length="65535" not-null="true">
                 <comment>消息内容</comment>

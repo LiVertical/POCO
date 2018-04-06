@@ -28,10 +28,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   	<div>已发布的通知</div>
   	<div>发布通知
-  		  标题：<input type="text" placeholder="请输入标题" name="notifiactionTitle"><br/>
- 		 通知内容：<textarea name="notifiactionInfo" cols="30" rows="3" align="center"></textarea>
+  		  标题：<input type="text" placeholder="请输入标题" id="notifiactionTitle" name="notifiactionTitle"><br/>
+ 		 通知内容：<textarea id="notifiactionInfo" name="notifiactionInfo" cols="30" rows="3" align="center"></textarea>
   		<button id="submit">发布</button>
   	</div>
   	
   </body>
+  <script type="text/javascript" src="<%=basePath%>/js/jquery-1.9.1.min.js"></script> 
+  <script type="text/javascript" src="<%=basePath%>/js/common.js"></script> 
+  <script type="text/javascript" src="<%=basePath%>/script/notifiaction.js"></script>
 </html>

@@ -15,7 +15,7 @@ import com.services.ISysNotificationService;
 import com.services.IUserService;
 
 public class SysNotificationAction extends ActionSupport{
-	
+	private static final long serialVersionUID = 1L;
 	private ISysNotificationService sysNotificationService;
 	private IUserService userService;
 	
@@ -189,5 +189,10 @@ public class SysNotificationAction extends ActionSupport{
 	public void setResult(JSONObject result) {
 		this.result = result;
 	}
-
+	public Notifiaction getNotifiaction() {
+		return notifiaction;
+	}
+	public void setNotifiaction(Notifiaction notifiaction) {
+		this.notifiaction = notifiaction;
+	}
 }

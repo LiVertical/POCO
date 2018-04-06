@@ -1,6 +1,5 @@
 package com.actions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,6 @@ import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 
 import com.entities.Notifiaction;
-import com.entities.Users;
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.ISysNotificationService;
 import com.services.IUserService;
@@ -31,6 +29,8 @@ public class SysNotificationAction extends ActionSupport{
 	
 	private Notifiaction notifiaction;
 	
+	private List<Notifiaction> notifiactions;
+	
 	/**
 	 * 根据用户ID查询通知集合
 	 * 根据时间倒叙展示
@@ -49,7 +49,10 @@ public class SysNotificationAction extends ActionSupport{
 		result.put("dataList", notifications);
 		return SUCCESS;
 	}
-	
+	/**
+	 * 查看一条通知
+	 * @return
+	 */
 	public String showNotification(){
 		result = new JSONObject();
 		
@@ -88,29 +91,45 @@ public class SysNotificationAction extends ActionSupport{
 	 * @return
 	 */
 	public String addNotification(){
-		List<Users> userList;
-		try {
-			userList = userService.queryUserByCondition(Integer.MAX_VALUE, 1);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-			return ERROR;
-		}
-		for (Users users : userList) {
-//			notifiaction.setUserId(users.getUserId());
-			try {
-				sysNotificationService.add(notifiaction);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		result = new JSONObject();
+		int count = sysNotificationService.adds(notifiaction);
+		result.put("count", count);
 		return SUCCESS;
 	}
 	
 	public String delNotifiaction(){
-		
-		
-		return null;
+		result = new JSONObject();
+		if(notifiactions.size() < 1){
+			result.put("msg", "删除通知少于1条");
+			return ERROR;
+		}
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpSession session = request.getSession();
+		String userId = session.getAttribute("userId").toString();
+		if(userId == null || userId.equals("")){
+			result.put("msg", "获取用户异常");
+			return ERROR;
+		}
+		for (Notifiaction notifiaction2 : notifiactions) {
+			if(notifiaction2 == null && notifiaction2.getNotifiactionGroupId() == null && notifiaction2.getNotifiactionId() == null){
+				result.put("msg", "无效的通知");
+				return ERROR;
+			}
+			if(notifiaction2.getNotifiactionGroupId() != null && !notifiaction2.getNotifiactionGroupId().equals("")
+					&& notifiaction2.getNotifiactionId() != null && !notifiaction2.getNotifiactionId().equals("")){
+				result.put("msg", "异常的通知");
+				return ERROR;
+			}
+			notifiaction2.setUserId(userId);
+			sysNotificationService.delete(notifiaction2);
+		}
+		return SUCCESS;
 	}
+	
+	
+	
+	
+	
 	
 	
 	
@@ -123,11 +142,45 @@ public class SysNotificationAction extends ActionSupport{
 		this.sysNotificationService = sysNotificationService;
 	}
 
+	public IUserService getUserService() {
+		return userService;
+	}
 
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
 
+	public String getNotifiactionId() {
+		return notifiactionId;
+	}
 
+	public void setNotifiactionId(String notifiactionId) {
+		this.notifiactionId = notifiactionId;
+	}
 
+	public String getNotifiactionIds() {
+		return notifiactionIds;
+	}
 
+	public void setNotifiactionIds(String notifiactionIds) {
+		this.notifiactionIds = notifiactionIds;
+	}
+
+	public String getReadType() {
+		return readType;
+	}
+
+	public void setReadType(String readType) {
+		this.readType = readType;
+	}
+
+	public List<Notifiaction> getNotifiactions() {
+		return notifiactions;
+	}
+
+	public void setNotifiactions(List<Notifiaction> notifiactions) {
+		this.notifiactions = notifiactions;
+	}
 
 	public JSONObject getResult() {
 		return result;

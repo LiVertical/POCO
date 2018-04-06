@@ -25,7 +25,13 @@ public interface ISysNotificationService {
 	 * 创建系统通知
 	 * @param notifiaction
 	 */
-	void add(Notifiaction notifiaction);
+	int adds(Notifiaction notifiaction);
+
+	/**
+	 * 删除通知
+	 * @param notifiaction2
+	 */
+	void delete(Notifiaction notifiaction2);
 
 
 }

@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.entities.Notifiaction;
@@ -35,6 +36,11 @@ public class SysNotificationDao extends BaseDao{
 
 	public void add(Notifiaction notifiaction) {
 		this.getSession().save(notifiaction);
+	}
+
+	public void delete(Notifiaction notifiaction2) {
+		String hql = "update Notifiaction as n set n.curStatus=? ,n.updateTime=? ,n.updateUser=? where n.notifiactionId=? or n.notifiactionGroupId=?";
+		getSession().createQuery(hql).setString(0, "0").setDate(1, new Date()).setString(2, notifiaction2.getUserId()).setString(3, notifiaction2.getNotifiactionId()).setString(4, notifiaction2.getNotifiactionGroupId());
 	}
 
 }

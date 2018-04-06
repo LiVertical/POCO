@@ -3,29 +3,33 @@ package com.entities;
 import java.util.Date;
 
 /**
- * Comment entity. @author MyEclipse Persistence Tools
+ * Comments entity. @author MyEclipse Persistence Tools
  */
 
 public class Comments implements java.io.Serializable {
-	
+
+	// Fields
+
 	private String commentId;
 	private String commentUser;
 	private String productId;
 	private Date createTime;
-	private int commentStatus;
 	private String commentDesc;
+	private int commentStatus;
+	
 	
 	public Comments() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	
 	public Comments(String commentId, String commentUser, String productId,
-			Date createTime, int commentStatus) {
+			Date createTime, String commentDesc, int commentStatus) {
 		super();
 		this.commentId = commentId;
 		this.commentUser = commentUser;
 		this.productId = productId;
 		this.createTime = createTime;
+		this.commentDesc = commentDesc;
 		this.commentStatus = commentStatus;
 	}
 	public String getCommentId() {
@@ -52,17 +56,17 @@ public class Comments implements java.io.Serializable {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	public int getCommentStatus() {
-		return commentStatus;
-	}
-	public void setCommentStatus(int commentStatus) {
-		this.commentStatus = commentStatus;
-	}
 	public String getCommentDesc() {
 		return commentDesc;
 	}
 	public void setCommentDesc(String commentDesc) {
 		this.commentDesc = commentDesc;
+	}
+	public int getCommentStatus() {
+		return commentStatus;
+	}
+	public void setCommentStatus(int commentStatus) {
+		this.commentStatus = commentStatus;
 	}
 	
 }

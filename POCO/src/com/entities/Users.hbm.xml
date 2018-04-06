@@ -6,8 +6,8 @@
 -->
 <hibernate-mapping>
     <class name="com.entities.Users" table="users" catalog="bywork">
-        <id name="userId" type="String">
-            <column name="userId" />
+        <id name="userId" type="string">
+            <column name="userId" length="32" />
             <generator class="native" />
         </id>
         <property name="userName" type="string">
@@ -27,7 +27,7 @@
         </property>
         <property name="sex" type="integer">
             <column name="sex">
-                <comment>0：男，1：女</comment>
+                <comment>0ï¼šç"·ï¼Œ1ï¼šå¥³</comment>
             </column>
         </property>
         <property name="faceImg" type="string">
@@ -35,15 +35,15 @@
         </property>
         <property name="role" type="integer">
             <column name="role" not-null="true">
-                <comment>0：普通用户，1：系统用户</comment>
+                <comment>0ï¼šæ™®é€šç"¨æˆ·ï¼Œ1ï¼šç³»ç»Ÿç"¨æˆ·</comment>
             </column>
         </property>
         <property name="createTime" type="timestamp">
-            <column name="createTime" length="19" />
+            <column name="createTime" length="0" />
         </property>
         <property name="curStatus" type="string">
             <column name="curStatus" length="3">
-                <comment>0:注销状态，1：正常状态</comment>
+                <comment>0:æ³¨é"€çŠ¶æ€�ï¼Œ1ï¼šæ­£å¸¸çŠ¶æ€�</comment>
             </column>
         </property>
     </class>

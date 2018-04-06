@@ -11,11 +11,16 @@ public class Notifiaction implements java.io.Serializable {
 	// Fields
 
 	private String notifiactionId;
+	private String notifiactionTitle;
 	private String notifiactionInfo;
 	private String userId;
 	private Date createTime;
 	private Integer usefulLife;
 	private String curStatus;
+	private String notifiactionGroupId;
+	private Date updateTime;
+	private String updateUser;
+	private String createUser;
 
 	// Constructors
 
@@ -29,13 +34,20 @@ public class Notifiaction implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Notifiaction(String notifiactionInfo, String userId,
-			Date createTime, Integer usefulLife, String curStatus) {
+	public Notifiaction(String notifiactionTitle, String notifiactionInfo,
+			String userId, Date createTime, Integer usefulLife,
+			String curStatus, String notifiactionGroupId, Date updateTime,
+			String updateUser, String createUser) {
+		this.notifiactionTitle = notifiactionTitle;
 		this.notifiactionInfo = notifiactionInfo;
 		this.userId = userId;
 		this.createTime = createTime;
 		this.usefulLife = usefulLife;
 		this.curStatus = curStatus;
+		this.notifiactionGroupId = notifiactionGroupId;
+		this.updateTime = updateTime;
+		this.updateUser = updateUser;
+		this.createUser = createUser;
 	}
 
 	// Property accessors
@@ -46,6 +58,14 @@ public class Notifiaction implements java.io.Serializable {
 
 	public void setNotifiactionId(String notifiactionId) {
 		this.notifiactionId = notifiactionId;
+	}
+
+	public String getNotifiactionTitle() {
+		return this.notifiactionTitle;
+	}
+
+	public void setNotifiactionTitle(String notifiactionTitle) {
+		this.notifiactionTitle = notifiactionTitle;
 	}
 
 	public String getNotifiactionInfo() {
@@ -86,6 +106,38 @@ public class Notifiaction implements java.io.Serializable {
 
 	public void setCurStatus(String curStatus) {
 		this.curStatus = curStatus;
+	}
+
+	public String getNotifiactionGroupId() {
+		return this.notifiactionGroupId;
+	}
+
+	public void setNotifiactionGroupId(String notifiactionGroupId) {
+		this.notifiactionGroupId = notifiactionGroupId;
+	}
+
+	public Date getUpdateTime() {
+		return this.updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public String getUpdateUser() {
+		return this.updateUser;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+
+	public String getCreateUser() {
+		return this.createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
 	}
 
 }

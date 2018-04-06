@@ -10,7 +10,7 @@ public class ProductInfo implements java.io.Serializable {
 
 	// Fields
 
-	private Integer productId;
+	private String productId;
 	private String productName;
 	private Date uploadTime;
 	private String productPath;
@@ -30,8 +30,9 @@ public class ProductInfo implements java.io.Serializable {
 
 	/** full constructor */
 	public ProductInfo(String productName, Date uploadTime, String productPath,
-			Integer productTypes, Integer productOrder, Integer workId,
-			String productUser, String productRemark, Integer productDel) {
+			String productDesc, Integer productTypes, Integer productOrder,
+			String workId, String productUser, String productRemark,
+			Integer productDel) {
 		this.productName = productName;
 		this.uploadTime = uploadTime;
 		this.productPath = productPath;
@@ -46,11 +47,11 @@ public class ProductInfo implements java.io.Serializable {
 
 	// Property accessors
 
-	public Integer getProductId() {
+	public String getProductId() {
 		return this.productId;
 	}
 
-	public void setProductId(Integer productId) {
+	public void setProductId(String productId) {
 		this.productId = productId;
 	}
 
@@ -79,7 +80,7 @@ public class ProductInfo implements java.io.Serializable {
 	}
 
 	public String getProductDesc() {
-		return productDesc;
+		return this.productDesc;
 	}
 
 	public void setProductDesc(String productDesc) {

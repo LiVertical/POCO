@@ -40,6 +40,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}
 				} 
 		  }
+	       $(function(){
+		    	 loadSrc('<%=basePath%>/system/works.jsp')
+		 });
 	</script>
   </head>  
 <body>
@@ -72,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</nav>
 	        <div class="rightBody">
 	        	<article class="ac_article" style="width:94%;background:#fff;margin:0 auto">
-					<iframe id="mainFrame" style="width: 100%;min-height:300px;"  frameborder="0" scrolling="no" onload="iframeHeight()"></iframe>
+					<iframe id="mainFrame" style="width: 100%;min-height:500px;"  frameborder="0" scrolling="no" onload="iframeHeight()"></iframe>
 				</article>
 	        </div>
    </div>

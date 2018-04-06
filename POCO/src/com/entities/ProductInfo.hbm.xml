@@ -6,28 +6,27 @@
 -->
 <hibernate-mapping>
     <class name="com.entities.ProductInfo" table="productinfo" catalog="bywork">
-        <id name="productId" type="String">
-            <column name="product_id" />
-            <generator class="native" />
+        <id name="productId" type="string">
+            <column name="product_id" length="32" />
+            <generator class="uuid" />
         </id>
         <property name="productName" type="string">
             <column name="product_name" length="55" />
         </property>
-        <property name="uploadTime" type="date">
-            <column name="upload_time" length="10" />
+        <property name="uploadTime" type="timestamp">
+            <column name="upload_time" length="0" />
         </property>
         <property name="productPath" type="string">
-            <column name="product_path" length="65535">
+            <column name="product_path">
                 <comment>路径</comment>
             </column>
         </property>
         <property name="productDesc" type="string">
-            <column name="product_desc" length="65535">
-            </column>
+            <column name="product_desc" length="65535" />
         </property>
         <property name="productTypes" type="integer">
             <column name="product_types">
-                <comment>图片类型</comment>
+                <comment>作品类型</comment>
             </column>
         </property>
         <property name="productOrder" type="integer">
@@ -35,19 +34,19 @@
                 <comment>图片顺序</comment>
             </column>
         </property>
-        <property name="workId" type="String">
-            <column name="work_id">
+        <property name="workId" type="string">
+            <column name="work_id" length="32">
                 <comment>作品id</comment>
             </column>
         </property>
         <property name="productUser" type="string">
             <column name="product_user" length="44">
-                <comment>作者</comment>
+                <comment>上传人</comment>
             </column>
         </property>
         <property name="productRemark" type="string">
             <column name="product_remark" length="111">
-                <comment>标识码</comment>
+                <comment>标记</comment>
             </column>
         </property>
         <property name="productDel" type="integer">

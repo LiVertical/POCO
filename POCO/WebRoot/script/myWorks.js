@@ -35,7 +35,7 @@ function queryProducts(currentPage,userName) {
 				 if (result.totals > 0) {
 					 pageSize = (result.totals > recordSize ? recordSize: result.totals);
 					 for (var i = 0; i < pageSize; i++) {
-						 if(i%2==0){
+						 if(i%2 == 0){
 							 tbody += "<tr class='tr_even'>";
 						}else{
 								tbody += "<tr class='tr_odd'>";
@@ -43,6 +43,7 @@ function queryProducts(currentPage,userName) {
 						tbody += "<td><input class='hide' name='product' type='checkbox' value='"+result.productInfos[i].productId+"'>"+result.productInfos[i].productName+"</td> "
 							  + "<td><img style='height:50px;width:50px' src='/POCO/" + result.productInfos[i].productPath+ "'></td>" 
 							  +"<td>"+ result.productInfos[i].productDesc+ "</td>"
+							  +"<td>"+ types(result.productInfos[i].productTypes)+ "</td>"
 							  + "<td>"+ result.productInfos[i].uploadTime.substring(0,16) + "</td>"
 							  +"<td><button class='button' onclick='delBatch()'>删除</button></td>";
 					$("#dataDisplay").append(tbody);
@@ -132,7 +133,19 @@ var deleteCollect = function(productId){
 			}
 		},'json');
 };
-
+//判断作品类型
+function types(type){
+	 switch(type){
+	 case 1: return "山水";break;
+	 case 2: return "花鸟";break;
+	 case 3: return "人物";break;
+	 case 4: return "建筑";break;
+	 case 5: return "生态";break;
+	 case 6: return "纪实";break;
+	 case 7: return "LOMO";break;
+	 case 8: return "风景";break;
+ }
+}
 
 
 

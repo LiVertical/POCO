@@ -1,4 +1,4 @@
-$(function(){
+$(document).ready(function() {
 	queryProducts(100, 1, 0);
 });
 
@@ -26,9 +26,9 @@ function queryProducts(proType, currentPage, isFirst) {
 						  + "</p><p>上传时间："
 						  + result.productInfos[i].uploadTime.substring(0,16)
 						  + "</p><p>&nbsp;</p><a href=" + getRootPath() + "/views/productDetails.jsp?productId=" + result.productInfos[i].productId+">点我去评论</a></br>" 
-						  +"<button id='like' onclick='like("+result.productInfos[i].productId+",&quot;"+result.productInfos[i].productName+"&quot;)'>顶我</button>"
+						  +"<button id='like' onclick='like("+result.productInfos[i].productId+",&quot;"+result.productInfos[i].productName+"&quot;"+")'>顶我</button>"
 						  +"<button id='noLike' onclick='noLike("+result.productInfos[i].productId+")'>踩我</button><br/>"
-						  +"<button id='collect' class='collect' onclick='addCollect("+result.productInfos[i].productId+")'>收藏</button>" 
+						  +"<button id='collect' class='collect' onclick='addCollect("+result.productInfos[i].productId+",&quot;"+result.productInfos[i].productName+"&quot;"+")'>收藏</button>" 
 						  +"<button id='cancleColl' class='collect' onclick='deleteCollect("+result.productInfos[i].productId+")'>取消收藏</button></div></li>";
 						$("#p_content").append(tbody);
 					}
@@ -55,7 +55,7 @@ function queryProducts(proType, currentPage, isFirst) {
 			}
 	});
 };
-
+//查看作品详情
 var queryProductInfos = function(productId){
 	window.location.href = getRootPath() + "/views/productDetails.jsp?productId=" + productId;
 }; 
@@ -77,7 +77,7 @@ var like = function(productId,productName){
 };
 
 //取消点赞
-var like = function(productId){
+var nolike = function(productId){
 	var url = getRootPath() + "/user/getTags.action";
 	var param = {
 			productId:productId,
@@ -93,7 +93,7 @@ var like = function(productId){
 };
 
 //踩
-var like = function(productId){
+var likes = function(productId){
 	var url = getRootPath() + "/user/getTags.action";
 	var param = {
 			productId:productId,
@@ -108,8 +108,8 @@ var like = function(productId){
 };
 
 //添加收藏
-function addCollect(productId){
-	$.post(getRootPath() + "/user/addToCollect.action?productId="+productId, function(data){
+function addCollect(productId,productName){
+	$.post(getRootPath() + "/user/addToCollect.action?productId="+productId+"&productName="+productName, function(data){
 		if(data.returnCode == '00'){
 			alert("收藏成功！");
 			$("#collect").attr("disabled", true);

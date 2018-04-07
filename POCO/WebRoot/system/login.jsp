@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<img src="<%=basePath%>admin/generateCode.action" onclick="this.src=this.src+'?'" title="点击图片刷新验证码" />
 			</div>
 		</div>
-		<input class="sucBtn" value="登录" type="submit" id="loginBtn">
+		<input class="subBtn" value="登录" type="submit" id="loginBtn">
 				<br/>
 	</form>
 </div>

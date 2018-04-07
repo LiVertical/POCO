@@ -96,7 +96,7 @@ public class LoginAction extends ActionSupport{
 		if(role == 1){//系统用户
 			return "adminLogin";
 		}else{
-		return "index";
+		return "logOut";
 	}
 }
 

@@ -227,6 +227,7 @@
 			</result> 
   			<result name="adminUserJsp">/system/sysIndex.jsp</result>
   			<result name="sys">/admin/admin.jsp</result>
+  			<result name="logOut">/system/login.jsp</result>
   		</action>
   	
   		<!-- 验证码 -->

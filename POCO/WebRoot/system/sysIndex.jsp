@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </div>
      <div class="header">
          <ul>
-			<li><a onclick="jumpUpdateIndex();" href="#" >修改密码</a></li>
+			<li onclick="loadSrc('<%=basePath%>system/updatePwd.jsp',this.id)">修改密码</li>
 			<li><a href="<%=basePath%>admin/login-loginOut.action">退出登录</a></li>
          </ul>
    </div> <!-- END Header -->

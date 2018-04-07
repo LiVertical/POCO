@@ -1,0 +1,27 @@
+.adminRegist{
+	padding-top: 30px;
+}
+.adminRegist input{
+	float:left;
+	width:200px;
+	-webkit-border-radius:6px;
+	outline:none;
+	border:1px solid #f9f9f9;
+}
+.regBtn{
+	border-radius:4px;
+	border:none;
+	width:300px;
+	background:#06438f;
+	margin-top:60px;
+	font-size:19px;
+	color:#fff;
+	height:40px;
+}
+.boder-radius{
+     -webkit-border-radius:6px;//适配以webkit为核心的浏览器(chrome、safari等)
+     -moz-border-radius:6px;//适配firefox浏览器
+     -ms-border-radius:6px;//适配IE浏览器
+     -o-border-radius:6px;//适配opera浏览器
+     border-radius:6px;//适配所有浏览器(需要放在最后面，类似于if..else if..else..)
+}

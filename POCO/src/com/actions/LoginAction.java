@@ -42,7 +42,7 @@ public class LoginAction extends ActionSupport{
 			HttpServletRequest request = ServletActionContext.getRequest();
 			HttpSession session = request.getSession();
 			session.setAttribute("loginName", loginName);
-			session.setAttribute("loginPwd", loginPass);
+			session.setAttribute("loginPass", loginPass);
 			role = loginService.queryUserRole(loginName, loginPass);
 			loginService.doAdminUserLogin(loginName, loginPass, role);	
 			logger.info("admin's session:"+session.getAttribute("loginName"));
@@ -80,7 +80,7 @@ public class LoginAction extends ActionSupport{
 	
 	//注销
 	public String loginOut(){
-		logger.info("Loginout start·····");
+		logger.info("LoginAction.loginOut start·····");
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest();
 			HttpSession session = request.getSession();

@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <div class="header">
          <ul>
 			<li><a onclick="jumpUpdateIndex();" href="#" >修改密码</a></li>
-			<li><a href="<%=basePath%>login-loginOut.action">退出登录</a></li>
+			<li><a href="<%=basePath%>admin/login-loginOut.action">退出登录</a></li>
          </ul>
    </div> <!-- END Header -->
    <div class="main">

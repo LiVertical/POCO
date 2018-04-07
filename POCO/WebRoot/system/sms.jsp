@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 														+ "<td>" + isMan + "</td>"
 														+ "<td>" + result.userInfos[i].age+ "</td>" 
 														+ "<td>" + result.userInfos[i].email + "</td>" 
-														+ "<td><img src='" + getRootPath() + "/img/icons/delete.jpg' class='delBtn' onclick='deleteUser(&quot;"+result.userInfos[i].userId+"&quot;)'></td></tr>";
+														+ "<td><img style='height:30px;width:44px' src='" + getRootPath() + "/img/icons/delete.jpg' class='delBtn' onclick='deleteUser(&quot;"+result.userInfos[i].userId+"&quot;)'></td></tr>";
 											}
 										}
 									}

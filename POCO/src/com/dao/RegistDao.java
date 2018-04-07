@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 
 import com.entities.Users;
+import com.util.MD5;
 import com.util.UUIDUtil;
 
 public class RegistDao extends BaseDao{
@@ -37,7 +38,7 @@ public class RegistDao extends BaseDao{
 			user.setUserId(UUIDUtil.generateUUID());
 			user.setLoginName(loginName);
 			user.setRole(1);
-			user.setLoginPass(loginPwd);
+			user.setLoginPass(MD5.getMD5ofString(loginPwd));
 			user.setUserName(userName);
 			user.setCreateTime(new Date());
 			user.setCurStatus("1");

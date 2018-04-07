@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.dao.LoginDao;
 import com.entities.Users;
 import com.services.ILoginService;
+import com.util.MD5;
 
 public class LoginService implements ILoginService{
 	private LoginDao loginDao;
@@ -29,8 +30,8 @@ public class LoginService implements ILoginService{
 	}
 	
 	@Override
-	public List<Users> doAdminUserLogin(String loginName, String loginPass, int role) {
-		return loginDao.findAdminUserByNameAndPwd(loginName, loginPass, role);
+	public List<Users> doAdminUserLogin(String loginName, String loginPass, int role) {		
+		return loginDao.findAdminUserByNameAndPwd(loginName, MD5.getMD5ofString(loginPass), role);
 	}
 	
 	//查询用户身份

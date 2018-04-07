@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li><span id="userImg"></span>
 						<ul class="loginCenter" style="display:none">
 								<li onclick="gotoMyWorks('${sessionScope.loginName }')">我的空间</li>
-								<li><a href="">账号管理</a></li>
+								<li><a href="<%=basePath%>/views/accountManage.jsp">账号管理</a></li>
 								<li><a href="">系统通知</a></li>
 								<li><a href="<%=basePath%>user/login-loginOut.action">退出登录</a></li>
 						</ul>

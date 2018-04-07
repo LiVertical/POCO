@@ -86,6 +86,7 @@
 		</bean>
 		<bean id="sysNotificationService" class="com.services.impl.SysNotificationService">
 			<property name="sysNotificationDao" ref="sysNotificationDao"></property>
+			<property name="userDao" ref="userDao"></property>
 		</bean>
 
 </beans>

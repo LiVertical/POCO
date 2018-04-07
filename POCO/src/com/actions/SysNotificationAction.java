@@ -92,6 +92,17 @@ public class SysNotificationAction extends ActionSupport{
 	 */
 	public String addNotification(){
 		result = new JSONObject();
+		if(notifiaction.getNotifiactionTitle() == null || notifiaction.getNotifiactionInfo() == null){
+			return ERROR;
+		}
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpSession session = request.getSession();
+		String userId = session.getAttribute("userId").toString();
+		if(userId == null || userId.equals("")){
+			result.put("msg", "获取用户异常");
+			return ERROR;
+		}
+		notifiaction.setCreateUser(userId);
 		int count = sysNotificationService.adds(notifiaction);
 		result.put("count", count);
 		return SUCCESS;

@@ -41,9 +41,14 @@ public class LoginDao extends BaseDao {
 		return user;
 	}
 	
-	public List<Users> findAdminUserByNameAndPwd(String loginName, String loginPwd, int role){
+	public Users findAdminUserByNameAndPwd(String loginName, String loginPwd, int role){
 		String hql = "FROM Users WHERE loginName = ? AND loginPass = ? AND role = ?";
-		return getSession().createQuery(hql).setString(0, loginName).setString(1, loginPwd).setInteger(2, role).list();
+		List<Users> list = (List<Users>)getSession().createQuery(hql).setString(0, loginName).setString(1, loginPwd).setInteger(2, role).list();
+		if(list.size() > 0){
+			return list.get(0);
+		}else{
+			return null;
+		}
 	}
 	
 	public Integer doQueryUserRole(String loginName, String loginPass) {

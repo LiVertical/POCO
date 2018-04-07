@@ -41,11 +41,15 @@ public class LoginAction extends ActionSupport{
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest();
 			HttpSession session = request.getSession();
-			session.setAttribute("loginName", loginName);
-			session.setAttribute("loginPass", loginPass);
 			role = loginService.queryUserRole(loginName, loginPass);
-			loginService.doAdminUserLogin(loginName, loginPass, role);	
-			logger.info("admin's session:"+session.getAttribute("loginName"));
+			Users userLogin = loginService.doAdminUserLogin(loginName, loginPass, role);
+			if(userLogin != null){
+				session.setAttribute("loginName", userLogin.getUserName());
+				session.setAttribute("userId", userLogin.getUserId());
+				logger.info("admin's session:"+session.getAttribute("loginName"));
+			}else{
+				throw new Exception("帐号密码错误");
+			}
 		}catch (Exception e) {
 			logger.error("登录失败",e);
 			return "sys";

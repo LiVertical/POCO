@@ -1,5 +1,6 @@
 package com.services.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.dao.SysNotificationDao;
@@ -29,28 +30,28 @@ public class SysNotificationService implements ISysNotificationService {
 
 	@Override
 	public int adds(Notifiaction notifiaction) {
-		String flag = "Y";
+		String uuid = UUIDUtil.generateUUID();
 		int count = 0;
 		List<Users> userList;
 		try {
-			userList = userDao.getAllByPage(Integer.MAX_VALUE, 1);
+			userList = userDao.queryUserInfo(Integer.MAX_VALUE, 1);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			return count;
 		}
 		
 		for (Users users : userList) {
-			String uuid = UUIDUtil.generateUUID();
-			if(flag.equals("Y")){
-				notifiaction.setNotifiactionGroupId(uuid);
-				flag = uuid;
-			}else{
-				notifiaction.setNotifiactionGroupId(uuid);
-			}
-			notifiaction.setNotifiactionId(uuid);
-			notifiaction.setUserId(users.getUserId());
+			Notifiaction nf = new Notifiaction();
+			nf.setNotifiactionGroupId(uuid);
+			nf.setUserId(users.getUserId());
+			nf.setCreateTime(new Date());
+			nf.setUsefulLife(-1);
+			nf.setCurStatus("1");
+			nf.setNotifiactionInfo(notifiaction.getNotifiactionInfo());
+			nf.setNotifiactionTitle(notifiaction.getNotifiactionTitle());
+			nf.setCreateUser(notifiaction.getCreateUser());
 			try {
-				sysNotificationDao.add(notifiaction);
+				sysNotificationDao.add(nf);
 				count++;
 			} catch (Exception e) {
 				e.printStackTrace();

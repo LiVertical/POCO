@@ -29,12 +29,18 @@ public class LoginService implements ILoginService{
 		return b;
 	}
 	
+	/**
+	 * 查詢用戶身份
+	 * @param loginName
+	 * @param loginPass
+	 * @param role
+	 * @return
+	 */
 	@Override
 	public List<Users> doAdminUserLogin(String loginName, String loginPass, int role) {		
 		return loginDao.findAdminUserByNameAndPwd(loginName, MD5.getMD5ofString(loginPass), role);
 	}
-	
-	//查询用户身份
+
 	@Override
 	public Integer queryUserRole(String loginName, String loginPass) {
 		int role = 0;

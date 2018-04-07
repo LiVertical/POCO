@@ -17,14 +17,14 @@
     background:#3B3B3B;
     position: relative;
 }
-div:link {/* δ���ʵ����� */
+div:link {
 	color: #FF0000;
 }     
-.loginCenter:visited {/* �ѷ��ʵ����� */
+.loginCenter:visited {
 	color: #00FF00;
 	display:block;
 }  
-.loginCenter:hover {/* ���������ͣ�������� */
+.loginCenter:hover {
 	color: #FF00FF;
 	display:block;
 }    
@@ -48,7 +48,7 @@ div:link {/* δ���ʵ����� */
 	background: white;
 	height: 100%;
 	font-size: 13px;
-	font-family: "΢���ź�", "����", Arial;
+	font-family: "微软雅黑", Arial;
     }
 	#developCount span{
 	margin:0 15px;

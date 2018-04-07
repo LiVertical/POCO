@@ -2,11 +2,16 @@ package com.dao;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
 import com.entities.Users;
+import com.util.MD5;
 
 public class UserDao extends BaseDao{
+	
+	Logger logger = Logger.getLogger(this.getClass());
 	
 	//删除用户信息
 	public void delete(String userId) {		
@@ -56,5 +61,15 @@ public class UserDao extends BaseDao{
 		String hql = "update Users u set u.age = ?,u.email=?,u.sex=? where u.userId = ?";
 		getSession().createQuery(hql).setInteger(0, age).setString(1, email).setString(2, sex).setString(3, userId).executeUpdate();
 	}
-	
+
+	public void doUpdate(String userId, String newPass) {
+		try {
+			String hql = "update Users u set u.loginPass = '" + MD5.getMD5ofString(newPass)+"' WHERE u.userId='" + userId + "'";
+			getSession().createQuery(hql).executeUpdate();
+		} catch (HibernateException e) {
+			logger.error("更新用户密码异常", e);
+		}
+	}
+
+
 }

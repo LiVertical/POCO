@@ -20,5 +20,8 @@ public interface IUserService {
 	//更新用户信息
 	void doSaveOrUpdateUserInfo(String userId, int age, String email, String sex);
 
+	//更新用户密码
+	void doUpdatePass(String userId, String newPass);
+
 
 }

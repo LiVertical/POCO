@@ -229,7 +229,15 @@
   			<result name="sys">/admin/admin.jsp</result>
   			<result name="logOut">/system/login.jsp</result>
   		</action>
-  	
+  		
+  		<!-- 修改密码 -->
+  		<action name="updatePass" class="com.actions.UserAction" method="updatePass">
+  			<result type="json">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+ 	 	</action> 
+ 	 	
   		<!-- 验证码 -->
   		<action name="generateCode" class="com.actions.SecurityCodeAction" method="generateCode">
   			<result name="code" type="stream">

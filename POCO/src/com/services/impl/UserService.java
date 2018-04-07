@@ -9,6 +9,7 @@ import com.entities.Users;
 import com.services.IUserService;
 
 public class UserService implements IUserService{
+	
 	private UserDao userDao;
 	Logger logger = Logger.getLogger(this.getClass());
 	
@@ -47,6 +48,12 @@ public class UserService implements IUserService{
 	public List<Users> getAllByPage(int pageSize,int page){
 		List<Users> users = userDao.getAllByPage(pageSize, page);
 		return users;
+	}
+	
+	//更新密码
+	@Override
+	public void doUpdatePass(String userId, String newPass) {
+		userDao.doUpdate(userId, newPass);
 	}
 	
 	public UserDao getUserDao() {

@@ -48,6 +48,8 @@ public class UserAction extends ActionSupport{
 	private int age;
 	private String email;
 	private String sex;
+	private String newPass;
+	private String oldPass;
 	
 	Logger logger = Logger.getLogger(this.getClass());
 
@@ -157,7 +159,7 @@ public class UserAction extends ActionSupport{
 			String arrix = uploadFileName.substring(uploadFileName.lastIndexOf(".")+1);
 			//得到新的图片名
 			String newFileName = new Date().getTime()+"."+arrix;
-			logger.info("�µ��ļ���:"+newFileName);
+			logger.info("后缀名:"+newFileName);
 			File file = new File(ServletActionContext.getServletContext().getRealPath("/images"));
 			logger.info("file:"+file);
 			//如果文件夹不存在则创建
@@ -246,6 +248,30 @@ public class UserAction extends ActionSupport{
 		
 		return SUCCESS;
 	}
+	
+	//更新密码
+	public String updatePass(){
+		logger.info("UserAction.updatePass start······");
+		result = new JSONObject();
+		if(StringUtils.isBlank(newPass)||StringUtils.isBlank(oldPass)){
+			result.put("returnCode", "10");
+			result.put("returnMsg", "参数错误");
+			return SUCCESS;
+		}
+		try {
+			HttpServletRequest request = ServletActionContext.getRequest(); 
+			HttpSession session = request.getSession(); 
+			String userId = session.getAttribute("userId").toString();
+			userService.doUpdatePass(userId, newPass);
+		} catch (Exception e) {
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部徐服务器异常");
+			logger.error("更新用户密码异常！", e);
+		}
+		return SUCCESS;
+	}
+	
+	
 
 	public File getUpload() {
 		return upload;
@@ -367,6 +393,22 @@ public class UserAction extends ActionSupport{
 
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+
+	public String getNewPass() {
+		return newPass;
+	}
+
+	public void setNewPass(String newPass) {
+		this.newPass = newPass;
+	}
+
+	public String getOldPass() {
+		return oldPass;
+	}
+
+	public void setOldPass(String oldPass) {
+		this.oldPass = oldPass;
 	}
 	
 }

@@ -37,14 +37,14 @@ public class LoginService implements ILoginService{
 	 * @return
 	 */
 	@Override
-	public List<Users> doAdminUserLogin(String loginName, String loginPass, int role) {		
+	public Users doAdminUserLogin(String loginName, String loginPass, int role) {		
 		return loginDao.findAdminUserByNameAndPwd(loginName, MD5.getMD5ofString(loginPass), role);
 	}
 
 	@Override
 	public Integer queryUserRole(String loginName, String loginPass) {
 		int role = 0;
-		role = loginDao.doQueryUserRole(loginName, loginPass); 
+		role = loginDao.doQueryUserRole(loginName, MD5.getMD5ofString(loginPass)); 
 		return role;
 	}
 

@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 
 import com.entities.Users;
+import com.util.MD5;
 
 public class LoginDao extends BaseDao {
 	Logger logger = Logger.getLogger(this.getClass());

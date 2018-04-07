@@ -23,6 +23,7 @@
 	margin: 10px auto;
 	border-radius:5px;
 	padding-left:10px;
+	outline:none;
 }
 
 .login img {

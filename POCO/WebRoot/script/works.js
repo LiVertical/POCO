@@ -5,7 +5,7 @@ $(function() {
 var initUserData = function(isFirst) {
 	var recordSize = 6;
 	var currentPage = 1;
-	$.getJSON(getRootPath()+"/product-queryAllProducts.action?currentPage="+ currentPage + "&recordSize=" + recordSize,
+	$.getJSON(getRootPath()+"/user/product-queryAllProducts.action?currentPage="+ currentPage + "&recordSize=" + recordSize,
 					function(result) {
 						$("#dataDisplay").empty();
 						if (result.returnCode == "00") {
@@ -31,11 +31,11 @@ var initUserData = function(isFirst) {
 										 }
 										 tbody += "<tr><td>"+ (i+1) + "</td>"
 													+ "<td><img class='product' src='" + getRootPath() + "/" + result.productInfos[i].productPath + "'</td>"
-													+ "<td>" + result.productInfos[i].productDesc + "</td>"
+													+ "<td style='word-break'>" + result.productInfos[i].productDesc + "</td>"
 													+ "<td>" + result.productInfos[i].uploadTime.substring(0,16) + "</td>"
 													+ "<td>" + productType+ "</td>" 
 													+ "<td>" + result.productInfos[i].productUser + "</td>" 
-													+ "<td><a class='delBtn' onclick='deleteProduct("+result.productInfos[i].productId+")'>删除</a></td></tr>";
+													+ "<td><img style='height:30px;width:44px' src='"+getRootPath()+"/img/icons/delete.jpg' class='delBtn' onclick='deleteProduct("+result.productInfos[i].productId+")'></td></tr>";
 										}
 									}
 									$("#dataDisplay").append(tbody);
@@ -63,7 +63,7 @@ var initUserData = function(isFirst) {
 		};
 		
 		var deleteProduct = function(productId){
- 		   $.post(getRootPath() + "/product-deleteProductInfo.action?productId=" + productId, function (data) {
+ 		   $.post(getRootPath() + "/user/product-deleteProductInfo.action?productId=" + productId, function (data) {
         	if (data.returnCode == '00') {
            	alert("删除成功");
            		window.location.reload(); 

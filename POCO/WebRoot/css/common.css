@@ -17,19 +17,22 @@
     background:#3B3B3B;
     position: relative;
 }
-div:link {/* Î´·ÃÎÊµÄÁ´½Ó */
+div:link {/* Î´ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ */
 	color: #FF0000;
 }     
-.loginCenter:visited {/* ÒÑ·ÃÎÊµÄÁ´½Ó */
+.loginCenter:visited {/* ï¿½Ñ·ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ */
 	color: #00FF00;
 	display:block;
 }  
-.loginCenter:hover {/* µ±ÓÐÊó±êÐüÍ£ÔÚÁ´½ÓÉÏ */
+.loginCenter:hover {/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 	color: #FF00FF;
 	display:block;
 }    
-  *{margin:0px;padding:0px;}
-    #developCount{
+*{
+	margin:0px;
+	padding:0px;
+}
+#developCount{
 	width:100%;
 	height:50px;
 	border:1px solid;
@@ -45,7 +48,7 @@ div:link {/* Î´·ÃÎÊµÄÁ´½Ó */
 	background: white;
 	height: 100%;
 	font-size: 13px;
-	font-family: "Î¢ÈíÑÅºÚ", "ËÎÌå", Arial;
+	font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½", "ï¿½ï¿½ï¿½ï¿½", Arial;
     }
 	#developCount span{
 	margin:0 15px;

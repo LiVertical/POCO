@@ -26,6 +26,7 @@ body{
 	border-radius:7px;
 	margin-top:19px;
 	padding-left:9px;
+	outline:none;
 }
 .btn{
 	width:300px;

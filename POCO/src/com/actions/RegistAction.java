@@ -1,5 +1,4 @@
 package com.actions;
-
 import java.io.InputStream;
 
 import net.sf.json.JSONObject;
@@ -68,7 +67,7 @@ public class RegistAction extends ActionSupport{
 		} catch (Exception e) {
 			result.put("returnCode", "-1");
 			result.put("returnMsg", "用户注册失败，服务器异常");
-			logger.info("用户注册失败，内部服务器异常！", e);
+			logger.error("用户注册失败，内部服务器异常！", e);
 		}
 		return SUCCESS;
 	}

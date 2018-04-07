@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a class="userName">${sessionScope.loginName}</a>
 			    </s:else>
 		    </li>
-            <li><a href="<%=basePath%>/login-out.action">退出登陆</a></li>
+            <li><a href="<%=basePath%>/login-loginOut.action">退出登陆</a></li>
          </ul>
         </div> <!-- END Header -->
         <article class="ac_article" style="width:94%;background:#fff;margin:0 auto">

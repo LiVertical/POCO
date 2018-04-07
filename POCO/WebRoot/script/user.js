@@ -18,9 +18,10 @@ var gotoCompleteUserInfo = function(){
 };
 
 var initUserInfo = function(){
-	$.post(getRootPath() + '/user-getUserInfo.action',function(data){
+	$.post(getRootPath() + '/admin/user-getUserInfo.action',function(data){
 		if(data.returnCode == '00'){
 			console.log("success");
+			if(data.role != '2'){
 			$("#userId").val(data.userId);
 			 $("img").attr("src", getRootPath()+"/"+data.userImg);
 			$("#userName").val(data.userName);
@@ -33,7 +34,7 @@ var initUserInfo = function(){
 			}
 		}else{
 			console.log("failed");
-		}
+		}}
 	},'json');
 };
 
@@ -56,7 +57,7 @@ var saveOrUpdateUserInfo = function(){
 		email : email,
 		sex : sex
 	};
-	$.post(getRootPath() + '/user-saveOrUpdateUserInfo.action', params, function(data){
+	$.post(getRootPath() + '/admin/user-saveOrUpdateUserInfo.action', params, function(data){
 		if(data.returnCode == '00'){
 			alert("更新数据成功");
 			window.location.href = getRootPath() + "/views/myWorks.jsp";

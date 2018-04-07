@@ -3,11 +3,15 @@ package com.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 
 import com.entities.Users;
+import com.util.UUIDUtil;
 
 public class RegistDao extends BaseDao{
+	
+	Logger logger = Logger.getLogger(this.getClass());
 	
 	public void registSave(Users user) {
 		if(!user.equals(null)){
@@ -30,16 +34,16 @@ public class RegistDao extends BaseDao{
 	public void doAdminUserRegist(String loginName, String loginPwd, String userName) {
 		try {
 			Users user = new Users();
+			user.setUserId(UUIDUtil.generateUUID());
 			user.setLoginName(loginName);
 			user.setRole(1);
 			user.setLoginPass(loginPwd);
 			user.setUserName(userName);
-			Date date = new Date();
-			user.setCreateTime(date);
+			user.setCreateTime(new Date());
 			user.setCurStatus("1");
 			getSession().save(user);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("添加系统管理员异常", e);
 		}
 	}
 }

@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
-
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%
 String path = request.getContextPath();
@@ -21,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/admin.css">
 	<script type="text/javascript" src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
-	<script src="<%=basePath%>/js/common.js"></script>
+	<script src="<%=basePath%>/control/js/common.js"></script>
 	<script src="<%=basePath%>/js/jquery.pagination.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/script/custom.js"></script>
 	 
@@ -30,7 +29,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	  $("#mainFrame").attr("height",100);
 	    	  $("#mainFrame").attr("src",src);
 	    	  $.cookie("id", id);
-	    	  $.cookie("flag", "4");//flag:标志位：1.处于商户发展 2.活跃度 3.营销 4.用户
 	      }
 	      function iframeHeight() {
 				var ifm = document.getElementById("mainFrame");
@@ -52,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var initUserData = function(isFirst) {
 			var recordSize = 6;
 			var currentPage = 1;
-			$.getJSON("<%=basePath%>admin/user-queryUserDetails.action?currentPage="+ currentPage + "&recordSize=" + recordSize,
+			$.getJSON(getRootPath()+"/admin/user-queryUserDetails.action?currentPage="+ currentPage + "&recordSize=" + recordSize,
 					function(result) {
 						$("#dataDisplay").empty();
 						console.log("userInfos:" + result.userInfos);
@@ -62,20 +60,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							if (result.userInfos.length > 0) {
 									var pageSize = (result.userInfos.length > recordSize ? recordSize: result.userInfos.length);
 										for (var i = 0; i < pageSize; i++) {
-											var sex = result.userInfos[i].sex;
-											var isMan = "";
-											if(sex == 1){
-												isMan = "男";
-											}else{
-												isMan = "女";
+											if(result.userInfos[i].role != '2'){
+												var sex = result.userInfos[i].sex;
+												var isMan = "";
+												if(sex == 1){
+													isMan = "男";
+												}else{
+													isMan = "女";
+												}
+												var userPhoto = result.userInfos[i].faceImg;
+												if(userPhoto == ''){
+													userPhoto = getRootPath() + "/img/icons/default.jpg";
+												}else{
+													userPhoto = getRootPath() + "/" + result.userInfos[i].faceImg;
+												}
+												tbody += "<tr><td style='word-wrap: break-word;font-size:12px;'>"+ result.userInfos[i].userId + "</td>"
+														+ "<td><img alt="+userPhoto+" class='userImg' src='" + userPhoto + "'</td>"
+														+ "<td>" + result.userInfos[i].loginName + "</td>"
+														+ "<td>" + isMan + "</td>"
+														+ "<td>" + result.userInfos[i].age+ "</td>" 
+														+ "<td>" + result.userInfos[i].email + "</td>" 
+														+ "<td><img src='" + getRootPath() + "/img/icons/delete.jpg' class='delBtn' onclick='deleteUser(&quot;"+result.userInfos[i].userId+"&quot;)'></td></tr>";
 											}
-											tbody += "<tr><td>"+ result.userInfos[i].userid + "</td>"
-													+ "<td><img class='userImg' src='" + getRootPath() + "/" + result.userInfos[i].faceimg + "'</td>"
-													+ "<td>" + result.userInfos[i].loginName + "</td>"
-													+ "<td>" + isMan + "</td>"
-													+ "<td>" + result.userInfos[i].age+ "</td>" 
-													+ "<td>" + result.userInfos[i].email + "</td>" 
-													+ "<td><a class='delBtn' onclick='deleteUser("+result.userInfos[i].userid+")'>销户</a></td></tr>";
 										}
 									}
 									$("#dataDisplay").append(tbody);
@@ -102,8 +108,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		}
 		
+		//删除用户
 		var deleteUser = function(userId){
- 		   $.post(getRootPath() + "/user-deleteUserInfo.action?userId=" + userId, function (data) {
+ 		   $.post(getRootPath() + "/admin/user-deleteUserInfo.action?userId=" + userId, function (data) {
         	if (data.returnCode == '00') {
            	alert("删除成功");
            		window.location.reload(); 
@@ -113,15 +120,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		 },'json');
 		};
 	</script>
-	<div class="header">
-		<p style="text-align:right;margin-right:20px;margin-top:23px"><a href="<%=basePath%>/views/regist.jsp">立即注册</a></p>	
-	</div>
 	<div class="main">
 		<div id="p_content">
 			<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
 				<thead>
 					<tr>
-						<td>序号</td>
+						<td>编号</td>
 						<td>头像</td>
 						<td>账户名</td>
 						<td>性别</td>
@@ -133,7 +137,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<tbody class="table" id="dataDisplay"></tbody>
 			</table>
 		</div>
-		<s:debug/>
 		<div class="pagination" id="page"></div>
 	</div>
 </body>

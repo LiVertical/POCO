@@ -51,15 +51,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </div>
      <div class="header">
          <ul>
-            <li><s:if test="#session.user.username== null">
-					<a href="login-input.action">登录</a>
-		        </s:if>
-				<s:else>
-					<a class="userName">${sessionScope.loginName}</a>
-			    </s:else>
-		    </li>
 			<li><a onclick="jumpUpdateIndex();" href="#" >修改密码</a></li>
-			<li><a onclick="logout();" href="#"">退出登录</a></li>
+			<li><a href="<%=basePath%>login-loginOut.action">退出登录</a></li>
          </ul>
    </div> <!-- END Header -->
    <div class="main">
@@ -68,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<li onclick="loadSrc('<%=basePath%>/system/works.jsp',this.id)">作品管理</li>
 		            <li onclick="loadSrc('<%=basePath%>/system/sms.jsp',this.id)">用户管理</li>
 		            <li onclick="loadSrc('<%=basePath%>/system/smsNotification.jsp',this.id)">系统通知</li>
-		            <li><a href="events.html" id="menu-event">用户留言</a></li>
+		            <li onclick="loadSrc('<%=basePath%>/system/addAdminUser.jsp',this.id)">添加管理员</li>
 		            <li><a href="reports.html" id="menu-report">Reports</a></li>
 		            <li><a href="tasks.html" id="menu-task">Tasks</a></li>
 				</section>

@@ -6,9 +6,9 @@
 -->
 <hibernate-mapping>
     <class name="com.entities.Users" table="users" catalog="bywork">
-        <id name="userId" type="string">
-            <column name="userId" length="32" />
-            <generator class="native" />
+        <id name="userId" type="java.lang.String">
+            <column name="userId" length="32" not-null="true" />
+            <generator class="uuid" />
         </id>
         <property name="userName" type="string">
             <column name="userName" length="32" />
@@ -27,15 +27,15 @@
         </property>
         <property name="sex" type="integer">
             <column name="sex">
-                <comment>0ï¼šç"·ï¼Œ1ï¼šå¥³</comment>
+                <comment>0：男，1：女</comment>
             </column>
         </property>
         <property name="faceImg" type="string">
-            <column name="faceImg" length="65535" />
+            <column name="faceImg" length="128" />
         </property>
         <property name="role" type="integer">
             <column name="role" not-null="true">
-                <comment>0ï¼šæ™®é€šç"¨æˆ·ï¼Œ1ï¼šç³»ç»Ÿç"¨æˆ·</comment>
+                <comment>0：普通用户，1：系统用户</comment>
             </column>
         </property>
         <property name="createTime" type="timestamp">
@@ -43,7 +43,7 @@
         </property>
         <property name="curStatus" type="string">
             <column name="curStatus" length="3">
-                <comment>0:æ³¨é"€çŠ¶æ€�ï¼Œ1ï¼šæ­£å¸¸çŠ¶æ€�</comment>
+                <comment>0:注销状态，1：正常状态</comment>
             </column>
         </property>
     </class>

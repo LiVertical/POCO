@@ -33,7 +33,7 @@ public class LoginService implements ILoginService{
 		return loginDao.findAdminUserByNameAndPwd(loginName, loginPass, role);
 	}
 	
-	//查询用户的角色
+	//鏌ヨ鐢ㄦ埛韬唤
 	@Override
 	public Integer queryUserRole(String loginName, String loginPass) {
 		int role = 0;

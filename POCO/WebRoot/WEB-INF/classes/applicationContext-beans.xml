@@ -79,6 +79,14 @@
 		<bean id="commentsService" class="com.services.impl.CommentsService">
 		<property name="commentsDao" ref="commentsDao"></property>
 		</bean>
+		
+	<!-- 系统通知 -->
+		<bean id="sysNotificationDao" class="com.dao.SysNotificationDao">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id="sysNotificationService" class="com.services.impl.SysNotificationService">
+			<property name="sysNotificationDao" ref="sysNotificationDao"></property>
+		</bean>
 
 </beans>
 

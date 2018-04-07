@@ -6,9 +6,9 @@
 -->
 <hibernate-mapping>
     <class name="com.entities.Users" table="users" catalog="bywork">
-        <id name="userId" type="integer">
-            <column name="userId" />
-            <generator class="native" />
+        <id name="userId" type="java.lang.String">
+            <column name="userId" length="32" not-null="true" />
+            <generator class="uuid" />
         </id>
         <property name="userName" type="string">
             <column name="userName" length="32" />
@@ -31,7 +31,7 @@
             </column>
         </property>
         <property name="faceImg" type="string">
-            <column name="faceImg" length="65535" />
+            <column name="faceImg" length="128" />
         </property>
         <property name="role" type="integer">
             <column name="role" not-null="true">
@@ -39,7 +39,7 @@
             </column>
         </property>
         <property name="createTime" type="timestamp">
-            <column name="createTime" length="19" />
+            <column name="createTime" length="0" />
         </property>
         <property name="curStatus" type="string">
             <column name="curStatus" length="3">

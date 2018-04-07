@@ -80,8 +80,9 @@
  	
  <!-- 普通用户 -->
  <package name="users" extends="default2" namespace="/user"> 
-  	<!-- 注册 -->
-  	<action name="regist-*" class="com.actions.RegistAction" method="{1}">
+  
+  	<!-- 普通用户注册 -->
+  	<action name="userInfoSave" class="com.actions.RegistAction" method="userInfoSave">
   		<result type="json">
 			<param name="root">result</param>
 			<param name="excludeNullProperties">true</param>
@@ -117,14 +118,6 @@
     </action>
         
  
- 	<!-- 评论 -->
- 	<action name="addComments" class="com.actions.CommentsAction" method="addComments">
- 		<result name="success"  type="json">
-			<param name="root">result</param>
-			<param name="excludeNullProperties">true</param>
-		</result> 
- 	</action>
- 	
  	<!-- 点赞 -->
  	<action name="getTags" class="com.actions.LikesAction" method="getTags">
  		<result name="success"  type="json">
@@ -171,6 +164,13 @@
  		</action>
  		
  		<!-- 评论 -->
+ 	<action name="addComments" class="com.actions.CommentsAction" method="addComments">
+ 		<result name="success"  type="json">
+			<param name="root">result</param>
+			<param name="excludeNullProperties">true</param>
+		</result> 
+ 	</action>
+ 	
  		<action name="deleteCommentByCommentId" class="com.actions.CommentsAction" method="deleteCommentByCommentId">                  
   			<result  type="json" name="success">
 				<param name="root">result</param>
@@ -191,6 +191,7 @@
    
  <!-- 管理员    -->
    <package name="admins" extends="default2" namespace="/admin">
+   		
    		<action name="user-*" class="com.actions.UserAction" method="{1}">
 	  		<result name="list">/pages/user-list.jsp</result>
 	  		<result name="update">/pages/user-edit.jsp</result>
@@ -210,6 +211,14 @@
 	  		<interceptor-ref name="pocoStack"></interceptor-ref> 
   		</action>
   		
+  		<!-- 添加系统管理员 -->
+  		<action name="adminUserRegist" class="com.actions.RegistAction" method="adminUserRegist">
+  			<result type="json">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+ 	 	</action> 
+  		
   		<!-- 管理员后台登录 -->
   		 <action name="login-*" class="com.actions.LoginAction" method="{1}">
 	  		<result name="success"  type="json">
@@ -228,7 +237,13 @@
   				<param name="bufferSize">2048</param>
   			</result>
   		</action>
- 
+ 		
+ 		<action name="addNotifiaction" class="com.actions.SysNotificationAction"  method="addNotification">
+ 			<result name="success" type="json">
+ 				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+ 			</result>
+ 	</action>
    </package>
 </struts>
 

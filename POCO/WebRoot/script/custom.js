@@ -25,6 +25,7 @@ var loadUserImg = function(userImg){
 	 $("#userImg").append(htm);
  };
  
+ //完善用户信息
 var gotoCompleteUserInfo = function(){
 		window.location = getRootPath() + "/pages/userInfoEdit.jsp";
 };

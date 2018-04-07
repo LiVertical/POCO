@@ -6,8 +6,8 @@
 -->
 <hibernate-mapping>
     <class name="com.entities.Work" table="work" catalog="bywork">
-        <id name="workId" type="integer">
-            <column name="work_id" />
+        <id name="workId" type="string">
+            <column name="work_id" length="32" />
             <generator class="native" />
         </id>
         <property name="workName" type="string">
@@ -16,23 +16,23 @@
             </column>
         </property>
         <property name="workUploadTime" type="timestamp">
-            <column name="work_upload_time" length="19">
+            <column name="work_upload_time" length="0">
                 <comment>上传时间</comment>
             </column>
         </property>
         <property name="workComment" type="string">
-            <column name="work_comment" length="65535">
-                <comment>作品评论</comment>
+            <column name="work_comment">
+                <comment>作品描述</comment>
             </column>
         </property>
         <property name="workPath" type="string">
-            <column name="work_path" length="65535">
-                <comment>作品路径</comment>
+            <column name="work_path">
+                <comment>路径</comment>
             </column>
         </property>
-        <property name="productId" type="integer">
-            <column name="product_id">
-                <comment>图片id</comment>
+        <property name="productId" type="string">
+            <column name="product_id" length="32">
+                <comment>评论</comment>
             </column>
         </property>
     </class>

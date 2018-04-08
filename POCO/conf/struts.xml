@@ -230,6 +230,13 @@
   			<result name="logOut">/system/login.jsp</result>
   		</action>
   		
+  		<action name="checkIsLogin" class="com.actions.LoginAction" method="checkIsLogin">
+	  		<result name="success"  type="json">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		</action>
+  		
   		<!-- 修改密码 -->
   		<action name="updatePass" class="com.actions.UserAction" method="updatePass">
   			<result type="json">

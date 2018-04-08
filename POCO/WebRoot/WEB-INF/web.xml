@@ -72,8 +72,8 @@
     </filter-mapping>
    
   	<session-config>  
-        <session-timeout>30</session-timeout>  
- </session-config> 
+        <session-timeout>10</session-timeout>  
+ 	</session-config> 
   
    <filter>
         <filter-name>struts2</filter-name>

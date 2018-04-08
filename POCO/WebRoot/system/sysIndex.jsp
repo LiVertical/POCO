@@ -41,8 +41,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				} 
 		  }
 	       $(function(){
-		    	 loadSrc('<%=basePath%>/system/works.jsp')
-		 });
+		     loadSrc('<%=basePath%>/system/works.jsp');
+		     $.ajax({
+		    	url: '<%=basePath%>/admin/checkIsLogin.action',
+		    	type: 'post',
+		    	dataType: 'json',
+		    	async:'false',
+		    	data: {},
+		    	success : function(json) {
+		    		if (json.returnCode == "00") {
+		    			 $("#mainFrame").attr("src",src);
+		    			$("#mainFrame").attr("height",100);
+		    		}else{
+		    			logout();
+		    		} 
+		    	}
+		   });
+	 });
 	</script>
   </head>  
 <body>

@@ -2,6 +2,7 @@ package com.actions;
 
 import java.io.InputStream;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,15 +13,17 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.entities.Users;
-import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ActionContext;
 import com.services.ILoginService;
+import com.util.LoginUserUtil;
+import com.util.UserInfo;
 
 /**
  * @author Administrator
  *
  */
 @SuppressWarnings("serial")
-public class LoginAction extends ActionSupport{
+public class LoginAction extends BaseAction{
 	
 	private ILoginService loginService;
 	private InputStream inputStream;	
@@ -41,12 +44,19 @@ public class LoginAction extends ActionSupport{
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest();
 			HttpSession session = request.getSession();
+			UserInfo userInfo = new UserInfo();
 			role = loginService.queryUserRole(loginName, loginPass);
 			Users userLogin = loginService.doAdminUserLogin(loginName, loginPass, role);
 			if(userLogin != null){
 				session.setAttribute("loginName", userLogin.getUserName());
 				session.setAttribute("userId", userLogin.getUserId());
 				logger.info("admin's session:"+session.getAttribute("loginName"));
+				userInfo.setLoginName(loginName);
+				userInfo.setUserName(userLogin.getUserName());
+				userInfo.setPassword(loginPass);
+				userInfo.setRole(role);
+				userInfo.setUserId(userLogin.getUserId());
+				LoginUserUtil.saveUserInfo(getContext(), userInfo);
 			}else{
 				throw new Exception("帐号密码错误");
 			}
@@ -101,8 +111,59 @@ public class LoginAction extends ActionSupport{
 			return "adminLogin";
 		}else{
 		return "logOut";
+		}
 	}
-}
+	
+	//检测是否是登录状态
+	public String checkIsLogin(){
+		logger.info("LoginAction.checkIsLogin start·····");
+		result = new JSONObject();
+		try {
+			if(LoginUserUtil.getUserInfo() == null){
+				logger.info("用户没有登录,转到登录界面");
+			    result.put("returnCode", "10");
+			    result.put("returnMsg", "用户没有登录");
+			 }else{
+				logger.info("当前登录账户：" + LoginUserUtil.getUserInfo().getLoginName());
+				 result.put("returnCode", "00");
+				 result.put("returnMsg", "用户处于登录状态");
+			}
+		} catch (Exception e) {
+			logger.error("检测用户是否登录异常");
+		}
+		return outputResult(result.toString());
+	}
+	
+	private void setCookie(String cookieName,String cookieValue,Cookie[] cooks){
+    	int i=0;
+        for(Cookie cook:cooks){
+            if(cook.getName().equals(cookieName)){
+                i=1;
+            }
+ 
+        }
+        if(i==0){
+            Cookie cook = new Cookie(cookieName, cookieValue);
+            cook.setMaxAge(7*24*60*60);
+            cook.setPath("/");
+            ServletActionContext.getResponse().addCookie(cook);
+        }else{
+            for(Cookie cook:cooks){
+                if(cook.getName().equals(cookieName)){
+                    if(!cook.getValue().equals(cookieValue)){
+                        cook.setValue(cookieValue);
+                        cook.setMaxAge(10*24*60*60);
+                        ServletActionContext.getResponse().addCookie(cook);
+                    }
+                }
+            }   
+        }
+    }
+    
+    public String statisticIndex(){
+    	logger.info("start loginAction.statisticIndex...");
+        return SUCCESS;
+    }
 
 	public JSONObject getResult() {
 		return result;

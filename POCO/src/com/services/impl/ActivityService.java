@@ -25,6 +25,19 @@ public class ActivityService implements IActivityService {
 		
 	}
 	
+	@Override
+	public List<Activities> queryAllActivitiesByCondition(int currentPage,
+			int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int queryAllActivitiesCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	public UserDao getUserDao() {
 		return userDao;
 	}

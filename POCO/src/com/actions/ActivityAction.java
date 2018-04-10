@@ -26,6 +26,8 @@ public class ActivityAction extends ActionSupport{
 	private List<String> productNames;
 	private JSONObject result; 
 	private IActivityService activityService;
+	private int currentPage;
+	private int pageSize;
 	
 	//用户申请活动
 	public String applyActivity(){
@@ -50,7 +52,28 @@ public class ActivityAction extends ActionSupport{
 	
 	//管理员审批活动
 	
+	
 	//查询所有活动
+	public String queryAllActivities(){
+		logger.info("ActivityAction.queryAllActivities start·····");
+		result = new JSONObject();
+		if(StringUtils.isBlank(userId)){
+			result.put("returnCode", "10");
+			result.put("returnMsg", "参数错误");
+			return SUCCESS;
+		}
+		try {
+			result.put("activitiesInfos", activityService.queryAllActivitiesByCondition(currentPage, pageSize));
+			result.put("totalActivitiesCount", activityService.queryAllActivitiesCount());
+			result.put("returnCode", "00");
+			result.put("returnMsg", "查询成功");
+		} catch (Exception e) {
+			logger.error("查询活动详情异常", e);
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部服务器异常");
+		}
+		return SUCCESS;
+	}
 	
 	//参加活动
 	
@@ -153,6 +176,22 @@ public class ActivityAction extends ActionSupport{
 
 	public void setProductNames(List<String> productNames) {
 		this.productNames = productNames;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 	}
 	
 }

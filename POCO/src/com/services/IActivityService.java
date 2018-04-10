@@ -3,6 +3,8 @@ package com.services;
 import java.io.File;
 import java.util.List;
 
+import com.entities.Activities;
+
 public interface IActivityService {
 
 
@@ -10,5 +12,9 @@ public interface IActivityService {
 			List<String> productIds, List<String> productNames, String userId,
 			String activityDesc, String activityInfo, String createTime,
 			String endTime);
+
+	List<Activities> queryAllActivitiesByCondition(int currentPage, int pageSize);
+
+	int queryAllActivitiesCount();
 
 }

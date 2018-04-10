@@ -88,6 +88,14 @@
 			<property name="sysNotificationDao" ref="sysNotificationDao"></property>
 			<property name="userDao" ref="userDao"></property>
 		</bean>
+	<!-- 活动 -->
+	<bean id="activityDao" class="com.dao.ActivityDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="activityService" class="com.services.impl.ActivityService">
+		<property name="activityDao" ref="activityDao"></property>
+		<property name="userDao" ref="userDao"></property>
+	</bean>
 
 </beans>
 

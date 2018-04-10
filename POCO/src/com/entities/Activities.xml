@@ -16,6 +16,9 @@
             <property name="activityName" type="string">
                 <column name="activityName" length="32" />
             </property>
+             <property name="activityDesc" type="string">
+                <column name="activityDesc" length="256" />
+            </property>
             <property name="userId" type="string">
                 <column name="userId" length="32" />
             </property>

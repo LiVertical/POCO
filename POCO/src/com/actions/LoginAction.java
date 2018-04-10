@@ -73,6 +73,7 @@ public class LoginAction extends BaseAction{
 		HttpSession session = request.getSession(); 
 		logger.info("账号"+loginName+"密码："+loginPass);
 		if(StringUtils.isBlank(loginName)||StringUtils.isBlank(loginPass)){
+			logger.info("参数错误");
 			return "userLogin";
 		}
 		Users user;
@@ -86,7 +87,7 @@ public class LoginAction extends BaseAction{
 			session.setAttribute("userImg", user.getFaceImg());
 			logger.info("session:"+session.getAttribute("loginName"));
 		} catch (Exception e) {
-			logger.info("普通用户登录失败", e);
+			logger.error("普通用户登录失败", e);
 			return "index";
 		}
 		return "user";

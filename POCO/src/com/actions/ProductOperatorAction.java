@@ -29,6 +29,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.services.IProductOperatorService;
 import com.util.JsonDateValueProcessor;
 import com.util.UUIDUtil;
+import com.util.UploadFileUtil;
 
 /**
  * 使用List上传多个文件
@@ -43,7 +44,6 @@ public class ProductOperatorAction extends ActionSupport {
 	private File image; // 上传的文件
 	private String imageFileName; // 上传的文件名
 	private String imageContentType; // 文件类型
-	private static final int BUFFER_SIZE = 1024 * 1024;
 	private String savePath;
 	private String url;
 	private ProductInfo productInfo;
@@ -65,6 +65,7 @@ public class ProductOperatorAction extends ActionSupport {
 	private JSONObject result;
 	private UUIDUtil uuidUtil;
 	private String userName;
+	private UploadFileUtil uploadFileUtil;
 	
 	Logger logger = Logger.getLogger(this.getClass());
 	/**
@@ -79,43 +80,8 @@ public class ProductOperatorAction extends ActionSupport {
 		return "upload";
 	}
 
-	// 上传设置大小的方法
-	private static void copy(File src, File dst) {
-		InputStream in = null;
-		OutputStream out = null;
-		try {
-			in = new BufferedInputStream(new FileInputStream(src), BUFFER_SIZE);
-			out = new BufferedOutputStream(new FileOutputStream(dst),BUFFER_SIZE);
-			byte[] buffer = new byte[BUFFER_SIZE];
-			int len = 0;
-			while ((len = in.read(buffer)) > 0) {
-				// 每次读多少，从哪里开始，到哪里结束
-				out.write(buffer, 0, len);
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (null != in) {
-				try {
-					in.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if (null != out) {
-				try {
-					out.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
 	public String publishImages() {
-		logger.info("publishImages start·····");
+		logger.info("ProductOperatorAction.publishImages start·····");
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest(); 
 			HttpSession session = request.getSession(); 
@@ -131,35 +97,34 @@ public class ProductOperatorAction extends ActionSupport {
 				// 根据服务器的文件的保存地址和源文件名称创建目录文件的全部路径
 				logger.info("文件名:" + image.getAbsolutePath());
 				// 截取后缀名
-					String ext = imageFileName.substring(imageFileName.lastIndexOf(".") + 1);
-					// 更改源文件的名称+时间
-					String newFileName = new Date().getTime() + "." + ext;
-					File file = new File(ServletActionContext.getServletContext().getRealPath("/images") + "/" + newFileName);
-					logger.info("file:" + image);
-					// 如果不存在此文件夹，则自动创建
-					if (!file.exists() || !file.isFile()) {
-						file.createNewFile();
-					}
-					copy(image, file);
-					// 保存路径
-					url = "images" + "/" + newFileName;
-					ProductInfo proInfo = new ProductInfo();
-					proInfo.setProductPath(url);
-				    proInfo.setUploadTime(new Date());
-				    proInfo.setProductName(productName);
-				    proInfo.setProductTypes(proType);
-				    proInfo.setProductDesc(productDesc);
-				    proInfo.setProductUser(productUser);
-					productOperatorService.save(proInfo);
+				String ext = imageFileName.substring(imageFileName.lastIndexOf(".") + 1);
+				// 更改源文件的名称+时间
+				String newFileName = new Date().getTime() + "." + ext;
+				File file = new File(ServletActionContext.getServletContext().getRealPath("/images") + "/" + newFileName);
+				logger.info("file:" + image);
+				// 如果不存在此文件夹，则自动创建
+				if (!file.exists() || !file.isFile()) {
+					file.createNewFile();
 				}
-				result.put("productName", productName);
-				result.put("productType", proType);
-				result.put("productPath", url);
-				result.put("productDesc", productDesc);
-				result.put("productUser", productUser);
-				result.put("returnCode", "00");
-				result.put("returnMsg", "操作成功");
-			
+				uploadFileUtil.uploadImgs(image, file);
+				// 保存路径
+				url = "images" + "/" + newFileName;
+				ProductInfo proInfo = new ProductInfo();
+				proInfo.setProductPath(url);
+				proInfo.setUploadTime(new Date());
+				proInfo.setProductName(productName);
+			    proInfo.setProductTypes(proType);
+				proInfo.setProductDesc(productDesc);
+				proInfo.setProductUser(productUser);
+				productOperatorService.save(proInfo);
+			}
+			result.put("productName", productName);
+			result.put("productType", proType);
+			result.put("productPath", url);
+			result.put("productDesc", productDesc);
+			result.put("productUser", productUser);
+			result.put("returnCode", "00");
+			result.put("returnMsg", "操作成功");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}catch(Exception e){
@@ -170,7 +135,7 @@ public class ProductOperatorAction extends ActionSupport {
 
 	// 删除
 	public String deleteProductInfo() {
-		logger.info("deleteProductInfo start ····");
+		logger.info("ProductOperatorAction.deleteProductInfo start ····");
 		result = new JSONObject();
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest();
@@ -195,7 +160,7 @@ public class ProductOperatorAction extends ActionSupport {
 
 	// 批量删除
 	public String delBatch() {
-		logger.info("delBatch start·····");
+		logger.info("ProductOperatorAction.delBatch start·····");
 		result = new JSONObject();
 		if(StringUtils.isBlank(productIds)){
 			result.put("returnCode", "10");
@@ -229,6 +194,7 @@ public class ProductOperatorAction extends ActionSupport {
 		 * 
 		 * */
 	public String queryAllProducts(){	
+		logger.info("ProductOperatorAction.queryAllProducts start·····");
 		result = new JSONObject();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
@@ -258,6 +224,7 @@ public class ProductOperatorAction extends ActionSupport {
 		 * 分类查询作品
 		 * */
 	public String queryProductByCondition() {
+		logger.info("ProductOperatorAction.queryProductByCondition start·····");
 		try {
 			result = new JSONObject();
 			JsonConfig jsonConfig = new JsonConfig();
@@ -527,4 +494,11 @@ public class ProductOperatorAction extends ActionSupport {
 			this.proType = proType;
 		}
 
+		public UploadFileUtil getUploadFileUtil() {
+			return uploadFileUtil;
+		}
+
+		public void setUploadFileUtil(UploadFileUtil uploadFileUtil) {
+			this.uploadFileUtil = uploadFileUtil;
+		}
 }

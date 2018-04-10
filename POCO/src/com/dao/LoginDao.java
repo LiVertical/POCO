@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
 import com.entities.Users;
@@ -16,10 +17,15 @@ public class LoginDao extends BaseDao {
 	//保存用户信息
 	public Users findByUserNameAndUserPass(String loginName,String password, int role){
 		user = new Users();
-		//按角色保存用户信息
-		if(!StringUtils.isBlank(loginName)&&!StringUtils.isBlank(password)){
-			Query query = getSession().createQuery("FROM Users WHERE loginName=? AND loginPass=? AND role = ?");
-			user = (Users) query.setString(0, loginName).setString(1, password).setInteger(2, role).uniqueResult();	
+		//按角色查找用户信息
+		try {
+			if(!StringUtils.isBlank(loginName)&&!StringUtils.isBlank(password)){
+				String sql = "FROM Users WHERE loginName=" + loginName+" AND loginPass="+MD5.getMD5ofString(password)+" AND role = "+role;
+				
+				user = (Users) getSession().createQuery(sql).list().get(0);
+			}
+		} catch (HibernateException e) {
+			logger.error("查询用户信息异常", e);
 		}		
 		return user;
 	}

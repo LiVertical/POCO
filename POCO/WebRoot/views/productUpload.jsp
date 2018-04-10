@@ -20,7 +20,6 @@ String basePath = request.getScheme()+ "://" + request.getServerName() + ":" +re
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/custom.css">
 	<script src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
 	<script src="<%=basePath%>/js/common.js"></script>
-	<script src="<%=basePath%>/script/user.js"></script>
 	<script src="<%=basePath%>/script/upload.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/script/custom.js"></script>
    </head>

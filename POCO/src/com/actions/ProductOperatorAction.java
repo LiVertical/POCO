@@ -65,7 +65,6 @@ public class ProductOperatorAction extends ActionSupport {
 	private JSONObject result;
 	private UUIDUtil uuidUtil;
 	private String userName;
-	private UploadFileUtil uploadFileUtil;
 	
 	Logger logger = Logger.getLogger(this.getClass());
 	/**
@@ -106,6 +105,7 @@ public class ProductOperatorAction extends ActionSupport {
 				if (!file.exists() || !file.isFile()) {
 					file.createNewFile();
 				}
+				UploadFileUtil uploadFileUtil = new UploadFileUtil();
 				uploadFileUtil.uploadImgs(image, file);
 				// 保存路径
 				url = "images" + "/" + newFileName;
@@ -126,9 +126,9 @@ public class ProductOperatorAction extends ActionSupport {
 			result.put("returnCode", "00");
 			result.put("returnMsg", "操作成功");
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("图片上传IO流异常");
 		}catch(Exception e){
-			e.printStackTrace();
+			logger.error("图片上传异常", e);
 		}
 		return SUCCESS;
 	}
@@ -494,11 +494,4 @@ public class ProductOperatorAction extends ActionSupport {
 			this.proType = proType;
 		}
 
-		public UploadFileUtil getUploadFileUtil() {
-			return uploadFileUtil;
-		}
-
-		public void setUploadFileUtil(UploadFileUtil uploadFileUtil) {
-			this.uploadFileUtil = uploadFileUtil;
-		}
 }

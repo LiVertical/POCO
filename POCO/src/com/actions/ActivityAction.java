@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import net.sf.json.JSONObject;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.services.IActivityService;
 
 public class ActivityAction extends ActionSupport{
 	
@@ -12,6 +13,7 @@ public class ActivityAction extends ActionSupport{
 	private String activityId;
 	private String activityName;
 	private JSONObject result; 
+	private IActivityService activityService;
 	
 	//用户申请活动
 	public String applyActivity(){
@@ -47,5 +49,11 @@ public class ActivityAction extends ActionSupport{
 	}
 	public void setResult(JSONObject result) {
 		this.result = result;
+	}
+	public IActivityService getActivityService() {
+		return activityService;
+	}
+	public void setActivityService(IActivityService activityService) {
+		this.activityService = activityService;
 	}
 }

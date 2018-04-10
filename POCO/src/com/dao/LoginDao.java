@@ -20,8 +20,7 @@ public class LoginDao extends BaseDao {
 		//按角色查找用户信息
 		try {
 			if(!StringUtils.isBlank(loginName)&&!StringUtils.isBlank(password)){
-				String sql = "FROM Users WHERE loginName=" + loginName+" AND loginPass="+MD5.getMD5ofString(password)+" AND role = "+role;
-				
+				String sql = "FROM Users WHERE loginName='" + loginName+"' AND loginPass='"+MD5.getMD5ofString(password)+"' AND role = "+role;
 				user = (Users) getSession().createQuery(sql).list().get(0);
 			}
 		} catch (HibernateException e) {

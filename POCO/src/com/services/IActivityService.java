@@ -17,4 +17,6 @@ public interface IActivityService {
 
 	int queryAllActivitiesCount();
 
+	void doApplyActivity(String userId, String activityName, String activityDesc, String createTime, String endTime);
+
 }

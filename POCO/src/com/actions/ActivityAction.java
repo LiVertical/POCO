@@ -32,8 +32,31 @@ public class ActivityAction extends ActionSupport{
 	//用户申请活动
 	public String applyActivity(){
 		logger.info("ActivityAction.applyActivity start·····");
+		result = new JSONObject();
+		try{
+			activityName = new String(activityName.getBytes("ISO-8859-1"),"UTF-8");
+			activityDesc =  new String(activityDesc.getBytes("ISO-8859-1"),"UTF-8");;
+			if(StringUtils.isBlank(activityName)||StringUtils.isBlank(userId)||StringUtils.isBlank(activityDesc)){
+				result.put("returnCode", "10");
+				result.put("returnMsg", "参数错误");
+				return SUCCESS;
+			}
+		activityService.doApplyActivity(userId, activityName,  activityDesc, createTime, endTime);
+	} catch (Exception e) {
+		logger.error("保存活动异常", e);
+		result.put("returnCode", "-1");
+		result.put("returnMsg", "内部服务器异常");
+	}
+	result.put("returnCode", "00");
+	result.put("returnMsg", "申请活动成功");
+		return SUCCESS;
+	}
+	
+	//用户参加活动
+	public String joinActivity(){
+		logger.info("ActivityAction.joinActivity start·····");
 		if(StringUtils.isBlank(activityName)||StringUtils.isBlank(userId)||
-				StringUtils.isBlank(activityDesc)||StringUtils.isBlank(activityInfo)||products == null){
+			StringUtils.isBlank(activityDesc)||StringUtils.isBlank(activityInfo)||products == null){
 			result.put("returnCode", "10");
 			result.put("returnMsg", "参数错误");
 			return SUCCESS;

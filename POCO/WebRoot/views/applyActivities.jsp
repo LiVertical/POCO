@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>活动</title>
+    <title>申请活动</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -50,7 +50,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  data-user_id ='${sessionScope.userId }'>
  <div class="main" style='min-height:300px'>
 	<div class="content">
-		<ul id="p_content"></ul>
+		文件：<input type="file" name="products">
+		活动标题：<input type="text" name="activityName">
+		活动介绍：<input type="activityDesc">
+		
 	</div>
 	 <div class="pagination" id="page"></div>
  </div>

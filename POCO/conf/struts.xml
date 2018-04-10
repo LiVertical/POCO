@@ -186,7 +186,14 @@
   		 </action>
   		 
   		<!-- 活动 -->
-  		<action name="applyActivity" class="com。actions.ActivityAction" method="applyActivity">                  
+  		<action name="applyActivity" class="com.actions.ActivityAction" method="applyActivity">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
+  		 <action name="joinActivity" class="com.actions.ActivityAction" method="joinActivity">                  
   			<result  type="json" name="success">
 				<param name="root">result</param>
 				<param name="excludeNullProperties">true</param>

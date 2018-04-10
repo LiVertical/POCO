@@ -1,8 +1,10 @@
 package com.entities;
 
 import java.util.Date;
-
-public class Activities {
+/**
+ * Activities entity. @author MyEclipse Persistence Tools
+ */
+public class Activities implements java.io.Serializable{
 	
 	private String activityId;
 	private String activityInfo;
@@ -22,8 +24,7 @@ public class Activities {
 
 	public Activities(String activityId, String activityInfo,
 			String activityName, Date createTime, Date endTime, String userId,
-			int curStatus, String activityGroupId, String productId,String productName
-			,String activityDesc) {
+			int curStatus, String activityGroupId, String productId,String productName,String activityDesc) {
 		super();
 		this.activityId = activityId;
 		this.activityInfo = activityInfo;

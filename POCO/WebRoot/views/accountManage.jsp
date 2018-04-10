@@ -59,19 +59,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 
 	<div class="main">
-		<div id="p_content"></div>
-		<div class="content">
-			<textarea id="discuss" placeholder="发表评论······"></textarea>
-			<button class="btn" onclick="addComment()">提交</button>
-			<p style='margin-top:50px;	display:block;'>
-				<button id="look">查看精彩评论</button>
-			</p>
-			<div class="hotDiscuss">
-				<ul id="hotDiscuss"></ul>
-			</div>
-		</div>
-	   <div class="pagination" id="page"></div>
-    </div>
+	<div class="saveBox">
+  	<h2 class="title">修改用户资料</h2>
+  	<div class="upload-box">
+  		<div class="text"><p>HeadImg :</p></div>
+  		<div class="img">
+   		 	<div class="top">
+            	<img src="" width="100px" height="100px"><br/>
+             	<span id="photoCover"></span>
+         	</div>
+        </div>
+        <div class="bottom">
+	    	<input class="upload" name="upload" type="file" id="file">
+	    	<button class="subBtn" onclick="uploadUserImg()">确认上传</button>
+   		</div>
+  	</div>
+	    	<s:hidden name="userId" id="userId"></s:hidden>
+	    	UserName:<br/>
+	    	<input class="input" id="userName" placeholder="请输入您的用户名"><br>
+	    	<s:hidden name="password"/>
+	    	Age:<br/>
+		   	<input class="input" id="userAge" placeholder="请输入您的年龄"><br>
+		   	Email:<br/>
+		   	<input class="input" id="userEmail" placeholder="请输入您的邮箱"><br>
+		   	<div class="submitBox">
+		   	Sex:<br/>
+		   		<input type="radio" style='margin-top: 10px' name="sex" id="man" value="1">男
+		   		<input type="radio" name="sex" id="women" checked value="0">女
+		   		<button class="subBtn" onclick="saveOrUpdateUserInfo()">完成</button>
+		   	</div>
+  </div>    
 	<div class="footer">
 		<a>POCO网违法和不良信息举报电话：13928869007 举报邮箱：kent@poco.cn</a>
 	</div>

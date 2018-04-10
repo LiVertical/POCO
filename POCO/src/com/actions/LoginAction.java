@@ -111,7 +111,7 @@ public class LoginAction extends BaseAction{
 		if(role == 1){//系统用户
 			return "adminLogin";
 		}else{
-		return "logOut";
+		return "index";
 		}
 	}
 	

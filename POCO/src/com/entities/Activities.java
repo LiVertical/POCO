@@ -7,6 +7,7 @@ public class Activities {
 	private String activityId;
 	private String activityInfo;
 	private String activityName;
+	private String activityDesc;
 	private Date createTime;
 	private Date endTime;
 	private String userId;
@@ -21,11 +22,13 @@ public class Activities {
 
 	public Activities(String activityId, String activityInfo,
 			String activityName, Date createTime, Date endTime, String userId,
-			int curStatus, String activityGroupId, String productId,String productName) {
+			int curStatus, String activityGroupId, String productId,String productName
+			,String activityDesc) {
 		super();
 		this.activityId = activityId;
 		this.activityInfo = activityInfo;
 		this.activityName = activityName;
+		this.activityDesc = activityDesc;
 		this.createTime = createTime;
 		this.endTime = endTime;
 		this.userId = userId;
@@ -96,6 +99,14 @@ public class Activities {
 
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+
+	public String getActivityDesc() {
+		return activityDesc;
+	}
+
+	public void setActivityDesc(String activityDesc) {
+		this.activityDesc = activityDesc;
 	}
 	
 }

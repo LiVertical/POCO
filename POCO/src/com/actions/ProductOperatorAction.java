@@ -41,7 +41,7 @@ public class ProductOperatorAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 	
-	private File image; // 上传的文件
+	private List<File> image; // 上传的文件
 	private String imageFileName; // 上传的文件名
 	private String imageContentType; // 文件类型
 	private String savePath;
@@ -93,30 +93,31 @@ public class ProductOperatorAction extends ActionSupport {
 			}
 			// 上传照片的方法
 			if (image != null) {
-				// 根据服务器的文件的保存地址和源文件名称创建目录文件的全部路径
-				logger.info("文件名:" + image.getAbsolutePath());
-				// 截取后缀名
-				String ext = imageFileName.substring(imageFileName.lastIndexOf(".") + 1);
-				// 更改源文件的名称+时间
-				String newFileName = new Date().getTime() + "." + ext;
-				File file = new File(ServletActionContext.getServletContext().getRealPath("/images") + "/" + newFileName);
-				logger.info("file:" + image);
-				// 如果不存在此文件夹，则自动创建
-				if (!file.exists() || !file.isFile()) {
-					file.createNewFile();
+				for(File img : image){
+					logger.info("文件名:" + img.getAbsolutePath());
+					// 截取后缀名
+					String ext = imageFileName.substring(imageFileName.lastIndexOf(".") + 1);
+					// 更改源文件的名称+时间
+					String newFileName = new Date().getTime() + "." + ext;
+					File file = new File(ServletActionContext.getServletContext().getRealPath("/images") + "/" + newFileName);
+					logger.info("file:" + image);
+					// 如果不存在此文件夹，则自动创建
+					if (!file.exists() || !file.isFile()) {
+						file.createNewFile();
+					}
+					UploadFileUtil uploadFileUtil = new UploadFileUtil();
+					uploadFileUtil.uploadImgs(img, file);
+					// 保存路径
+					url = "images" + "/" + newFileName;
+					ProductInfo proInfo = new ProductInfo();
+					proInfo.setProductPath(url);
+					proInfo.setUploadTime(new Date());
+					proInfo.setProductName(productName);
+				    proInfo.setProductTypes(proType);
+					proInfo.setProductDesc(productDesc);
+					proInfo.setProductUser(productUser);
+					productOperatorService.save(proInfo);
 				}
-				UploadFileUtil uploadFileUtil = new UploadFileUtil();
-				uploadFileUtil.uploadImgs(image, file);
-				// 保存路径
-				url = "images" + "/" + newFileName;
-				ProductInfo proInfo = new ProductInfo();
-				proInfo.setProductPath(url);
-				proInfo.setUploadTime(new Date());
-				proInfo.setProductName(productName);
-			    proInfo.setProductTypes(proType);
-				proInfo.setProductDesc(productDesc);
-				proInfo.setProductUser(productUser);
-				productOperatorService.save(proInfo);
 			}
 			result.put("productName", productName);
 			result.put("productType", proType);
@@ -404,13 +405,12 @@ public class ProductOperatorAction extends ActionSupport {
 		public void setSavePath(String savePath) {
 			this.savePath = savePath;
 		}
-		
 
-		public File getImage() {
+		public List<File> getImage() {
 			return image;
-		}		
+		}
 
-		public void setImage(File image) {
+		public void setImage(List<File> image) {
 			this.image = image;
 		}
 

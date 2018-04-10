@@ -178,17 +178,23 @@
 			</result> 
   		 </action>
   		 
- 			 <action name="queryAllCommentsByUser" class="com.actions.CommentsAction" method="queryAllCommentsByUser">                  
-  				<result  type="json" name="success">
-					<param name="root">result</param>
-					<param name="excludeNullProperties">true</param>
-				</result> 
+ 		<action name="queryAllCommentsByUser" class="com.actions.CommentsAction" method="queryAllCommentsByUser">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
+  		<!-- 活动 -->
+  		<action name="applyActivity" class="com。actions.ActivityAction" method="applyActivity">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
   		 </action>
    </package>  
  
  
- 
-   
  <!-- 管理员    -->
    <package name="admins" extends="default2" namespace="/admin">
    		

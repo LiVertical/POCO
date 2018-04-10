@@ -24,13 +24,14 @@ $(function(){
 		$("#upload").attr("disabled", false);
 		upload();
 	});
-});
+
 
 
 var upload = function(){
 	var productName = $("input[name='productName']").val().trim();
 	var proType = $("select option:selected").val().trim();
-	var image =  document.getElementById("image").files[0];
+	var files = document.getElementById("files");
+	var image =  files.getElementByTagName("input").files;
 	var productDesc = $("input[name='productDesc']").val();
 	var formData = new FormData();
 	formData.append("productName",productName);
@@ -58,7 +59,8 @@ var upload = function(){
         }
     });
 };
-	
+});
+
 //上传用户头像
 var uploadUserImg = function(){
 	var upload =  document.getElementById("file").files[0];

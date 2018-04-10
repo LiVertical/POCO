@@ -40,7 +40,7 @@ String basePath = request.getScheme()+ "://" + request.getServerName() + ":" +re
 				<li><a>${sessionScope.loginName }</a></li>
 			 </s:else>
 			<li><a onclick="gotoCompleteUserInfo()">完善资料</a></li>
-			<li><a href="<%=basePath%>/login-loginOut.action">退出登陆</a></li>
+			<li><a href="<%=basePath%>/user/login-loginOut.action">退出登陆</a></li>
 	 	</ul>
 	</div>
  	<a href="<%=basePath%>/pages/userInfoEdit.jsp">编辑用户资料</a>
@@ -59,21 +59,18 @@ String basePath = request.getScheme()+ "://" + request.getServerName() + ":" +re
 					<option value="7">人体摄影</option>
 					<option value="9">自拍摄影</option>
 					<option value="10">商业摄影</option>
-					<option value="14">妆型摄影</option>
 					<option value="11">LOMO</option>
-					<option value="12">达物摄影</option>
-					<option value="13">宠物摄影</option>
-					<option value="15">汽车摄影</option>
-					<option value="16">观念摄影</option>
-					<option value="18">儿童摄影</option>
-					<option value="19">航拍摄影</option>
-					<option value="23">手机摄影</option>
-					<option value="22">极限运动</option>
-					<option value="17">潜水摄影</option>
 					<option value="8">其他摄影</option>
 				</select>
 			</p>
-			<p>file:</p><input type="file" name="image" id="image">
+			<p>file:</p>
+			<div id="files">
+				<input type="file" name="image" id="image">
+				<input type="file" name="image">
+				<input type="file" name="image">
+				<input type="file" name="image">
+				<input type="file" name="image">
+			</div>
 			<p>作品描述：<input type="text" name="productDesc"></p>
 			<button class="submit" id="upload">上传</button>
 	</div>

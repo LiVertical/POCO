@@ -17,7 +17,7 @@ public class SysNotificationService implements ISysNotificationService {
 	private UserDao userDao;
 	
 	@Override
-	public List<Notifiaction> notificationListByUserId(int userId) {
+	public List<Notifiaction> notificationListByUserId(String userId) {
 		List<Notifiaction> notificationList = sysNotificationDao.notificationListByUserId(userId);
 		return notificationList;
 	}
@@ -84,6 +84,12 @@ public class SysNotificationService implements ISysNotificationService {
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
+	}
+
+	@Override
+	public List<Notifiaction> queryNotifiactions(int currentPage, int recordSize) {
+		
+		return sysNotificationDao.queryNotifactions(currentPage,recordSize);
 	}
 
 	

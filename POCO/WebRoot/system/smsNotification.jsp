@@ -67,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	var initUserData = function(isFirst) {
 		var recordSize = 6;
 		var currentPage = 1;
-		$.getJSON("<%=basePath%>admin/user-queryUserDetails.action?currentPage="+ currentPage + "&recordSize=" + recordSize,
+		$.getJSON("<%=basePath%>admin/queryNotifiactions.action?currentPage="+ currentPage + "&recordSize=" + recordSize,
 				function(result) {
 					$("#dataDisplay").empty();
 					console.log("userInfos:" + result.userInfos);

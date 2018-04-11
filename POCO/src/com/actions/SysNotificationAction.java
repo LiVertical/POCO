@@ -31,22 +31,37 @@ public class SysNotificationAction extends ActionSupport{
 	
 	private List<Notifiaction> notifiactions;
 	
+	private int currentPage;
+	
+	private int recordSize;
+	
 	/**
 	 * 根据用户ID查询通知集合
 	 * 根据时间倒叙展示
 	 * @return
 	 */
-	public String NotificationList(){
+	public String notificationList(){
 		//创建返回JSON
 		result = new JSONObject();
 		//获取session
 		HttpServletRequest request = ServletActionContext.getRequest(); 
 		HttpSession session = request.getSession(); 
 		//获取用户userId
-		int userId =  (Integer) session.getAttribute("userId");
+		String userId = (String) session.getAttribute("userId");
 		//根据userId获取通知集合
 		List<Notifiaction> notifications = sysNotificationService.notificationListByUserId(userId);
 		result.put("dataList", notifications);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 后台查询通知列表
+	 * @return
+	 */
+	public String queryNotifiactions(){
+		
+		List<Notifiaction> nfs = sysNotificationService.queryNotifiactions(currentPage,recordSize);
+		
 		return SUCCESS;
 	}
 	/**

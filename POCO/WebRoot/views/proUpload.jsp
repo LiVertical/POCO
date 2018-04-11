@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>ÉÏ´«×÷Æ·</title>
+    <title>ä¸Šä¼ ä½œå“</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -23,7 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="<%=path %>/control/css/zyUpload.css" type="text/css">
 	
 	<script src="<%=path %>/js/jquery-1.9.1.min.js"></script>
-	<script src="<%=path %>/script/jquery.form.js"></script>
 	<script src="<%=path %>/script/zyFile.js"></script>
 	<script src="<%=path %>/control/js/zyUpload.js"></script>
 	<script src="<%=path %>/control/js/common.js"></script>
@@ -32,24 +31,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 		<div id="demo" class="demo"></div>
 		<div class="content">
-	    	<p>ÇëÑ¡Ôñ×÷Æ··ÖÀà£º <select class="type" name="proType">
-         			    <option value="">ÇëÑ¡Ôñ×÷Æ··ÖÀà</option>
-                        <option value="0" >ÈËÏñÉãÓ°</option>
-                        <option value="1" >ÉúÌ¬ÉãÓ°</option>
-                        <option value="2" >ÔË¶¯ÉãÓ°</option>
-                        <option value="3" >Éú»îÉãÓ°</option>
-                        <option value="4" >Ò¹¾°ÉãÓ°</option>
-                        <option value="5" >·ç¾°ÉãÓ°</option>
-                        <option value="6" >¼ÍÊµÉãÓ°</option>
-                        <option value="7" >ÈËÌåÉãÓ°</option>
-                        <option value="9" >×ÔÅÄÉãÓ°</option>
-                        <option value="8" >ÆäËûÉãÓ°</option>
+	    	<p>è¯·é€‰æ‹©ä½œå“åˆ†ç±»ï¼š <select class="type" name="proType">
+         			    <option value="">è¯·é€‰æ‹©ä½œå“åˆ†ç±»</option>
+                        <option value="0" >äººåƒæ‘„å½±</option>
+                        <option value="1" >ç”Ÿæ€æ‘„å½±</option>
+                        <option value="2" >è¿åŠ¨æ‘„å½±</option>
+                        <option value="3" >ç”Ÿæ´»æ‘„å½±</option>
+                        <option value="4" >å¤œæ™¯æ‘„å½±</option>
+                        <option value="5" >é£æ™¯æ‘„å½±</option>
+                        <option value="6" >çºªå®æ‘„å½±</option>
+                        <option value="7" >äººä½“æ‘„å½±</option>
+                        <option value="9" >è‡ªæ‹æ‘„å½±</option>
+                        <option value="8" >å…¶ä»–æ‘„å½±</option>
                 </select></p>
-	           <p>±êÌâ£º</p>
-	           <p><input class="productName" type="text" name="productName" placeholder="ÇëÊäÈë±êÌâ¡¤¡¤¡¤¡¤¡¤¡¤¡¤"></p>
-	           <p>ÄÚÈİ(Ñ¡Ìî)£º</p>
+	           <p>æ ‡é¢˜ï¼š</p>
+	           <p><input class="productName" type="text" name="productName" placeholder="è¯·è¾“å…¥æ ‡é¢˜Â·Â·Â·Â·Â·Â·Â·"></p>
+	           <p>å†…å®¹(é€‰å¡«)ï¼š</p>
 	           <p><input class="productDesc" type="text" name="productDesc"></p>          	            
-	           <div class="upload_btn">·¢²¼</div>
+	           <div class="upload_btn">å‘å¸ƒ</div>
      </div> 
   </body>
 </html>

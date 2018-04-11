@@ -272,7 +272,13 @@
  				<param name="root">result</param>
 				<param name="excludeNullProperties">true</param>
  			</result>
- 	</action>
+ 		</action>
+ 		<action name="queryNotifiactions" class="com.actions.SysNotificationAction"  method="notificationList">
+ 			<result name="success" type="json">
+ 				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+ 			</result>
+ 		</action>
    </package>
 </struts>
 

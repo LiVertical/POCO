@@ -1,38 +1,39 @@
+О╩© /* www.jq22.com */
 $(function(){
-	// ЁУй╪╩╞╡Е╪Ч
+	// Е┬²Е╖▀Е▄√Ф▐▓Д╩╤
 	$("#demo").zyUpload({
-		width            :   "650px",                 // ©М╤х
-		height           :   "400px",                 // ╦ъ╤х
-		itemWidth        :   "120px",                 // нд╪ЧоН╣д©М╤х
-		itemHeight       :   "100px",                 // нд╪ЧоН╣д╦ъ╤х
-		url              :   "/POCO/product-preview.action",  // ио╢╚нд╪Ч╣дб╥╬╤
-		multiple         :   true,                    // йг╥Я©ирт╤Ю╦Жнд╪Чио╢╚
-		dragDrop         :   true,                    // йг╥Я©иртмо╤╞ио╢╚нд╪Ч
-		del              :   true,                    // йг╥Я©ирти╬ЁЩнд╪Ч
-		finishDel        :   false,  				  // йг╥Ятзио╢╚нд╪ЧмЙЁи╨Си╬ЁЩт╓юю
-		/* мБ╡©╩Я╣ц╣д╩ь╣В╫с©з */
-		onSelect: function(files, allFiles){                    // я║тЯнд╪Ч╣д╩ь╣В╥╫╥╗
-			console.info("╣╠г╟я║тЯакртобнд╪Чё╨");
+		width            :   "650px",                 // Е╝╫Е╨╕
+		height           :   "400px",                 // Е╝╫Е╨╕
+		itemWidth        :   "120px",                 // Ф√┤Д╩╤И║╧Г └Е╝╫Е╨╕
+		itemHeight       :   "100px",                 // Ф√┤Д╩╤И║╧Г └И╚≤Е╨╕
+		url              :   "/upload/UploadAction",  // Д╦┼Д╪═Ф√┤Д╩╤Г └Х╥╞Е╬└
+		multiple         :   true,                    // Ф≤╞Е░╕Е▐╞Д╩╔Е╓ Д╦╙Ф√┤Д╩╤Д╦┼Д╪═
+		dragDrop         :   true,                    // Ф≤╞Е░╕Е▐╞Д╩╔Ф▀√Е┼╗Д╦┼Д╪═Ф√┤Д╩╤
+		del              :   true,                    // Ф≤╞Е░╕Е▐╞Д╩╔Е┬═И≥╓Ф√┤Д╩╤
+		finishDel        :   false,  				  // Ф≤╞Е░╕Е°╗Д╦┼Д╪═Ф√┤Д╩╤Е╝▄Ф┬░Е░▌Е┬═И≥╓И╒└Х╖┬
+		/* Е╓√И┐╗Х▌╥Е╬≈Г └Е⌡·Х╟┐Ф▌╔Е▐ё */
+		onSelect: function(files, allFiles){                    // И─┴Ф▀╘Ф√┤Д╩╤Г └Е⌡·Х╟┐Ф√╧ФЁ∙
+			console.info("Е╫⌠Е┴█И─┴Ф▀╘Д╨├Д╩╔Д╦▀Ф√┤Д╩╤О╪ ");
 			console.info(files);
-			console.info("ж╝г╟ц╩ио╢╚╣днд╪Чё╨");
+			console.info("Д╧▀Е┴█Ф╡║Д╦┼Д╪═Г └Ф√┤Д╩╤О╪ ");
 			console.info(allFiles);
 		},
-		onDelete: function(file, surplusFiles){                     // и╬ЁЩр╩╦Жнд╪Ч╣д╩ь╣В╥╫╥╗
-			console.info("╣╠г╟и╬ЁЩак╢кнд╪Чё╨");
+		onDelete: function(file, surplusFiles){                     // Е┬═И≥╓Д╦─Д╦╙Ф√┤Д╩╤Г └Е⌡·Х╟┐Ф√╧ФЁ∙
+			console.info("Е╫⌠Е┴█Е┬═И≥╓Д╨├Ф╜╓Ф√┤Д╩╤О╪ ");
 			console.info(file);
-			console.info("╣╠г╟йёсЮ╣днд╪Чё╨");
+			console.info("Е╫⌠Е┴█Е┴╘Д╫≥Г └Ф√┤Д╩╤О╪ ");
 			console.info(surplusFiles);
 		},
-		onSuccess: function(file){                    // нд╪Чио╢╚Ёи╧╕╣д╩ь╣В╥╫╥╗
-			console.info("╢кнд╪Чио╢╚Ёи╧╕ё╨");
+		onSuccess: function(file){                    // Ф√┤Д╩╤Д╦┼Д╪═Ф┬░Е┼÷Г └Е⌡·Х╟┐Ф√╧ФЁ∙
+			console.info("Ф╜╓Ф√┤Д╩╤Д╦┼Д╪═Ф┬░Е┼÷О╪ ");
 			console.info(file);
 		},
-		onFailure: function(file){                    // нд╪Чио╢╚й╖╟э╣д╩ь╣В╥╫╥╗
-			console.info("╢кнд╪Чио╢╚й╖╟эё╨");
+		onFailure: function(file){                    // Ф√┤Д╩╤Д╦┼Д╪═Е╓╠Х╢╔Г └Е⌡·Х╟┐Ф√╧ФЁ∙
+			console.info("Ф╜╓Ф√┤Д╩╤Д╦┼Д╪═Е╓╠Х╢╔О╪ ");
 			console.info(file);
 		},
-		onComplete: function(responseInfo){           // ио╢╚мЙЁи╣д╩ь╣В╥╫╥╗
-			console.info("нд╪Чио╢╚мЙЁи");
+		onComplete: function(responseInfo){           // Д╦┼Д╪═Е╝▄Ф┬░Г └Е⌡·Х╟┐Ф√╧ФЁ∙
+			console.info("Ф√┤Д╩╤Д╦┼Д╪═Е╝▄Ф┬░");
 			console.info(responseInfo);
 		}
 	});

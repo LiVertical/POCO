@@ -12,7 +12,7 @@ public interface ISysNotificationService {
 	 * @param userId
 	 * @return
 	 */
-	List<Notifiaction> notificationListByUserId(int userId);
+	List<Notifiaction> notificationListByUserId(String userId);
 
 	/**
 	 * 根据ID查询系统通知
@@ -32,6 +32,14 @@ public interface ISysNotificationService {
 	 * @param notifiaction2
 	 */
 	void delete(Notifiaction notifiaction2);
+
+	/**
+	 * 后台分页查询发布的通知
+	 * @param currentPage
+	 * @param recordSize
+	 * @return
+	 */
+	List<Notifiaction> queryNotifiactions(int currentPage, int recordSize);
 
 
 }

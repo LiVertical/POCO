@@ -35,5 +35,10 @@
                 <comment>评论</comment>
             </column>
         </property>
+         <property name="activityId" type="string">
+            <column name="activity_id" length="32">
+                <comment>活动id</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

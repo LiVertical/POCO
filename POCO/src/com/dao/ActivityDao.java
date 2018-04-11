@@ -19,8 +19,7 @@ public class ActivityDao extends BaseDao {
 
 
 	public void saveActivity(String activityName, List<File> products, List<String> productIds,
-		List<String> productNames, String userId, String activityDesc, String activityInfo,
-		String createTime, String endTime) {
+		List<String> productNames, String userId, String activityDesc, String activityInfo, String createTime, String endTime) {
 		UploadFileUtil uploadFileUtil = new UploadFileUtil();
 		try {	
 			Activities activity = new Activities();
@@ -53,5 +52,24 @@ public class ActivityDao extends BaseDao {
 		}catch(Exception e){
 			logger.error("存储活动信息异常", e);
 		}
+	}
+
+
+	public void saveActivity(String activityName, String userId, String activityDesc, String createTime, String endTime) {
+		Activities activity = new Activities();
+		try {
+			activity.setActivityId(UUIDUtil.generateUUID());
+			activity.setUserId(userId);
+			activity.setActivityName(activityName);
+			activity.setActivityDesc(activityDesc);
+			activity.setEndTime(DateUtil.convertStringToDate(endTime));
+			activity.setCreateTime(DateUtil.convertStringToDate(createTime));
+			this.getSession().save(activity);
+		} catch (ParseException e) {
+			logger.error("格式化时间异常", e);
+		}catch(Exception e){
+			logger.error("保存活动异常", e);
+		}
+	
 	}
 }

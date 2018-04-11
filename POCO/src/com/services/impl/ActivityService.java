@@ -1,16 +1,12 @@
 package com.services.impl;
 
 import java.io.File;
-import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
 import com.dao.ActivityDao;
 import com.dao.UserDao;
 import com.entities.Activities;
 import com.services.IActivityService;
-import com.util.DateUtil;
-import com.util.UUIDUtil;
 
 public class ActivityService implements IActivityService {
 	private UserDao userDao;
@@ -22,7 +18,11 @@ public class ActivityService implements IActivityService {
 			String activityDesc, String activityInfo, String createTime,
 			String endTime) {
 		activityDao.saveActivity(activityName, products, productIds, productNames, userId, activityDesc, activityInfo, createTime, endTime);
-		
+	}
+	
+	@Override
+	public void doApplyActivity(String userId, String activityName, String activityDesc, String createTime, String endTime) {
+		activityDao.saveActivity(activityName, userId, activityDesc, createTime, endTime);
 	}
 	
 	@Override

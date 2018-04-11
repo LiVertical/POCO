@@ -21,29 +21,14 @@ public class Activities implements java.io.Serializable {
 	private String activityGroupId;
 	private String productId;
 
-	// Constructors
 
-	/** default constructor */
-	public Activities() {
-	}
 
-	/** minimal constructor */
-	public Activities(String activityInfo, String activityName,
-			String activityDesc, Date createTime, String userId,
+	public Activities(String activityId, String activityInfo,
+			String activityName, String activityDesc, Date createTime,
+			Date endTime, String userId, Integer curStatus,
 			String activityGroupId, String productId) {
-		this.activityInfo = activityInfo;
-		this.activityName = activityName;
-		this.activityDesc = activityDesc;
-		this.createTime = createTime;
-		this.userId = userId;
-		this.activityGroupId = activityGroupId;
-		this.productId = productId;
-	}
-
-	/** full constructor */
-	public Activities(String activityInfo, String activityName,
-			String activityDesc, Date createTime, Date endTime, String userId,
-			Integer curStatus, String activityGroupId, String productId) {
+		super();
+		this.activityId = activityId;
 		this.activityInfo = activityInfo;
 		this.activityName = activityName;
 		this.activityDesc = activityDesc;
@@ -55,7 +40,11 @@ public class Activities implements java.io.Serializable {
 		this.productId = productId;
 	}
 
-	// Property accessors
+	
+	
+	public Activities() {
+		super();
+	}
 
 	public String getActivityId() {
 		return this.activityId;

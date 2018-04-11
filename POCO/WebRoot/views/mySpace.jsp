@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div class="header">
 		<ul>
 			<li><a href="<%=basePath%>/views/productShow.jsp">POCO首页</a></li>
-			<li><a href="">活动</a></li>
+			<li><a href="<%=basePath%>/views/activities.jsp?userId=${sessionScope.userId }">活动</a></li>
 			<li><a href="<%=basePath%>/views/myWorks.jsp">论坛</a></li>
 			<li><a href="<%=basePath%>/views/myStores.jsp">问答</a></li>
 	 	</ul>

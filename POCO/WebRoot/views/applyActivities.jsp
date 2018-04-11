@@ -18,15 +18,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/myWorks.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/activity.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/custom.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/pagination.css">
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/activity.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/jquery-ui.min.css">
 	<script src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
 	<script src="<%=basePath%>/js/jquery.pagination.js"></script>
-	<script src="<%=basePath%>/script/myWorks.js"></script>
+	<script src="<%=basePath%>/script/activity.js"></script>
 	<script src="<%=basePath%>/js/common.js"></script>
 	<script src="<%=basePath%>/script/custom.js"></script>
+	<script src="<%=basePath%>/js/jquery-ui.js"></script>
 	<script>
 		 function loadSrc(src,id){
 	    	  $("#mainFrame").attr("height",100);
@@ -50,12 +51,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  data-user_id ='${sessionScope.userId }'>
  <div class="main" style='min-height:300px'>
 	<div class="content">
-		文件：<input type="file" name="products">
-		活动标题：<input type="text" name="activityName">
-		活动介绍：<input type="activityDesc">
-		
+		<h3>活动申请</h3>
+		活动标题:<input type="text" id="activityName"><br/>
+		活动介绍:<input id="activityDesc" type="text"><br/>
+		开始时间:<input id="startTime" class="time-input " type="text"> --
+		结束时间:<input id="endTime" class="time-input " type="text"><br/>
+		<button class="apply" id="apply">点击申请</button>
 	</div>
-	 <div class="pagination" id="page"></div>
  </div>
 </body>
 </html>

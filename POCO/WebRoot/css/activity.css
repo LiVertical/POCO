@@ -1,0 +1,29 @@
+.content{
+	margin:10px auto;
+	width:90%;
+	border:1px solid;
+	text-align:left;
+	min-height:400px;
+}
+.content h1{
+	color:;
+}
+.content p{
+	font-size:16px;
+	
+}
+.content input{
+	height:30px;
+	width:150px;
+	margin-top:10px;
+} 
+.apply{
+	background:#00B2EE;
+	border-radius:3px;
+	outline:none;
+	width:150px;
+	height:30px;
+	border:none;
+	color:#fff;
+	margin-top:30px;
+}

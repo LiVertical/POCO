@@ -16,6 +16,14 @@
 	height:30px;
 	width:150px;
 	margin-top:10px;
+}
+.desc{
+	height:200px;
+	width:300px;
+	border:1px solid #e2e2e2;
+	resize:none;
+	outline:none;
+	margin-top:20px;
 } 
 .apply{
 	background:#00B2EE;

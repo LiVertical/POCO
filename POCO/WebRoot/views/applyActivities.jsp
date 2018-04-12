@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="content">
 		<h3>活动申请</h3>
 		活动标题:<input type="text" id="activityName"><br/>
-		活动介绍:<input id="activityDesc" type="text"><br/>
+		活动介绍:<textarea class="desc" id="activityDesc"></textarea><br/>
 		开始时间:<input id="startTime" class="time-input " type="text"> --
 		结束时间:<input id="endTime" class="time-input " type="text"><br/>
 		<button class="apply" id="apply">点击申请</button>

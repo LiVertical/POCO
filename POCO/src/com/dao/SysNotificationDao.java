@@ -43,9 +43,11 @@ public class SysNotificationDao extends BaseDao{
 		getSession().createQuery(hql).setString(0, "0").setDate(1, new Date()).setString(2, notifiaction2.getUserId()).setString(3, notifiaction2.getNotifiactionId()).setString(4, notifiaction2.getNotifiactionGroupId());
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Notifiaction> queryNotifactions(int currentPage, int recordSize) {
-		String hql = "FROM  Notifiaction n GROUP BY n.notifiactionGroupId ORDER BY n.createTime ";
-		return null;
+		String hql = "FROM Notifiaction as n GROUP BY n.notifiactionGroupId ORDER BY n.createTime DESC";
+		List<Notifiaction> list = (List<Notifiaction>) getSession().createQuery(hql).setFirstResult(currentPage).setMaxResults(recordSize).list();
+		return list;
 	}
 
 }

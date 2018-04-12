@@ -88,8 +88,13 @@ public class SysNotificationService implements ISysNotificationService {
 
 	@Override
 	public List<Notifiaction> queryNotifiactions(int currentPage, int recordSize) {
+		List<Notifiaction> list = sysNotificationDao.queryNotifactions(currentPage,recordSize);
 		
-		return sysNotificationDao.queryNotifactions(currentPage,recordSize);
+//		for (Notifiaction notifiaction : list) {
+//			Users user = userDao.getUserById(notifiaction.getCreateUser());
+//			notifiaction.setCreateUser(user.getUserName());
+//		}
+		return list; 
 	}
 
 	

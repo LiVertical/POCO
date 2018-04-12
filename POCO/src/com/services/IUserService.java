@@ -13,7 +13,7 @@ public interface IUserService {
 	//上传用户头像
 	void saveOrUpdateUserImg(Integer userId, String url);
 
-	Users getUserById(Integer userId);
+	Users getUserById(String userId);
 
 	void doDeleteUserInfo(String userId);
 

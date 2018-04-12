@@ -1,11 +1,14 @@
 package com.actions;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -13,6 +16,7 @@ import com.entities.Notifiaction;
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.ISysNotificationService;
 import com.services.IUserService;
+import com.util.JsonDateValueProcessor;
 
 public class SysNotificationAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
@@ -59,9 +63,19 @@ public class SysNotificationAction extends ActionSupport{
 	 * @return
 	 */
 	public String queryNotifiactions(){
-		
-		List<Notifiaction> nfs = sysNotificationService.queryNotifiactions(currentPage,recordSize);
-		
+		result = new JSONObject();
+		try {
+			JsonConfig jsonConfig = new JsonConfig();
+			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
+			List<Notifiaction> nfs = sysNotificationService.queryNotifiactions(currentPage,recordSize);
+			JSONArray resultArray = JSONArray.fromObject(nfs, jsonConfig);	
+			result.put("notifiactions", nfs);
+			result.put("returnCode", "0");
+			result.put("returnMsg", "查询通知成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.put("error", "系统异常");
+		}
 		return SUCCESS;
 	}
 	/**
@@ -220,5 +234,21 @@ public class SysNotificationAction extends ActionSupport{
 	}
 	public void setNotifiaction(Notifiaction notifiaction) {
 		this.notifiaction = notifiaction;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public int getRecordSize() {
+		return recordSize;
+	}
+
+	public void setRecordSize(int recordSize) {
+		this.recordSize = recordSize;
 	}
 }

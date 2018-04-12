@@ -34,7 +34,7 @@ public class UserService implements IUserService{
 	}
 	
 	//根据id查询用户
-	public Users getUserById(Integer userId){
+	public Users getUserById(String userId){
 		return userDao.getUserById(userId);
 	}
 	

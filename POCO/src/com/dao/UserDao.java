@@ -31,7 +31,7 @@ public class UserDao extends BaseDao{
 	}
 		
 	//查询用户
-	public Users getUserById(Integer userId){			
+	public Users getUserById(String userId){			
 		return (Users) getSession().get(Users.class, userId);
 	}
 	

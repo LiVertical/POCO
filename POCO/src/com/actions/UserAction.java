@@ -115,8 +115,8 @@ public class UserAction extends ActionSupport{
 			result = new JSONObject();
 			HttpServletRequest request = ServletActionContext.getRequest();
 			HttpSession session = request.getSession();
-			Integer userId = session.getAttribute("userId") == null?-1:Integer.parseInt(session.getAttribute("userId").toString());
-			if(StringUtils.isBlank(String.valueOf(userId))){
+			String userId = session.getAttribute("userId").toString();// == null?-1:Integer.parseInt(session.getAttribute("userId").toString());
+			if(StringUtils.isBlank(userId)){
 				result.put("returnCode", "10");
 				result.put("returnMsg", "参数错误");
 				return SUCCESS;

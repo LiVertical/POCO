@@ -9,8 +9,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
     <title>我的空间</title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -24,9 +22,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/list.css">
 	<script src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
 	<script src="<%=basePath%>/js/jquery.cookie.js"></script>
-	<script src="<%=basePath%>/script/mySpace.js"></script>
+ 	<script src="<%=basePath%>/script/mySpace.js"></script>
 	<script src="<%=basePath%>/js/common.js"></script>
-	<script src="<%=basePath%>/script/custom.js"></script>
+ 	<script src="<%=basePath%>/script/custom.js"></script>
 	<script type="text/javascript">
 	      function loadSrc(src,id){
 	    	  $("#mainFrame").attr("height",100);

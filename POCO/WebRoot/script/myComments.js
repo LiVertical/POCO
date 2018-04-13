@@ -13,6 +13,8 @@ function queryAllComments(page){
 		if(data.returnCode == '00'){
 			var html = '';
 			var commentList = data.commentsInfosOfUser;
+    		$("#dataDisplay").html("");
+    		$("#page").html("");
 			if(commentList.length>0){
 				for(var i = 0; i < commentList.length; i++){
 					html = "<li><p>"+commentList[i].commentDesc
@@ -23,7 +25,9 @@ function queryAllComments(page){
 				if ($("#page").html() == '') {
 	                  $("#page").pagination(data.commentsTotalsCountOfUser, {
 	                        callback: function (index) {
+	                        	alert(1);
 	                        	queryAllComments(index+1);
+	                        	alert(2);
 	                        },
 	                        prev_text: '上一页',       //上一页按钮里text
 	                        next_text: '下一页',       //下一页按钮里text

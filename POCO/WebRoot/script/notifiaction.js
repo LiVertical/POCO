@@ -15,4 +15,10 @@ $(function() {// 初始化内容
 		  		}
 	  		});
 	  	});
-  });
+});
+
+//tab标签翻页
+$('#myTab a').click(function (e) {
+	  e.preventDefault();
+	  $(this).tab('show');
+});

@@ -8,8 +8,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
     <title>系统通知</title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -18,21 +16,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/admin.css">
+	<link href="<%=basePath%>/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
 	<script type="text/javascript" src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
 	<script src="<%=basePath%>/js/common.js"></script>
 	<script src="<%=basePath%>/js/jquery.pagination.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/script/custom.js"></script>
-
+	<script type="text/javascript" src="<%=basePath%>/script/notifiaction.js"></script>
   </head>
   
   <body>
-  	<div>已发布的通知</div>
-  	<div>发布通知
-  		  标题：<input type="text" placeholder="请输入标题" id="notifiactionTitle" name="notifiactionTitle"><br/>
- 		 通知内容：<textarea id="notifiactionInfo" name="notifiactionInfo" cols="30" rows="3" align="center"></textarea>
-  		<button id="submit">发布</button>
-  	</div>
-  	
+  
+  <ul id="myTab" class="nav nav-tabs">
+	  <li class="active"><a href="#">已发布通知</a></li>
+	  <li><a href="<%=basePath%>/system/smsNotification.jsp">发布通知</a></li>
+	  <li><a href="#">VB.Net</a></li>
+	  <li><a href="#">Java</a></li>
+	  <li><a href="#">PHP</a></li>
+   </ul>
+  	<h2 style="text-align:center">已发布的通知</h2>
   	<div class="main">
 		<div id="p_content">
 			<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
@@ -50,7 +51,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<tbody class="table" id="dataDisplay"></tbody>
 			</table>
 		</div>
-		<s:debug/>
 		<div class="pagination" id="page"></div>
 	</div>
   	
@@ -136,8 +136,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function Pagecallback(index, pg) {
 			queryUsers(index);
 			return false;
-		}
-	}
+		};
+	
   
   
   </script>

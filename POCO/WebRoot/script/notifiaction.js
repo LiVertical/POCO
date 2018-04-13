@@ -11,14 +11,24 @@ $(function() {// 初始化内容
 	  		    	"notifiaction.notifiactionInfo":info
 	  		    },
 	  		  	success:function(data){
-		  			
+		  			if(data.returnCode == '00'){
+		  				alert("发布成功！");
+		  				
+		  			}else{
+		  				alert("发布失败！");
+		  			}
 		  		}
 	  		});
 	  	});
 });
 
 //tab标签翻页
-$('#myTab a').click(function (e) {
-	  e.preventDefault();
-	  $(this).tab('show');
+$('.tab .menus li').each(function(){
+    $('.tab .menus li').mouseover(function(){
+        $('.tab .menus li').removeClass('bg');
+        $(this).addClass('bg');
+        var index = $(this).index();
+       
+        $('.tab .scroll').css('margin-top',-index*800+'px');
+    });
 });

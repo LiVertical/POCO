@@ -1,11 +1,15 @@
 package com.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+
+import com.dao.jdbc.BaseJdbcDao;
 import com.entities.Notifiaction;
 
-public class SysNotificationDao extends BaseDao{
+public class SysNotificationDao extends BaseJdbcDao{
 
 	/**
 	 * 根据userId查询系统通知集合，需要根据创建时间倒叙排序
@@ -14,7 +18,7 @@ public class SysNotificationDao extends BaseDao{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Notifiaction> notificationListByUserId(String userId){
-		String hql = "FROM Notifiaction as n WHERE n.userId=? order by createTime desc";
+		String hql = "FROM Notifiaction as n WHERE n.userId=?";
 		List<Notifiaction> list = (List<Notifiaction>) getSession().createQuery(hql).setString(0, userId).list();
 		return list;
 	}
@@ -45,8 +49,13 @@ public class SysNotificationDao extends BaseDao{
 
 	@SuppressWarnings("unchecked")
 	public List<Notifiaction> queryNotifactions(int currentPage, int recordSize) {
-		String hql = "FROM Notifiaction as n GROUP BY n.notifiactionGroupId ORDER BY n.createTime DESC";
-		List<Notifiaction> list = (List<Notifiaction>) getSession().createQuery(hql).setFirstResult(currentPage).setMaxResults(recordSize).list();
+		List<Notifiaction> list = new ArrayList<Notifiaction>();
+		try {
+			String hql = "FROM Notifiaction as n GROUP BY n.notifiactionGroupId ORDER BY n.createTime DESC";
+			list = (List<Notifiaction>) getSession().createQuery(hql).setFirstResult(currentPage).setMaxResults(recordSize).list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
 		return list;
 	}
 

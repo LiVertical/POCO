@@ -22,10 +22,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="<%=basePath%>/js/jquery.cookie.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/script/sysIndex.js"></script>
 	<script type="text/javascript">
-	      function loadSrc(src,id){
+	      function loadSrc(src){
 	    	  $("#mainFrame").attr("height",100);
 	    	  $("#mainFrame").attr("src",src);
-	    	  $.cookie("id", id);
 	      }
 	       function iframeHeight() {
 			 	var ifm = document.getElementById("mainFrame");
@@ -48,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	data: {},
 		    	success : function(json) {
 		    		if (json.returnCode == "00") {
-		    			 $("#mainFrame").attr("src",src);
+		    			$("#mainFrame").attr("src",'<%=basePath%>/system/works.jsp');
 		    			$("#mainFrame").attr("height",100);
 		    		}else{
 		    			logout();

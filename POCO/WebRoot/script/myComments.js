@@ -25,9 +25,7 @@ function queryAllComments(page){
 				if ($("#page").html() == '') {
 	                  $("#page").pagination(data.commentsTotalsCountOfUser, {
 	                        callback: function (index) {
-	                        	alert(1);
 	                        	queryAllComments(index+1);
-	                        	alert(2);
 	                        },
 	                        prev_text: '上一页',       //上一页按钮里text
 	                        next_text: '下一页',       //下一页按钮里text

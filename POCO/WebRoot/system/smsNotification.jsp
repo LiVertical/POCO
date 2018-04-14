@@ -22,10 +22,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="<%=basePath%>/js/common.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/jquery.pagination.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/script/custom.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/script/notifiaction.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/jquery-ui.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/jquery.dialogbox-1.0.js"></script>
+  
   </head>
+  <style>
+  	.on{
+	    height: 110px !important;
+	    background: rgb(0,159,233) !important;
+	    line-height: 110px !important;
+	}
+  </style>
     <script type="text/javascript">
   $(function() {
 		initUserData(1);
@@ -52,6 +59,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  	success:function(data){
 				  if(data.returnCode == '00'){
 				  	alert("成功发布"+data.count+"条通知");
+				  	$("#a").show();
+				  	$("#aa").addClass('on');
+					$("#bb").removeClass('on');
 				  	initUserData(1);			
 				  }else{
 				  	alert("发布失败！");
@@ -61,6 +71,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		});
 	
+		$("#aa").click(function(){
+			$("#aa").addClass('on');
+			$("#bb").removeClass('on');
+			$("#a").show();
+			$("#b").hide();
+		});
+		
+		$("#bb").click(function(){
+			$("#aa").removeClass('on');
+			$("#bb").addClass('on');
+			$("#b").show();
+			$("#a").hide();
+		});
 		
   });
   
@@ -108,7 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								+ "<td>" + data.notifiactions[i].createUser + "</td>"
 								+ "<td>" + status+ "</td>" 
 								+ "<td>" + usefulLife + "</td>" 
-								+ "<td><button class='look' onclick='look("+title+","+info+","+data.receiverCount+")'>查看</button></td></tr>";
+								+ "<td><button class='look' onclick='look("+title+","+info+","+data.receiverCount+")'>查看详情</button></td></tr>";
 						}
 						}else{
 								tbody="<tr class='tr_even'  style='color:969696'><td colspan='"+($(".tr_head").children().length)+"'>暂无通知</td></tr>";
@@ -135,14 +158,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div class="tab">
         <div class="box">
             <ul class="menus">
-                <li class="bg">已发布通知</li>
-                <li>发布通知</li>
-                <li>tab3</li>
+                <li class="on" id="aa">查看通知</li>
+                <li id="bb">发布通知</li>
             </ul>
             <div class="right">
                 <div class="scroll">
                 <!-- 查看通知 -->
-                    <div class="tab_right">
+                    <div class="tab_right" id="a" style="display:block">
                     	<h2 style="text-align:center;margin-bottom:30px;color:rgb(92,94,103);">已发布的通知</h2>
 							<div id="p_content">
 								<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
@@ -163,7 +185,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="pagination" id="page"></div>
             </div>
             <!-- 发送通知 -->
-            <div class="tab_right">
+            <div class="tab_right" id="b">
            		<div class="main">发布通知
   				 <p> 标题：</p>
   				 <input type="text" placeholder="请输入标题" id="notifiactionTitle" name="notifiactionTitle"><br/>
@@ -173,8 +195,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				 <button class="send" id="submit">发布</button>
   				</div>
            	</div>
-            <div class="tab_right"></div>
-            <div class="tab_right"></div>
         </div>
      </div>
    </div>

@@ -10,7 +10,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <title>我的空间</title>
-    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -53,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  data-user_id ='${sessionScope.userId }'>
    <div class="header">
 		<ul>
-			<li><a href="<%=basePath%>/views/productShow.jsp">POCO首页</a></li>
+			<li><a href="<%=basePath%>/index.jsp">POCO首页</a></li>
 			<li><a href="<%=basePath%>/views/activities.jsp?userId=${sessionScope.userId }">活动</a></li>
 			<li><a href="<%=basePath%>/views/myWorks.jsp">论坛</a></li>
 			<li><a href="<%=basePath%>/views/myStores.jsp">问答</a></li>
@@ -67,7 +66,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 	<li><span id="userName">${sessionScope.loginName }</span></li>
 			 	<li><span id="userId">${sessionScope.userId }</span></li>
 			 	<li><a href="<%=basePath%>/views/productUpload.jsp">发作品</a></li>
-			 	<li><a href="<%=basePath%>/user/login-loginOut.action">退出登陆</a></li>
 				<li><span id="userImg" style='height:30px;'></span>
 					<div class="loginCenter" style="display:none">
 						<ul class="menus">

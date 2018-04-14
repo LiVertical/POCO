@@ -27,7 +27,7 @@ ul {
     overflow: hidden;
 }
 .tab .box .menus li {
-    width: 300px;
+    width: 450px;
     height: 100px;
     float:left;
     background: #e2e2e2;
@@ -42,11 +42,6 @@ ul {
 }
 .tab .box .menus li:nth-child(7) {
     border-bottom: none;
-}
-.tab .box .bg {
-    height: 110px !important;
-    background: rgb(0,159,233) !important;
-    line-height: 110px !important;
 }
 .tab .right {
     float: left;
@@ -123,4 +118,10 @@ ul {
 	background:rgb(0,159,233);
 	color:#fff;
 	border-radius:5px;
+}
+#a{
+	display:none;
+}
+#b{
+	display:none;
 }

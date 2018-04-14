@@ -10,10 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 
-<base href="<%=basePath%>">
-
 <title>首页</title>
-
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -30,8 +27,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=basePath%>/script/index.js"></script>
 	<script src="<%=basePath%>/script/custom.js"></script>
 </head>
-<body data-user_name = '${sessionScope.loginName }' 
-	  data-user_img='${sessionScope.userImg }'>
+<script>
+		 function loadSrc(src,id){
+	    	  $("#mainFrame").attr("height",100);
+	    	  $("#mainFrame").attr("src",src);
+	      }
+	      function iframeHeight() {
+				var ifm = document.getElementById("mainFrame");
+				var subWeb = document.frames ? document.frames["mainFrame"].document :ifm.contentDocument;
+				if (ifm != null && subWeb != null) {
+					ifm.height = subWeb.body.scrollHeight;
+				}
+				window.parent.window.iframeHeight();
+		  }
+	</script>	 
+<body>
 	<div class="header">
 		<ul>
 			<li onclick="gotoMyWorks('${sessionScope.loginName }')">POCO</li>
@@ -48,8 +58,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li><span id="userImg"></span>
 						<ul class="loginCenter" style="display:none">
 								<li onclick="gotoMyWorks('${sessionScope.loginName }')">我的空间</li>
-								<li><a href="<%=basePath%>/views/accountManage.jsp">账号管理</a></li>
-								<li><a href="">系统通知</a></li>
+								<li><a href="<%=basePath%>views/accountManage.jsp">账号管理</a></li>
+								<li><a href="<%=basePath%>views/notifications.jsp">系统通知</a></li>
 								<li><a href="<%=basePath%>user/login-loginOut.action">退出登录</a></li>
 						</ul>
 				</li>

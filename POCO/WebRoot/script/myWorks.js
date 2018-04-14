@@ -24,7 +24,6 @@ function queryProducts(currentPage,userName) {
 	var recordSize = 6;
 	var pageSize = 6;
 	var userName=$("#userName").text();
-	var userId= 11;
 	$.getJSON(getRootPath() + "/user/product-queryProductByUser.action?userName="+userName+"&currentPage="+currentPage+"&recordSize="+recordSize,
 		function(result) {
 		$("#p_content").empty();
@@ -46,9 +45,11 @@ function queryProducts(currentPage,userName) {
 							  +"<td>"+ types(result.productInfos[i].productTypes)+ "</td>"
 							  + "<td>"+ result.productInfos[i].uploadTime.substring(0,16) + "</td>"
 							  +"<td><button class='button' onclick='delBatch()'>删除</button></td>";
-					$("#dataDisplay").append(tbody);
 					 }
-				 }
+				 }else{
+						tbody="<tr class='tr_even'  style='color:969696'><td colspan='"+($(".tr_head").children().length)+"'>暂无作品</td></tr>";
+				}
+				 $("#dataDisplay").append(tbody);
 				if ($("#page").html() == '') {
 	                  $("#page").pagination(result.totals, {
 	                        callback: function (index) {

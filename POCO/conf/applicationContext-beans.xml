@@ -81,13 +81,14 @@
 		</bean>
 		
 	<!-- 系统通知 -->
-		<bean id="sysNotificationDao" class="com.dao.SysNotificationDao">
+		<bean id="sysNotificationDao" class="com.dao.SysNotificationDao" parent="abstractDao">
 			<property name="sessionFactory" ref="sessionFactory"></property>
 		</bean>
 		<bean id="sysNotificationService" class="com.services.impl.SysNotificationService">
 			<property name="sysNotificationDao" ref="sysNotificationDao"></property>
 			<property name="userDao" ref="userDao"></property>
 		</bean>
+	
 	<!-- 活动 -->
 	<bean id="activityDao" class="com.dao.ActivityDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>

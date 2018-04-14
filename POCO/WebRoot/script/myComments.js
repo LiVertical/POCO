@@ -13,6 +13,8 @@ function queryAllComments(page){
 		if(data.returnCode == '00'){
 			var html = '';
 			var commentList = data.commentsInfosOfUser;
+    		$("#dataDisplay").html("");
+    		$("#page").html("");
 			if(commentList.length>0){
 				for(var i = 0; i < commentList.length; i++){
 					html = "<li><p>"+commentList[i].commentDesc

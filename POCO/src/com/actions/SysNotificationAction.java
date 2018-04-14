@@ -10,6 +10,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.entities.Notifiaction;
@@ -19,6 +20,8 @@ import com.services.IUserService;
 import com.util.JsonDateValueProcessor;
 
 public class SysNotificationAction extends ActionSupport{
+	
+	Logger logger = Logger.getLogger(this.getClass());
 	private static final long serialVersionUID = 1L;
 	private ISysNotificationService sysNotificationService;
 	private IUserService userService;
@@ -63,18 +66,18 @@ public class SysNotificationAction extends ActionSupport{
 	 * @return
 	 */
 	public String queryNotifiactions(){
+		logger.info("SysNotificationAction.queryNotifiactions start·····");
 		result = new JSONObject();
 		try {
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
-			List<Notifiaction> nfs = sysNotificationService.queryNotifiactions(currentPage,recordSize);
-			JSONArray resultArray = JSONArray.fromObject(nfs, jsonConfig);	
-			result.put("notifiactions", nfs);
-			result.put("returnCode", "0");
+			result.put("notifiactions", JSONArray.fromObject(sysNotificationService.queryNotifiactions(currentPage,recordSize), jsonConfig));
+			result.put("returnCode", "00");
 			result.put("returnMsg", "查询通知成功");
 		} catch (Exception e) {
-			e.printStackTrace();
-			result.put("error", "系统异常");
+			logger.error("查询系统通知异常！", e);
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部服务器异常");
 		}
 		return SUCCESS;
 	}
@@ -120,20 +123,32 @@ public class SysNotificationAction extends ActionSupport{
 	 * @return
 	 */
 	public String addNotification(){
+		logger.info("SysNotificationAction.addNotification start·····");
 		result = new JSONObject();
 		if(notifiaction.getNotifiactionTitle() == null || notifiaction.getNotifiactionInfo() == null){
-			return ERROR;
+			result.put("returnCode", "10");
+			result.put("returnMsg", "参数错误");
+			return SUCCESS;
 		}
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 		String userId = session.getAttribute("userId").toString();
 		if(userId == null || userId.equals("")){
-			result.put("msg", "获取用户异常");
-			return ERROR;
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "获取用户异常");
+			return SUCCESS;
 		}
 		notifiaction.setCreateUser(userId);
-		int count = sysNotificationService.adds(notifiaction);
-		result.put("count", count);
+		try {
+			int count = sysNotificationService.adds(notifiaction);
+			result.put("count", count);
+			result.put("returnCode", "00");
+			result.put("returnMsg", "发布成功");
+		} catch (Exception e) {
+			logger.error("发布通知失败", e);
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部服务器异常");
+		}
 		return SUCCESS;
 	}
 	
@@ -165,12 +180,6 @@ public class SysNotificationAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	public ISysNotificationService getSysNotificationService() {
@@ -251,4 +260,5 @@ public class SysNotificationAction extends ActionSupport{
 	public void setRecordSize(int recordSize) {
 		this.recordSize = recordSize;
 	}
+	
 }

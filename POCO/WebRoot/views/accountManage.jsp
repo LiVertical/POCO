@@ -10,8 +10,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 
-<base href="<%=basePath%>">
-
 <title>账号管理</title>
 
 <meta http-equiv="pragma" content="no-cache">

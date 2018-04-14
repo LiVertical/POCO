@@ -1,5 +1,6 @@
 package com.services.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class SysNotificationService implements ISysNotificationService {
 			nf.setNotifiactionGroupId(uuid);
 			nf.setUserId(users.getUserId());
 			nf.setCreateTime(new Date());
+			nf.setUpdateTime(new Date());
 			nf.setUsefulLife(-1);
 			nf.setCurStatus("1");
 			nf.setNotifiactionInfo(notifiaction.getNotifiactionInfo());
@@ -88,12 +90,12 @@ public class SysNotificationService implements ISysNotificationService {
 
 	@Override
 	public List<Notifiaction> queryNotifiactions(int currentPage, int recordSize) {
-		List<Notifiaction> list = sysNotificationDao.queryNotifactions(currentPage,recordSize);
-		
-//		for (Notifiaction notifiaction : list) {
-//			Users user = userDao.getUserById(notifiaction.getCreateUser());
-//			notifiaction.setCreateUser(user.getUserName());
-//		}
+		List<Notifiaction> list = new ArrayList<Notifiaction>();;
+		try {
+			list = sysNotificationDao.queryNotifactions(currentPage,recordSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return list; 
 	}
 

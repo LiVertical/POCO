@@ -8,17 +8,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
     <title>活动管理</title>
-    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
+	<link href="<%=basePath%>/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
   </head>  
-  <body>
-  
-  </body> 
+<body>
+	<ul class="nav nav-tabs">
+	  <li class="active"><a href="#">Home</a></li>
+	  <li><a href="#">发布通知</a></li>
+	  <li><a href="#">查看已发布通知</a></li>
+	  <li><a href="#">VB.Net</a></li>
+	  <li><a href="#">Java</a></li>
+	  <li><a href="#">PHP</a></li>
+   </ul>
+</body> 
 </html>

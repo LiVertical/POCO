@@ -28,7 +28,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 function loadSrc(src,id){
 	    	  $("#mainFrame").attr("height",100);
 	    	  $("#mainFrame").attr("src",src);
-	    	  $.cookie("id", id);
 	      }
 	      function iframeHeight() {
 				var ifm = document.getElementById("mainFrame");
@@ -41,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 	</script>	 
  </head>
-	<body>
+<body>
 	<script>	
 		$(function() {
 			initUserData(0);
@@ -58,29 +57,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							var tbody = '';
 							$("#dataDisplay div:gt(0)").remove();
 							if (result.userInfos.length > 0) {
-									var pageSize = (result.userInfos.length > recordSize ? recordSize: result.userInfos.length);
-										for (var i = 0; i < pageSize; i++) {
-											if(result.userInfos[i].role != '2'){
-												var sex = result.userInfos[i].sex;
-												var isMan = "";
-												if(sex == 1){
-													isMan = "男";
-												}else{
-													isMan = "女";
-												}
-												var userPhoto = result.userInfos[i].faceImg;
-												if(userPhoto == ''){
-													userPhoto = getRootPath() + "/img/icons/default.jpg";
-												}else{
-													userPhoto = getRootPath() + "/" + result.userInfos[i].faceImg;
-												}
-												tbody += "<tr><td style='word-wrap: break-word;font-size:12px;'>"+ result.userInfos[i].userId + "</td>"
-														+ "<td><img alt="+userPhoto+" class='userImg' src='" + userPhoto + "'</td>"
-														+ "<td>" + result.userInfos[i].loginName + "</td>"
-														+ "<td>" + isMan + "</td>"
-														+ "<td>" + result.userInfos[i].age+ "</td>" 
-														+ "<td>" + result.userInfos[i].email + "</td>" 
-														+ "<td><img style='height:30px;width:44px' src='" + getRootPath() + "/img/icons/delete.jpg' class='delBtn' onclick='deleteUser(&quot;"+result.userInfos[i].userId+"&quot;)'></td></tr>";
+								var pageSize = (result.userInfos.length > recordSize ? recordSize: result.userInfos.length);
+								for (var i = 0; i < pageSize; i++) {
+									if(result.userInfos[i].role != '2'){
+										var sex = result.userInfos[i].sex;
+										var isMan = "";
+										if(sex == 1){
+											isMan = "男";
+										}else{
+											isMan = "女";
+										}
+										var userPhoto = result.userInfos[i].faceImg;
+										if(userPhoto == ''){
+											userPhoto = getRootPath() + "/img/icons/default.jpg";
+										}else{
+											userPhoto = getRootPath() + "/" + result.userInfos[i].faceImg;
+										}
+										tbody += "<tr><td style='word-wrap: break-word;font-size:12px;'>"+ result.userInfos[i].userId + "</td>"
+												+ "<td><img alt="+userPhoto+" class='userImg' src='" + userPhoto + "'</td>"
+												+ "<td>" + result.userInfos[i].loginName + "</td>"
+												+ "<td>" + isMan + "</td>"
+												+ "<td>" + result.userInfos[i].age+ "</td>" 
+												+ "<td>" + result.userInfos[i].email + "</td>" 
+												+ "<td><img style='height:30px;width:44px' src='" + getRootPath() + "/img/icons/delete.jpg' class='delBtn' onclick='deleteUser(&quot;"+result.userInfos[i].userId+"&quot;)'></td></tr>";
 											}
 										}
 									}
@@ -106,7 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				queryUsers(index);
 				return false;
 			}
-		}
+		};
 		
 		//删除用户
 		var deleteUser = function(userId){

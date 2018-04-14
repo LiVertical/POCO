@@ -16,6 +16,7 @@ table{
 
 table,th, td{
   border: 1px solid black;
+  height: 30px;
 }
 .delBtn{
 	color:#CD8C95;

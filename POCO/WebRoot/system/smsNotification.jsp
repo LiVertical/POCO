@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div id="p_content">
 								<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
 									<thead>
-										<tr>
+										<tr class='tr_head'>
 											<td>序号</td>
 											<td>标题</td>
 											<td style="width:160px">时间</td>
@@ -124,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							+ "<td><a class='delBtn' onclick='deleteUser("+data.notifiactions[i].userid+")'>查看</a></td></tr>";
 					}
 				}else{
-					tbody="<tr class='tr_even'><td colspan='"+($(".tr_head").children().length)+"'>暂无支付通知</td></tr>";
+					tbody="<tr class='tr_even'  style='color:969696'><td colspan='"+($(".tr_head").children().length)+"'>暂无通知</td></tr>";
 				}
 				$("#dataDisplay").append(tbody);
 				$("#page").pagination(data.totalCountPro,{

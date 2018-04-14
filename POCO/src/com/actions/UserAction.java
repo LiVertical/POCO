@@ -263,6 +263,8 @@ public class UserAction extends ActionSupport{
 			HttpSession session = request.getSession(); 
 			String userId = session.getAttribute("userId").toString();
 			userService.doUpdatePass(userId, newPass);
+			result.put("returnCode", "00");
+			result.put("returnMsg", "更新密码成功");
 		} catch (Exception e) {
 			result.put("returnCode", "-1");
 			result.put("returnMsg", "内部徐服务器异常");

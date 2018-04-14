@@ -78,7 +78,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript" src="<%=basePath%>/js/jquery-1.9.1.min.js"></script> 
   <script type="text/javascript" src="<%=basePath%>/js/common.js"></script> 
   <script type="text/javascript" src="<%=basePath%>/script/notifiaction.js"></script>
-  <script src="<%=basePath%>/js/jquery.pagination.js"></script>
+  <script type="text/javascript" src="<%=basePath%>/js/jquery.pagination.js"></script>
+  <script type="text/javascript" src="<%=basePath%>/script/plug-in.js"></script>
+  
   <script type="text/javascript">
   $(function() {
 		initUserData(1);
@@ -115,13 +117,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						}else{
 							usefulLife=data.notifiactions[i].usefulLife;
 						}
+					var title= '"'+data.notifiactions[i].notifiactionTitle+'"';
+					var info = '"'+data.notifiactions[i].notifiactionInfo+'"';
 					tbody += "<tr><td>"+ i + "</td>"
-							+ "<td>" + data.notifiactions[i].notifiactionTitle + "'</td>"
+							+ "<td>" + data.notifiactions[i].notifiactionTitle + "</td>"
 							+ "<td>" + data.notifiactions[i].createTime.substring(0,16) + "</td>"
 							+ "<td>" + data.notifiactions[i].createUser + "</td>"
 							+ "<td>" + status+ "</td>" 
 							+ "<td>" + usefulLife + "</td>" 
-							+ "<td><a class='delBtn' onclick='deleteUser("+data.notifiactions[i].userid+")'>查看</a></td></tr>";
+							+ "<td><a class='delBtn'" +"onclick='popAlert("+title+","+info+")'>查看</a></td></tr>";
 					}
 				}else{
 					tbody="<tr class='tr_even'><td colspan='"+($(".tr_head").children().length)+"'>暂无支付通知</td></tr>";
@@ -141,6 +145,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		}
 	},'json');
+		
+function popAlert(title,message){
+	$.Pop(title,message,'alert');
+}
 	
 	$(function() {// 初始化内容
 		$("#submit").click(function(){

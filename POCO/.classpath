@@ -71,7 +71,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2-spring-plugin-2.3.15.3.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/uuid-3.2.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xwork-core-2.3.15.3.jar"/>
-	<classpathentry kind="lib" path="D:/software/apache-tomcat-7.0.73/lib/jsp-api.jar"/>
-	<classpathentry kind="lib" path="D:/software/apache-tomcat-7.0.73/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="D:/software/apache-tomcat-7.0.85/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="D:/software/apache-tomcat-7.0.85/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

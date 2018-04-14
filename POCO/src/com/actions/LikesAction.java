@@ -1,5 +1,7 @@
 package com.actions;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,8 +11,11 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.ILikeService;
+import com.util.JsonDateValueProcessor;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 public class LikesAction extends ActionSupport{
 	
@@ -101,7 +106,9 @@ public class LikesAction extends ActionSupport{
 			return SUCCESS;
 		}
 		try {
-			result.put("products", likeService.queryProductByUserId(userId));
+			JsonConfig jsonConfig = new JsonConfig();
+			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
+			result.put("products", JSONArray.fromObject(likeService.queryProductByUserId(userId), jsonConfig));
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询成功");
 		} catch (Exception e) {

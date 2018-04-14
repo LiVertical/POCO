@@ -21,8 +21,6 @@ public class Activities implements java.io.Serializable {
 	private String activityGroupId;
 	private String productId;
 
-
-
 	public Activities(String activityId, String activityInfo,
 			String activityName, String activityDesc, Date createTime,
 			Date endTime, String userId, Integer curStatus,
@@ -40,8 +38,6 @@ public class Activities implements java.io.Serializable {
 		this.productId = productId;
 	}
 
-	
-	
 	public Activities() {
 		super();
 	}

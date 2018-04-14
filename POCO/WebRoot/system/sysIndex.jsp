@@ -29,11 +29,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       function iframeHeight() {
 			 	var ifm = document.getElementById("mainFrame");
 				var subWeb = document.frames ? document.frames["mainFrame"].document :ifm.contentDocument;
-				var height = $("#leftMenu").height()+20;
+				var height = $("#leftMenu").height();
 				if (ifm != null && subWeb != null) {
-					ifm.height = subWeb.body.scrollHeight+50;
+					ifm.height = subWeb.body.scrollHeight;
 					if(height<subWeb.body.scrollHeight){
-						height = subWeb.body.scrollHeight+50;
+						height = subWeb.body.scrollHeight;
 					}
 				} 
 		  }

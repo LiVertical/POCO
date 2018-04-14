@@ -40,7 +40,6 @@ public class SysNotificationService implements ISysNotificationService {
 			e1.printStackTrace();
 			return count;
 		}
-		
 		for (Users users : userList) {
 			Notifiaction nf = new Notifiaction();
 			nf.setNotifiactionGroupId(uuid);
@@ -61,15 +60,32 @@ public class SysNotificationService implements ISysNotificationService {
 		}
 		
 		return count;
-		
+	}
+	
+	@Override
+	public List<Notifiaction> queryNotifiactions(int currentPage, int recordSize) {
+		List<Notifiaction> list = new ArrayList<Notifiaction>();;
+		try {
+			list = sysNotificationDao.queryNotifactions(currentPage,recordSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list; 
+	}
+
+	@Override
+	public int queryTotalNotification() {
+		return sysNotificationDao.queryNotifactionsCount();
 	}
 
 	@Override
 	public void delete(Notifiaction notifiaction2) {
-		
 		sysNotificationDao.delete(notifiaction2);
-		
-		
+	}
+	
+	@Override
+	public int countReceiver() {
+		return sysNotificationDao.doCountReceiver();
 	}
 
 	public SysNotificationDao getSysNotificationDao() {
@@ -88,16 +104,4 @@ public class SysNotificationService implements ISysNotificationService {
 		this.userDao = userDao;
 	}
 
-	@Override
-	public List<Notifiaction> queryNotifiactions(int currentPage, int recordSize) {
-		List<Notifiaction> list = new ArrayList<Notifiaction>();;
-		try {
-			list = sysNotificationDao.queryNotifactions(currentPage,recordSize);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list; 
-	}
-
-	
 }

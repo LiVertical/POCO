@@ -72,6 +72,8 @@ public class SysNotificationAction extends ActionSupport{
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
 			result.put("notifiactions", JSONArray.fromObject(sysNotificationService.queryNotifiactions(currentPage,recordSize), jsonConfig));
+			result.put("totalNotifiactionsCount", sysNotificationService.queryTotalNotification());
+			result.put("receiverCount", sysNotificationService.countReceiver());
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询通知成功");
 		} catch (Exception e) {

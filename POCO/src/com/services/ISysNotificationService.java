@@ -41,5 +41,9 @@ public interface ISysNotificationService {
 	 */
 	List<Notifiaction> queryNotifiactions(int currentPage, int recordSize);
 
+	int queryTotalNotification();
+
+	int countReceiver();
+
 
 }

@@ -59,4 +59,18 @@ public class SysNotificationDao extends BaseJdbcDao{
 		return list;
 	}
 
+	public int queryNotifactionsCount() {
+		String sql = "FROM Notifiaction GROUP BY notifiactionGroupId";
+		int size = 0;
+		size = getSession().createQuery(sql).list().size();
+		return size;
+	}
+
+	public int doCountReceiver() {
+		String sql = "FROM Notifiaction GROUP BY userId";
+		int size = 0;
+		size = getSession().createQuery(sql).list().size();
+		return size;
+	}
+
 }

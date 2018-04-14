@@ -116,3 +116,11 @@ ul {
 	outline:none;
 	font-size:16px;
 }
+.look{
+	width:100px;
+	height:25px;
+	border:none;
+	background:rgb(0,159,233);
+	color:#fff;
+	border-radius:5px;
+}

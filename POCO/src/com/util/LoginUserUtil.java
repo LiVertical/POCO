@@ -1,7 +1,7 @@
 package com.util;
 
 import org.hibernate.service.spi.ServiceException;
-
+import com.entities.Users;
 import com.opensymphony.xwork2.ActionContext;
 
 public class LoginUserUtil {
@@ -39,6 +39,24 @@ public class LoginUserUtil {
             throw new ServiceException("AcitonContext为空！");
         }
         return (UserInfo) context.getSession().get(COMMONUSER_SESSION_KEY);
+    }
+	
+	public static Users getLoginAdminUser(ActionContext context)
+    {
+        if (context == null)
+        {
+            throw new ServiceException("AcitonContext为空");
+        }
+        return (Users) context.getSession().get(USERINFO_SESSION_KEY);
+    }
+	
+	public static Users getLoginCommonUser(ActionContext context)
+    {
+        if (context == null)
+        {
+            throw new ServiceException("AcitonContext为空");
+        }
+        return (Users) context.getSession().get(COMMONUSER_SESSION_KEY);
     }
 
 }

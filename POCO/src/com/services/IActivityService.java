@@ -19,4 +19,6 @@ public interface IActivityService {
 
 	void doApplyActivity(String userId, String activityName, String activityDesc, String createTime, String endTime);
 
+	void doAuditActivity(String activityId, int curStatus);
+
 }

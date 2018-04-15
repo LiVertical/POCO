@@ -1,6 +1,7 @@
 package com.actions;
 
 import java.io.InputStream;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -80,6 +81,7 @@ public class LoginAction extends BaseAction{
 				cuserInfo.setRole(role);
 				cuserInfo.setUserId(user.getUserId());
 				cuserInfo.setUserName(user.getUserName());
+				cuserInfo.setUserImg(user.getFaceImg());
 				LoginUserUtil.saveCommonUserInfo(getContext(), cuserInfo);
 			}else{
 				throw new Exception("帐号密码错误");
@@ -95,17 +97,16 @@ public class LoginAction extends BaseAction{
 	public String loginOut(){
 		logger.info("LoginAction.loginOut start·····");
 		try {
-			HttpServletRequest request = ServletActionContext.getRequest();
-			HttpSession session = request.getSession();
 			role = LoginUserUtil.getUserInfo().getRole();
-			//清除session
-			session.invalidate();
+            Map session =  ActionContext.getContext().getSession();
+            session.remove("USERINFO_SESSION_KEY");
 		} catch (Exception e) {
 			logger.error("清除session异常", e);
 		}
 		if(role == 1 || role == 2){//系统用户
 			return "adminLogin";
 		}else{
+			
 		return "index";
 		}
 	}

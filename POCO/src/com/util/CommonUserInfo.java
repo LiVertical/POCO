@@ -7,19 +7,21 @@ public class CommonUserInfo {
 	private String loginName;
 	private String userId;
 	private int role;
+	private String userImg;
 	
 	public CommonUserInfo() {
 		super();
 	}
 
 	public CommonUserInfo(String userName, String password, String loginName,
-			String userId, int role) {
+			String userId, int role, String userImg) {
 		super();
 		this.userName = userName;
 		this.password = password;
 		this.loginName = loginName;
 		this.userId = userId;
 		this.role = role;
+		this.userImg = userImg;
 	}
 	
 	public String getUserName() {
@@ -52,5 +54,12 @@ public class CommonUserInfo {
 	public void setRole(int role) {
 		this.role = role;
 	}
-	
+
+	public String getUserImg() {
+		return userImg;
+	}
+
+	public void setUserImg(String userImg) {
+		this.userImg = userImg;
+	}
 }

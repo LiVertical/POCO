@@ -38,6 +38,12 @@ public class ActivityService implements IActivityService {
 		return 0;
 	}
 	
+	//审批活动
+	@Override
+	public void doAuditActivity(String activityId, int curStatus) {
+		activityDao.auditActivity(activityId, curStatus);
+	}
+	
 	public UserDao getUserDao() {
 		return userDao;
 	}

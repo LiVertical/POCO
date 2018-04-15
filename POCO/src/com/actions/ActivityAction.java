@@ -32,6 +32,7 @@ public class ActivityAction extends ActionSupport{
 	private IActivityService activityService;
 	private int currentPage;
 	private int pageSize;
+	private int curStatus;
 	
 	//用户申请活动
 	public String applyActivity(){
@@ -78,6 +79,25 @@ public class ActivityAction extends ActionSupport{
 	}
 	
 	//管理员审批活动
+	public String auditActivity(){
+		logger.info("ActivityAction.auditActivity start·····");
+		result = new JSONObject();
+		if(StringUtils.isBlank(activityId) || StringUtils.isBlank(String.valueOf(curStatus))){
+			result.put("returnCode", "10");
+			result.put("returnMsg", "参数错误");
+			return SUCCESS;
+		}
+		try {
+			 activityService.doAuditActivity(activityId, curStatus);
+			result.put("returnCode", "00");
+			result.put("returnMsg", "审批活动成功");
+		} catch (Exception e) {
+			logger.error("审批活动异常", e);
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部服务器异常");
+		}
+		return SUCCESS;
+	} 
 	
 	
 	//查询所有活动
@@ -219,6 +239,14 @@ public class ActivityAction extends ActionSupport{
 
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public int getCurStatus() {
+		return curStatus;
+	}
+
+	public void setCurStatus(int curStatus) {
+		this.curStatus = curStatus;
 	}
 	
 }

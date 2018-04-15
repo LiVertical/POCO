@@ -70,6 +70,12 @@ public class ActivityDao extends BaseDao {
 		}catch(Exception e){
 			logger.error("保存活动异常", e);
 		}
-	
 	}
+
+
+	public void auditActivity(String activityId, int curStatus) {
+		String hql = "UPDATE Activities a SET a.curStatus="+curStatus;
+		getSession().createQuery(hql).executeUpdate();
+	}
+	
 }

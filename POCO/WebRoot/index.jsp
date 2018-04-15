@@ -1,11 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
+<%@page import="com.util.CommonUserInfo"%>
+<%@page import="com.util.LoginUserUtil"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	CommonUserInfo commonUser = (CommonUserInfo) session.getAttribute(LoginUserUtil.COMMONUSER_SESSION_KEY);
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -41,21 +43,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				window.parent.window.iframeHeight();
 		  }
 	</script>	 
-<body>
+<body data-user_id="${commonUser.userId }">
+ <s:property value="#session.APP_COMMONUSERINFO_SESSION_KEY.userName"></s:property>
+ <s:property value="#session.APP_COMMONUSERINFO_SESSION_KEY.userImg"></s:property>
 	<div class="header">
 		<ul>
-			<li onclick="gotoMyWorks('${sessionScope.loginName }')">POCO</li>
+			<li onclick="gotoMyWorks('${loginName }')">POCO</li>
 			<li><a href="">活动</a></li>
 			<li><a href="<%=basePath%>/views/myWorks.jsp">论坛</a></li>
 			<li><a href="<%=basePath%>/views/myStores.jsp">问答</a></li>
 	 	</ul>
 	 	<ul style="float:right;padding-right:66px">
-			 <s:if test="#session.loginName== null">
+			 <s:if test="#session.APP_COMMONUSERINFO_SESSION_KEY.loginName == null">
 				<li><a href="<%=basePath%>user/login-userLogin.action">登录</a></li>
 			 </s:if>
 			 <s:else>
 			 	<li><a href="<%=basePath%>/views/productUpload.jsp">发作品</a></li>
-				<li><img id="userImg" style="height:30px;width:30px;margin-top:9px;" src="<%=basePath%>${sessionScope.userImg}">
+				<li><img id="userImg" style="height:30px;width:30px;margin-top:9px;" src="<%=basePath%>${sessionScope.APP_COMMONUSERINFO_SESSION_KEY.userImg}">
 						<ul class="loginCenter" style="display:none">
 								<li onclick="gotoMyWorks('${sessionScope.loginName }')">我的空间</li>
 								<li><a href="<%=basePath%>views/accountManage.jsp">账号管理</a></li>
@@ -78,6 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li onclick="queryProducts(8)"><p>风景</p></li>
 		</ul>
 	<div class="main">
+	<s:debug/>
 	   <div class="p_content"> <ul class='boxs' id ="p_content"></ul></div>
 	   <div class="pagination" id="page"></div>
     </div>

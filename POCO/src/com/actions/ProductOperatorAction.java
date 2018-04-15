@@ -28,6 +28,7 @@ import com.entities.ProductInfo;
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.IProductOperatorService;
 import com.util.JsonDateValueProcessor;
+import com.util.LoginUserUtil;
 import com.util.UUIDUtil;
 import com.util.UploadFileUtil;
 
@@ -254,15 +255,13 @@ public class ProductOperatorAction extends ActionSupport {
 				result = new JSONObject();
 				JsonConfig jsonConfig = new JsonConfig();
 				jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
-				HttpServletRequest request = ServletActionContext.getRequest();
-				HttpSession session = request.getSession();
-				userName = session.getAttribute("loginName").toString();
-				if(StringUtils.isBlank(userName)){
+				String userId = LoginUserUtil.getCommonUserInfo().getUserId();
+				if(StringUtils.isBlank(userId)){  
 					result.put("returnCode", "10");
 					result.put("returnMsg", "参数错误");
 				}
-				List<ProductInfo> proList = productOperatorService.queryPorductByUser(userName,recordSize,currentPage);
-				int totalCountPro = productOperatorService.getTotalRecordsByUser(userName);
+				List<ProductInfo> proList = productOperatorService.queryPorductByUser(userId,recordSize,currentPage);
+				int totalCountPro = productOperatorService.getTotalRecordsByUser(userId);
 				JSONArray productInfos = JSONArray.fromObject(proList, jsonConfig);
 				result.put("productInfos", productInfos);
 				result.put("totals", totalCountPro);

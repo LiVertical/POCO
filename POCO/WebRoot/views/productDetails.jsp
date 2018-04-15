@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/list.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/custom.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/productDetails.css">
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/pagination.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/css/pagination.css">
 	<script src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
 	<script src="<%=basePath%>/js/jquery.pagination.js"></script>
 	<script src="<%=basePath%>/js/jquery.mousewheel.min.js"></script>

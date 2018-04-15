@@ -45,8 +45,8 @@ public class ProductOperatorService implements IProductOperatorService{
 		return productInfos;
 	}
 	//根据当前用户名查询该用户的作品
-	public List<ProductInfo> queryPorductByUser(String userName,int recordSize,int curPage){
-		return productOperatorDao.queryProductByUser(userName,recordSize,curPage);
+	public List<ProductInfo> queryPorductByUser(String userId,int recordSize,int curPage){
+		return productOperatorDao.queryProductByUser(userId,recordSize,curPage);
 	}
 	
 	
@@ -55,8 +55,8 @@ public class ProductOperatorService implements IProductOperatorService{
 	}
 	
 	//根据用户名查询作品数量
-	public int getTotalRecordsByUser(String userName){
-		return productOperatorDao.getTotalRecordsByUser(userName);
+	public int getTotalRecordsByUser(String userId){
+		return productOperatorDao.getTotalRecordsByUser(userId);
 	}
 	
 	@Override

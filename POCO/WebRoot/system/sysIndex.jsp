@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/admin.css" />
-    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>css/css/common.css" />
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/sysIndex.css" />
 	<script type="text/javascript" src="<%=basePath%>/js/jquery-1.9.1.min.js"></script> 
 	<script type="text/javascript" src="<%=basePath%>/js/jquery.cookie.js"></script>

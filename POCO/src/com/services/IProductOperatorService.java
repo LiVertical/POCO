@@ -20,11 +20,11 @@ public interface IProductOperatorService {
 	
 	List<Map> queryProductByCondition(int proType,int recordSize,int currentPage);
 	
-	List<ProductInfo> queryPorductByUser(String userName,int recordSize,int curPage);
+	List<ProductInfo> queryPorductByUser(String userId,int recordSize,int curPage);
 
 	int getTotalRecords(int proType);
 	
-	int getTotalRecordsByUser(String userName);
+	int getTotalRecordsByUser(String userId);
 
 	List<ProductInfo> doQueryAllProducts(int recordSize, int curPage);
 

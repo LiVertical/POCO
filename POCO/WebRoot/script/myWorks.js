@@ -1,10 +1,8 @@
 $(function(){
-	var data=$('body').data();
-	var userName = data.user_name;
-	$("#userName").text(userName);
-	var userId = data.user_id;
+	var userId = $("body").data().user_id;
 	$("#userId").text(userId);
-	queryProducts(1,userName);
+	
+	queryProducts(1);
 	
 	$("input[name='products']").click(function (){
 		if($(this).is(':checked')){  
@@ -20,26 +18,24 @@ $(function(){
 	
 });
 
-function queryProducts(currentPage,userName) {
+function queryProducts(page) {
 	var recordSize = 6;
-	var pageSize = 6;
-	var userName=$("#userName").text();
-	$.getJSON(getRootPath() + "/user/product-queryProductByUser.action?userName="+userName+"&currentPage="+currentPage+"&recordSize="+recordSize,
-		function(result) {
+	var currentPage = page;
+	$.getJSON(getRootPath() + "/user/product-queryProductByUser.action?currentPage="+currentPage+"&recordSize="+recordSize,function(result) {
 		$("#p_content").empty();
-		 $("#page").empty();
-			console.log("productInfos:"+result.productInfos);
-			if (result.returnCode == "00") {
-				var tbody = '';
-				 if (result.totals > 0) {
-					 pageSize = (result.totals > recordSize ? recordSize: result.totals);
-					 for (var i = 0; i < pageSize; i++) {
-						 if(i%2 == 0){
-							 tbody += "<tr class='tr_even'>";
-						}else{
-								tbody += "<tr class='tr_odd'>";
-						}
-						tbody += "<td><input class='hide' name='product' type='checkbox' value='"+result.productInfos[i].productId+"'>"+result.productInfos[i].productName+"</td> "
+		$("#page").empty();
+		console.log("productInfos:"+result.productInfos);
+		if (result.returnCode == "00") {
+			var tbody = '';
+			if (result.totals > 0) {
+			   pageSize = (result.productInfos.length > recordSize ? recordSize: result.productInfos.length);
+				for (var i = 0; i < pageSize; i++) {
+				  if(i%2 == 0){
+							tbody += "<tr class='tr_even'>";
+					}else{
+							tbody += "<tr class='tr_odd'>";
+					}
+					tbody += "<td><input class='hide' name='product' type='checkbox' value='"+result.productInfos[i].productId+"'>"+result.productInfos[i].productName+"</td> "
 							  + "<td><img style='height:50px;width:50px' src='/POCO/" + result.productInfos[i].productPath+ "'></td>" 
 							  +"<td>"+ result.productInfos[i].productDesc+ "</td>"
 							  +"<td>"+ types(result.productInfos[i].productTypes)+ "</td>"
@@ -49,7 +45,7 @@ function queryProducts(currentPage,userName) {
 				 }else{
 						tbody="<tr class='tr_even'  style='color:969696'><td colspan='"+($(".tr_head").children().length)+"'>暂无作品</td></tr>";
 				}
-				 $("#dataDisplay").append(tbody);
+				$("#dataDisplay").append(tbody);
 				if ($("#page").html() == '') {
 	                  $("#page").pagination(result.totals, {
 	                        callback: function (index) {

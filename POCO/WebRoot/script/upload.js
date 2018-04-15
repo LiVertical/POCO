@@ -30,8 +30,7 @@ $(function(){
 var upload = function(){
 	var productName = $("input[name='productName']").val().trim();
 	var proType = $("select option:selected").val().trim();
-	var files = document.getElementById("files");
-	var image =  files.getElementByTagName("input").files;
+	var image = document.getElementById("files")[0];
 	var productDesc = $("input[name='productDesc']").val();
 	var formData = new FormData();
 	formData.append("productName",productName);

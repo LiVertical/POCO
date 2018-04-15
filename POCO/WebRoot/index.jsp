@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/custom.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/index.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/list.css">
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/pagination.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/css/pagination.css">
 	<script src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
 	<script src="<%=basePath%>/js/jquery.pagination.js"></script>
 	<script src="<%=basePath%>/js/common.js"></script>
@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 </s:if>
 			 <s:else>
 			 	<li><a href="<%=basePath%>/views/productUpload.jsp">发作品</a></li>
-				<li><span id="userImg"></span>
+				<li><img id="userImg" style="height:30px;width:30px;margin-top:9px;" src="<%=basePath%>${sessionScope.userImg}">
 						<ul class="loginCenter" style="display:none">
 								<li onclick="gotoMyWorks('${sessionScope.loginName }')">我的空间</li>
 								<li><a href="<%=basePath%>views/accountManage.jsp">账号管理</a></li>

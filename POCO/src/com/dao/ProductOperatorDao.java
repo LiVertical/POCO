@@ -42,7 +42,7 @@ public class ProductOperatorDao extends BaseDao {
 		}
 	}
 	//根据用户查询作品
-	public List<ProductInfo> queryProductByUser(String userName,int recordSize,int curPage){
+	public List<ProductInfo> queryProductByUser(String userId,int recordSize,int curPage){
 		List<ProductInfo> proList = new ArrayList<ProductInfo>();
 		try {
 			if (recordSize == 0) {
@@ -52,7 +52,7 @@ public class ProductOperatorDao extends BaseDao {
 				curPage = 1;
 			}
 			String hql = "FROM ProductInfo as p WHERE p.productUser=?";
-			proList = getSession().createQuery(hql).setString(0, userName).setFirstResult((curPage-1)*recordSize).setMaxResults(recordSize).list();
+			proList = getSession().createQuery(hql).setString(0, userId).setFirstResult((curPage-1)*recordSize).setMaxResults(recordSize).list();
 		} catch (Exception e) {
 			logger.error("查询用户作品失败！", e);
 		}
@@ -101,8 +101,8 @@ public class ProductOperatorDao extends BaseDao {
 	}
 	
 	//查询所有作品
-	public int getTotalRecordsByUser(String userName){
-		String hql = "FROM ProductInfo as p WHERE p.productUser='"+userName+"'";
+	public int getTotalRecordsByUser(String userId){
+		String hql = "FROM ProductInfo as p WHERE p.productUser='"+userId+"'";
 		int totalProCount = getSession().createQuery(hql).list().size();
 		return totalProCount;
 	}

@@ -1,13 +1,12 @@
 package com.dao;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 
 import com.dao.jdbc.BaseJdbcDao;
-import com.entities.Notifiaction;
+import com.entities.Notification;
 
 public class SysNotificationDao extends BaseJdbcDao{
 
@@ -17,9 +16,9 @@ public class SysNotificationDao extends BaseJdbcDao{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Notifiaction> notificationListByUserId(String userId){
-		String hql = "FROM Notifiaction as n WHERE n.userId=?";
-		List<Notifiaction> list = (List<Notifiaction>) getSession().createQuery(hql).setString(0, userId).list();
+	public List<Notification> notificationListByUserId(String userId , int currentPage, int recordSize){
+		String hql = "FROM Notification as n WHERE n.userId="+userId;
+		List<Notification> list = (List<Notification>) getSession().createQuery(hql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
 		return list;
 	}
 
@@ -28,9 +27,9 @@ public class SysNotificationDao extends BaseJdbcDao{
 	 * @param notifiactionId
 	 * @return
 	 */
-	public Notifiaction showNotificationById(String notifiactionId) {
-		String hql = "FROM Notifiaction as n WHERE n.notifiactionId=?";
-		List<Notifiaction> list = (List<Notifiaction>) getSession().createQuery(hql).setString(0, notifiactionId).list();
+	public Notification showNotificationById(String notificationId) {
+		String hql = "FROM Notification as n WHERE n.notifiactionId=?";
+		List<Notification> list = (List<Notification>) getSession().createQuery(hql).setString(0, notificationId).list();
 		if (list.size() > 0) {
 			return list.get(0);
 		} else {
@@ -38,39 +37,51 @@ public class SysNotificationDao extends BaseJdbcDao{
 		}
 	}
 
-	public void add(Notifiaction notifiaction) {
+	public void add(Notification notifiaction) {
 		this.getSession().save(notifiaction);
 	}
 
-	public void delete(Notifiaction notifiaction2) {
-		String hql = "update Notifiaction as n set n.curStatus=? ,n.updateTime=? ,n.updateUser=? where n.notifiactionId=? or n.notifiactionGroupId=?";
-		getSession().createQuery(hql).setString(0, "0").setDate(1, new Date()).setString(2, notifiaction2.getUserId()).setString(3, notifiaction2.getNotifiactionId()).setString(4, notifiaction2.getNotifiactionGroupId());
-	}
-
 	@SuppressWarnings("unchecked")
-	public List<Notifiaction> queryNotifactions(int currentPage, int recordSize) {
-		List<Notifiaction> list = new ArrayList<Notifiaction>();
+	public List<Notification> queryNotifactions(String userId, int role, int currentPage, int recordSize) {
+		List<Notification> list = new ArrayList<Notification>();
 		try {
-			String hql = "FROM Notifiaction as n GROUP BY n.notifiactionGroupId ORDER BY n.createTime DESC";
-			list = (List<Notifiaction>) getSession().createQuery(hql).setFirstResult(currentPage).setMaxResults(recordSize).list();
+			String hql = "FROM Notification as n GROUP BY n.notificationGroupId ORDER BY n.createTime DESC";
+			if(role != 2){
+				hql = "FROM Notification as n WHERE n.userId='"+userId+"' GROUP BY n.notificationGroupId ORDER BY n.createTime DESC ";
+			}
+			list = (List<Notification>) getSession().createQuery(hql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
 
-	public int queryNotifactionsCount() {
-		String sql = "FROM Notifiaction GROUP BY notifiactionGroupId";
+	public int queryNotifactionsCount(String userId, int role) {
+		String sql = "FROM Notification GROUP BY notificationGroupId";
+		if(role != 2){
+			sql = "FROM Notification as n WHERE n.userId='"+userId+"' GROUP BY n.notificationGroupId ORDER BY n.createTime DESC ";
+		}
+		int size = 0;
+		size = getSession().createQuery(sql).list().size();
+		return size;
+	}
+	
+	public int doCountReceiver() {
+		String sql = "FROM Notification GROUP BY userId";
 		int size = 0;
 		size = getSession().createQuery(sql).list().size();
 		return size;
 	}
 
-	public int doCountReceiver() {
-		String sql = "FROM Notifiaction GROUP BY userId";
-		int size = 0;
-		size = getSession().createQuery(sql).list().size();
-		return size;
+	public int doCountNotifications(String userId) {
+		String hql = "FROM Notification WHERE userId="+userId;
+		return getSession().createQuery(hql).list().size();
 	}
+
+	public void doDeleteNotificationByNotificationId(String notifiactionId) {
+		String hql = "DELETE FROM Notification  WHERE notificationId='"+notifiactionId+"'";
+		getSession().createQuery(hql).executeUpdate();
+	}
+
 
 }

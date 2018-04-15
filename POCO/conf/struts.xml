@@ -40,7 +40,7 @@
   	 <default-interceptor-ref name="pocoStack"></default-interceptor-ref>  	
   	 <!-- 定义全局变量，跳转到登录页面 -->
   	 	<global-results>  
-    		<result name="adminLogin" type="redirectAction">/login-adminLogin</result> 
+    		<result name="adminLogin" type="redirectAction">/login-adminUserLogin</result> 
     		<result name="userLogin">/login-userLogin</result>
 		</global-results> 
  	</package>
@@ -114,7 +114,6 @@
 			<param name="root">result</param>
 			<param name="excludeNullProperties">true</param>
 		</result> 
-  	    <interceptor-ref name="pocoStack"></interceptor-ref>
     </action>
         
  
@@ -185,6 +184,32 @@
 			</result> 
   		 </action>
   		 
+  		 <!-- 通知 -->
+  		 <action name="notificationList" class="com.actions.SysNotificationAction" method="notificationList">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
+  		   <action name="delNotification" class="com.actions.SysNotificationAction" method="delNotification">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
+  		 <action name="showNotification" class="com.actions.SysNotificationAction" method="showNotification">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
+  		 <action name="showDetial" class="com.actions.SysNotificationAction" method="showDetial">                  
+  			<result name="detail">/views/notificationInfo.jsp</result>
+  		 </action>
+  		 
   		<!-- 活动 -->
   		<action name="applyActivity" class="com.actions.ActivityAction" method="applyActivity">                  
   			<result  type="json" name="success">
@@ -199,10 +224,11 @@
 				<param name="excludeNullProperties">true</param>
 			</result> 
   		 </action>
+  		 
    </package>  
  
  
- <!-- 管理员    -->
+ <!-- 管理员 -->
    <package name="admins" extends="default2" namespace="/admin">
    		
    		<action name="user-*" class="com.actions.UserAction" method="{1}">
@@ -267,13 +293,14 @@
   			</result>
   		</action>
  		
- 		<action name="addNotifiaction" class="com.actions.SysNotificationAction"  method="addNotification">
+ 		<!-- 通知 -->
+ 		<action name="addNotification" class="com.actions.SysNotificationAction"  method="addNotification">
  			<result name="success" type="json">
  				<param name="root">result</param>
 				<param name="excludeNullProperties">true</param>
  			</result>
  		</action>
- 		<action name="queryNotifiactions" class="com.actions.SysNotificationAction"  method="queryNotifiactions">
+ 		<action name="queryNotifications" class="com.actions.SysNotificationAction"  method="queryNotifications">
  			<result name="success" type="json">
  				<param name="root">result</param>
 				<param name="excludeNullProperties">true</param>

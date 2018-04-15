@@ -2,7 +2,7 @@ package com.services;
 
 import java.util.List;
 
-import com.entities.Notifiaction;
+import com.entities.Notification;
 
 public interface ISysNotificationService {
 
@@ -10,28 +10,18 @@ public interface ISysNotificationService {
 	 * 根据用户ID获取用户通知
 	 *
 	 * @param userId
+	 * @param recordSize 
+	 * @param currentPage 
 	 * @return
 	 */
-	List<Notifiaction> notificationListByUserId(String userId);
+	List<Notification> notificationListByUserId(String userId, int currentPage, int recordSize);
 
 	/**
 	 * 根据ID查询系统通知
 	 * @param notifiactionId
 	 * @return
 	 */
-	Notifiaction showNotificationById(String notifiactionId);
-
-	/**
-	 * 创建系统通知
-	 * @param notifiaction
-	 */
-	int adds(Notifiaction notifiaction);
-
-	/**
-	 * 删除通知
-	 * @param notifiaction2
-	 */
-	void delete(Notifiaction notifiaction2);
+	Notification showNotificationById(String notifiactionId);
 
 	/**
 	 * 后台分页查询发布的通知
@@ -39,11 +29,15 @@ public interface ISysNotificationService {
 	 * @param recordSize
 	 * @return
 	 */
-	List<Notifiaction> queryNotifiactions(int currentPage, int recordSize);
-
-	int queryTotalNotification();
+	List<Notification> queryNotifiactions(String userId, int role, int currentPage, int recordSize);
 
 	int countReceiver();
 
+	int notificationListByUserId(String userId);
 
+	void deleteNotificationByNotificationId(String notifiactionId);
+
+	int adds(String notificationTitle, String notificationInfo, String userId, String userName);
+
+	int queryTotalNotification(String userId, int role);
 }

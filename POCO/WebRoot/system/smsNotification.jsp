@@ -16,8 +16,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/notification.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/admin.css">
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/css/jquery.dialogbox-1.0.css"/>
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/css/jquery.dialogbox-1.0.css"/>
 	<script type="text/javascript" src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/common.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/jquery.pagination.js"></script>
@@ -38,8 +38,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		initUserData(1);
 		
 		$("#submit").click(function(){
-			var title = $("#notifiactionTitle").val();
-			var info = $("#notifiactionInfo").val();
+			var title = $("#notificationTitle").val();
+			var info = $("#notificationInfo").val();
 			if(title == ''){
 				alert("请输入活动标题");
 				return;
@@ -49,12 +49,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				return;
 			}
 			$.ajax({
-			  	url:getRootPath() + "/admin/addNotifiaction.action",
+			  	url:getRootPath() + "/admin/addNotification.action",
 			  	type:'POST', //GET
 			  	async:false,    //或false,是否异步
 			  	data:{
-			  		"notifiaction.notifiactionTitle":title,
-			  		"notifiaction.notifiactionInfo":info
+			  		"notificationTitle":title,
+			  		"notificationInfo":info
 			  	},
 			  	success:function(data){
 				  if(data.returnCode == '00'){
@@ -102,33 +102,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				currentPage:currentPage,
 				recordSize:recordSize,
 		};
-		$.post(getRootPath()+"/admin/queryNotifiactions.action", params, function(data){
-			console.log("notifiactions:" + data);
+		$.post(getRootPath()+"/admin/queryNotifications.action", params, function(data){
+			console.log("notifications:" + data);
 			if (data.returnCode == "00") {
 				var tbody = '';
 					$("#dataDisplay").html("");
 	    			$("#page").html("");
-					if (data.notifiactions.length > 0) {
-						var pageSize = (data.notifiactions.length > recordSize ? recordSize: data.notifiactions.length);
+					if (data.notifications.length > 0) {
+						var pageSize = (data.notifications.length > recordSize ? recordSize: data.notifications.length);
 						for (var i = 0; i < pageSize; i++) {
 							var status = "";
-							if(data.notifiactions[i].curStatus == "1"){
+							if(data.notifications[i].curStatus == "1"){
 								status="使用中";
 							}else{
 								status="已删除";
 							}
 							var usefulLife = "";
-							if(data.notifiactions[i].usefulLife == "-1"){
+							if(data.notifications[i].usefulLife == "-1"){
 								usefulLife="长期有效";
 							}else{
-								usefulLife=data.notifiactions[i].usefulLife;
+								usefulLife=data.notifications[i].usefulLife;
 							}
-							var title= '"'+data.notifiactions[i].notifiactionTitle+'"';
-							var info = '"'+data.notifiactions[i].notifiactionInfo+'"';
+							var title= '"'+data.notifications[i].notificationTitle+'"';
+							var info = '"'+data.notifications[i].notificationInfo+'"';
 							tbody += "<tr><td>"+ (i+(currentPage-1)*recordSize+1) + "</td>"
-								+ "<td>" + data.notifiactions[i].notifiactionTitle + "</td>"
-								+ "<td>" + data.notifiactions[i].createTime.substring(0,16) + "</td>"
-								+ "<td>" + data.notifiactions[i].createUser + "</td>"
+								+ "<td>" + data.notifications[i].notificationTitle + "</td>"
+								+ "<td>" + data.notifications[i].createTime.substring(0,16) + "</td>"
+								+ "<td>" + data.notifications[i].createUserName + "</td>"
 								+ "<td>" + status+ "</td>" 
 								+ "<td>" + usefulLife + "</td>" 
 								+ "<td><button class='look' onclick='look("+title+","+info+","+data.receiverCount+")'>查看详情</button></td></tr>";
@@ -170,12 +170,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
 									<thead>
 										<tr class='tr_head'>
-											<td>序号</td>
+											<td style="width:40px">序号</td>
 											<td>标题</td>
-											<td style="width:160px">时间</td>
-											<td style="width:70px">创建人</td>
+											<td style="width:130px">时间</td>
+											<td style="width:200px">创建人</td>
 											<td style="width:70px">状态</td>
-											<td>有效期</td>
+											<td style="width:70px">有效期</td>
 											<td>操作</td>
 										</tr>
 									</thead>
@@ -188,9 +188,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="tab_right" id="b">
            		<div class="main">发布通知
   				 <p> 标题：</p>
-  				 <input type="text" placeholder="请输入标题" id="notifiactionTitle" name="notifiactionTitle"><br/>
+  				 <input type="text" placeholder="请输入标题" id="notificationTitle" name="notificationTitle"><br/>
  				 <p>通知内容：</p>
- 				 <textarea id="notifiactionInfo" placeholder="请输入活动介绍" maxlength="100" name="notifiactionInfo" cols="30" rows="3" align="center"></textarea>
+ 				 <textarea id="notificationInfo" placeholder="请输入活动介绍" maxlength="100" name="notificationInfo" cols="30" rows="3" align="center"></textarea>
  				 <br/>
   				 <button class="send" id="submit">发布</button>
   				</div>

@@ -9,21 +9,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>我的作品</title>
+    <title>系统通知</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/myWorks.css">
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/custom.css">
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/pagination.css">
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/list.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/nfs.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/custom.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/css/pagination.css">
 	<script src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
 	<script src="<%=basePath%>/js/jquery.pagination.js"></script>
-	<script src="<%=basePath%>/script/myWorks.js"></script>
+	<script src="<%=basePath%>/script/notification.js"></script>
 	<script src="<%=basePath%>/js/common.js"></script>
-	<script src="<%=basePath%>/script/custom.js"></script>
   </head>
 <body>
 <div class="header">
@@ -50,12 +48,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</s:else>
 	 	</ul>
 </div>
- <div class="main" style='min-height:300px'>
-	<div class='btns'>
-		<button class="button" onclick="delBatch()">删除</button>
+	<div class="content">
+		<ul id="p_content"></ul>
 	</div>
-	<div class="content"></div>
 	 <div class="pagination" id="page"></div>
- </div>
+	 <div class="footer">
+		<a>POCO网违法和不良信息举报电话：13928869007 举报邮箱：kent@poco.cn</a>
+	</div>
 </body>
 </html>

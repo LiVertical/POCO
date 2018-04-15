@@ -1,0 +1,336 @@
+#userImg{
+	height:30px;
+	width:30px;
+	margin-top:9px;
+    border:1px solid #fff;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+.userImg{
+	height:30px;
+	width:30px;
+}
+.loginCenter{
+	height: auto;
+    width: 100px;
+    background:#3B3B3B;
+    position: relative;
+}
+div:link {
+	color: #FF0000;
+}     
+.loginCenter:visited {
+	color: #00FF00;
+	display:block;
+}  
+.loginCenter:hover {
+	color: #FF00FF;
+	display:block;
+}    
+*{
+	margin:0px;
+	padding:0px;
+}
+#developCount{
+	width:100%;
+	height:50px;
+	border:1px solid;
+	background-color:#666460;
+	color:white;
+	margin:0px 10px 10px 0px;
+	line-height:50px;
+	text-align:center;
+	font-weight:bold;
+	font-size:20px;
+	}
+	body {
+	background: white;
+	height: 100%;
+	font-size: 13px;
+	font-family: "微软雅黑", Arial;
+    }
+	#developCount span{
+	margin:0 15px;
+	}
+	.selectColor{
+	background-color:#343535;
+	color:white;
+	}
+	.selectColor1{
+	background-color:#FFFFFF;
+	border-bottom:none;
+	color: #F55151;
+	border-bottom: 1px solid #ffffff;
+	}
+	
+   li{
+    float:left;
+    list-style-type:none;
+    text-align:center;
+    width:100%;
+    cursor: pointer;
+    border-bottom: 1px solid #DADADA;
+    }
+    ul li a{
+     text-decoration:none;
+     }
+     ul li a:hover{
+     color:red
+     }
+		
+	#thisWeekCount p{
+	margin:2px;
+	border:1px solid;
+	padding:5px;
+	}
+	#showMarketType{
+    border: 1px solid #dadada;
+	height: 50px;
+	position: relative;
+	top: 2px;
+	border-bottom: 1px solid #FFFFFF;
+	}
+	#showMarketType li{
+	width:123px;
+	height:49px;
+	line-height:49px;
+	}
+	.initColor{
+	background-color:#F5F3F2;
+	border-bottom:1px solid #DADADA;
+	}
+	#send_chose_time li,#use_chose_time li,#act_chose_time li,#chose_time1 li,
+	#chose_time2 li,#chose_time3 li,#time_cycle li,#op_time_type li{
+	margin:-1px 5px;
+	padding:3px 0px;
+	border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+	border-top: 1px solid #DADADA;
+	border-left: 1px solid #DADADA;
+	border-right: 1px solid #DADADA;
+	}
+	#send_time_period li a,#use_time_period li a{
+	color:inherit;
+	}
+	
+	#send_time_period li,#use_time_period li,#act_time_period li,#time_period1 li,#time_period2 li,
+	#time_period3 li,#time_period li,#op_time_period li{
+	width:68px;
+	border: 1px solid #DADADA;
+	font-weight: normal;
+	font-size:12px;
+	border-left:none;
+	}
+	.chartTotalStyle{
+	clear:both;border:1px solid #DADADA;width:798px;background-color:#FFFFFF;
+	}
+	.timeStyle{
+	margin:20px auto 0 auto;border-bottom:1px solid #DADADA;width:785px;zoom:1;
+	}
+	.timeStyle1{
+	 border-bottom:1px solid #DADADA;width:785px;margin:0 auto;
+	}
+	.timePeriodStyle{
+	clear:both;position:relative;left:516px;top:0px;border-top:1px soild #FBFBFA;z-index:10;width: 300px;height: 20px;
+	}
+	.chartStyle{
+	height:300px;width:800px;/* margin-top:40px; */
+	text-align:center;
+	}
+	
+	.chartDivStyle{
+	clear:both;border:1px solid #ECEAE8;width:798px;height:420px;background-color:#FFFFFF;margin-top:0px;
+	}
+	.radiolayout{
+	width: 420px;
+	margin: 0 auto;
+	height: 45px;
+    line-height: 45px;
+	}
+	 .timeChose{
+    margin: 0px auto;
+	width: 350px;
+	padding: 34px 0px;
+    }
+    .timeChose li{
+    width:85px;
+    height:28px;
+    margin:0 3px;
+    line-height:28px;
+    }
+    .radiolayout input{
+    margin-left:20px;
+    }
+    #term_corner{
+	position:relative;
+	height:7px;
+	width:100px;
+	left:368px;
+	top:1px;
+	border:0px solid red;
+	background:url(../img/tooltip.png) no-repeat
+}
+
+.market_question_postion{
+	position: relative;
+	z-index: 50;
+}
+.increaseRate{
+	clear:both;background-color:#FAFAFA;min-height:70px;width:90%;top:10px;margin:0 auto;
+	border: 1px solid #E5E5E5;
+	
+}
+
+.market_rate{
+    background: #FAFAFA;
+    margin:0 auto;
+      border-collapse: collapse;
+}
+.market_rate1{
+    background: #FAFAFA;
+    margin:0 auto;
+      border-collapse: collapse;
+}
+ .increase_rate_tab td,.market_rate td,.market_rate1 td{
+     vertical-align:middle; 
+     height:44px;
+     padding:4px 0;
+     text-align:center;
+ }
+ .secondBg{
+  background:#B8D6F0;
+ }
+ .market_rate tr td:first-child span{
+ display:block;
+ text-align:center;
+ width:60px;
+ background:#7CA8D5;border-radius:3px;
+ }
+ .market_rate tr td:first-child span.secondBg {
+ background:#B8D6F0;
+ }
+ .market_rate tr:first-child td:first-child{
+  background: #FAFAFA;
+ }
+  #triangle_left_add,#triangle_left_min {
+     width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    display:inline-block;
+}
+#triangle_left_add{
+	border-right: 7px solid #F6A5A5;
+	margin-bottom:20px;
+}
+#triangle_left_min{
+	border-right: 7px solid #8BCD85;
+	margin-bottom:20px;
+}
+.triangle_left_add,.triangle_left_min {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    display:inline-block;
+}
+.triangle_left_add{
+	border-right: 7px solid #F6A5A5;
+	margin-bottom:20px;
+}
+.triangle_left_min{
+	border-right: 7px solid #8BCD85;
+	margin-bottom:20px;
+}
+.rate_block{
+	/*float:left;*/
+	display:none;
+	position:absolute;
+    text-align: left !important;
+    z-index:9999;
+    margin-left:10px;
+}
+.rate_add_detail,.rate_reduce_detail{
+	display:inline-block;
+	border-radius:7px;
+	padding:5px 0px 5px 5px;
+	color:white;
+	font-size:12px;
+	min-width:75px;
+	width:auto;
+}
+.rate_add_detail{
+	background-color:#F6A5A5;
+}
+.rate_reduce_detail{
+	background-color:#8BCD85;
+}
+.rate_add_detail div:FIRST-CHILD,.rate_reduce_detail div:FIRST-CHILD{
+	margin-bottom: 5px;
+}
+.rate_add_detail div:LAST-CHILD,.rate_reduce_detail div:LAST-CHILD{
+	margin-top: 5px;
+}
+.dataSpan{
+  line-height: 49px;
+  display: inline;
+}
+.dataSpan1{
+  line-height: 49px;
+  float:left;
+}
+.market_rate img{
+	margin-top: 19px;
+/*     float: left; */
+   /* margin-left:5px;*/
+}
+.market_rate1 img{
+	margin-top: 19px;
+/*     float: left; */
+   /* margin-left:5px;*/
+}
+.trBottomBorder{
+	border-bottom:1px dashed #DADADA;
+}
+.bordrOnChart,.borderAcitve{
+	height:10px;
+	border-top:1px solid #DADADA;
+	margin:20px auto 0 auto;
+}
+.bordrOnChart{
+	width:90%;
+}
+.borderAcitve{
+	width:760px;
+}
+.dataExport{
+	float: right;position: relative;
+	cursor: pointer;
+}
+ .timeStyle:after{display:block; content:'clear'; clear:both; line-height:0; visibility:hidden;} 
+ .timeStyle1:after{display:block; content:'clear'; clear:both; line-height:0; visibility:hidden;} 
+
+.blankAboveTable{
+	height:1px;
+	margin:20px auto 0 auto;
+	width:90%;
+}
+.marketExplain{
+	float: right;margin-top: 20px;margin-right: 15px;
+}
+.marketExport{
+	top:20px;height:22px;margin-right:2px;
+}
+
+.entDevExplain{
+	float: right;position: relative;top: -12px;margin-right: 15px;
+}
+.entDevExport{
+	top:-12px;height:22px;margin-right:2px;
+}
+.imgStyle {
+  position:absolute;
+  right:-10px;
+ }
+.dataStyle{
+  position:relative;
+}

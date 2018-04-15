@@ -15,6 +15,7 @@ import org.apache.struts2.ServletActionContext;
 import com.entities.Users;
 import com.opensymphony.xwork2.ActionContext;
 import com.services.ILoginService;
+import com.util.CommonUserInfo;
 import com.util.LoginUserUtil;
 import com.util.UserInfo;
 
@@ -42,20 +43,15 @@ public class LoginAction extends BaseAction{
 			return "sys";
 		}
 		try {
-			HttpServletRequest request = ServletActionContext.getRequest();
-			HttpSession session = request.getSession();
 			UserInfo userInfo = new UserInfo();
 			role = loginService.queryUserRole(loginName, loginPass);
-			Users userLogin = loginService.doAdminUserLogin(loginName, loginPass, role);
-			if(userLogin != null){
-				session.setAttribute("loginName", userLogin.getUserName());
-				session.setAttribute("userId", userLogin.getUserId());
-				logger.info("admin's session:"+session.getAttribute("loginName"));
+			Users adminLogin = loginService.doAdminUserLogin(loginName, loginPass, role);
+			if(adminLogin != null){
 				userInfo.setLoginName(loginName);
-				userInfo.setUserName(userLogin.getUserName());
+				userInfo.setUserName(adminLogin.getUserName());
 				userInfo.setPassword(loginPass);
 				userInfo.setRole(role);
-				userInfo.setUserId(userLogin.getUserId());
+				userInfo.setUserId(adminLogin.getUserId());
 				LoginUserUtil.saveUserInfo(getContext(), userInfo);
 			}else{
 				throw new Exception("帐号密码错误");
@@ -68,24 +64,26 @@ public class LoginAction extends BaseAction{
 	}
 	
 	public String userLogin(){
-		logger.info("userLogin start ·····");
-		HttpServletRequest request = ServletActionContext.getRequest(); 
-		HttpSession session = request.getSession(); 
+		logger.info("LoginAction.userLogin start ·····");
 		logger.info("账号"+loginName+"密码："+loginPass);
 		if(StringUtils.isBlank(loginName)||StringUtils.isBlank(loginPass)){
 			logger.info("参数错误");
 			return "userLogin";
 		}
-		Users user;
 		try {
+			CommonUserInfo cuserInfo = new CommonUserInfo();
 			role = loginService.queryUserRole(loginName, loginPass);
-			user = loginService.findByUserNameAndUserPass(loginName, loginPass, role);
-			session.setAttribute("loginName",loginName);
-			session.setAttribute("loginPass", loginPass);
-			session.setAttribute("userId", user.getUserId());
-			session.setAttribute("userName", user.getLoginName());
-			session.setAttribute("userImg", user.getFaceImg());
-			logger.info("session:"+session.getAttribute("loginName"));
+			Users user = loginService.findByUserNameAndUserPass(loginName, loginPass, role);
+			if(user != null){
+				cuserInfo.setLoginName(loginName);
+				cuserInfo.setPassword(loginPass);
+				cuserInfo.setRole(role);
+				cuserInfo.setUserId(user.getUserId());
+				cuserInfo.setUserName(user.getUserName());
+				LoginUserUtil.saveCommonUserInfo(getContext(), cuserInfo);
+			}else{
+				throw new Exception("帐号密码错误");
+			}
 		} catch (Exception e) {
 			logger.error("普通用户登录失败", e);
 			return "index";
@@ -99,16 +97,13 @@ public class LoginAction extends BaseAction{
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest();
 			HttpSession session = request.getSession();
-			logger.info("当前session:"+session.getAttributeNames());
-			String loginName = session.getAttribute("loginName").toString();
-			String loginPass = session.getAttribute("loginPass").toString();
-			role = loginService.queryUserRole(loginName, loginPass);;
+			role = LoginUserUtil.getUserInfo().getRole();
 			//清除session
 			session.invalidate();
 		} catch (Exception e) {
 			logger.error("清除session异常", e);
 		}
-		if(role == 1){//系统用户
+		if(role == 1 || role == 2){//系统用户
 			return "adminLogin";
 		}else{
 		return "index";

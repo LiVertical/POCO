@@ -13,10 +13,10 @@ public interface IProductOperatorService {
 	List<ProductInfo> listProductinfo();
 	
 	//批量删除
-	void delAll(Integer[] productIds);
+	void delAll(String[] productIds);
 	
 	//根据Id查询作品
-	ProductInfo findById(Integer productId);
+	ProductInfo findById(String productId);
 	
 	List<Map> queryProductByCondition(int proType,int recordSize,int currentPage);
 	

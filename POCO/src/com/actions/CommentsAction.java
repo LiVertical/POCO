@@ -16,6 +16,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.ICommentsService;
 import com.util.JsonDateValueProcessor;
+import com.util.LoginUserUtil;
 
 public class CommentsAction extends ActionSupport  {
 	
@@ -34,9 +35,7 @@ public class CommentsAction extends ActionSupport  {
 	public String addComments(){
 		logger.info("CommentsAction.addComments start······");
 		result = new JSONObject();
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession();
-		commentUser = session.getAttribute("userId").toString();
+		commentUser = LoginUserUtil.getUserInfo().getUserId();
 		if(StringUtils.isBlank(commentUser)||StringUtils.isBlank(productId)||StringUtils.isBlank(commentDesc)){
 			result.put("returnCode", "10");
 			result.put("returnMsg", "参数错误");
@@ -82,9 +81,7 @@ public class CommentsAction extends ActionSupport  {
 		logger.info("CommentsAction.queryAllCommentsByUser start·····");
 		result = new JSONObject();
 		try {
-			HttpServletRequest request = ServletActionContext.getRequest();
-			HttpSession session = request.getSession();
-			commentUser = session.getAttribute("userId").toString();
+			String commentUser = LoginUserUtil.getUserInfo().getUserId();
 			if(StringUtils.isBlank(commentUser)){
 				result.put("returnCode", "10");
 				result.put("returnMsg", "参数错误");

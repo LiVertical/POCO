@@ -1,23 +1,6 @@
-body{
-	margin:0 auto;
+*{
+	margin:0;
 	padding:0;
-	font-family:"Times New Roman",Georgia,Serif;
-}
-span{
-	font-size:17px;
-}
-.content{
-	margin:10px auto;
-	text-align:center;
-	width: 90%;
-}
-.content p{
-	text-align:left;
-}
-.upload{
-	height:300px;
-	width:70%;
-	margin:40px auto;
 }
 .productName{
 	height:30px;
@@ -33,63 +16,12 @@ span{
 }
 .upload_box{
 	height:300px;
-	width:600px;
-	border:1px solid #ccc;
-	margin:10%;
-}
-/* .upload_btn{
-	background:#008B00;
-	height:50px;
-	width:120px;
-	border:1px solid #008B00;
-	line-height: 50px;
-    text-align: center;
-    margin:18%;
-} */
-.upload_btn a{
-	font-size:23px;
-	color:#fff;	
-	text-decoration:none;
-}
-.upload_btn a:hover{
-	color:#fff;
-	text-decoration:none;
-	}
-span{
-	font-szie:30px;
+	width:200px;
 }
 .type{
 	height:30px;
 	wdith:120px;
 	border:1px solid #ccc;
-}
-#prvid{
-	border:1px solid red;
-	height:200px;
-	width:200px;
-	margin:0px auto;
-}
-#prvid img{
-	width:100px;
-	width:100px;
-}
-.pic_div{
-	height:300px;
-	width:80%;
-	margin:0 auto;
-	border:1px solid red;
-}
-.upload{
-	height:40px;
-	width:130px;
-	background:#66bd30;
-}
-.upload_color{
-	color:#fff;
-	font-weight:600;
-}
-.add{
-	font-size:21px;
 }
 .uploadDiv{
 	margin:20px auto;
@@ -100,13 +32,75 @@ span{
 .uploadDiv p{
 	margin-top:12px;
 }
-.userImg{
-	height:30px;
-	width:30px;
-	margin-top:9px;
+.img{
+	clear:both;
+	width:70%;
+	border-right:2px solid #f6f6f6;
+	margin:30px auto;
+	display:none;
+	float:left;
+	overflow:hidden;
 }
-
-
+.img li {
+	float:left;
+	margin:20px;
+	height:300px;
+	width:200px;
+}
+.uploadBox{
+	float:right;
+	width:25%;
+	height:220px;
+	text-align:left;
+}
+.uploadBox p{
+	margin-top:20px;
+	margin-left:10px;
+}
+.uploadBox input{
+	height:30px;
+	width:240px;
+} 
+#image{
+	height: 11px;
+    width: 23px;
+    position: relative;
+    top: -18px;
+    left: 75px;
+    outline: none;
+}
+.work{
+	clear:both;
+	width:100%;
+	float:left;
+	padding:40px;
+}
+.work p{
+	margin-top:10px;
+	padding-left:50px;
+}
+#workTitle{
+	width:200px;
+	height:40px;
+	font-size:17px;
+}
+#workDesc{
+	width:400px;
+	height:200px;
+	font-size:17px;
+	margin-top:10px;
+	resize:none;
+}
+#submit{
+	float:right;
+	width:100px;
+	height:40px;
+	border-radius:5px;
+	border:none;
+	background:#8DEEEE;
+	color:#fff;
+	font-size:17px;
+}
 
 
 

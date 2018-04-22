@@ -28,28 +28,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      function loadSrc(src,id){
 	    	  $("#mainFrame").attr("height",100);
 	    	  $("#mainFrame").attr("src",src);
-	    	  $.cookie("id", id);
 	      }
 	       function iframeHeight() {
 			 	var ifm = document.getElementById("mainFrame");
 				var subWeb = document.frames ? document.frames["mainFrame"].document :ifm.contentDocument;
-				var height = $("#leftMenu").height()+20;
+				var height = $("#leftMenu").height();
 				if (ifm != null && subWeb != null) {
-					ifm.height = subWeb.body.scrollHeight+50;
+					ifm.height = subWeb.body.scrollHeight;
 					if(height<subWeb.body.scrollHeight){
-						height = subWeb.body.scrollHeight+50;
+						height = subWeb.body.scrollHeight;
 					}
 				} 
 		  }
-	    $(function(){
-		    	 loadSrc('<%=basePath%>/views/myWorks.jsp')
-		 });
+	      
+	  $(function(){
+		    loadSrc('<%=basePath%>/views/myWorks.jsp');
+	  });
 	</script>
   </head>
   
-<body data-user_name = '${sessionScope.loginName }' 
-	  data-user_img ='${sessionScope.userImg }'
-	  data-user_id ='${sessionScope.userId }'>
+<body>
    <div class="header">
 		<ul>
 			<li><a href="<%=basePath%>/index.jsp">POCO首页</a></li>
@@ -65,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 <s:else>
 			 	<li><span id="userName">${sessionScope.loginName }</span></li>
 			 	<li><span id="userId">${sessionScope.userId }</span></li>
-			 	<li><a href="<%=basePath%>/views/productUpload.jsp">发作品</a></li>
+			 	<li onclick="gotoUpload()">发作品</li>
 				<li><span id="userImg" style='height:30px;'></span>
 					<div class="loginCenter" style="display:none">
 						<ul class="menus">
@@ -91,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</nav>
 	        <div class="rightBody">
 	        	<article class="ac_article" style="width:94%;background:#fff;margin:0 auto">
-					<iframe id="mainFrame" style="width: 100%;min-height:300px;"  frameborder="0" scrolling="no" onload="iframeHeight()"></iframe>
+					<iframe id="mainFrame" style="width: 100%;min-height:600px;"  frameborder="0" scrolling="no" onload="iframeHeight()"></iframe>
 				</article>
 	        </div>
    </div>

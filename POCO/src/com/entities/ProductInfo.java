@@ -19,7 +19,7 @@ public class ProductInfo implements java.io.Serializable {
 	private Integer productOrder;
 	private String workId;
 	private String productUser;
-	private String productRemark;
+	private String productGroupId;
 	private Integer productDel;
 
 	// Constructors
@@ -41,7 +41,7 @@ public class ProductInfo implements java.io.Serializable {
 		this.productOrder = productOrder;
 		this.workId = workId;
 		this.productUser = productUser;
-		this.productRemark = productRemark;
+		this.productGroupId = productGroupId;
 		this.productDel = productDel;
 	}
 
@@ -119,12 +119,12 @@ public class ProductInfo implements java.io.Serializable {
 		this.productUser = productUser;
 	}
 
-	public String getProductRemark() {
-		return this.productRemark;
+	public String getProductGroupId() {
+		return productGroupId;
 	}
 
-	public void setProductRemark(String productRemark) {
-		this.productRemark = productRemark;
+	public void setProductGroupId(String productGroupId) {
+		this.productGroupId = productGroupId;
 	}
 
 	public Integer getProductDel() {

@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
-
 import com.constants.CommentConstants;
 import com.entities.Comments;
 import com.util.UUIDUtil;
@@ -31,7 +29,7 @@ public class CommentsDao extends BaseDao{
 	}
 
 	public List<Comments> queryAllCommentInfos(String productId, int currentPage, int recordSize) {
-		String hql = "FROM Comments c WHERE c.productId = "+productId;
+		String hql = "FROM Comments c WHERE c.productId = '"+productId + "'";
 		List<Comments> commentsInfos = new ArrayList<Comments>();
 		try {
 			commentsInfos = getSession().createQuery(hql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
@@ -42,7 +40,7 @@ public class CommentsDao extends BaseDao{
 	}
 
 	public List<Comments> queryAllCommentInfosOfUser(String commentUser, int currentPage, int recordSize) {
-		String hql = "FROM Comments c WHERE c.commentUser = " + commentUser;
+		String hql = "FROM Comments c WHERE c.commentUser =  '" + commentUser+"'";
 		List<Comments> commentsInfosOfUser = new ArrayList<Comments>();
 		try {
 			commentsInfosOfUser = getSession().createQuery(hql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
@@ -63,7 +61,7 @@ public class CommentsDao extends BaseDao{
 
 	public int queryAllCommentsByUserCount(String commentUser) {
 		int commentsCount = 0;
-		String hql = "FROM Comments c WHERE c.commentUser = " + commentUser;
+		String hql = "FROM Comments c WHERE c.commentUser = '" + commentUser+"'";
 		commentsCount = getSession().createQuery(hql).list().size();
 		return commentsCount;
 	}
@@ -71,7 +69,7 @@ public class CommentsDao extends BaseDao{
 	public int queryAllCommentsCount(String productId) {
 		int commentsTotals = 0;
 		try {
-			String hql = "FROM Comments c WHERE c.productId = "+productId;
+			String hql = "FROM Comments c WHERE c.productId = '"+productId+"'";
 			commentsTotals = getSession().createQuery(hql).list().size();
 		} catch (Exception e) {
 			logger.error("查询用户评论数目异常", e);

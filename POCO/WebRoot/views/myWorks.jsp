@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class='btns'>
 		<button class="button" onclick="delBatch()">删除</button>
 	</div>
-	<div class="content"><s:debug/>
+	<div class="content">
 	   <table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
 				<thead>
 					<tr class="tr_head">

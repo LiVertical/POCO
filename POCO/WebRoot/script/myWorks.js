@@ -27,8 +27,8 @@ function queryProducts(page) {
 		console.log("productInfos:"+result.productInfos);
 		if (result.returnCode == "00") {
 			var tbody = '';
+			var pageSize = (result.productInfos.length > recordSize ? recordSize: result.productInfos.length);
 			if (result.totals > 0) {
-			   pageSize = (result.productInfos.length > recordSize ? recordSize: result.productInfos.length);
 				for (var i = 0; i < pageSize; i++) {
 				  if(i%2 == 0){
 							tbody += "<tr class='tr_even'>";
@@ -45,7 +45,7 @@ function queryProducts(page) {
 				 }else{
 						tbody="<tr class='tr_even'  style='color:969696'><td colspan='"+($(".tr_head").children().length)+"'>暂无作品</td></tr>";
 				}
-				$("#dataDisplay").append(tbody);
+				$("#dataDisplay").html(tbody);
 				if ($("#page").html() == '') {
 	                  $("#page").pagination(result.totals, {
 	                        callback: function (index) {
@@ -55,7 +55,7 @@ function queryProducts(page) {
 	                        next_text: '下一页',       //下一页按钮里text
 	                        items_per_page: pageSize, 
 	                        current_page:currentPage-1,
-	                        num_display_entries: 6,    //连续分页主体部分分页条目数
+	                        num_display_entries: 3,    //连续分页主体部分分页条目数
 	                        num_edge_entries: 2        //两侧首尾分页条目数
 	                    });
 				}

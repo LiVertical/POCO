@@ -1,21 +1,20 @@
 $(document).ready(function() {
-	queryProducts(100, 1, 0);
+	queryProducts(1);
 });
 
 //解析json   
-function queryProducts(proType, currentPage, isFirst) {
+function queryProducts(page) {
 	var recordSize = 6;
-	var currentPage = 0;
-	var pageSize = 6;
+	var currentPage = page;
+	var proType = 100;
 	$.getJSON(getRootPath()+ "/vistor/queryProductByCondition.action?proType="+ proType + "&currentPage=" + currentPage+ "&recordSize=" + recordSize,
 		function(result) {
 			console.log(result.productInfos);
 			if (result.returnCode == "00") {
-				$("#p_content").empty()
+				$("#p_content").empty();
 				var tbody = '';
 				if (result.total > 0) {
-				    pageSize = (result.total > recordSize ? recordSize: result.total);
-					for (var i = 0; i < pageSize; i++) {
+					for (var i = 0; i < result.productInfos.length; i++) {
 						tbody += "<li><div class='boxs_middle'> "
 						  + "<img onclick='queryProductInfos("+ result.productInfos[i].productId +")' src='/POCO/"
 						  + result.productInfos[i].productPath
@@ -30,25 +29,8 @@ function queryProducts(proType, currentPage, isFirst) {
 						  +"<button id='noLike' onclick='noLike("+result.productInfos[i].productId+")'>踩我</button><br/>"
 						  +"<button id='collect' class='collect' onclick='addCollect("+result.productInfos[i].productId+",&quot;"+result.productInfos[i].productName+"&quot;"+")'>收藏</button>" 
 						  +"<button id='cancleColl' class='collect' onclick='deleteCollect("+result.productInfos[i].productId+")'>取消收藏</button></div></li>";
-						$("#p_content").append(tbody);
+						$("#p_content").html(tbody);
 					}
-				}
-				isFirst++;
-				if($("#page").html() == ''){
-					$("#page").pagination(result.total, { //总条目数
-						callback: function (index ,isFirst) {
-							if(isFirst >= 1){
-								queryProducts(index);
-							}
-                        },
-						prev_text : '上一页',
-						next_text : '下一页',
-						current_page:currentPage-1,
-						items_per_page : pageSize,	//每页显示条数  
-						num_display_entries : 6, //连续分页主体显示页数
-						num_edge_entries : 2	//两侧首尾分页条目数  
-					//边缘页数
-					});
 				}
 			}else{
 				window.location.href= getRootPath() + "/views/userLogin.jsp";

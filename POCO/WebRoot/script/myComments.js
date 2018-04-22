@@ -22,6 +22,9 @@ function queryAllComments(page){
 								+"<button class='delBtn' onclick='deleteComment("+commentList[i].commentId+")'>删除</button></span></li>";
 					$("#dataDisplay").append(html);
 				}
+			}else{
+				$("#dataDisplay").html("您暂时还没有评论");
+			}
 				if ($("#page").html() == '') {
 	                  $("#page").pagination(data.commentsTotalsCountOfUser, {
 	                        callback: function (index) {
@@ -36,9 +39,6 @@ function queryAllComments(page){
 	                    });
 				}
 			}
-		}else{
-			$("p_content").html("您暂时还没有评论");
-		}
 	},'json');
 }
 

@@ -29,8 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=basePath%>/script/custom.js"></script>
 	<script src="<%=basePath%>/script/productDetails.js"></script>
 </head>
-<body data-user_name = '${sessionScope.loginName }' 
-	  data-user_img='${sessionScope.userImg }'>
+<body>
 	<div class="header">
 		<ul>
 			<li><a onclick="gotoMyWorks('${sessionScope.loginName }')">我的空间</a></li>

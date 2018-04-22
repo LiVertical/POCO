@@ -4,9 +4,6 @@ import java.io.InputStream;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,7 +13,6 @@ import org.apache.struts2.ServletActionContext;
 import com.entities.Users;
 import com.opensymphony.xwork2.ActionContext;
 import com.services.ILoginService;
-import com.util.CommonUserInfo;
 import com.util.LoginUserUtil;
 import com.util.UserInfo;
 
@@ -41,6 +37,11 @@ public class LoginAction extends BaseAction{
 		logger.info("账号:"+loginName+"密码:"+loginPass);	
 		result = new JSONObject();
 		if(StringUtils.isBlank(loginName)||StringUtils.isBlank(loginPass)){
+			logger.info("参数错误");
+			return "sys";
+		}
+		if(role != 1 && role != 2){
+			logger.info("权限错误");
 			return "sys";
 		}
 		try {
@@ -65,15 +66,18 @@ public class LoginAction extends BaseAction{
 	}
 	
 	public String userLogin(){
-		logger.info("LoginAction.userLogin start ·····");
-		logger.info("账号"+loginName+"密码："+loginPass);
+		logger.info("LoginAction.userLogin start ·····账号"+loginName+"密码："+loginPass);
 		if(StringUtils.isBlank(loginName)||StringUtils.isBlank(loginPass)){
 			logger.info("参数错误");
 			return "userLogin";
 		}
 		try {
-			CommonUserInfo cuserInfo = new CommonUserInfo();
+			UserInfo cuserInfo = new UserInfo();
 			role = loginService.queryUserRole(loginName, loginPass);
+			if(role == 1 || role == 2){
+				logger.info("权限错误");
+				return "user";
+			}
 			Users user = loginService.findByUserNameAndUserPass(loginName, loginPass, role);
 			if(user != null){
 				cuserInfo.setLoginName(loginName);
@@ -82,7 +86,7 @@ public class LoginAction extends BaseAction{
 				cuserInfo.setUserId(user.getUserId());
 				cuserInfo.setUserName(user.getUserName());
 				cuserInfo.setUserImg(user.getFaceImg());
-				LoginUserUtil.saveCommonUserInfo(getContext(), cuserInfo);
+				LoginUserUtil.saveUserInfo(getContext(), cuserInfo);
 			}else{
 				throw new Exception("帐号密码错误");
 			}
@@ -106,8 +110,7 @@ public class LoginAction extends BaseAction{
 		if(role == 1 || role == 2){//系统用户
 			return "adminLogin";
 		}else{
-			
-		return "index";
+			return "index";
 		}
 	}
 	

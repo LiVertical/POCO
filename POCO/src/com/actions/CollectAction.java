@@ -12,6 +12,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.ICollectService;
 import com.util.JsonDateValueProcessor;
+import com.util.LoginUserUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -31,9 +32,7 @@ public class CollectAction extends ActionSupport{
 	public String addToCollect(){
 		logger.info("CollectAction.addToCollect start·····");
 		result = new JSONObject();
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession();
-		userId = session.getAttribute("userId").toString();
+		userId = LoginUserUtil.getUserInfo().getUserId();
 		if(StringUtils.isBlank(productId)||StringUtils.isBlank(userId)){
 			result.put("returnCode", "10");
 			result.put("returnMsg", "参数错误");
@@ -76,6 +75,7 @@ public class CollectAction extends ActionSupport{
 	public String queryCollectByUserId(){
 		logger.info("CollectAction.deleteCollect start·····");
 		result = new JSONObject();
+		userId = LoginUserUtil.getUserInfo().getUserId();
 		if(StringUtils.isBlank(userId)){
 			result.put("returnCode", "10");
 			result.put("returnMsg", "参数错误");

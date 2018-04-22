@@ -44,8 +44,8 @@
                 <comment>上传人</comment>
             </column>
         </property>
-        <property name="productRemark" type="string">
-            <column name="product_remark" length="111">
+        <property name="productGroupId" type="string">
+            <column name="product_group_id" length="32">
                 <comment>标记</comment>
             </column>
         </property>

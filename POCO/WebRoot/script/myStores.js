@@ -16,8 +16,10 @@ function queryProductsMyCollects() {
 								+"<img onclick='delCollectByCollectId("+result.collectInfos[i].productId+")' style='height:30px;width:34px' src='"+getRootPath() +"/img/icons/delete.png'>"
 							  	+"</li>";
 					 }
-					 $("#p_content").append(tbody);
+				 }else{
+					 tbody="暂时还未收藏任何作品！";
 				 }
+				 $("#p_content").append(tbody);
 			}
 	},'json');
 }

@@ -1,42 +1,25 @@
-$(function(){
-	$("#upload").click(function(){
-		var productName = $("input[name='productName']").val().trim();
-		var proType = $("select option:selected").val().trim();
-		var image =  document.getElementById("image").files[0];
-		var productDesc = $("input[name='productDesc']").val();
-		if(productName == ""){
-			alert("请输入作品名！");
-			$("#upload").attr("disabled", true);
-			$("#upload").attr("disabled", false);
-		}else if(proType == ""){
-			alert("请输入作品类型！");
-			$("#upload").attr("disabled", true);
-			$("#upload").attr("disabled", false);
-		}else if(image == ""){
-			alert("请选择作品！");
-			$("#upload").attr("disabled", true);
-			$("#upload").attr("disabled", false);
-		} else if(productDesc == ""){
-			alert("请输入作品描述！");
-			$("#upload").attr("disabled", true);
-			$("#upload").attr("disabled", false);
-		}
-		$("#upload").attr("disabled", false);
+$(document).ready(function(){
+	$("#image").on("change", function(){
 		upload();
 	});
 
+	//初始化文本编辑器
+	 $('#summernote').summernote();
 
 
-var upload = function(){
+function upload(){
 	var productName = $("input[name='productName']").val().trim();
 	var proType = $("select option:selected").val().trim();
-	var image = document.getElementById("files")[0];
+	var image = document.getElementById("image").files[0];
 	var productDesc = $("input[name='productDesc']").val();
+	var productGroupId = GetRequest();
+	console.log("当前组id:"+productGroupId);
 	var formData = new FormData();
 	formData.append("productName",productName);
 	formData.append("proType",proType);
 	formData.append("image",image);
 	formData.append("productDesc",productDesc);
+	formData.append("productGroupId", productGroupId);
 	$.ajax({
         url: getRootPath() + "/user/product-publishImages.action",
         type: "post",
@@ -47,9 +30,8 @@ var upload = function(){
         mimeType: "multipart/form-data",
         success: function (data) {
         	if(data.returnCode == '00'){
-        		 console.log(data.returnCode+";"+data.returnMsg);
+        		 console.log("上传图片："+data.returnCode+";"+data.returnMsg);
                  alert("上传成功");
-                /* window.location.href = getRootPath() + "/views/productShow.jsp";*/
         	}
         },
         error: function (data) {
@@ -58,6 +40,18 @@ var upload = function(){
         }
     });
 };
+
+$("#image").on("change",function(){
+	var objUrl = getObjectURL(this.files[0]) ; //获取图片的路径，该路径不是图片在本地的路径
+	console.log("图片路径:"+objUrl);
+	var htm = "";
+	if (objUrl) {
+		htm = "<li class='uploadDiv'><img class='upload_box' src='" +   objUrl + "' id='img'></li>";
+		$("#pic").append(htm);
+		$("#imgBox").show();
+	}
+});
+
 });
 
 //上传用户头像
@@ -83,5 +77,44 @@ var uploadUserImg = function(){
     });
 };
 
+function getObjectURL(file) {
+	var url = null ;
+	if (window.createObjectURL!=undefined) { // basic
+		url = window.createObjectURL(file) ;
+	} else if (window.URL!=undefined) { // mozilla(firefox)
+		url = window.URL.createObjectURL(file) ;
+	} else if (window.webkitURL!=undefined) { // webkit or chrome
+		url = window.webkitURL.createObjectURL(file) ;
+	}
+		return url ;
+}
+
+//上传作品
+function uploadWork(){
+	var workName = $("#workTitle").val();
+	var workComment = $('#summernote').summernote('code');
+	var productGroupId = GetRequest();
+	if(workName == ''){
+		alert("请输入作品标题");
+		return;
+	}
+	if(workComment == ''){
+		alert("请输入作品内容");
+		return;
+	}
+	var params = {
+			workName:workName,
+			workComment : workComment,
+			productGroupId:productGroupId,
+	};
+	$.post(getRootPath()+"/user/addWork.action", params, function(data){
+		if(data.returnCode == '00'){
+			alert("作品上传成功");
+			window.location = getRootPath() + "/index.jsp";
+		}else{
+			alert("上传失败");
+		}
+	});
+}
 
 

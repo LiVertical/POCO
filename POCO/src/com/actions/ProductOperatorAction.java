@@ -1,14 +1,8 @@
  package com.actions;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +36,7 @@ public class ProductOperatorAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 	
-	private List<File> image; // 上传的文件
+	private File image; // 上传的文件
 	private String imageFileName; // 上传的文件名
 	private String imageContentType; // 文件类型
 	private String savePath;
@@ -66,27 +60,15 @@ public class ProductOperatorAction extends ActionSupport {
 	private JSONObject result;
 	private UUIDUtil uuidUtil;
 	private String userName;
+	private String productGroupId;
 	
 	Logger logger = Logger.getLogger(this.getClass());
-	/**
-	 * 返回上传文件保存的位置
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-
-	public String upload() {
-		System.out.println("进入图片发布页面······");
-		return "upload";
-	}
 
 	public String publishImages() {
 		logger.info("ProductOperatorAction.publishImages start·····");
+		result = new JSONObject();
 		try {
-			HttpServletRequest request = ServletActionContext.getRequest(); 
-			HttpSession session = request.getSession(); 
-			productUser = session.getAttribute("loginName").toString();
-			result = new JSONObject();
+			productUser = LoginUserUtil.getUserInfo().getUserId();
 			if(StringUtils.isBlank(productUser)){
 				result.put("returnCode", "10");
 				result.put("returnMsg", "参数错误");
@@ -94,31 +76,30 @@ public class ProductOperatorAction extends ActionSupport {
 			}
 			// 上传照片的方法
 			if (image != null) {
-				for(File img : image){
-					logger.info("文件名:" + img.getAbsolutePath());
-					// 截取后缀名
-					String ext = imageFileName.substring(imageFileName.lastIndexOf(".") + 1);
-					// 更改源文件的名称+时间
-					String newFileName = new Date().getTime() + "." + ext;
-					File file = new File(ServletActionContext.getServletContext().getRealPath("/images") + "/" + newFileName);
-					logger.info("file:" + image);
-					// 如果不存在此文件夹，则自动创建
-					if (!file.exists() || !file.isFile()) {
-						file.createNewFile();
-					}
-					UploadFileUtil uploadFileUtil = new UploadFileUtil();
-					uploadFileUtil.uploadImgs(img, file);
-					// 保存路径
-					url = "images" + "/" + newFileName;
-					ProductInfo proInfo = new ProductInfo();
-					proInfo.setProductPath(url);
-					proInfo.setUploadTime(new Date());
-					proInfo.setProductName(productName);
-				    proInfo.setProductTypes(proType);
-					proInfo.setProductDesc(productDesc);
-					proInfo.setProductUser(productUser);
-					productOperatorService.save(proInfo);
+				logger.info("文件名:" + image.getAbsolutePath());
+				// 截取后缀名
+				String ext = imageFileName.substring(imageFileName.lastIndexOf(".") + 1);
+				// 更改源文件的名称+时间
+				String newFileName = new Date().getTime() + "." + ext;
+				File file = new File(ServletActionContext.getServletContext().getRealPath("/images") + "/" + newFileName);
+				logger.info("file:" + image);
+				// 如果不存在此文件夹，则自动创建
+				if (!file.exists() || !file.isFile()) {
+					file.createNewFile();
 				}
+				UploadFileUtil uploadFileUtil = new UploadFileUtil();
+				uploadFileUtil.uploadImgs(image, file);
+				// 保存路径
+				url = "images" + "/" + newFileName;
+				ProductInfo proInfo = new ProductInfo();
+				proInfo.setProductPath(url);
+				proInfo.setUploadTime(new Date());
+				proInfo.setProductName(productName);
+				proInfo.setProductTypes(proType);
+				proInfo.setProductDesc(productDesc);
+				proInfo.setProductUser(productUser);
+				proInfo.setProductGroupId(productGroupId);
+				productOperatorService.save(proInfo);
 			}
 			result.put("productName", productName);
 			result.put("productType", proType);
@@ -171,19 +152,13 @@ public class ProductOperatorAction extends ActionSupport {
 		}
 		try {
 			String[] proArrayStr = productIds.split(",");
-			Integer[] proArray = new Integer[proArrayStr.length];
-			for(int i=0;i<proArrayStr.length;i++){
-				proArray[i] = Integer.parseInt(proArrayStr[i]);
-			}
 			if (this.productOperatorService.listProductinfo().size() > 0) {
-				this.productOperatorService.delAll(proArray);
+				this.productOperatorService.delAll(proArrayStr);
 			}
 			result.put("returnCode", "00");
 			result.put("returnMsg", "删除成功");
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}catch(Exception e){
-			e.printStackTrace();
+		} catch(Exception e){
+			logger.error("删除图片异常" , e);
 			result.put("returnCode", "-1");
 			result.put("returnMsg", "服务器异常");
 		}
@@ -255,7 +230,7 @@ public class ProductOperatorAction extends ActionSupport {
 				result = new JSONObject();
 				JsonConfig jsonConfig = new JsonConfig();
 				jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
-				String userId = LoginUserUtil.getCommonUserInfo().getUserId();
+				String userId = LoginUserUtil.getUserInfo().getUserId();
 				if(StringUtils.isBlank(userId)){  
 					result.put("returnCode", "10");
 					result.put("returnMsg", "参数错误");
@@ -405,14 +380,6 @@ public class ProductOperatorAction extends ActionSupport {
 			this.savePath = savePath;
 		}
 
-		public List<File> getImage() {
-			return image;
-		}
-
-		public void setImage(List<File> image) {
-			this.image = image;
-		}
-
 		public String getImageFileName() {
 			return imageFileName;
 		}
@@ -493,4 +460,19 @@ public class ProductOperatorAction extends ActionSupport {
 			this.proType = proType;
 		}
 
+		public String getProductGroupId() {
+			return productGroupId;
+		}
+
+		public void setProductGroupId(String productGroupId) {
+			this.productGroupId = productGroupId;
+		}
+
+		public File getImage() {
+			return image;
+		}
+
+		public void setImage(File image) {
+			this.image = image;
+		}
 }

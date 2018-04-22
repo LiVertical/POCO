@@ -1,6 +1,5 @@
 $(function(){
-	var productId = GetRequest();
-	queryProductInfos(productId);
+	queryProductInfos();
 	
 	$("#look").click(function(){
 		queryAllComments(1);
@@ -11,18 +10,6 @@ $(function(){
 	queryLikeNum(productId);
 	
 });
-
-//接收url传来的参数
-function GetRequest() {
-	   var url = location.search; //获取url中"?"符后的字串
-	   var productId = '';
-	   if (url.indexOf("?") != -1) {    //判断是否有参数
-	      var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
-	      strs = str.split("=");   //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
-	      productId = strs[1];
-	   }
-	   return productId;
-}
 
 var  queryProductInfos = function(){
 	var productId = GetRequest();
@@ -40,6 +27,7 @@ var  queryProductInfos = function(){
 //添加评论
 var addComment = function(){
 	var commentDesc = $("#discuss").val();
+	var productId = GetRequest();
 	$.post(getRootPath()+"/user/addComments.action?productId="+productId+"&commentDesc="+commentDesc, function(result){
 		if(result.returnCode == '00'){
 			alert("评论成功！");
@@ -60,11 +48,15 @@ var queryAllComments = function(currentPage){
 			var commentList = result.commentsInfos;
 			var html = "";
 			 pageSize = (result.commentsTotalsCount > recordSize ? recordSize: result.commentsTotalsCount);
-			for(var i = 0; i < commentList.length; i++){
-				html = "<li><div class='commentsInfo'><p>&nbsp;</p>"+commentList[i].commentDesc
-						+  "<p>"+commentList[i].createTime.substring(0,16)+"</p></li>";
-				$("#hotDiscuss").append(html);
-			}
+			 if(result.commentsInfos.length > 0){
+				for(var i = 0; i < commentList.length; i++){
+					html = "<li><div class='commentsInfo'><p>&nbsp;</p>"+commentList[i].commentDesc
+							+  "<p>"+commentList[i].createTime.substring(0,16)+"</p></li>";
+				}
+			 }else{
+				 html = "<p style='text-align:center'>暂时还没有评论</p>";
+			 }
+			$("#hotDiscuss").html(html);
 			if ($("#page").html() == '') {
                 $("#page").pagination(result.commentsTotalsCount, {
                       callback: function (index) {

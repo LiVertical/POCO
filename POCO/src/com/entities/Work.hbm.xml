@@ -8,7 +8,7 @@
     <class name="com.entities.Work" table="work" catalog="bywork">
         <id name="workId" type="string">
             <column name="work_id" length="32" />
-            <generator class="native" />
+            <generator class="uuid" />
         </id>
         <property name="workName" type="string">
             <column name="work_name" length="111">
@@ -30,14 +30,18 @@
                 <comment>路径</comment>
             </column>
         </property>
-        <property name="productId" type="string">
-            <column name="product_id" length="32">
+        <property name="productGroupId" type="string">
+            <column name="product_group_id" length="32">
                 <comment>评论</comment>
             </column>
         </property>
          <property name="activityId" type="string">
             <column name="activity_id" length="32">
                 <comment>活动id</comment>
+            </column>
+        </property>
+         <property name="userId" type="string">
+            <column name="user_id" length="32">
             </column>
         </property>
     </class>

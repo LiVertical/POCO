@@ -26,15 +26,14 @@ public class ProductOperatorDao extends BaseDao {
 
 	@SuppressWarnings("unchecked")
 	public List<ProductInfo> getProductinfos() {
-		return this.getSession()
-				.createQuery("FROM ProductInfo ORDER BY productId").list();
+		return this.getSession().createQuery("FROM ProductInfo ORDER BY productId").list();
 	}
 
 	// 根据Id查询图片
 	@SuppressWarnings("unchecked")
-	public ProductInfo findById(Integer productId) {
+	public ProductInfo findById(String productId) {
 		String hql = "FROM ProductInfo as p WHERE p.productId=?";
-		List<ProductInfo> list = (List<ProductInfo>) getSession().createQuery(hql).setInteger(0, productId).list();
+		List<ProductInfo> list = (List<ProductInfo>) getSession().createQuery(hql).setString(0, productId).list();
 		if (list.size() > 0) {
 			return list.get(0);
 		} else {
@@ -61,22 +60,18 @@ public class ProductOperatorDao extends BaseDao {
 	
 	//按类型查询
 	public List<Map> queryProductByCondition(int proType, int recordSize,int currentPage) {
+		List<Map> list = null;
 		if ((proType <= 0 || proType > 8) && proType != 100) {
 			return null;
-		}
-		if (recordSize == 0) {
-			recordSize = 10;
-		}
-		if (currentPage == 0) {
-			currentPage = 1;
 		}
 		String hql = "FROM ProductInfo";
 		if (proType != 100) {
 			hql += " WHERE  productTypes = '" + proType + "'";
+			list = getSession().createQuery(hql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
+		}else{
+			list = getSession().createQuery(hql).list();
 		}
-		@SuppressWarnings("unchecked")
-		List<Map> list = getSession().createQuery(hql).setFirstResult(0).setMaxResults(recordSize).list();
-			return (List<Map>) list;
+		return list;
 	}
 	
 	public int getTotalRecords(int proType){
@@ -108,7 +103,7 @@ public class ProductOperatorDao extends BaseDao {
 	}
 
 	// delAll
-	public void delAll(Integer[] productIds) {
+	public void delAll(String[] productIds) {
 		for (int i = 0; i < productIds.length; i++) {
 			ProductInfo product = this.findById(productIds[i]);
 			getSession().delete(product);
@@ -123,13 +118,13 @@ public class ProductOperatorDao extends BaseDao {
 			curPage = 1;
 		}
 		String hql = "FROM ProductInfo";
-		return getSession().createQuery(hql).setFirstResult(0).setMaxResults(recordSize).list();
+		return getSession().createQuery(hql).setFirstResult((curPage-1)*recordSize).setMaxResults(recordSize).list();
 	}
 
 	public List<ProductInfo> queryProductInfosByProductId(String productId) {
 		List<ProductInfo> productInfos = new ArrayList<ProductInfo>();
 		try {
-			String hql = "FROM ProductInfo as p WHERE p.productId='" + Integer.parseInt(productId) + "'";
+			String hql = "FROM ProductInfo as p WHERE p.productId='" + productId + "'";
 			productInfos = getSession().createQuery(hql).list();
 		} catch (Exception e) {
 			logger.error("查询作品信息异常", e);

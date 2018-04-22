@@ -1,25 +1,29 @@
 package com.util;
 
-public class UserInfo {
+import java.io.Serializable;
+
+public class UserInfo implements Serializable{
 
 	private String userName;
 	private String password;
 	private String loginName;
 	private String userId;
 	private int role;
+	private String userImg;
 	
 	public UserInfo() {
 		super();
 	}
 
 	public UserInfo(String userName, String password, String loginName,
-			String userId, int role) {
+			String userId, int role,String userImg) {
 		super();
 		this.userName = userName;
 		this.password = password;
 		this.loginName = loginName;
 		this.userId = userId;
 		this.role = role;
+		this.userImg = userImg;
 	}
 	
 	public String getUserName() {
@@ -51,6 +55,14 @@ public class UserInfo {
 	}
 	public void setRole(int role) {
 		this.role = role;
+	}
+
+	public String getUserImg() {
+		return userImg;
+	}
+
+	public void setUserImg(String userImg) {
+		this.userImg = userImg;
 	}
 	
 }

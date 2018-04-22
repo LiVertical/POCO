@@ -3,13 +3,8 @@ package com.actions;
 import java.io.File;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
-
 import net.sf.json.JSONObject;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -39,8 +34,6 @@ public class ActivityAction extends ActionSupport{
 		logger.info("ActivityAction.applyActivity start·····");
 		result = new JSONObject();
 		try{
-			/*activityName = new String(activityName.getBytes("ISO-8859-1"),"UTF-8");
-			activityDesc =  new String(activityDesc.getBytes("ISO-8859-1"),"UTF-8");*/
 			if(StringUtils.isBlank(activityName)||StringUtils.isBlank(userId)||StringUtils.isBlank(activityDesc)){
 				result.put("returnCode", "10");
 				result.put("returnMsg", "参数错误");

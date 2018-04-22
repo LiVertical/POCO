@@ -12,7 +12,6 @@ function queryProducts(currentPage) {
 	var recordSize = 6;
 	var pageSize = 6;
 	var userName=$("#userName").text();
-	var userId=$("#userId").text();
 	var userId= 11;
 	$.getJSON(getRootPath() + "/user/product-queryProductByUser.action?userName="+userName+"&currentPage="+currentPage+"&recordSize="+recordSize,
 		function(result) {
@@ -134,7 +133,10 @@ var deleteCollect = function(productId){
 		},'json');
 };
 
-
+function gotoUpload(){
+	var uuid = guid();
+	window.location = getRootPath() + "/views/productUpload.jsp?productGroupId="+uuid;
+}
 
 
 

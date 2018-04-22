@@ -1,10 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<%@page import="com.util.CommonUserInfo"%>
+<%@page import="com.util.UserInfo"%>
 <%@page import="com.util.LoginUserUtil"%>
 <%
-	CommonUserInfo commonUser = (CommonUserInfo) session.getAttribute(LoginUserUtil.COMMONUSER_SESSION_KEY);
+	UserInfo commonUser = (UserInfo) session.getAttribute(LoginUserUtil.USERINFO_SESSION_KEY);
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
@@ -43,23 +43,21 @@
 				window.parent.window.iframeHeight();
 		  }
 	</script>	 
-<body data-user_id="${commonUser.userId }">
- <s:property value="#session.APP_COMMONUSERINFO_SESSION_KEY.userName"></s:property>
- <s:property value="#session.APP_COMMONUSERINFO_SESSION_KEY.userImg"></s:property>
+<body>
 	<div class="header">
 		<ul>
 			<li onclick="gotoMyWorks('${loginName }')">POCO</li>
 			<li><a href="">活动</a></li>
-			<li><a href="<%=basePath%>/views/myWorks.jsp">论坛</a></li>
-			<li><a href="<%=basePath%>/views/myStores.jsp">问答</a></li>
+			<li><a href="<%=basePath%>views/myWorks.jsp">论坛</a></li>
+			<li><a href="<%=basePath%>views/myStores.jsp">问答</a></li>
 	 	</ul>
 	 	<ul style="float:right;padding-right:66px">
-			 <s:if test="#session.APP_COMMONUSERINFO_SESSION_KEY.loginName == null">
+			 <s:if test="loginName == null">
 				<li><a href="<%=basePath%>user/login-userLogin.action">登录</a></li>
 			 </s:if>
 			 <s:else>
-			 	<li><a href="<%=basePath%>/views/productUpload.jsp">发作品</a></li>
-				<li><img id="userImg" style="height:30px;width:30px;margin-top:9px;" src="<%=basePath%>${sessionScope.APP_COMMONUSERINFO_SESSION_KEY.userImg}">
+			 	<li><a href="<%=basePath%>views/productUpload.jsp">发作品</a></li>
+				<li><img id="userImg" style="height:30px;width:30px;margin-top:9px;" src="<%=basePath%>${sessionScope.APP_USERINFO_SESSION_KEY.userImg}">
 						<ul class="loginCenter" style="display:none">
 								<li onclick="gotoMyWorks('${sessionScope.loginName }')">我的空间</li>
 								<li><a href="<%=basePath%>views/accountManage.jsp">账号管理</a></li>
@@ -71,15 +69,15 @@
 	 	</ul>
 	</div>
 	   <ul class="nav">
-	    	<li onclick="queryProducts(100)"><p>全部类型</p></li>
-			<li onclick="queryProducts(1)"><p>花鸟</p></li>
-			<li onclick="queryProducts(2)"><p>人物</p></li>
-			<li onclick="queryProducts(3)"><p>山水</p></li>
-			<li onclick="queryProducts(4)"><p>建筑</p></li>
-			<li onclick="queryProducts(5)"><p>生态</p></li>
-			<li onclick="queryProducts(6)"><p>纪实</p></li>
-			<li onclick="queryProducts(7)"><p>LOMO</p></li>
-			<li onclick="queryProducts(8)"><p>风景</p></li>
+	    	<li onclick="queryProducts(1,100)"><p>全部类型</p></li>
+			<li onclick="queryProducts(1,1)"><p>花鸟</p></li>
+			<li onclick="queryProducts(1,2)"><p>人物</p></li>
+			<li onclick="queryProducts(1,3)"><p>山水</p></li>
+			<li onclick="queryProducts(1,4)"><p>建筑</p></li>
+			<li onclick="queryProducts(1,5)"><p>生态</p></li>
+			<li onclick="queryProducts(1,6)"><p>纪实</p></li>
+			<li onclick="queryProducts(1,7)"><p>LOMO</p></li>
+			<li onclick="queryProducts(1,8)"><p>风景</p></li>
 		</ul>
 	<div class="main">
 	<s:debug/>

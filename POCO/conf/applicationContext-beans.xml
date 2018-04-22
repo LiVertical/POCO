@@ -97,6 +97,14 @@
 		<property name="activityDao" ref="activityDao"></property>
 		<property name="userDao" ref="userDao"></property>
 	</bean>
-
+	
+	<!-- 作品 -->
+	<bean id="workDao" class="com.dao.WorkDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="workService" class="com.services.impl.WorkService">
+		<property name="workDao" ref="workDao"></property>
+		<property name="userDao" ref="userDao"></property>
+	</bean>
 </beans>
 

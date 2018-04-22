@@ -12,6 +12,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.ILikeService;
 import com.util.JsonDateValueProcessor;
+import com.util.LoginUserUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -97,9 +98,7 @@ public class LikesAction extends ActionSupport{
 	public String getProductByUserId(){
 		logger.info("LikesAction.getProductByUserId start ·····");
 		result = new JSONObject();
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession();
-		userId = session.getAttribute("userId").toString();
+		userId = LoginUserUtil.getUserInfo().getUserId();
 		if(StringUtils.isBlank(userId)){
 			result.put("returnCode", "10");
 			result.put("returnMsg", "参数错误");

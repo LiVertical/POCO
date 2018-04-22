@@ -41,7 +41,7 @@
   	 <!-- 定义全局变量，跳转到登录页面 -->
   	 	<global-results>  
     		<result name="adminLogin" type="redirectAction">/login-adminUserLogin</result> 
-    		<result name="userLogin">/login-userLogin</result>
+    		<result name="userLogin" type="redirectAction">/login-userLogin</result>
 		</global-results> 
  	</package>
  	
@@ -100,7 +100,7 @@
   		<result name="userLogin">/views/userLogin.jsp</result>
   		<result name="user">/views/mySpace.jsp</result>
   		<result name="index">/index.jsp</result>
-  		<interceptor-ref name="pocoStack"></interceptor-ref>
+  		<result name="adminLogin">/system/login.jsp</result>
   	</action>
   	
   	
@@ -219,6 +219,14 @@
   		 </action>
   		 
   		 <action name="joinActivity" class="com.actions.ActivityAction" method="joinActivity">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
+  		 <!-- 上传作品 -->
+  		  <action name="addWork" class="com.actions.WorkAction" method="addWork">                  
   			<result  type="json" name="success">
 				<param name="root">result</param>
 				<param name="excludeNullProperties">true</param>

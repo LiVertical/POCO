@@ -24,7 +24,7 @@ public class AuthenticationInterceptor extends MethodFilterInterceptor  {
         }
         // 确认Session中是否存在LOGIN
         Map<String, Object> session = actionInvocation.getInvocationContext().getSession();
-        Object login = session.get("APP_COMMONUSERINFO_SESSION_KEY");
+        Object login = session.get("APP_USERINFO_SESSION_KEY");
         HttpServletRequest request = ServletActionContext.getRequest();
         if (login != null) {
             // 存在的情况下进行后续操作。
@@ -40,7 +40,7 @@ public class AuthenticationInterceptor extends MethodFilterInterceptor  {
         	if(request.getServletPath().contains("user")){
         		return "userLogin";
         	}else{
-            return "adminLogin";
+        		return "adminLogin";
         	}
         }
 	}

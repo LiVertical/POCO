@@ -30,11 +30,11 @@ public class ProductOperatorService implements IProductOperatorService{
 	} 
 	
 	//delAll
-	public void delAll(Integer[] productIds){
+	public void delAll(String[] productIds){
 		productOperatorDao.delAll(productIds);
 	}
 
-	public ProductInfo findById(Integer productId) {		
+	public ProductInfo findById(String productId) {		
 		return productOperatorDao.findById(productId);
 	}
 

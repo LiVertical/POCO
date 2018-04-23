@@ -69,7 +69,7 @@ public class LoginAction extends BaseAction{
 		logger.info("LoginAction.userLogin start ·····账号"+loginName+"密码："+loginPass);
 		if(StringUtils.isBlank(loginName)||StringUtils.isBlank(loginPass)){
 			logger.info("参数错误");
-			return "userLogin";
+			return "login";
 		}
 		try {
 			UserInfo cuserInfo = new UserInfo();

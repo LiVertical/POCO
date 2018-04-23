@@ -68,21 +68,27 @@
 			</s:else>
 	 	</ul>
 	</div>
-	   <ul class="nav">
-	    	<li onclick="queryProducts(1,100)"><p>全部类型</p></li>
-			<li onclick="queryProducts(1,1)"><p>花鸟</p></li>
-			<li onclick="queryProducts(1,2)"><p>人物</p></li>
-			<li onclick="queryProducts(1,3)"><p>山水</p></li>
-			<li onclick="queryProducts(1,4)"><p>建筑</p></li>
-			<li onclick="queryProducts(1,5)"><p>生态</p></li>
-			<li onclick="queryProducts(1,6)"><p>纪实</p></li>
-			<li onclick="queryProducts(1,7)"><p>LOMO</p></li>
-			<li onclick="queryProducts(1,8)"><p>风景</p></li>
-		</ul>
+	<div class="recommend ">
+		<span style="color:#76EE00">*</span>
+			首页推荐
+		<span style="color:#76EE00">*</span>
+	</div>
 	<div class="main">
-	<s:debug/>
 	   <div class="p_content"> <ul class='boxs' id ="p_content"></ul></div>
 	   <div class="pagination" id="page"></div>
+    </div>
+    <div class="container">
+    	<ul class="nav">
+	    	<li onclick="queryProducts(100)"><p>全部类型</p></li>
+			<li onclick="queryProducts(1)"><p>花鸟</p></li>
+			<li onclick="queryProducts(2)"><p>人物</p></li>
+			<li onclick="queryProducts(3)"><p>山水</p></li>
+			<li onclick="queryProducts(4)"><p>建筑</p></li>
+			<li onclick="queryProducts(5)"><p>生态</p></li>
+			<li onclick="queryProducts(6)"><p>纪实</p></li>
+			<li onclick="queryProducts(7)"><p>LOMO</p></li>
+			<li onclick="queryProducts(8)"><p>风景</p></li>
+		</ul>
     </div>
 	<div class="footer">
 		<a>POCO网违法和不良信息举报电话：13928869007 举报邮箱：kent@poco.cn</a>

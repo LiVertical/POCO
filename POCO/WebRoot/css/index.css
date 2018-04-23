@@ -1,3 +1,11 @@
+.recommend{
+	height:50px;
+	width:90%;
+	margin:10px auto;
+	text-align:center;
+	font-size:23px;
+	font-weight:600;
+}
 .nav{
 	margin:10px auto;
 	width:90%;

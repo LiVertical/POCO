@@ -112,3 +112,8 @@ function deleteCollect(productId){
 		}
 	},'json');
 };
+
+//分类查看作品
+function queryProductsByType(type){
+	window.location = getRootPath() + "/views/products.jsp?productType="+type;
+}

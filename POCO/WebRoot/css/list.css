@@ -55,6 +55,16 @@
   	min-height:600px;
   	padding-bottom:30px;
   	margin:20px auto;
+  	clear:both;
+  	float:left;
+}
+.container{
+	clear:both;
+	float:left;
+	width:100%;
+	margin-top:30px;
+	overflow:hidden;
+	text-align:center;
 }
 .footer{
 	text-align:center;

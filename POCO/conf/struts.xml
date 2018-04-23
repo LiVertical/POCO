@@ -97,7 +97,7 @@
 			<param name="root">result</param>
 			<param name="excludeNullProperties">true</param>
 		</result> 
-  		<result name="userLogin">/views/userLogin.jsp</result>
+  		<result name="login">/views/userLogin.jsp</result>
   		<result name="user">/views/mySpace.jsp</result>
   		<result name="index">/index.jsp</result>
   		<result name="adminLogin">/system/login.jsp</result>

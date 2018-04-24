@@ -1,6 +1,7 @@
 package com.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -24,6 +25,11 @@ public class WorkDao extends BaseDao{
 		} catch (Exception e) {
 			logger.error("保存作品异常", e);
 		}
+	}
+
+	public List<Work> getWorksByWorkType(int workType) {
+		String sql = "FROM Work WHERE workType = '"+ workType +"'";
+		return getSession().createQuery(sql).list();
 	}
 
 }

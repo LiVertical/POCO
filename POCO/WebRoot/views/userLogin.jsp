@@ -128,7 +128,7 @@ function barter_btn(bb) {
 
   <body class="login_body">
     <div class="login_div">
-      <form action="<%=basePath%>/user/login-userLogin.action" method="post">
+      <form action="<%=basePath%>user/userLogin.action" method="post">
         <div class="col-xs-12 login_title">登录</div>
         <div class="login">
             <div class="nav">

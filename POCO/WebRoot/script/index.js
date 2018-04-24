@@ -115,5 +115,5 @@ function deleteCollect(productId){
 
 //分类查看作品
 function queryProductsByType(type){
-	window.location = getRootPath() + "/views/products.jsp?productType="+type;
+	window.location.href = getRootPath() + "/views/products.jsp?productType="+type;
 }

@@ -29,8 +29,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 function loadSrc(src,id){
 	    	  $("#mainFrame").attr("height",100);
 	    	  $("#mainFrame").attr("src",src);
-	    	  $.cookie("id", id);
-	    	  $.cookie("flag", "4");//flag:标志位：1.处于商户发展 2.活跃度 3.营销 4.用户
 	      }
 	      function iframeHeight() {
 				var ifm = document.getElementById("mainFrame");
@@ -43,10 +41,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>	 
   </head>
   
-<body data-user_name = '${sessionScope.loginName }' 
-	  data-user_img ='${sessionScope.userImg }'
-	  data-user_id ='${sessionScope.userId }'>
- <div class="main" style='min-height:300px'>
+<body>
+ <div class="main">
 	<div class='btns'>
 		<button class="button" onclick="delBatch()">删除</button>
 	</div>
@@ -54,7 +50,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   <table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
 				<thead>
 					<tr class="tr_head">
-						<td><input type="checkbox" name="products">标题</td>
+						<td style="width: 100px;"><input type="checkbox" name="products">全选/取消</td>
+						<td>标题</td>
 						<td>作品</td>
 						<td>作品描述</td>
 						<td>作品类型</td>

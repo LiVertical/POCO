@@ -101,8 +101,10 @@ public class LoginAction extends BaseAction{
 	public String loginOut(){
 		logger.info("LoginAction.loginOut start·····");
 		try {
-			role = LoginUserUtil.getUserInfo().getRole();
             Map session =  ActionContext.getContext().getSession();
+            if(session.get("USERINFO_SESSION_KEY") != null){
+            	 role = LoginUserUtil.getUserInfo().getRole();
+            } 
             session.remove("USERINFO_SESSION_KEY");
 		} catch (Exception e) {
 			logger.error("清除session异常", e);

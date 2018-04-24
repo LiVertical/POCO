@@ -40,8 +40,8 @@
   	 <default-interceptor-ref name="pocoStack"></default-interceptor-ref>  	
   	 <!-- 定义全局变量，跳转到登录页面 -->
   	 	<global-results>  
-    		<result name="adminLogin" type="redirectAction">/login-adminUserLogin</result> 
-    		<result name="userLogin" type="redirectAction">/login-userLogin</result>
+    		<result name="adminLogin" type="redirectAction">login-adminUserLogin</result> 
+    		<result name="userLogin" type="redirectAction">userLogin</result>
 		</global-results> 
  	</package>
  	
@@ -70,11 +70,19 @@
   		 </action>
   		 
   		 <action name="getLikesNum" class="com.actions.LikesAction" method="getLikesNum">
- 		<result name="success"  type="json">
-			<param name="root">result</param>
-			<param name="excludeNullProperties">true</param>
-		</result> 
- 	</action>
+ 			<result name="success"  type="json">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+ 		</action>
+ 	
+ 	<!-- 活动 -->
+ 	 <action name="getAllActivities" class="com.actions.ActivityAction" method="getAllActivities">
+ 			<result name="success"  type="json">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+ 		</action>
   		 
  	</package>
  	
@@ -91,18 +99,17 @@
   	</action> 
   	
   	<!--登录 -->
-  	 <action name="login-*" class="com.actions.LoginAction" method="{1}">
-  		<result name="admin">/login/admin.jsp</result>
-  		<result name="success"  type="json">
-			<param name="root">result</param>
-			<param name="excludeNullProperties">true</param>
-		</result> 
+  	 <action name="userLogin" class="com.actions.LoginAction" method="userLogin">
   		<result name="login">/views/userLogin.jsp</result>
   		<result name="user">/views/mySpace.jsp</result>
   		<result name="index">/index.jsp</result>
-  		<result name="adminLogin">/system/login.jsp</result>
   	</action>
   	
+  	<!-- 退出 -->
+  	<action name="loginOut" class="com.actions.LoginAction" method="loginOut">
+  		<result name="adminLogin">/system/login.jsp</result>
+  		<result name="index">/index.jsp</result>
+  	</action>
   	
   	<!-- 上传文件 -->   
     <action name="product-*" class="com.actions.ProductOperatorAction" method="{1}">                  
@@ -233,6 +240,12 @@
 			</result> 
   		 </action>
   		 
+  		  <action name="queryWorksByType" class="com.actions.WorkAction" method="queryWorksByType">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
    </package>  
  
  
@@ -267,15 +280,15 @@
  	 	</action> 
   		
   		<!-- 管理员后台登录 -->
-  		 <action name="login-*" class="com.actions.LoginAction" method="{1}">
-	  		<result name="success"  type="json">
-				<param name="root">result</param>
-				<param name="excludeNullProperties">true</param>
-			</result> 
-  			<result name="adminUserJsp">/system/sysIndex.jsp</result>
-  			<result name="sys">/admin/admin.jsp</result>
-  			<result name="logOut">/system/login.jsp</result>
-  		</action>
+  	 <action name="adminUserLogin" class="com.actions.LoginAction" method="adminUserLogin">
+  		<result name="adminUserJsp">system/login.jsp</result>
+  		<result name="sys">system/sysIndex.jsp</result>
+  	</action>
+  	
+  	<!-- 退出 -->
+  	<action name="loginOut" class="com.actions.LoginAction" method="loginOut">
+  		<result name="adminLogin">/system/login.jsp</result>
+  	</action>
   		
   		<action name="checkIsLogin" class="com.actions.LoginAction" method="checkIsLogin">
 	  		<result name="success"  type="json">

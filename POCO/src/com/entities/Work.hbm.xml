@@ -11,7 +11,7 @@
             <generator class="uuid" />
         </id>
         <property name="workName" type="string">
-            <column name="work_name" length="111">
+            <column name="work_name" length="128">
                 <comment>作品名字</comment>
             </column>
         </property>
@@ -27,6 +27,11 @@
         </property>
         <property name="workPath" type="string">
             <column name="work_path">
+                <comment>路径</comment>
+            </column>
+        </property>
+        <property name="workType" type="integer">
+            <column name="work_type">
                 <comment>路径</comment>
             </column>
         </property>

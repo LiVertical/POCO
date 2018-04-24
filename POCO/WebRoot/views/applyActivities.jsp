@@ -20,8 +20,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/activity.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/custom.css">
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/pagination.css">
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/css/pagination.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/css/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/css/red-datepicker.css">
 	<script src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
 	<script src="<%=basePath%>/js/jquery.pagination.js"></script>
 	<script src="<%=basePath%>/script/activity.js"></script>
@@ -46,16 +47,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>	 
   </head>
   
-<body data-user_name = '${sessionScope.loginName }' 
-	  data-user_img ='${sessionScope.userImg }'
-	  data-user_id ='${sessionScope.userId }'>
+<body>
  <div class="main" style='min-height:300px'>
 	<div class="content">
-		<h3>活动申请</h3>
-		活动标题:<input type="text" id="activityName"><br/>
-		活动介绍:<textarea class="desc" id="activityDesc"></textarea><br/>
-		开始时间:<input id="startTime" class="time-input " type="text"> --
-		结束时间:<input id="endTime" class="time-input " type="text"><br/>
+		<h2 style="text-align:center;margin-bottom:30px;">活动申请</h2>
+		活动标题：<input type="text" id="activityName"><br/>
+		<p>活动介绍：</p>
+		<textarea class="desc" id="activityDesc"></textarea><br/>
+		开始时间：<input id="startTime" class="time-input " type="text"> --
+		结束时间：<input id="endTime" class="time-input " type="text"><br/>
 		<button class="apply" id="apply">点击申请</button>
 	</div>
  </div>

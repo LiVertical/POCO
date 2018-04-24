@@ -35,7 +35,8 @@ function queryProducts(page) {
 					}else{
 							tbody += "<tr class='tr_odd'>";
 					}
-					tbody += "<td><input class='hide' name='product' type='checkbox' value='"+result.productInfos[i].productId+"'>"+result.productInfos[i].productName+"</td> "
+					tbody += "<td><input class='hide' name='product' type='checkbox' value='"+result.productInfos[i].productId+"'></td><td>"
+							  + result.productInfos[i].productName+"</td> "
 							  + "<td><img style='height:50px;width:50px' src='/POCO/" + result.productInfos[i].productPath+ "'></td>" 
 							  +"<td>"+ result.productInfos[i].productDesc+ "</td>"
 							  +"<td>"+ types(result.productInfos[i].productTypes)+ "</td>"

@@ -93,15 +93,10 @@ public class ActivityAction extends ActionSupport{
 	} 
 	
 	
-	//查询所有活动
+	//查询所有活动（管理员）
 	public String queryAllActivities(){
 		logger.info("ActivityAction.queryAllActivities start·····");
 		result = new JSONObject();
-		if(StringUtils.isBlank(userId)){
-			result.put("returnCode", "10");
-			result.put("returnMsg", "参数错误");
-			return SUCCESS;
-		}
 		try {
 			result.put("activitiesInfos", activityService.queryAllActivitiesByCondition(currentPage, pageSize));
 			result.put("totalActivitiesCount", activityService.queryAllActivitiesCount());
@@ -114,6 +109,23 @@ public class ActivityAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
+	
+	//查询所有活动（普通用户）
+		public String getAllActivities(){
+			logger.info("ActivityAction.getAllActivities start·····");
+			result = new JSONObject();
+			try {
+				result.put("activitiesInfos", activityService.queryAllActivities());
+				result.put("totalActivitiesCount", activityService.queryAllActivitiesCount());
+				result.put("returnCode", "00");
+				result.put("returnMsg", "查询成功");
+			} catch (Exception e) {
+				logger.error("查询活动详情异常", e);
+				result.put("returnCode", "-1");
+				result.put("returnMsg", "内部服务器异常");
+			}
+			return SUCCESS;
+		}
 	
 	//参加活动
 	

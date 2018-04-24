@@ -1,58 +1,58 @@
 $(function() {
-    // ÓÃÀ´´æ·Åµ±Ç°ÕıÔÚ²Ù×÷µÄÈÕÆÚÎÄ±¾¿òµÄÒıÓÃ¡£
+    // ç”¨æ¥å­˜æ”¾å½“å‰æ­£åœ¨æ“ä½œçš„æ—¥æœŸæ–‡æœ¬æ¡†çš„å¼•ç”¨ã€‚
     var datepicker_CurrentInput;
     $.datepicker.regional['zh-CN'] = {
-        closeText : '¹Ø±Õ',
-        prevText : 'ÉÏÔÂ',
-        prevStatus : 'ÏÔÊ¾ÉÏÔÂ',
+        closeText : 'å…³é—­',
+        prevText : 'ä¸Šæœˆ',
+        prevStatus : 'æ˜¾ç¤ºä¸Šæœˆ',
         prevBigText : '<<',
-        prevBigStatus : 'ÏÔÊ¾ÉÏÒ»Äê',
-        nextText : 'ÏÂÔÂ',
-        nextStatus : 'ÏÔÊ¾ÏÂÔÂ',
+        prevBigStatus : 'æ˜¾ç¤ºä¸Šä¸€å¹´',
+        nextText : 'ä¸‹æœˆ',
+        nextStatus : 'æ˜¾ç¤ºä¸‹æœˆ',
         nextBigText : '>>',
-        nextBigStatus : 'ÏÔÊ¾ÏÂÒ»Äê',
-        currentText : 'Çå³ı',
-        currentStatus : 'ÏÔÊ¾±¾ÔÂ',
-        monthNames : [ 'Ò»ÔÂ', '¶şÔÂ', 'ÈıÔÂ', 'ËÄÔÂ', 'ÎåÔÂ', 'ÁùÔÂ', 'ÆßÔÂ', '°ËÔÂ', '¾ÅÔÂ',
-                'Ê®ÔÂ', 'Ê®Ò»ÔÂ', 'Ê®¶şÔÂ' ],
+        nextBigStatus : 'æ˜¾ç¤ºä¸‹ä¸€å¹´',
+        currentText : 'æ¸…é™¤',
+        currentStatus : 'æ˜¾ç¤ºæœ¬æœˆ',
+        monthNames : [ 'ä¸€æœˆ', 'äºŒæœˆ', 'ä¸‰æœˆ', 'å››æœˆ', 'äº”æœˆ', 'å…­æœˆ', 'ä¸ƒæœˆ', 'å…«æœˆ', 'ä¹æœˆ',
+                'åæœˆ', 'åä¸€æœˆ', 'åäºŒæœˆ' ],
         monthNamesShort : [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
                 '11', '12' ],
-        monthStatus : 'Ñ¡ÔñÔÂ·İ',
-        yearStatus : 'Ñ¡ÔñÄê·İ',
-        weekHeader : 'ÖÜ',
-        weekStatus : 'ÄêÄÚÖÜ´Î',
-        dayNames : [ 'ĞÇÆÚÈÕ', 'ĞÇÆÚÒ»', 'ĞÇÆÚ¶ş', 'ĞÇÆÚÈı', 'ĞÇÆÚËÄ', 'ĞÇÆÚÎå', 'ĞÇÆÚÁù' ],
-        dayNamesShort : [ 'ÖÜÈÕ', 'ÖÜÒ»', 'ÖÜ¶ş', 'ÖÜÈı', 'ÖÜËÄ', 'ÖÜÎå', 'ÖÜÁù' ],
-        dayNamesMin : [ 'ÈÕ', 'Ò»', '¶ş', 'Èı', 'ËÄ', 'Îå', 'Áù' ],
-        dayStatus : 'ÉèÖÃ DD ÎªÒ»ÖÜÆğÊ¼',
-        dateStatus : 'Ñ¡Ôñ mÔÂ dÈÕ, DD',
+        monthStatus : 'é€‰æ‹©æœˆä»½',
+        yearStatus : 'é€‰æ‹©å¹´ä»½',
+        weekHeader : 'å‘¨',
+        weekStatus : 'å¹´å†…å‘¨æ¬¡',
+        dayNames : [ 'æ˜ŸæœŸæ—¥', 'æ˜ŸæœŸä¸€', 'æ˜ŸæœŸäºŒ', 'æ˜ŸæœŸä¸‰', 'æ˜ŸæœŸå››', 'æ˜ŸæœŸäº”', 'æ˜ŸæœŸå…­' ],
+        dayNamesShort : [ 'å‘¨æ—¥', 'å‘¨ä¸€', 'å‘¨äºŒ', 'å‘¨ä¸‰', 'å‘¨å››', 'å‘¨äº”', 'å‘¨å…­' ],
+        dayNamesMin : [ 'æ—¥', 'ä¸€', 'äºŒ', 'ä¸‰', 'å››', 'äº”', 'å…­' ],
+        dayStatus : 'è®¾ç½® DD ä¸ºä¸€å‘¨èµ·å§‹',
+        dateStatus : 'é€‰æ‹© mæœˆ dæ—¥, DD',
         dateFormat : 'yy-mm-dd',
         firstDay : 1,
         maxDate: +(-1),
         
         gotoCurrent : true,
-        initStatus : 'ÇëÑ¡ÔñÈÕÆÚ',
+        initStatus : 'è¯·é€‰æ‹©æ—¥æœŸ',
         isRTL : false,
-        showMonthAfterYear : true, // ÔÂÔÚÄêÖ®ºóÏÔÊ¾
-		//changeMonth : true, // ÔÊĞíÑ¡ÔñÔÂ·İ
-        //changeYear : true, // ÔÊĞíÑ¡ÔñÄê·İ
-        showOn : 'focus', // ÔÚÊäÈë¿òÅÔ±ßÏÔÊ¾°´Å¥´¥·¢£¬Ä¬ÈÏÎª£ºfocus¡£»¹¿ÉÒÔÉèÖÃÎªboth ,button
+        showMonthAfterYear : true, // æœˆåœ¨å¹´ä¹‹åæ˜¾ç¤º
+		//changeMonth : true, // å…è®¸é€‰æ‹©æœˆä»½
+        //changeYear : true, // å…è®¸é€‰æ‹©å¹´ä»½
+        showOn : 'focus', // åœ¨è¾“å…¥æ¡†æ—è¾¹æ˜¾ç¤ºæŒ‰é’®è§¦å‘ï¼Œé»˜è®¤ä¸ºï¼šfocusã€‚è¿˜å¯ä»¥è®¾ç½®ä¸ºboth ,button
         //showOtherMonths : true,
         showButtonPanel : true,
        // showWeek: true,
-		showAnim:'show',//ÏÔÊ¾¶¯»­show£¬slideDown¡¢fadeIn(Ä¬ÈÏ)
+		showAnim:'show',//æ˜¾ç¤ºåŠ¨ç”»showï¼ŒslideDownã€fadeIn(é»˜è®¤)
         beforeShow : function(input, inst) {
             datepicker_CurrentInput = input;
         }
     };
-    // °ó¶¨¡°Today¡±°´Å¥µÄclickÊÂ¼ş£¬´¥·¢µÄÊ±ºò£¬Çå¿ÕÎÄ±¾¿òµÄÖµ
+    // ç»‘å®šâ€œTodayâ€æŒ‰é’®çš„clickäº‹ä»¶ï¼Œè§¦å‘çš„æ—¶å€™ï¼Œæ¸…ç©ºæ–‡æœ¬æ¡†çš„å€¼
    $(".ui-datepicker-current").live("click", function() {
 		datepicker_CurrentInput.value = '';
 		$(".ui-datepicker-close").click();
 		$(datepicker_CurrentInput).blur();
 		
 	});
-	//ÉèÖÃÈÕÆÚ¿òµÄÑùÊ½
+	//è®¾ç½®æ—¥æœŸæ¡†çš„æ ·å¼
 	//var style=$("<style type='text/css' src='./red-datepicker.css'></style>");
 	//$("head").append(style);
 	$.datepicker.setDefaults($.datepicker.regional['zh-CN']);

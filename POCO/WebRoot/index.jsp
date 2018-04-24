@@ -46,14 +46,13 @@
 <body>
 	<div class="header">
 		<ul>
-			<li onclick="gotoMyWorks('${loginName }')">POCO</li>
-			<li><a href="">活动</a></li>
+			<li><a href="<%=basePath%>views/activities.jsp">活动</a></li>
 			<li><a href="<%=basePath%>views/myWorks.jsp">论坛</a></li>
 			<li><a href="<%=basePath%>views/myStores.jsp">问答</a></li>
 	 	</ul>
 	 	<ul style="float:right;padding-right:66px">
-			 <s:if test="loginName == null">
-				<li><a href="<%=basePath%>user/login-userLogin.action">登录</a></li>
+			 <s:if test="%{#session.isEmpty()}">
+				<li><a href="<%=basePath%>user/userLogin.action">登录</a></li>
 			 </s:if>
 			 <s:else>
 			 	<li><a href="<%=basePath%>views/productUpload.jsp">发作品</a></li>
@@ -62,12 +61,13 @@
 								<li onclick="gotoMyWorks('${sessionScope.loginName }')">我的空间</li>
 								<li><a href="<%=basePath%>views/accountManage.jsp">账号管理</a></li>
 								<li><a href="<%=basePath%>views/notifications.jsp">系统通知</a></li>
-								<li><a href="<%=basePath%>user/login-loginOut.action">退出登录</a></li>
+								<li><a href="<%=basePath%>user/loginOut.action">退出登录</a></li>
 						</ul>
 				</li>
 			</s:else>
 	 	</ul>
 	</div>
+	<s:debug/>
 	<div class="recommend ">
 		<span style="color:#76EE00">*</span>
 			首页推荐
@@ -79,15 +79,15 @@
     </div>
     <div class="container">
     	<ul class="nav">
-	    	<li onclick="queryProducts(100)"><p>全部类型</p></li>
-			<li onclick="queryProducts(1)"><p>花鸟</p></li>
-			<li onclick="queryProducts(2)"><p>人物</p></li>
-			<li onclick="queryProducts(3)"><p>山水</p></li>
-			<li onclick="queryProducts(4)"><p>建筑</p></li>
-			<li onclick="queryProducts(5)"><p>生态</p></li>
-			<li onclick="queryProducts(6)"><p>纪实</p></li>
-			<li onclick="queryProducts(7)"><p>LOMO</p></li>
-			<li onclick="queryProducts(8)"><p>风景</p></li>
+	    	<li onclick="queryProductsByType(100)"><p>全部类型</p></li>
+			<li onclick="queryProductsByType(1)"><p>花鸟</p></li>
+			<li onclick="queryProductsByType(2)"><p>人物</p></li>
+			<li onclick="queryProductsByType(3)"><p>山水</p></li>
+			<li onclick="queryProductsByType(4)"><p>建筑</p></li>
+			<li onclick="queryProductsByType(5)"><p>生态</p></li>
+			<li onclick="queryProductsByType(6)"><p>纪实</p></li>
+			<li onclick="queryProductsByType(7)"><p>LOMO</p></li>
+			<li onclick="queryProductsByType(8)"><p>风景</p></li>
 		</ul>
     </div>
 	<div class="footer">

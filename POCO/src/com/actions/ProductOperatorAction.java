@@ -198,7 +198,7 @@ public class ProductOperatorAction extends ActionSupport {
 
 		/**
 		 * @return
-		 * 分类查询作品
+		 * 分类分页查询作品
 		 * */
 	public String queryProductByCondition() {
 		logger.info("ProductOperatorAction.queryProductByCondition start·····");
@@ -216,10 +216,14 @@ public class ProductOperatorAction extends ActionSupport {
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询成功");
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("分类分页查询作品失败", e);
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部服务器异常");
 		}
 		return SUCCESS;
 	}
+	
+	
 		/**
 		 * @return
 		 * 根据当前用户，查询该用户的所有作品

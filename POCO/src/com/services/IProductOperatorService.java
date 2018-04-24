@@ -31,4 +31,5 @@ public interface IProductOperatorService {
 	void doDeleteProductInfo(String productId);
 
 	List<ProductInfo> doQueryProductInfosByProductId(String productId);
+
 }

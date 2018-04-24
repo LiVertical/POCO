@@ -1,5 +1,4 @@
 $(function(){
-	var userId = $("body").data().user_id;
 	$('#endTime').datepicker({
    	 	numberOfMonths:1,//显示几个月  
         showButtonPanel:true,//是否显示按钮面板  

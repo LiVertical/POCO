@@ -26,8 +26,7 @@ public class ActivityService implements IActivityService {
 	}
 	
 	@Override
-	public List<Activities> queryAllActivitiesByCondition(int currentPage,
-			int pageSize) {
+	public List<Activities> queryAllActivitiesByCondition(int currentPage,int pageSize) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -42,6 +41,11 @@ public class ActivityService implements IActivityService {
 	@Override
 	public void doAuditActivity(String activityId, int curStatus) {
 		activityDao.auditActivity(activityId, curStatus);
+	}
+	
+	@Override
+	public List<Activities> queryAllActivities() {
+		return activityDao.getAllActivities();
 	}
 	
 	public UserDao getUserDao() {

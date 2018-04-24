@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>活动</title>
+    <title>活动详情</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -23,46 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=basePath%>/js/common.js"></script>
 	<script src="<%=basePath%>/script/custom.js"></script>
 	<script src="<%=basePath%>/script/activity.js"></script>
-	<style>
-	#p_content{
-			height:100px;
-			width:90%;
-			margin:20px auto;
-		}
-		#p_content li{
-			border-bottom: 1px solid cornflowerblue;
-			height:100px;
-			width:90%;
-			float:left;
-			margin-top:20px;
-		}
-		#p_content p{
-			margin-left:20px;
-			margin-top:5px;
-		}
-		#p_content h2{
-			margin-left:20px;
-			margin-top:5px;
-		}
-		.joinBtn{
-			    width: 100px;
-			    height: 34px;
-			    letter-spacing: 1px;
-			    background: #3385ff;
-			    border-bottom: 1px solid #2d78f4;
-			    outline: medium;
-			    -webkit-appearance: none;
-			    -webkit-border-radius: 0;
-			    border:none;
-			    float:right;
-			    line-height: 34px;
-			    text-align:center;
-		}
-		.joinBtn a{
-			text-decoration:none;
-			color:#fff;
-		}
-	</style>
 </head>
 <body>
 <div class="header">
@@ -88,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</s:else>
 	 	</ul>
 	</div>
- <div class="main" style='min-height:620px'>
+ <div class="main" style='min-height:550px'>
 	<div class="content">
 		<ul id="p_content"></ul>
 	</div>
@@ -100,26 +60,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 <script>
 $(function(){
-	getAllActivities();
-	
-	function joinActivity(activityId){
-		window.location.href= getRootPath() + "/views/activityInfo.jsp?activityId="+activityId;
-	}
+	getActivityInfo();
 });
 
-function getAllActivities(){
+function getActivityInfo(){
 	$.post(getRootPath()+"/vistor/getAllActivities.action", function(data){
 	if(data.returnCode == '00'){
 		var html = "";
 		for(var i = 0; i < data.activitiesInfos.length; i++){
 			html = "<li><h2>"+data.activitiesInfos[i].activityName+"</h2>"
 					+  "<p>" + data.activitiesInfos[i].activityDesc +"</p>"
-					+  "<div class='joinBtn'><a href='"+getRootPath()+"/views/activityInfo.jsp?activityId="+ data.activitiesInfos[i].activityId+"')'>点击进入</a></li>";	
+					+  "<button class='joinBtn' onclick='joinActivity("+ data.activitiesInfos[i].activityId+")'>点击进入</button></li>";	
 			$("#p_content").append(html);
 		}
 	  }
 	});
 	
+	function joinActivity(activityId){
+		
+	}
 }
 </script>
 </html>

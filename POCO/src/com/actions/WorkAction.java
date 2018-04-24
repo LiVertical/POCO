@@ -1,12 +1,17 @@
 package com.actions;
 
+import java.util.Date;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.IWorkService;
+import com.util.JsonDateValueProcessor;
 import com.util.LoginUserUtil;
 
 public class WorkAction extends ActionSupport{
@@ -18,6 +23,7 @@ public class WorkAction extends ActionSupport{
 	private String productGroupId;
 	private String workName;
 	private String workComment;
+	private int workType;
 	
 	public String addWork(){
 		logger.info("WorkActio.addWork start·····");
@@ -40,10 +46,26 @@ public class WorkAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
-	public String queryAllWorks(){
-		
-		return SUCCESS;
+	/**
+	 * @return
+	 * 分类查询作品
+	 * */
+public String queryWorksByType() {
+	logger.info("ProductOperatorAction.queryProductByType start·····");
+	try {
+		result = new JSONObject();
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
+		result.put("works", JSONArray.fromObject(workService.queryProductByWorkType(workType), jsonConfig));
+		result.put("returnCode", "00");
+		result.put("returnMsg", "查询成功");
+	} catch (Exception e) {
+		logger.error("分类查询作品失败", e);
+		result.put("returnCode", "-1");
+		result.put("returnMsg", "内部服务器异常");
 	}
+	return SUCCESS;
+}
 	
 	
 	
@@ -82,6 +104,14 @@ public class WorkAction extends ActionSupport{
 
 	public void setWorkComment(String workComment) {
 		this.workComment = workComment;
+	}
+
+	public int getWorkType() {
+		return workType;
+	}
+
+	public void setWorkType(int workType) {
+		this.workType = workType;
 	}
 	
 }

@@ -77,5 +77,10 @@ public class ActivityDao extends BaseDao {
 		String hql = "UPDATE Activities a SET a.curStatus="+curStatus;
 		getSession().createQuery(hql).executeUpdate();
 	}
+
+
+	public List<Activities> getAllActivities() {
+		return getSession().createQuery("FROM Activities").list();
+	}
 	
 }

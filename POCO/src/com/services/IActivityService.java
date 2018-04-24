@@ -21,4 +21,6 @@ public interface IActivityService {
 
 	void doAuditActivity(String activityId, int curStatus);
 
+	List<Activities> queryAllActivities();
+
 }

@@ -23,4 +23,6 @@ public interface IActivityService {
 
 	List<Activities> queryAllActivities();
 
+	Activities doQueryActivityInfo(String activityId);
+
 }

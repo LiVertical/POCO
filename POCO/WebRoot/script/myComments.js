@@ -23,7 +23,7 @@ function queryAllComments(page){
 					$("#dataDisplay").append(html);
 				}
 			}else{
-				$("#dataDisplay").html("您暂时还没有评论");
+				$("#dataDisplay").html("<p style='text-align: center;margin-top:30px'>您暂时还没有评论</p>");
 			}
 				if ($("#page").html() == '') {
 	                  $("#page").pagination(data.commentsTotalsCountOfUser, {

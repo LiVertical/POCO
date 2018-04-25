@@ -48,6 +48,11 @@ public class ActivityService implements IActivityService {
 		return activityDao.getAllActivities();
 	}
 	
+	@Override
+	public Activities doQueryActivityInfo(String activityId) {
+		return activityDao.queryActivityInfos(activityId);
+	}
+	
 	public UserDao getUserDao() {
 		return userDao;
 	}

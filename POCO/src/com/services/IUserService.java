@@ -11,7 +11,7 @@ public interface IUserService {
 	List<Users> queryUserByCondition(int recordSize, int currentPage);
 
 	//上传用户头像
-	void saveOrUpdateUserImg(Integer userId, String url);
+	void saveOrUpdateUserImg(String userId, String url);
 
 	Users getUserById(String userId);
 

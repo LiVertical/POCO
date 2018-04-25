@@ -17,7 +17,7 @@ function queryProductsMyCollects() {
 							  	+"</li>";
 					 }
 				 }else{
-					 tbody="暂时还未收藏任何作品！";
+					 tbody="<p style='text-align: center;margin-top:30px'>暂时还未收藏任何作品！</p>";
 				 }
 				 $("#p_content").append(tbody);
 			}

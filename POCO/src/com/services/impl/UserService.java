@@ -24,7 +24,7 @@ public class UserService implements IUserService{
 	}
 
 	//上传用户头像
-	public void saveOrUpdateUserImg(Integer userid,String faceimg){		
+	public void saveOrUpdateUserImg(String userid,String faceimg){		
 		userDao.saveOrUpdateUserImg(userid,faceimg);
 	}
 

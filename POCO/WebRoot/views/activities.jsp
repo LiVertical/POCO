@@ -62,6 +62,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			text-decoration:none;
 			color:#fff;
 		}
+		#status{
+			color:red;
+		}
 	</style>
 </head>
 <body>
@@ -112,7 +115,18 @@ function getAllActivities(){
 	if(data.returnCode == '00'){
 		var html = "";
 		for(var i = 0; i < data.activitiesInfos.length; i++){
-			html = "<li><h2>"+data.activitiesInfos[i].activityName+"</h2>"
+			var startTime = Date.parse(new Date(data.activitiesInfos[i].createTime));
+			var endTime = Date.parse(new Date(data.activitiesInfos[i].endTime));
+			var curStatus = "<a style='color:red;margin-left:20px'>火热进行中·····</a>";;
+			var currentTime = Date.parse(new Date()); // 获取当前时间戳(以s为单位)
+			console.log("开始时间："+startTime+";结束时间："+endTime +"当前时间："+currentTime);
+			if(currentTime < startTime ){
+				curStatus = "<a style='color:green;margin-left:20px'>即将开始敬请期待</a>";
+			}
+			if(currentTime > endTime ){
+				curStatus = "<a style='color:gray;margin-left:20px'>已结束</a>";
+			}
+			html = "<li><h2>"+data.activitiesInfos[i].activityName+curStatus+"</h2>"
 					+  "<p>" + data.activitiesInfos[i].activityDesc +"</p>"
 					+  "<div class='joinBtn'><a href='"+getRootPath()+"/views/activityInfo.jsp?activityId="+ data.activitiesInfos[i].activityId+"')'>点击进入</a></li>";	
 			$("#p_content").append(html);

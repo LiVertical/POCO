@@ -28,6 +28,8 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.IUserService;
 import com.util.JsonDateValueProcessor;
+import com.util.LoginUserUtil;
+import com.util.UploadFileUtil;
 
 public class UserAction extends ActionSupport{
 
@@ -35,7 +37,6 @@ public class UserAction extends ActionSupport{
 	private IUserService userService;
 	private String userId;
 	private Users user;
-	private JSONObject result;
 	private String userName;
 	private static final int BUFFER_SIZE = 1024 * 1024;
 	private File upload;
@@ -50,12 +51,12 @@ public class UserAction extends ActionSupport{
 	private String sex;
 	private String newPass;
 	private String oldPass;
-	
+	private JSONObject result;
 	Logger logger = Logger.getLogger(this.getClass());
 
 	//查询用户信息
 	public String queryUserDetails(){
-		logger.info("queryUserDetails start ·····");
+		logger.info("UserAction.queryUserDetails start ·····");
 		result = new JSONObject();
 		if(StringUtils.isBlank(String.valueOf(currentPage)) || StringUtils.isBlank(String.valueOf(recordSize))){
 			result.put("returnCode", "10");
@@ -85,7 +86,7 @@ public class UserAction extends ActionSupport{
 	 * 删除用户信息
 	 * */
 	public String deleteUserInfo(){
-		logger.info("deleteUserInfo start ·····");
+		logger.info("UserAction.deleteUserInfo start ·····");
 		result = new JSONObject();
 		if(StringUtils.isBlank(userId)){
 			result.put("returnCode", "10");
@@ -110,31 +111,19 @@ public class UserAction extends ActionSupport{
 	 * 查询用户信息
 	 * */
 	public String getUserInfo(){
-		logger.info("userInfoUpdate start·····");
+		logger.info("UserAction.getUserInfo start·····");
 		try {
 			result = new JSONObject();
-			HttpServletRequest request = ServletActionContext.getRequest();
-			HttpSession session = request.getSession();
-			String userId = session.getAttribute("userId").toString();// == null?-1:Integer.parseInt(session.getAttribute("userId").toString());
+			userId = LoginUserUtil.getUserInfo().getUserId();
 			if(StringUtils.isBlank(userId)){
 				result.put("returnCode", "10");
 				result.put("returnMsg", "参数错误");
 				return SUCCESS;
 			}
-			user = userService.getUserById(userId); 
-			ActionContext.getContext().getValueStack().push(user);
-			logger.info(user.getLoginName());
-			result.put("returnCode", "00");
-			result.put("returnMsg", "查询信息成功");
-			result.put("userId", user.getUserId());
-			result.put("userName", user.getLoginName());
-			result.put("userAge", user.getAge());
-			result.put("userEmail", user.getEmail());
-			result.put("userImg", user.getFaceImg());
-			result.put("userSex", user.getSex());
+			result.put("userInfos", userService.getUserById(userId));
 		} catch (Exception e) {
 			result.put("returnCode", "-1");
-			result.put("returnMsg", "查询用户信息失败");
+			result.put("returnMsg", "内部服务器异常");
 			logger.info("查询用户信息异常！", e);
 		}
 		result.put("returnCode", "00");
@@ -147,10 +136,11 @@ public class UserAction extends ActionSupport{
 	 * 上传用户头像
 	 * */
 	public String uploadUserImg(){
-		logger.info("uploadUserImg start·····");
+		logger.info("UserAction.uploadUserImg start·····");
 		result = new JSONObject();
 		try{
-			if(StringUtils.isBlank(upload.getName())){
+			userId = LoginUserUtil.getUserInfo().getUserId();
+			if(StringUtils.isBlank(upload.getName())||StringUtils.isBlank(userId)){
 				result.put("returnCode", "10");
 				result.put("returnMsg", "参数异常");
 				return SUCCESS;
@@ -159,23 +149,18 @@ public class UserAction extends ActionSupport{
 			String arrix = uploadFileName.substring(uploadFileName.lastIndexOf(".")+1);
 			//得到新的图片名
 			String newFileName = new Date().getTime()+"."+arrix;
-			logger.info("后缀名:"+newFileName);
+			logger.info("新文件名：:"+newFileName);
 			File file = new File(ServletActionContext.getServletContext().getRealPath("/images"));
-			logger.info("file:"+file);
 			//如果文件夹不存在则创建
 			if(!file.exists() && !file.isDirectory()){
 				file.mkdirs();
 			}
 			//获取存储文件的路径
 			String dstpath = ServletActionContext.getServletContext().getRealPath("images")+"\\"+newFileName;
-			File dstFile = new File(dstpath);
 			//把文件复制过去
-			copy(upload, dstFile);
-			//得到新的url
+			UploadFileUtil uploadFileUtil = new UploadFileUtil();
+			uploadFileUtil.uploadImgs(upload, new File(dstpath));
 			url = "images"+ "/"+newFileName;	
-			HttpServletRequest request = ServletActionContext.getRequest(); 
-			HttpSession session = request.getSession(); 
-			Integer userId = session.getAttribute("userId") == null?-1:Integer.parseInt(session.getAttribute("userId").toString());
 			userService.saveOrUpdateUserImg(userId, url);	
 			result.put("returnCode", "00");
 			result.put("returnMsg", "保存用户头像成功");
@@ -187,41 +172,6 @@ public class UserAction extends ActionSupport{
 		}
 		return SUCCESS;				
 	}	
-	
-	//复制的方法
-	private static void copy(File src,File dst){
-		InputStream in = null;
-		OutputStream out = null;
-		try {
-			in = new BufferedInputStream(new FileInputStream(src),BUFFER_SIZE);
-			out = new BufferedOutputStream(new FileOutputStream(dst),BUFFER_SIZE);
-			byte[] buffer = new byte[BUFFER_SIZE];
-			int len = 0;
-			while((len = in.read(buffer))>0){
-				//输出的方法
-				out.write(buffer, 0, len);
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}finally{
-			if(null != in){
-				try {
-					in.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if(null != out){
-				try {
-					out.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
 	
 	/**
 	 * @return

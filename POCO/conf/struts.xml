@@ -83,7 +83,14 @@
 				<param name="excludeNullProperties">true</param>
 			</result> 
  		</action>
-  		 
+ 		
+  		  <action name="queryActivityInfo" class="com.actions.ActivityAction" method="queryActivityInfo">
+ 			<result name="success"  type="json">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+ 		</action>
+ 		
  	</package>
  	
  <!-- 普通用户 -->
@@ -103,6 +110,22 @@
   		<result name="login">/views/userLogin.jsp</result>
   		<result name="user">/views/mySpace.jsp</result>
   		<result name="index">/index.jsp</result>
+  	</action>
+  	
+  	<!-- 上传头像 -->
+  	<action name="uploadUserImg" class="com.actions.UserAction" method="uploadUserImg">
+			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  	</action>
+  	
+  	<!-- 用户信息 -->
+  		<action name="getUserInfo" class="com.actions.UserAction" method="getUserInfo">
+			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
   	</action>
   	
   	<!-- 退出 -->
@@ -268,7 +291,6 @@
 				<param name="root">result</param>
 				<param name="excludeNullProperties">true</param>
 			</result> 
-	  		<interceptor-ref name="pocoStack"></interceptor-ref> 
   		</action>
   		
   		<!-- 添加系统管理员 -->

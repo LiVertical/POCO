@@ -20,9 +20,9 @@ public class UserDao extends BaseDao{
 	}
 	
 	//上传用户头像
-	public void saveOrUpdateUserImg(Integer userid,String faceimg){
+	public void saveOrUpdateUserImg(String userid,String faceimg){
 		String hql = "update Users u set u.faceImg = ? where u.userId = ?";
-		getSession().createQuery(hql).setString(0, faceimg).setInteger(1, userid).executeUpdate();
+		getSession().createQuery(hql).setString(0, faceimg).setString(1, userid).executeUpdate();
 	}
 	
 	//更新用户信息

@@ -1,14 +1,19 @@
 package com.actions;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.IActivityService;
+import com.util.JsonDateValueProcessor;
 
 public class ActivityAction extends ActionSupport{
 	
@@ -115,7 +120,9 @@ public class ActivityAction extends ActionSupport{
 			logger.info("ActivityAction.getAllActivities start·····");
 			result = new JSONObject();
 			try {
-				result.put("activitiesInfos", activityService.queryAllActivities());
+				JsonConfig jsonConfig = new JsonConfig();
+				jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
+				result.put("activitiesInfos", JSONArray.fromObject(activityService.queryAllActivities(), jsonConfig));
 				result.put("totalActivitiesCount", activityService.queryAllActivitiesCount());
 				result.put("returnCode", "00");
 				result.put("returnMsg", "查询成功");
@@ -130,7 +137,27 @@ public class ActivityAction extends ActionSupport{
 	//参加活动
 	
 	//展示活动详情
-	
+		public String queryActivityInfo(){
+			logger.info("ActivityAction.queryActivityInfo start·····");
+			result = new JSONObject();
+			if(StringUtils.isBlank(activityId)){
+				result.put("returnCode", "10");
+				result.put("returnMsg", "参数错误");
+				return SUCCESS;
+			}
+			try {
+				JsonConfig jsonConfig = new JsonConfig();
+				jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
+				result.put("activityInfos", JSONArray.fromObject(activityService.doQueryActivityInfo(activityId), jsonConfig));
+				result.put("returnCode", "00");
+				result.put("returnMsg", "查询活动详情成功");
+			} catch (Exception e) {
+				logger.error("根据活动id查询活动详情异常", e);
+				result.put("returnCode", "-1");
+				result.put("returnMsg", "内部服务器异常");
+			}
+			return SUCCESS;
+		}
 	//
 
 

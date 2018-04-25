@@ -23,6 +23,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=basePath%>/js/common.js"></script>
 	<script src="<%=basePath%>/script/custom.js"></script>
 	<script src="<%=basePath%>/script/activity.js"></script>
+<style>
+	.main{
+		text-align:center;
+		margin:50px auto;
+		width:90%;
+	}
+	.desc{
+		min-height:300px;
+		width:100%;
+		text-align:left;
+	}
+	.desc p{
+		padding:20px;
+	}
+	.time{
+		float:right;
+		margin-right:20px;
+	}
+	.joinBtn{
+		width: 100px;
+	    height: 34px;
+	    color: #fff;
+	    letter-spacing: 1px;
+	    background: #3385ff;
+	    border-bottom: 1px solid #2d78f4;
+	    outline: medium;
+	    -webkit-appearance: none;
+	    -webkit-border-radius: 0;
+	    border:none;
+	    float: right;
+    	margin-right: 200px;
+	}
+	.btn{
+		width:100%;
+		margin-top:40px;
+		margin-bottom:30px;
+	}
+</style>
 </head>
 <body>
 <div class="header">
@@ -48,37 +86,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</s:else>
 	 	</ul>
 	</div>
- <div class="main" style='min-height:550px'>
-	<div class="content">
-		<ul id="p_content"></ul>
-	</div>
-	 <div class="pagination" id="page"></div>
- </div>
- <div class="footer">
+	 <div id="p_content" class="main" style='min-height:450px'>
+	 </div>
+	 <div class='btn'><button class='joinBtn' id='joinBtn'>点击参加活动</button></div>
+ 	 <div class="footer" style="margin-top:50px">
 		<a>POCO网违法和不良信息举报电话：13928869007 举报邮箱：kent@poco.cn</a>
-	</div>
+	 </div>
 </body>
 <script>
-$(function(){
+$(document).ready(function(){
 	getActivityInfo();
+	
+	$("#joinBtn").click(function(){
+		var activityId = GetRequest();
+		window.location.href = getRootPath() + "/views/productUpload.jsp?activityId="+activityId;
+	});
+	 
 });
 
 function getActivityInfo(){
-	$.post(getRootPath()+"/vistor/getAllActivities.action", function(data){
+	var activityId =GetRequest();
+	$.post(getRootPath()+"/vistor/queryActivityInfo.action?activityId="+activityId, function(data){
 	if(data.returnCode == '00'){
-		var html = "";
-		for(var i = 0; i < data.activitiesInfos.length; i++){
-			html = "<li><h2>"+data.activitiesInfos[i].activityName+"</h2>"
-					+  "<p>" + data.activitiesInfos[i].activityDesc +"</p>"
-					+  "<button class='joinBtn' onclick='joinActivity("+ data.activitiesInfos[i].activityId+")'>点击进入</button></li>";	
-			$("#p_content").append(html);
-		}
+		console.log(data.activityInfos);
+		var html = "<h1>"+data.activityInfos[0].activityName+"</h1>"
+						+"<div class='desc'><p>"+data.activityInfos[0].activityDesc+"</p></div>"
+						+"<div class='time'>活动期限："+data.activityInfos[0].createTime.substring(0,10)+"--"+data.activityInfos[0].endTime.substring(0,10)
+						+"</div>";
+		$("#p_content").append(html);
 	  }
 	});
 	
-	function joinActivity(activityId){
-		
-	}
 }
 </script>
 </html>

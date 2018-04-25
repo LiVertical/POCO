@@ -16,7 +16,7 @@ function queryProductsMyLike() {
 							  	+"</li>";
 					} 
 				}else{
-					tbody="暂时还未对任何作品点赞";
+					tbody="<p style='text-align: center;margin-top:30px'>暂时还未对任何作品点赞</p>";
 				}
 			 $("#p_content").append(tbody);
 				

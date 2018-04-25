@@ -11,12 +11,6 @@ $(document).ready(function(){
     }).mouseout(function (){
 		$(".loginCenter").hide();
 	});
-    
-    
-    var data=$('body').data();
-    var userImg = data.user_img;
-	console.log(userImg);
-});
 
  //完善用户信息
 var gotoCompleteUserInfo = function(){
@@ -27,3 +21,5 @@ var gotoCompleteUserInfo = function(){
 var gotoMyWorks = function(){
 	window.location = getRootPath() + "/views/mySpace.jsp";
 };
+
+});

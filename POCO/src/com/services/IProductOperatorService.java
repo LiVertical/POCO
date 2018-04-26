@@ -32,4 +32,6 @@ public interface IProductOperatorService {
 
 	List<ProductInfo> doQueryProductInfosByProductId(String productId);
 
+	List<ProductInfo> queryProductByType(int proType);
+
 }

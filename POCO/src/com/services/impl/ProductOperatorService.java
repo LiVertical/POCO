@@ -69,6 +69,11 @@ public class ProductOperatorService implements IProductOperatorService{
 		return productOperatorDao.queryProductInfosByProductId(productId);
 	}
 	
+	@Override
+	public List<ProductInfo> queryProductByType(int proType) {
+		return productOperatorDao.doQueryProductsByType(proType);
+	}
+	
 	public ProductInfo getProductId() {
 		return productId;
 	}

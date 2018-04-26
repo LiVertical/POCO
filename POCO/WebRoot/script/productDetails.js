@@ -6,9 +6,7 @@ $(function(){
 		$('#look').attr('disabled',"true");
 		$("#look").html("精彩评论");
 	});
-	
-	queryLikeNum(productId);
-	
+	queryLikeNum();
 });
 
 var  queryProductInfos = function(){
@@ -75,6 +73,7 @@ var queryAllComments = function(currentPage){
 };
 //查询当前点赞数目
 var queryLikeNum = function(productId){
+	var productId = GetRequest();
 	var url = getRootPath() + "/vistor/getLikesNum.action";
 	var param = {
 			productId:productId,

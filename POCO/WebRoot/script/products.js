@@ -21,13 +21,40 @@ $(document).ready(function(){
 function queryProductsByType(){
 	var type = GetRequest();
 	console.log("当前加载作品类型:"+type);
-	$.post(getRootPath()+"/user/queryWorksByType.action?workType="+type, function(data){
+	$.post(getRootPath()+"/vistor/queryProductByType.action?proType="+type, function(data){
 		if(data.returnCode == '00'){
-			var html = "";
-			for(var i = 0;i < data.works.length;i++){
-			 html = "<li><p>"+data.works[i].workName+"</p></li>";
+			for(var i = 0;i < data.products.length;i++){
+				var html = "";
+				html = "<li><div class='boxImg'><img src='>"+getRootPath()+data.products[i].productPath+"'></div>" 
+						 +"<div class='contentBox'><ul>"
+						 +"<li><p>图片名称："+data.products[i].productName+"</p></li>"
+						 +"<li><p>图片描述："+data.products[i].productDesc+"</p></li>"
+						 +"<li><p>上传时间："+data.products[i].uploadTime.substring(0,16)+"</p></li>"
+						 +"</ul></li>";
+				$("#p_content").append(html);
 			}
-			$("#p_content").html(html);
 		}
 	});
 }
+	
+	function queryProductsByProductType(productType){
+		$.post(getRootPath()+"/vistor/queryProductByType.action?proType="+productType, function(data){
+			if(data.returnCode == '00'){
+				$("#p_content").empty();
+				var html = "";
+				if(data.products.length>0){
+					for(var i = 0;i < data.products.length;i++){
+						html = "<li><div class='boxImg'><img src='>"+getRootPath()+data.products[i].productPath+"'></div>" 
+								 +"<div class='contentBox'><ul>"
+								 +"<li><p>图片名称："+data.products[i].productName+"</p></li>"
+								 +"<li><p>图片描述："+data.products[i].productDesc+"</p></li>"
+								 +"<li><p>上传时间："+data.products[i].uploadTime.substring(0,16)+"</p></li>"
+								 +"</ul></li>";
+					}
+				}
+				}else{
+					html="<p style='text-align:center'>暂时还没有该类型的作品</p>";
+				}
+				$("#p_content").html(html);
+		});
+	};

@@ -76,7 +76,6 @@ public class ProductOperatorAction extends ActionSupport {
 			}
 			// 上传照片的方法
 			if (image != null) {
-				logger.info("文件名:" + image.getAbsolutePath());
 				// 截取后缀名
 				String ext = imageFileName.substring(imageFileName.lastIndexOf(".") + 1);
 				// 更改源文件的名称+时间
@@ -213,6 +212,23 @@ public class ProductOperatorAction extends ActionSupport {
 			totalRecords = productOperatorService.getTotalRecords(proType);
 			logger.info("总记录数：" + totalRecords);
 			result.put("total", totalRecords);
+			result.put("returnCode", "00");
+			result.put("returnMsg", "查询成功");
+		} catch (Exception e) {
+			logger.error("分类分页查询作品失败", e);
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部服务器异常");
+		}
+		return SUCCESS;
+	}
+	
+	public String queryProductByType() {
+		logger.info("ProductOperatorAction.queryProductByType start·····");
+		try {
+			result = new JSONObject();
+			JsonConfig jsonConfig = new JsonConfig();
+			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
+			result.put("products", JSONArray.fromObject(productOperatorService.queryProductByType(proType), jsonConfig));
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询成功");
 		} catch (Exception e) {

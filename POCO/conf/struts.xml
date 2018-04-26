@@ -62,6 +62,13 @@
 			</result> 
   		 </action>
   		 
+  		  <action name="queryProductByType" class="com.actions.ProductOperatorAction" method="queryProductByType">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
   		  <action name="queryAllComments" class="com.actions.CommentsAction" method="queryAllComments">                  
   			<result  type="json" name="success">
 				<param name="root">result</param>

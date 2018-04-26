@@ -145,10 +145,9 @@ public class UserAction extends ActionSupport{
 				file.mkdirs();
 			}
 			//获取存储文件的路径
-			String dstpath = ServletActionContext.getServletContext().getRealPath("images")+"\\"+newFileName;
 			//把文件复制过去
 			UploadFileUtil uploadFileUtil = new UploadFileUtil();
-			uploadFileUtil.uploadImgs(upload, new File(dstpath));
+			uploadFileUtil.uploadImgs(upload, file);
 			url = "images"+ "/"+newFileName;	
 			userService.saveOrUpdateUserImg(userId, url);	
 			result.put("returnCode", "00");

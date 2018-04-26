@@ -1,7 +1,5 @@
 package com.services.impl;
 
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.dao.LoginDao;

@@ -29,20 +29,6 @@
 	<script src="<%=basePath%>/script/index.js"></script>
 	<script src="<%=basePath%>/script/custom.js"></script>
 </head>
-<script>
-		 function loadSrc(src,id){
-	    	  $("#mainFrame").attr("height",100);
-	    	  $("#mainFrame").attr("src",src);
-	      }
-	      function iframeHeight() {
-				var ifm = document.getElementById("mainFrame");
-				var subWeb = document.frames ? document.frames["mainFrame"].document :ifm.contentDocument;
-				if (ifm != null && subWeb != null) {
-					ifm.height = subWeb.body.scrollHeight;
-				}
-				window.parent.window.iframeHeight();
-		  }
-	</script>	 
 <body>
 	<div class="header">
 		<ul>
@@ -65,7 +51,6 @@
 			</s:else>
 	 	</ul>
 	</div>
-	<s:debug/>
 	<div class="recommend ">
 		<span style="color:#76EE00">*</span>
 			首页推荐

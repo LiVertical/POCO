@@ -1,3 +1,44 @@
+.navContainer{
+	height:60px;
+	background:	#919191;
+}
+.nav li{
+	float:left;
+	width:11%;
+	height:100%;
+	line-height:60px;
+	font-size:20px;
+	color:#fff;
+	font-weight:600;
+	text-align:center;
+}
 #content{
 	height:900px;
+}
+.content ul{
+	width:90%;
+	margin:30px auto;
+}
+.content ul li{
+	height:300px;
+	width:90%;
+}
+.boxImg{
+	height:250px;
+	width:250px;
+	float:left;
+}
+.boxImg img{
+	width:100%;
+	height:100%;
+}
+.contentBox{
+	float:left;
+	width:70%;
+	height:250px;
+}
+.contentBox ul li{
+	height:50px;
+	width:100%;
+	line-height:50px;
 }

@@ -12,14 +12,4 @@ $(document).ready(function(){
 		$(".loginCenter").hide();
 	});
 
- //完善用户信息
-var gotoCompleteUserInfo = function(){
-		window.location = getRootPath() + "/pages/userInfoEdit.jsp";
-};
-
-//我的空间
-var gotoMyWorks = function(){
-	window.location = getRootPath() + "/views/mySpace.jsp";
-};
-
 });

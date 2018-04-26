@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	<div class="header">
 		<ul>
-			<li><a onclick="gotoMyWorks('${sessionScope.loginName }')">我的空间</a></li>
+			<li><a onclick="gotoMyWorks('${sessionScope.APP_USERINFO_SESSION_KEY.loginName }')">我的空间</a></li>
 			<li><a href="">系统通知</a></li>
 			<li><a href="<%=basePath%>/views/myWorks.jsp">我的评论</a></li>
 			<li><a href="<%=basePath%>/views/myStores.jsp">我的收藏</a></li>
@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   					<h2 style="text-align: center;">个人资料</h2>
 	    			<s:hidden name="userId" id="userId"></s:hidden>
 	    			<p>昵称：</p>
-	    			<input id="userName" type="text" placeholder="请输入您的用户名"><br/>
+	    			<input id="userName" type="text" maxlength="10" placeholder="请输入您的用户名"><br/>
 	    			<s:hidden name="password"/>
 	    			<p>年龄：</p>
 				   	<input id="userAge" type="text" placeholder="请输入您的年龄"><br/>
@@ -85,19 +85,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   	<p>性别：</p>
 				   	<input type="radio" style='margin-top: 10px' name="sex" id="man" value="1">男
 				   	<input type="radio" name="sex" id="women" checked value="0">女   <br/>
-				   <button class="subBtn" onclick="saveOrUpdateUserInfo()">保存</button>
+				   <button class="subBtn" onclick="updateProFile()">保存</button>
   			</div> 
-		
-			<div id="updatePass">
+			<div id="updatePass" style="border-bottom: none;">
 					<h2>修改密码</h2>
-					<p>当前密码：<input type="text" id="oldPass"></p>
-					<p>&nbsp;新&nbsp;密&nbsp;码&nbsp;：<input type="text" id="newPass"></p>
-					<p>确认密码：<input type="text" id="checkPass"></p>
-					<button class="subBtn" id="savePass">保存</button>
+					<p  style="margin-top:30px">当前密码：<input type="password" id="oldPass" maxlength="12"></p>
+					<p>&nbsp;新&nbsp;密&nbsp;码&nbsp;：<input type="password"  id="newPass" maxlength="12"></p>
+					<p>确认密码：<input type="password" id="checkPass" maxlength="12"></p>
+					<button class="subBtn" onclick="updatePass()">保存</button>
 			</div>
 	</div>
  </div> 
-	<div class="footer">
+	<div class="footer" style="margin-top:20px">
 		<a>POCO网违法和不良信息举报电话：13928869007 举报邮箱：kent@poco.cn</a>
 	</div>
 </body>

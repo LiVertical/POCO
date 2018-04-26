@@ -14,34 +14,36 @@ public class Users implements java.io.Serializable {
 	private String userName;
 	private String loginName;
 	private String loginPass;
-	private Integer age;
+	private int age;
 	private String email;
-	private Integer sex;
+	private int sex;
 	private String faceImg;
-	private Integer role;
+	private int role;
 	private Date createTime;
-	private String curStatus;
+	private int curStatus;
 
 		/** full constructor */
-public Users(String userId, String userName, String loginName,
-			String loginPass, Integer age, String email, Integer sex,
-			String faceImg, Integer role, Date createTime, String curStatus) {
-		super();
-		this.userId = userId;
-		this.userName = userName;
-		this.loginName = loginName;
-		this.loginPass = loginPass;
-		this.age = age;
-		this.email = email;
-		this.sex = sex;
-		this.faceImg = faceImg;
-		this.role = role;
-		this.createTime = createTime;
-		this.curStatus = curStatus;
-	}
+	
 
 		public Users() {
 			super();
+		}
+
+		public Users(String userId, String userName, String loginName,
+				String loginPass, int age, String email, int sex,
+				String faceImg, int role, Date createTime, int curStatus) {
+			super();
+			this.userId = userId;
+			this.userName = userName;
+			this.loginName = loginName;
+			this.loginPass = loginPass;
+			this.age = age;
+			this.email = email;
+			this.sex = sex;
+			this.faceImg = faceImg;
+			this.role = role;
+			this.createTime = createTime;
+			this.curStatus = curStatus;
 		}
 
 		public String getUserId() {
@@ -76,11 +78,11 @@ public Users(String userId, String userName, String loginName,
 			this.loginPass = loginPass;
 		}
 
-		public Integer getAge() {
+		public int getAge() {
 			return age;
 		}
 
-		public void setAge(Integer age) {
+		public void setAge(int age) {
 			this.age = age;
 		}
 
@@ -92,11 +94,11 @@ public Users(String userId, String userName, String loginName,
 			this.email = email;
 		}
 
-		public Integer getSex() {
+		public int getSex() {
 			return sex;
 		}
 
-		public void setSex(Integer sex) {
+		public void setSex(int sex) {
 			this.sex = sex;
 		}
 
@@ -108,11 +110,11 @@ public Users(String userId, String userName, String loginName,
 			this.faceImg = faceImg;
 		}
 
-		public Integer getRole() {
+		public int getRole() {
 			return role;
 		}
 
-		public void setRole(Integer role) {
+		public void setRole(int role) {
 			this.role = role;
 		}
 
@@ -124,11 +126,11 @@ public Users(String userId, String userName, String loginName,
 			this.createTime = createTime;
 		}
 
-		public String getCurStatus() {
+		public int getCurStatus() {
 			return curStatus;
 		}
 
-		public void setCurStatus(String curStatus) {
+		public void setCurStatus(int curStatus) {
 			this.curStatus = curStatus;
 		}
 

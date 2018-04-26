@@ -57,9 +57,9 @@ public class UserDao extends BaseDao{
 		return list;
 	}
 
-	public void saveOrUpdateUserInfo(String userId, int age, String email, String sex) {
+	public void saveOrUpdateUserInfo(String userId, int age, String email, int sex) {
 		String hql = "update Users u set u.age = ?,u.email=?,u.sex=? where u.userId = ?";
-		getSession().createQuery(hql).setInteger(0, age).setString(1, email).setString(2, sex).setString(3, userId).executeUpdate();
+		getSession().createQuery(hql).setInteger(0, age).setString(1, email).setInteger(2, sex).setString(3, userId).executeUpdate();
 	}
 
 	public void doUpdate(String userId, String newPass) {

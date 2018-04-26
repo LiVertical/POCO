@@ -1,19 +1,9 @@
 package com.actions;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -24,7 +14,6 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.entities.Users;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.IUserService;
 import com.util.JsonDateValueProcessor;
@@ -48,7 +37,7 @@ public class UserAction extends ActionSupport{
 	private int recordSize;
 	private int age;
 	private String email;
-	private String sex;
+	private int sex;
 	private String newPass;
 	private String oldPass;
 	private JSONObject result;
@@ -83,7 +72,7 @@ public class UserAction extends ActionSupport{
 	
 	/**
 	 * @return
-	 * 删除用户信息
+	 * 删除用户信息（管理员侧）
 	 * */
 	public String deleteUserInfo(){
 		logger.info("UserAction.deleteUserInfo start ·····");
@@ -108,7 +97,7 @@ public class UserAction extends ActionSupport{
 		
 	/**
 	 * @return
-	 * 查询用户信息
+	 * 查询用户信息(用户侧)
 	 * */
 	public String getUserInfo(){
 		logger.info("UserAction.getUserInfo start·····");
@@ -179,11 +168,12 @@ public class UserAction extends ActionSupport{
 	 *
 	 * */
 	public String saveOrUpdateUserInfo(){
-		logger.info("saveOrUpdateUserInfo start ·····");
+		logger.info("UserAction.saveOrUpdateUserInfo start ·····");
 		result = new JSONObject();
-		if(StringUtils.isBlank(userId)||StringUtils.isBlank(sex)||StringUtils.isBlank(email)||StringUtils.isBlank(String.valueOf(age))){
+		userId = LoginUserUtil.getUserInfo().getUserId();
+		if(StringUtils.isBlank(userId)||StringUtils.isBlank(String.valueOf(sex))||StringUtils.isBlank(email)||StringUtils.isBlank(String.valueOf(age))){
 			result.put("returnCode", "10");
-			result.put("returnMsg", "用户参数异常");
+			result.put("returnMsg", "参数异常");
 			return SUCCESS;
 		}
 		try {
@@ -195,7 +185,6 @@ public class UserAction extends ActionSupport{
 			result.put("returnMsg", "内部服务器异常");
 			logger.info("更新用户信息异常", e);
 		}
-		
 		return SUCCESS;
 	}
 	
@@ -209,9 +198,7 @@ public class UserAction extends ActionSupport{
 			return SUCCESS;
 		}
 		try {
-			HttpServletRequest request = ServletActionContext.getRequest(); 
-			HttpSession session = request.getSession(); 
-			String userId = session.getAttribute("userId").toString();
+			userId = LoginUserUtil.getUserInfo().getUserId();
 			userService.doUpdatePass(userId, newPass);
 			result.put("returnCode", "00");
 			result.put("returnMsg", "更新密码成功");
@@ -339,11 +326,11 @@ public class UserAction extends ActionSupport{
 		this.email = email;
 	}
 
-	public String getSex() {
+	public int getSex() {
 		return sex;
 	}
 
-	public void setSex(String sex) {
+	public void setSex(int sex) {
 		this.sex = sex;
 	}
 

@@ -41,7 +41,7 @@ public class RegistDao extends BaseDao{
 			user.setLoginPass(MD5.getMD5ofString(loginPwd));
 			user.setUserName(userName);
 			user.setCreateTime(new Date());
-			user.setCurStatus("1");
+			user.setCurStatus(1);
 			getSession().save(user);
 		} catch (Exception e) {
 			logger.error("添加系统管理员异常", e);

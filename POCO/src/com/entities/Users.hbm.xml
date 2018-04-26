@@ -41,7 +41,7 @@
         <property name="createTime" type="timestamp">
             <column name="createTime" length="0" />
         </property>
-        <property name="curStatus" type="string">
+        <property name="curStatus" type="integer">
             <column name="curStatus" length="3">
                 <comment>0:注销状态，1：正常状态</comment>
             </column>

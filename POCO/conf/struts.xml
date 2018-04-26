@@ -128,6 +128,20 @@
 			</result> 
   	</action>
   	
+  	<action name="saveOrUpdateUserInfo" class="com.actions.UserAction" method="saveOrUpdateUserInfo">
+			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  	</action>
+  	
+  	<action name="updatePass" class="com.actions.UserAction" method="updatePass">
+			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  	</action>
+  	
   	<!-- 退出 -->
   	<action name="loginOut" class="com.actions.LoginAction" method="loginOut">
   		<result name="adminLogin">/system/login.jsp</result>

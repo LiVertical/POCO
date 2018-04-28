@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	var activity = $("body").data().activity_id;
 	$("#image").on("change", function(){
 		upload();
 	});
@@ -13,6 +14,7 @@ function upload(){
 	var image = document.getElementById("image").files[0];
 	var productDesc = $("input[name='productDesc']").val();
 	var productGroupId = GetRequest();
+	var activityId = $("body").data().activity_id;
 	console.log("当前组id:"+productGroupId);
 	var formData = new FormData();
 	formData.append("productName",productName);
@@ -20,6 +22,9 @@ function upload(){
 	formData.append("image",image);
 	formData.append("productDesc",productDesc);
 	formData.append("productGroupId", productGroupId);
+	if(activityId != undefined){
+		formData.append("activityId", activityId);
+	}
 	$.ajax({
         url: getRootPath() + "/user/product-publishImages.action",
         type: "post",
@@ -66,7 +71,7 @@ var uploadUserImg = function(){
         contentType: false,
         processData: false,
         mimeType: "multipart/form-data",
-        success: function (data) {
+        success: function (data) { 
             console.log(data);
             alert("上传成功");
         },

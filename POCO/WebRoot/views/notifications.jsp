@@ -26,23 +26,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <div class="header">
 		<ul>
-			<li onclick="gotoMyWorks('${sessionScope.loginName }')">POCO</li>
-			<li><a href="">活动</a></li>
-			<li><a href="<%=basePath%>/views/myWorks.jsp">论坛</a></li>
-			<li><a href="<%=basePath%>/views/myStores.jsp">问答</a></li>
+			<li><a href="<%=basePath%>/index.jsp">POCO首页</a></li>
+			<li><a href="<%=basePath%>views/activities.jsp">活动</a></li>
+			<li><a href="<%=basePath%>views/works.jsp">作品集锦</a></li>
 	 	</ul>
 	 	<ul style="float:right;padding-right:66px">
-			 <s:if test="#session.loginName== null">
-				<li><a href="<%=basePath%>user/login-userLogin.action">登录</a></li>
+			 <s:if test="%{#session.isEmpty()}">
+				<li><a href="<%=basePath%>user/userLogin.action">登录</a></li>
 			 </s:if>
 			 <s:else>
-			 	<li><a href="<%=basePath%>/views/productUpload.jsp">发作品</a></li>
+			 	<li onclick="gotoUpload()">发作品</li>
 				<li><img id="userImg" style="height:30px;width:30px;margin-top:9px;" src="<%=basePath%>${sessionScope.userImg}">
 						<ul class="loginCenter" style="display:none">
 								<li onclick="gotoMyWorks('${sessionScope.loginName }')">我的空间</li>
 								<li><a href="<%=basePath%>views/accountManage.jsp">账号管理</a></li>
 								<li><a href="<%=basePath%>views/notifications.jsp">系统通知</a></li>
-								<li><a href="<%=basePath%>user/login-loginOut.action">退出登录</a></li>
+								<li><a href="<%=basePath%>user/loginOut.action">退出登录</a></li>
 						</ul>
 				</li>
 			</s:else>
@@ -50,9 +49,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 	<div class="content">
 		<ul id="p_content"></ul>
+	 	<div class="pagination" id="page"></div>
 	</div>
-	 <div class="pagination" id="page"></div>
-	 <div class="footer">
+	 <div style="margin-top:10px" class="footer">
 		<a>POCO网违法和不良信息举报电话：13928869007 举报邮箱：kent@poco.cn</a>
 	</div>
 </body>

@@ -37,14 +37,22 @@ public class RegistAction extends ActionSupport{
 			return SUCCESS;
 		}
 		try {
-			registService.saveUserInfo(loginName, loginPass, role);
+			boolean isExist = false;
+			isExist = registService.findUserByLoginName(loginName);
+			if(!isExist){
+				registService.saveUserInfo(loginName, loginPass, role);
+				result.put("returnCode", "00");
+				result.put("returnMsg", "用户注册成功");
+			}
+			else{
+				result.put("returnCode", "20");
+				result.put("returnMsg", "该用户名已存在");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.put("returnCode", "10");
 			result.put("returnMsg", "用户信息注册异常");
 		}
-		result.put("returnCode", "00");
-		result.put("returnMsg", "用户注册成功");
 		return SUCCESS;		
 	}
 	
@@ -55,15 +63,23 @@ public class RegistAction extends ActionSupport{
 	public String adminUserRegist(){
 		logger.info("adminUserRegist start·····");
 		result = new JSONObject();
-		if(StringUtils.isBlank(loginName) || StringUtils.isBlank(loginPass) || StringUtils.isBlank(userName)){
+		if(StringUtils.isBlank(loginName) || StringUtils.isBlank(userName)){
 			result.put("returnCode", "10");
 			result.put("returnMsg", "参数错误");
 			return SUCCESS;
 		}
 		try {
-			registService.doAdminUserRegist(loginName, loginPass, userName);
-			result.put("returnCode", "00");
-			result.put("returnMsg", "用户注册成功");
+			boolean isExist = false;
+			isExist = registService.findUserByLoginName(loginName);
+			if(!isExist){
+				registService.doAdminUserRegist(loginName, userName);
+				result.put("returnCode", "00");
+				result.put("returnMsg", "用户注册成功");
+			}
+			else{
+				result.put("returnCode", "20");
+				result.put("returnMsg", "该用户名已存在");
+			}
 		} catch (Exception e) {
 			result.put("returnCode", "-1");
 			result.put("returnMsg", "用户注册失败，服务器异常");

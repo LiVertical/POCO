@@ -40,7 +40,7 @@
   	 <default-interceptor-ref name="pocoStack"></default-interceptor-ref>  	
   	 <!-- 定义全局变量，跳转到登录页面 -->
   	 	<global-results>  
-    		<result name="adminLogin" type="redirectAction">login-adminUserLogin</result> 
+    		<result name="adminLogin" type="redirectAction">adminUserLogin</result> 
     		<result name="userLogin" type="redirectAction">userLogin</result>
 		</global-results> 
  	</package>
@@ -92,6 +92,21 @@
  		</action>
  		
   		  <action name="queryActivityInfo" class="com.actions.ActivityAction" method="queryActivityInfo">
+ 			<result name="success"  type="json">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+ 		</action>
+ 		
+ 		<!-- 作品 -->
+ 		<action name="queryWorks" class="com.actions.WorkAction" method="queryWorks">
+ 			<result name="success"  type="json">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+ 		</action>
+ 		
+ 		<action name="queryWorksInfosByWorkId" class="com.actions.WorkAction" method="queryWorksInfosByWorkId">
  			<result name="success"  type="json">
 				<param name="root">result</param>
 				<param name="excludeNullProperties">true</param>
@@ -276,7 +291,7 @@
 			</result> 
   		 </action>
   		 
-  		 <!-- 上传作品 -->
+  		 <!-- 作品 -->
   		  <action name="addWork" class="com.actions.WorkAction" method="addWork">                  
   			<result  type="json" name="success">
 				<param name="root">result</param>
@@ -290,24 +305,21 @@
 				<param name="excludeNullProperties">true</param>
 			</result> 
   		 </action>
+  		 
+  		 <action name="queryWorks" class="com.actions.WorkAction" method="queryWorks">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
    </package>  
  
  
  <!-- 管理员 -->
    <package name="admins" extends="default2" namespace="/admin">
-   		
+   	<!-- 用户管理 -->
    		<action name="user-*" class="com.actions.UserAction" method="{1}">
-	  		<result name="list">/pages/user-list.jsp</result>
-	  		<result name="update">/pages/user-edit.jsp</result>
-	  		<result name="complete">/pages/user-manage.jsp</result>
-	  		<result name="upload">/pages/user-list.jsp</result>
-	  		<result name="person">/pages/user-search.jsp</result>
-	  		<result name="search">/pages/user-info.jsp</result>
-	  		<result name="input">/block/success.jsp</result>
-	  		<result name="delete" type="stream">
-	  			<param name="ContentType">text/html</param>
-	  			<param name="inputName">inputStream</param>
-	  		</result>
 			<result  type="json" name="success">
 				<param name="root">result</param>
 				<param name="excludeNullProperties">true</param>
@@ -321,11 +333,19 @@
 				<param name="excludeNullProperties">true</param>
 			</result> 
  	 	</action> 
+ 	 	
+ 	 	<!-- 图片管理  -->
+  		<action name="queryAllProducts" class="com.actions.ProductOperatorAction" method="queryAllProducts">
+  			<result type="json">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+ 	 	</action> 
   		
   		<!-- 管理员后台登录 -->
   	 <action name="adminUserLogin" class="com.actions.LoginAction" method="adminUserLogin">
-  		<result name="adminUserJsp">system/login.jsp</result>
-  		<result name="sys">system/sysIndex.jsp</result>
+  		<result name="adminUserJsp">/system/login.jsp</result>
+  		<result name="sys">/system/sysIndex.jsp</result>
   	</action>
   	
   	<!-- 退出 -->
@@ -364,12 +384,37 @@
 				<param name="excludeNullProperties">true</param>
  			</result>
  		</action>
+ 		
  		<action name="queryNotifications" class="com.actions.SysNotificationAction"  method="queryNotifications">
  			<result name="success" type="json">
  				<param name="root">result</param>
 				<param name="excludeNullProperties">true</param>
  			</result>
  		</action>
+ 		
+ 		<!-- 活动 -->
+ 		<action name="queryAllActivities" class="com.actions.ActivityAction"  method="queryAllActivities">
+ 			<result name="success" type="json">
+ 				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+ 			</result>
+ 		</action>
+ 		
+ 		<action name="auditActivity" class="com.actions.ActivityAction"  method="auditActivity">
+ 			<result name="success" type="json">
+ 				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+ 			</result>
+ 		</action>
+ 		
+ 		<!-- 作品 -->
+ 		<action name="queryAllWorks" class="com.actions.WorkAction" method="queryAllWorks">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+ 		
    </package>
 </struts>
 

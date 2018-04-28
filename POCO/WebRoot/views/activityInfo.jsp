@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li><a href="<%=basePath%>/user/userLogin.action">登录</a></li>
 		 </s:if>
 		 <s:else>
-			 	<li><a href="<%=basePath%>/views/productUpload.jsp">发作品</a></li>
+			 	<li onclick="gotoUpload()">发作品</li>
 				<li><img id="userImg" style="height:30px;width:30px;margin-top:9px;" src="<%=basePath%>/${sessionScope.APP_USERINFO_SESSION_KEY.userImg}">
 					<ul class="loginCenter" style="display:none">
 							<li onclick="gotoMyWorks('${sessionScope.loginName }')">我的空间</li>

@@ -24,48 +24,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=basePath%>/script/custom.js"></script>
 	<script src="<%=basePath%>/script/activity.js"></script>
 	<style>
-	#p_content{
-			height:100px;
-			width:90%;
-			margin:20px auto;
-		}
-		#p_content li{
-			border-bottom: 1px solid cornflowerblue;
-			height:100px;
-			width:90%;
-			float:left;
-			margin-top:20px;
-		}
-		#p_content p{
-			margin-left:20px;
-			margin-top:5px;
-		}
-		#p_content h2{
-			margin-left:20px;
-			margin-top:5px;
-		}
-		.joinBtn{
-			    width: 100px;
-			    height: 34px;
-			    letter-spacing: 1px;
-			    background: #3385ff;
-			    border-bottom: 1px solid #2d78f4;
-			    outline: medium;
-			    -webkit-appearance: none;
-			    -webkit-border-radius: 0;
-			    border:none;
-			    float:right;
-			    line-height: 34px;
-			    text-align:center;
-		}
-		.joinBtn a{
-			text-decoration:none;
-			color:#fff;
-		}
-		#status{
-			color:red;
-		}
-	</style>
+#p_content {
+	height: 100px;
+	width: 90%;
+	margin: 20px auto;
+}
+
+#p_content li {
+	border-bottom: 1px solid cornflowerblue;
+	height: 100px;
+	width: 90%;
+	float: left;
+	margin-top: 20px;
+}
+
+#p_content p {
+	margin-left: 20px;
+	margin-top: 5px;
+}
+
+#p_content h2 {
+	margin-left: 20px;
+	margin-top: 5px;
+}
+
+.joinBtn {
+	width: 100px;
+	height: 34px;
+	letter-spacing: 1px;
+	background: #3385ff;
+	border-bottom: 1px solid #2d78f4;
+	outline: medium;
+	-webkit-appearance: none;
+	-webkit-border-radius: 0;
+	border: none;
+	float: right;
+	line-height: 34px;
+	text-align: center;
+}
+
+.joinBtn a {
+	text-decoration: none;
+	color: #fff;
+}
+
+#status {
+	color: red;
+}
+</style>
 </head>
 <body>
 <div class="header">
@@ -82,11 +88,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 	<li><a href="<%=basePath%>/views/productUpload.jsp">发作品</a></li>
 				<li><img id="userImg" style="height:30px;width:30px;margin-top:9px;" src="<%=basePath%>/${sessionScope.APP_USERINFO_SESSION_KEY.userImg}">
 					<ul class="loginCenter" style="display:none">
-							<li onclick="gotoMyWorks('${sessionScope.loginName }')">我的空间</li>
-							<li><a href="<%=basePath%>views/accountManage.jsp">账号管理</a></li>
-							<li><a href="<%=basePath%>views/notifications.jsp">系统通知</a></li>
-							<li><a href="<%=basePath%>user/loginOut.action">退出登录</a></li>
-					</ul>
+								<li><a href="<%=basePath%>/views/mySpace.jsp">我的空间</a></li>
+								<li><a href="<%=basePath%>/views/accountManage.jsp">账号管理</a></li>
+								<li><a href="<%=basePath%>/views/notifications.jsp">系统通知</a></li>
+								<li><a href="<%=basePath%>/user/loginOut.action">退出登录</a></li>
+						</ul>
 				</li>
 			</s:else>
 	 	</ul>

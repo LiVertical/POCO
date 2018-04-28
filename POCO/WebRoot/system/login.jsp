@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
  <div class="login">
-	<form action="admin/login-adminUserLogin.action" method="post">
+	<form action="admin/adminUserLogin.action" method="post">
 		<h1 class="text-center">登录POCO</h1>
 		<input type="text" class="loginName" name="loginName" id="username" placeholder="用户名" /> 
 		<input class="pwd" type="password" name="loginPass" id="password" placeholder="密码" />

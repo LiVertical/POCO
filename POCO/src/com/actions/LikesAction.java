@@ -2,12 +2,8 @@ package com.actions;
 
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.ILikeService;
@@ -32,9 +28,7 @@ public class LikesAction extends ActionSupport{
 	//用户点赞
 	public String getTags(){
 		logger.info("LikesAction.getTags start ·····");
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession();
-		userId = session.getAttribute("userId").toString();
+		userId = LoginUserUtil.getUserInfo().getUserId();
 		result = new JSONObject();
 		if(StringUtils.isBlank(userId)||StringUtils.isBlank(productId)||StringUtils.isBlank(productName)){
 			result.put("returnCode", "10");
@@ -55,15 +49,15 @@ public class LikesAction extends ActionSupport{
 	
 	//取消点赞
 	public String cancleLike(){
-		result = new JSONObject();
 		logger.info("LikesAction.cancleLike start ·····");
-		if(StringUtils.isBlank(id)){
+		result = new JSONObject();
+		if(StringUtils.isBlank(productId)){
 			result.put("returnCode", "10");
 			result.put("returnMsg", "参数错误");
 			return SUCCESS;
 		}
 		try {
-			likeService.doCancleLike(id);
+			likeService.doCancleLike(productId);
 			result.put("returnCode", "00");
 			result.put("returnMsg", "取消点赞成功");
 		} catch (Exception e) {

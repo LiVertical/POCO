@@ -24,9 +24,13 @@ public class WorkAction extends ActionSupport{
 	private String workName;
 	private String workComment;
 	private int workType;
+	private int currentPage;
+	private int recordSize;
+	private String activityId;
+	private String workId;
 	
 	public String addWork(){
-		logger.info("WorkActio.addWork start·····");
+		logger.info("WorkAction.addWork start·····");
 		result = new JSONObject();
 		String userId = LoginUserUtil.getUserInfo().getUserId();
 		if(StringUtils.isBlank(userId)){
@@ -35,7 +39,7 @@ public class WorkAction extends ActionSupport{
 			return SUCCESS;
 		}
 		try {
-			workService.doAddWork(userId, workName, workComment, productGroupId);
+			workService.doAddWork(userId, workName, workComment, productGroupId, activityId);
 			result.put("returnCode", "00");
 			result.put("returnMsg", "上传作品成功");
 		} catch (Exception e) {
@@ -50,23 +54,82 @@ public class WorkAction extends ActionSupport{
 	 * @return
 	 * 分类查询作品
 	 * */
-public String queryWorksByType() {
-	logger.info("ProductOperatorAction.queryProductByType start·····");
-	try {
-		result = new JSONObject();
-		JsonConfig jsonConfig = new JsonConfig();
-		jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
-		result.put("works", JSONArray.fromObject(workService.queryProductByWorkType(workType), jsonConfig));
-		result.put("returnCode", "00");
-		result.put("returnMsg", "查询成功");
-	} catch (Exception e) {
-		logger.error("分类查询作品失败", e);
-		result.put("returnCode", "-1");
-		result.put("returnMsg", "内部服务器异常");
+	public String queryWorksByType() {
+		logger.info("ProductOperatorAction.queryProductByType start·····");
+		try {
+			result = new JSONObject();
+			JsonConfig jsonConfig = new JsonConfig();
+			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
+			result.put("works", JSONArray.fromObject(workService.queryProductByWorkType(workType), jsonConfig));
+			result.put("returnCode", "00");
+			result.put("returnMsg", "查询成功");
+		} catch (Exception e) {
+			logger.error("分类查询作品失败", e);
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部服务器异常");
+		}
+		return SUCCESS;
 	}
-	return SUCCESS;
-}
 	
+	//查询所有作品（管理员侧）
+	public String queryAllWorks(){
+		logger.info("WorkAction.queryAllWorks start ······");
+		result = new JSONObject();
+		try {
+			JsonConfig jsonConfig = new JsonConfig();
+			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
+			result.put("worksInfo", JSONArray.fromObject(workService.queryWorks(currentPage, recordSize), jsonConfig));
+			result.put("worksCount", workService.countWorks());
+			result.put("returnCode", "00");
+			result.put("returnMsg", "查询作品成功");
+		} catch (Exception e) {
+			logger.error("查询作品信息异常", e);
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部服务器异常");
+		}
+		return SUCCESS;
+	}
+	
+	//查询作品（用户侧）
+	public String queryWorks(){
+		logger.info("WorkAction.queryWorks start·····");
+		result = new JSONObject();
+		try {
+			JsonConfig jsonConfig = new JsonConfig();
+			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
+			result.put("worksInfo", JSONArray.fromObject(workService.queryWorksInfo(currentPage, recordSize), jsonConfig));
+			result.put("worksCount", workService.countWorks());
+			result.put("returnCode", "00");
+			result.put("returnMsg", "查询作品成功");
+		} catch (Exception e) {
+			logger.error("查询作品信息异常", e);
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部服务器异常");
+		}
+		return SUCCESS;
+	}
+
+	public String queryWorksInfosByWorkId(){
+		logger.info("WorkAction.queryWorksInfosByWorkId start·····");
+		result = new JSONObject();
+		if(StringUtils.isBlank(workId)){
+			result.put("returnCode", "10");
+			result.put("returnMsg", "参数错误");
+			return SUCCESS;
+		}
+		try {
+			JsonConfig jsonConfig = new JsonConfig();
+			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
+			result.put("worksInfos", JSONArray.fromObject(workService.queryWorksInfoByWorkId(workId), jsonConfig));
+			result.put("returnCode", "00");
+			result.put("returnMsg", "查询作品成功");
+		} catch (Exception e) {
+			logger.error("查询作品信息异常", e);
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部服务器异常");
+		}
+		return SUCCESS;
+	}
 	
 	
 	public JSONObject getResult() {
@@ -113,5 +176,36 @@ public String queryWorksByType() {
 	public void setWorkType(int workType) {
 		this.workType = workType;
 	}
-	
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public int getRecordSize() {
+		return recordSize;
+	}
+
+	public void setRecordSize(int recordSize) {
+		this.recordSize = recordSize;
+	}
+
+	public String getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(String activityId) {
+		this.activityId = activityId;
+	}
+
+	public String getWorkId() {
+		return workId;
+	}
+
+	public void setWorkId(String workId) {
+		this.workId = workId;
+	}
 }

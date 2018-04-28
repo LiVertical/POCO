@@ -9,7 +9,6 @@ String basePath = request.getScheme()+ "://" + request.getServerName() + ":" +re
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">   
     <title>文件上传</title>   
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -27,31 +26,29 @@ String basePath = request.getScheme()+ "://" + request.getServerName() + ":" +re
 	<script src="<%=basePath%>/script/upload.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/script/custom.js"></script>
    </head>
-<body>
-     <div class="header" style="margin-top:-10px">
+<body data-activity_id = '${param.activityId  }'>
+<div class="header" style="margin-top:-10px">
 		<ul>
-			<li onclick="gotoMyWorks('${loginName }')">POCO</li>
-			<li><a href="">活动</a></li>
-			<li><a href="<%=basePath%>/views/myWorks.jsp">论坛</a></li>
-			<li><a href="<%=basePath%>/views/myStores.jsp">问答</a></li>
+			<li><a href="<%=basePath%>/index.jsp">POCO首页</a></li>
+			<li><a href="<%=basePath%>/views/activities.jsp">活动</a></li>
 	 	</ul>
 	 	<ul style="float:right;padding-right:66px">
-			 <s:if test="loginName == null">
-				<li><a href="<%=basePath%>/user/login-userLogin.action">登录</a></li>
+			 <s:if test="%{#session.isEmpty()}">
+				<li><a href="<%=basePath%>/user/userLogin.action">登录</a></li>
 			 </s:if>
 			 <s:else>
-			 	<li><a href="<%=basePath%>/views/productUpload.jsp">发作品</a></li>
-				<li><img id="userImg" style="height:30px;width:30px;margin-top:9px;" src="<%=basePath%>${sessionScope.APP_USERINFO_SESSION_KEY.userImg}">
+				<li><img id="userImg" style="height:30px;width:30px;margin-top:-9px;" src="<%=basePath%>/${sessionScope.APP_USERINFO_SESSION_KEY.userImg}">
 						<ul class="loginCenter" style="display:none">
-								<li onclick="gotoMyWorks('${sessionScope.loginName }')">我的空间</li>
-								<li><a href="<%=basePath%>views/accountManage.jsp">账号管理</a></li>
-								<li><a href="<%=basePath%>views/notifications.jsp">系统通知</a></li>
-								<li><a href="<%=basePath%>user/login-loginOut.action">退出登录</a></li>
+								<li><a href="<%=basePath%>/views/mySpace.jsp">我的空间</a></li>
+								<li><a href="<%=basePath%>/views/accountManage.jsp">账号管理</a></li>
+								<li><a href="<%=basePath%>/views/notifications.jsp">系统通知</a></li>
+								<li><a href="<%=basePath%>/user/loginOut.action">退出登录</a></li>
 						</ul>
 				</li>
 			</s:else>
 	 	</ul>
-	</div>
+</div>
+<s:debug/>
     <div class="img" id="imgBox"><ul id="pic"></ul></div>
     <div class="uploadBox">
 		<p>图片标题：<input name="productName"></p>

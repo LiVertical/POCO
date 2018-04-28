@@ -23,5 +23,7 @@ public interface IUserService {
 	//更新用户密码
 	void doUpdatePass(String userId, String newPass);
 
+	int countUser();
+
 
 }

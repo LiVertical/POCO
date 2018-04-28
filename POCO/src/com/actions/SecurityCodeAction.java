@@ -35,7 +35,7 @@ public class SecurityCodeAction extends ActionSupport {
 			//把验证码生成图片
 			imageStream = SecurityImage.getImageAsInputStream(securityCode);
 			//验证码加入session
-			session.setAttribute("securityCode", securityCode);		
+			//session.setAttribute("securityCode", securityCode);		
 			logger.info("验证码："+ securityCode);
 		} catch (Exception e) {
 			logger.info("验证码生成异常", e);

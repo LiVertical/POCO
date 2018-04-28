@@ -19,19 +19,18 @@
 }
 
 .boxs_middle{
-/* 	border:1px solid green;  */
 	float:left;
 	text-align:center;
 	width:50%;
 	height:100%;
 }
 .boxs_middle img{
-	height:300px;
-	width:260px;
+	height: 100%;
+    width: 100%;
 }
 .boxs_right{
 	float:left;
-/* 	border:1px solid blue; */
+	margin-left:15px;
 	height:100%;
 	width:40%;
 }

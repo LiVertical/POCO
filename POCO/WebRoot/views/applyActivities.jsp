@@ -28,26 +28,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=basePath%>/script/activity.js"></script>
 	<script src="<%=basePath%>/js/common.js"></script>
 	<script src="<%=basePath%>/script/custom.js"></script>
-	<script src="<%=basePath%>/js/jquery-ui.js"></script>
-	<script>
-		 function loadSrc(src,id){
-	    	  $("#mainFrame").attr("height",100);
-	    	  $("#mainFrame").attr("src",src);
-	    	  $.cookie("id", id);
-	      }
-	      function iframeHeight() {
-				var ifm = document.getElementById("mainFrame");
-				var subWeb = document.frames ? document.frames["mainFrame"].document :ifm.contentDocument;
-				if (ifm != null && subWeb != null) {
-					ifm.height = subWeb.body.scrollHeight;
-				}
-				window.parent.window.iframeHeight();
-		  }
-		
-	</script>	 
+	<script src="<%=basePath%>/js/jquery-ui.js"></script> 
   </head>
   
 <body>
+<div class="header">
+		<ul>
+			<li><a href="<%=basePath%>/views/activities.jsp">活动</a></li>
+			<li><a href="<%=basePath%>/views/myWorks.jsp">论坛</a></li>
+	 	</ul>
+	 	<ul style="float:right;padding-right:66px">
+		 <s:if test="%{#session.isEmpty()}">
+				<li><a href="<%=basePath%>/user/userLogin.action">登录</a></li>
+		 </s:if>
+		 <s:else>
+			 	<li onclick="gotoUpload()">发作品</li>
+				<li><img id="userImg" style="height:30px;width:30px;margin-top:9px;" src="<%=basePath%>/${sessionScope.APP_USERINFO_SESSION_KEY.userImg}">
+					<ul class="loginCenter" style="display:none">
+							<li onclick="gotoMyWorks('${sessionScope.loginName }')">我的空间</li>
+							<li><a href="<%=basePath%>/views/accountManage.jsp">账号管理</a></li>
+							<li><a href="<%=basePath%>/views/notifications.jsp">系统通知</a></li>
+							<li><a href="<%=basePath%>/user/loginOut.action">退出登录</a></li>
+					</ul>
+				</li>
+			</s:else>
+	 	</ul>
+	</div>
  <div class="main" style='min-height:300px'>
 	<div class="content">
 		<h2 style="text-align:center;margin-bottom:30px;">活动申请</h2>

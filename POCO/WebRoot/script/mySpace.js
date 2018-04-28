@@ -133,11 +133,6 @@ var deleteCollect = function(productId){
 		},'json');
 };
 
-function gotoUpload(){
-	var uuid = guid();
-	window.location = getRootPath() + "/views/productUpload.jsp?productGroupId="+uuid;
-}
-
 
 
 

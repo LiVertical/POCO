@@ -13,11 +13,16 @@ var  queryProductInfos = function(){
 	var productId = GetRequest();
 	$.post(getRootPath()+ "/vistor/queryPorductInfosByProductId.action?productId="+productId, function(data){
 		if(data.returnCode=='00'){
-			var html = "<div class='left_div'><span class='hide' id='productId'>"+productId+"</span><img src='/POCO/" + data.productInfos[0].productPath+ "'>"
-							+ "</div><div class='right_div'><p>标题:" + data.productInfos[0].productName + "</p><br/>"
-							+ "<p>作品描述:" + data.productInfos[0].productDesc + "</p><br/>"
-							+ "<p>上传时间:" + data.productInfos[0].uploadTime + "</p>"
-							+"<button id='Like'>查看点赞详情<button><div class='likesBox'></div></div>";
+			if(data.productInfos.length>0){
+				var html = "<div class='left_div'><span class='hide' id='productId'>"+productId+"</span>"
+				+"<img style='height:100%;width:100%' src='/POCO/"+ data.productInfos[0].productPath+ "'>"
+				+ "</div><div class='right_div'><p>标题:" + data.productInfos[0].productName + "</p><br/>"
+				+ "<p>作品描述:" + data.productInfos[0].productDesc + "</p><br/>"
+				+ "<p>上传时间:" + data.productInfos[0].uploadTime + "</p>"
+				+"</div></div>";
+			}else{
+				html="<p>暂无作品信息</p>";
+			}
 			$("#p_content").html(html);
 		}
 	},'json');

@@ -17,8 +17,13 @@ public class SysNotificationDao extends BaseJdbcDao{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Notification> notificationListByUserId(String userId , int currentPage, int recordSize){
-		String hql = "FROM Notification as n WHERE n.userId="+userId;
-		List<Notification> list = (List<Notification>) getSession().createQuery(hql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
+		List<Notification> list = null;
+		try {
+			String hql = "FROM Notification as n WHERE n.userId= '"+userId + "'";
+			list = (List<Notification>) getSession().createQuery(hql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
 		return list;
 	}
 
@@ -28,15 +33,16 @@ public class SysNotificationDao extends BaseJdbcDao{
 	 * @return
 	 */
 	public Notification showNotificationById(String notificationId) {
-		String hql = "FROM Notification as n WHERE n.notifiactionId=?";
-		List<Notification> list = (List<Notification>) getSession().createQuery(hql).setString(0, notificationId).list();
-		if (list.size() > 0) {
-			return list.get(0);
-		} else {
-			return null;
+		Notification notification = null;
+		try {
+			String hql = "FROM Notification as n WHERE n.notificationId= '" + notificationId + "'";
+			notification = (Notification) getSession().createQuery(hql).list().get(0);
+		} catch (HibernateException e) {
+			e.printStackTrace();
 		}
+		return notification;
 	}
-
+                     
 	public void add(Notification notifiaction) {
 		this.getSession().save(notifiaction);
 	}
@@ -74,7 +80,7 @@ public class SysNotificationDao extends BaseJdbcDao{
 	}
 
 	public int doCountNotifications(String userId) {
-		String hql = "FROM Notification WHERE userId="+userId;
+		String hql = "FROM Notification WHERE userId= '"+userId+"'";
 		return getSession().createQuery(hql).list().size();
 	}
 

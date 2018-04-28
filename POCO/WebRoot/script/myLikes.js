@@ -10,7 +10,7 @@ function queryProductsMyLike() {
 				var tbody = '';
 				 if (result.products.length > 0) {
 					 for (var i = 0; i < result.products.length; i++) {
-						tbody += "<li class='box'><a href='"+getRootPath() +"/views/productDetails.jsp?productId="+result.products[i].id+"'>"+result.products[i].productName+"</a>"
+						tbody += "<li class='box'><a href='"+getRootPath() +"/views/productDetailInfos.jsp?productId="+result.products[i].id+"'>"+result.products[i].productName+"</a>"
 								+"<p>"+result.products[i].createTime.substring(0,16)+"</p>"
 								+"<img onclick='cancleLike("+result.products[i].productId+")' style='height:30px;width:34px' src='"+getRootPath() +"/img/icons/delete.png'>"
 							  	+"</li>";

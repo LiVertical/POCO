@@ -58,10 +58,7 @@ public class SysNotificationAction extends ActionSupport{
 		//创建返回JSON
 		result = new JSONObject();
 		//获取session
-		HttpServletRequest request = ServletActionContext.getRequest(); 
-		HttpSession session = request.getSession(); 
-		//获取用户userId
-		String userId = (String) session.getAttribute("userId");
+		String userId = LoginUserUtil.getUserInfo().getUserId();
 		if(StringUtils.isBlank(userId)){
 			result.put("returnCode", "10");
 			result.put("renturnMsg", "参数错误");
@@ -72,7 +69,7 @@ public class SysNotificationAction extends ActionSupport{
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
 			result.put("notificationList", JSONArray.fromObject(sysNotificationService.notificationListByUserId(userId, currentPage, recordSize), jsonConfig));
-			result.put("notificationTotalCount", sysNotificationService.notificationListByUserId(userId));
+			result.put("notificationTotalCount", sysNotificationService.querynotificationCountByUserId(userId));
 			result.put("returnCode", "00");
 			result.put("renturnMsg", "查询成功");
 		} catch (Exception e) {
@@ -196,9 +193,7 @@ public class SysNotificationAction extends ActionSupport{
 			result.put("returnMsg", "参数异常");
 			return SUCCESS;
 		}
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession();
-		String userId = session.getAttribute("userId").toString();
+		String userId = LoginUserUtil.getUserInfo().getUserId();
 		if(userId == null || userId.equals("")){
 			result.put("returnCode", "20");
 			result.put("returnMsg", "获取当前用户异常");

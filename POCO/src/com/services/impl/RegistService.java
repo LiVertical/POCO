@@ -34,8 +34,13 @@ public class RegistService implements IRegistService{
 	}
 	
 	@Override
-	public void doAdminUserRegist(String loginName, String loginPwd, String userName) {
-		registDao.doAdminUserRegist(loginName, loginPwd, userName);
+	public boolean findUserByLoginName(String loginName) {
+		return registDao.isOrNotHasUserName(loginName);
+	}
+	
+	@Override
+	public void doAdminUserRegist(String loginName, String userName) {
+		registDao.doAdminUserRegist(loginName,userName);
 	}
 	
 	public RegistDao getRegistDao() {
@@ -53,6 +58,5 @@ public class RegistService implements IRegistService{
 	public void setUser(Users user) {
 		this.user = user;
 	}
-
 
 }

@@ -40,13 +40,13 @@ public class LoginAction extends BaseAction{
 			logger.info("参数错误");
 			return "sys";
 		}
-		if(role != 1 && role != 2){
-			logger.info("权限错误");
-			return "sys";
-		}
 		try {
 			UserInfo userInfo = new UserInfo();
 			role = loginService.queryUserRole(loginName, loginPass);
+			if(role != 1 && role != 2){
+				logger.info("权限错误");
+				return "sys";
+			}
 			Users adminLogin = loginService.doAdminUserLogin(loginName, loginPass, role);
 			if(adminLogin != null){
 				userInfo.setLoginName(loginName);
@@ -60,9 +60,9 @@ public class LoginAction extends BaseAction{
 			}
 		}catch (Exception e) {
 			logger.error("登录失败",e);
-			return "sys";
+			return "adminUserJsp";
 		}
-		return "adminUserJsp";	
+		return "sys";	
 	}
 	
 	public String userLogin(){
@@ -104,7 +104,11 @@ public class LoginAction extends BaseAction{
             Map session =  ActionContext.getContext().getSession();
             if(session.get("USERINFO_SESSION_KEY") != null){
             	 role = LoginUserUtil.getUserInfo().getRole();
-            } 
+            }
+            if(session.get("APP_USERINFO_SESSION_KEY")!=null){
+            	role = LoginUserUtil.getUserInfo().getRole();
+            	session.remove("APP_USERINFO_SESSION_KEY");
+            }
             session.remove("USERINFO_SESSION_KEY");
 		} catch (Exception e) {
 			logger.error("清除session异常", e);
@@ -136,32 +140,6 @@ public class LoginAction extends BaseAction{
 		return outputResult(result.toString());
 	}
 	
-	private void setCookie(String cookieName,String cookieValue,Cookie[] cooks){
-    	int i=0;
-        for(Cookie cook:cooks){
-            if(cook.getName().equals(cookieName)){
-                i=1;
-            }
- 
-        }
-        if(i==0){
-            Cookie cook = new Cookie(cookieName, cookieValue);
-            cook.setMaxAge(7*24*60*60);
-            cook.setPath("/");
-            ServletActionContext.getResponse().addCookie(cook);
-        }else{
-            for(Cookie cook:cooks){
-                if(cook.getName().equals(cookieName)){
-                    if(!cook.getValue().equals(cookieValue)){
-                        cook.setValue(cookieValue);
-                        cook.setMaxAge(10*24*60*60);
-                        ServletActionContext.getResponse().addCookie(cook);
-                    }
-                }
-            }   
-        }
-    }
-    
     public String statisticIndex(){
     	logger.info("start loginAction.statisticIndex...");
         return SUCCESS;

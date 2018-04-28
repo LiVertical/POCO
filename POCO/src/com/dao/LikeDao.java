@@ -26,7 +26,7 @@ public class LikeDao extends BaseDao{
 	}
 
 	public void doDelete(String id) {
-		String sql = "DELETE FROM Likes l WHERE l.id=?";
+		String sql = "DELETE FROM Likes l WHERE l.productId=?";
 		getSession().createQuery(sql).setString(0, id).executeUpdate();
 	}
 

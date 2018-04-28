@@ -84,7 +84,7 @@ public class SysNotificationService implements ISysNotificationService {
 	}
 	
 	@Override
-	public int notificationListByUserId(String userId) {
+	public int querynotificationCountByUserId(String userId) {
 		return sysNotificationDao.doCountNotifications(userId);
 	}
 	

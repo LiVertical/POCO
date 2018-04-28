@@ -13,10 +13,10 @@ ul {
     width: 100%;
     position: relative;
     margin: 0 auto;
-    height: 850px;
+    height: 550px;
 }
 .tab .box .menus {
-    height: 100px;
+    height: 70px;
     background: #e2e2e2;
     float: left;
     margin-left: 74px;
@@ -25,7 +25,6 @@ ul {
 }
 .tab .box .menus li {
     width: 450px;
-    height: 100px;
     float:left;
     background: #e2e2e2;
     font-size: 20px;
@@ -44,7 +43,7 @@ ul {
     float: left;
     width: 950px;
     margin-top: 25px;
-    height: 800px;
+    height: 600px;
     overflow: hidden;
     margin-left: 50px;
     border-radius: 10px;

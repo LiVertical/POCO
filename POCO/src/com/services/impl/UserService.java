@@ -56,6 +56,11 @@ public class UserService implements IUserService{
 		userDao.doUpdate(userId, newPass);
 	}
 	
+	@Override
+	public int countUser() {
+		return userDao.getCountUser();
+	}
+	
 	public UserDao getUserDao() {
 		return userDao;
 	}

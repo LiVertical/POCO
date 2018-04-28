@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	  $("#mainFrame").attr("height",100);
 	    	  $("#mainFrame").attr("src",src);
 	      }
+	      
 	       function iframeHeight() {
 			 	var ifm = document.getElementById("mainFrame");
 				var subWeb = document.frames ? document.frames["mainFrame"].document :ifm.contentDocument;
@@ -58,24 +59,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
   </head>  
 <body>
-  	 <div id="head">
-       <h1 style="font-size: 55px;">POCO 后台管理</h1>
+  	 <div class="head">
+       <h1 style="margin-left:70px;">POCO 后台管理</h1>
      </div>
      <div class="header">
          <ul>
 			<li onclick="loadSrc('<%=basePath%>system/updatePwd.jsp',this.id)">修改密码</li>
-			<li><a href="<%=basePath%>admin/login-loginOut.action">退出登录</a></li>
+			<li><a href="<%=basePath%>admin/loginOut.action">退出登录</a></li>
          </ul>
-   </div> <!-- END Header -->
+   </div>
    <div class="main">
         	<nav id="leftMenu" class="ac_nav" style="float:left;">
 				<section class="ac_menu">
-					<li onclick="loadSrc('<%=basePath%>/system/works.jsp',this.id)">作品管理</li>
+					<li onclick="loadSrc('<%=basePath%>/system/products.jsp',this.id)" class="on">图片管理</li>
 		            <li onclick="loadSrc('<%=basePath%>/system/sms.jsp',this.id)">用户管理</li>
 		            <li onclick="loadSrc('<%=basePath%>/system/smsNotification.jsp',this.id)">系统通知</li>
 		            <li onclick="loadSrc('<%=basePath%>/system/addAdminUser.jsp',this.id)">添加管理员</li>
 		            <li onclick="loadSrc('<%=basePath%>/system/smsActivities.jsp',this.id)">活动管理</li>
-		            <li><a href="tasks.html" id="menu-task">Tasks</a></li>
+		            <li onclick="loadSrc('<%=basePath%>/system/works.jsp',this.id)">作品管理</li>
 				</section>
 			</nav>
 	        <div class="rightBody">

@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
 import com.entities.ProductInfo;
+import com.entities.Users;
+import com.vo.ProductInfosVo;
 
 public class ProductOperatorDao extends BaseDao {
 
@@ -110,15 +111,30 @@ public class ProductOperatorDao extends BaseDao {
 		}
 	}
 	
-	public List<ProductInfo> queryAllProducts(int recordSize,int curPage){
-		if (recordSize == 0) {
-			recordSize = 10;
-		}
-		if (curPage == 0) {
-			curPage = 1;
-		}
+	public List<ProductInfosVo> queryAllProducts(int recordSize,int curPage){
 		String hql = "FROM ProductInfo";
-		return getSession().createQuery(hql).setFirstResult((curPage-1)*recordSize).setMaxResults(recordSize).list();
+		List<ProductInfo> lists = getSession().createQuery(hql).setFirstResult((curPage-1)*recordSize).setMaxResults(recordSize).list();
+		List<ProductInfosVo> productInfoList = new ArrayList<ProductInfosVo> ();
+		try {
+			for(ProductInfo list : lists){
+				ProductInfosVo productInfosVo = new ProductInfosVo();
+				String userId = list.getProductUser();
+				String sql = "FROM Users WHERE userId = '" + userId + "'";
+				Users user = (Users) getSession().createQuery(sql).list().get(0);
+				productInfosVo.setProductId(list.getProductId());
+				productInfosVo.setProductName(list.getProductName());
+				productInfosVo.setProductDesc(list.getProductDesc());
+				productInfosVo.setProductPath(list.getProductPath());
+				productInfosVo.setProductTypes(list.getProductTypes());
+				productInfosVo.setWorkId(list.getWorkId());
+				productInfosVo.setUploadTime(list.getUploadTime());
+				productInfosVo.setProductUserName(user.getUserName());
+				productInfoList.add(productInfosVo);
+			}
+		} catch (HibernateException e) {
+			logger.error("查询作品所属用户异常", e);
+		}
+		return productInfoList;
 	}
 
 	public List<ProductInfo> queryProductInfosByProductId(String productId) {
@@ -136,4 +152,16 @@ public class ProductOperatorDao extends BaseDao {
 		String hql = "FROM ProductInfo WHERE productTypes= '" + proType + "'";
 		return getSession().createQuery(hql).list();
 	}
+
+	public int countProducts() {
+		int size = 0;
+		try {
+			String hql = "FROM ProductInfo";
+			size = getSession().createQuery(hql).list().size();
+		} catch (HibernateException e) {
+			logger.error("查询图片数目异常", e);
+		}
+		return size;
+	}
+	
 }

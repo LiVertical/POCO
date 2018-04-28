@@ -55,10 +55,8 @@ public class UserAction extends ActionSupport{
 		try {
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
-			@SuppressWarnings("rawtypes")
-			List<Users> list = userService.queryUserByCondition(recordSize, currentPage);
-			JSONArray resultArray = JSONArray.fromObject(list, jsonConfig);			
-			result.put("userInfos", resultArray);
+			result.put("userInfos", JSONArray.fromObject(userService.queryUserByCondition(recordSize, currentPage), jsonConfig));
+			result.put("usersCount", userService.countUser());
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询用户信息成功");
 		} catch (Exception e) {
@@ -144,7 +142,6 @@ public class UserAction extends ActionSupport{
 			if(!file.exists() && !file.isDirectory()){
 				file.mkdirs();
 			}
-			//获取存储文件的路径
 			//把文件复制过去
 			UploadFileUtil uploadFileUtil = new UploadFileUtil();
 			uploadFileUtil.uploadImgs(upload, file);
@@ -209,8 +206,6 @@ public class UserAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
-	
-
 	public File getUpload() {
 		return upload;
 	}

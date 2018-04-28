@@ -3,6 +3,13 @@
 	line-height: 100px;
     margin-left: 21px;
 }
+.head{
+	height:55px;
+	width:100%;
+	background:#6A5ACD	;
+	color:#fff;
+	line-height:55px;
+}
 .header ul{
 	float: right;
 	height:60px;
@@ -146,6 +153,7 @@ th{
 .rightBody{
 	width: 88%;
     float: left;
+    margin-left:20px;
 }
 
 .ac_menu {

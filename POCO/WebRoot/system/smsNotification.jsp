@@ -28,9 +28,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <style>
   	.on{
-	    height: 110px !important;
+	    height: 70px !important;
 	    background: rgb(0,159,233) !important;
-	    line-height: 110px !important;
+	    line-height: 70px !important;
 	}
   </style>
     <script type="text/javascript">

@@ -2,6 +2,10 @@
 	margin:0;
 	padding:0;
 }
+.header a:hover{
+	text-decoration:none;
+	color:#fff;
+}
 .productName{
 	height:30px;
 	width:900px;
@@ -100,6 +104,7 @@
 	background:#8DEEEE;
 	color:#fff;
 	font-size:17px;
+	outline:none;
 }
 
 

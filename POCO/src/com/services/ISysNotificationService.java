@@ -33,11 +33,12 @@ public interface ISysNotificationService {
 
 	int countReceiver();
 
-	int notificationListByUserId(String userId);
+	int querynotificationCountByUserId(String userId);
 
 	void deleteNotificationByNotificationId(String notifiactionId);
 
 	int adds(String notificationTitle, String notificationInfo, String userId, String userName);
 
 	int queryTotalNotification(String userId, int role);
+
 }

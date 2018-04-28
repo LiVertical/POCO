@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import com.dao.ProductOperatorDao;
 import com.entities.ProductInfo;
 import com.services.IProductOperatorService;
+import com.vo.ProductInfosVo;
 
 public class ProductOperatorService implements IProductOperatorService{
 	private ProductOperatorDao productOperatorDao;
@@ -60,7 +61,7 @@ public class ProductOperatorService implements IProductOperatorService{
 	}
 	
 	@Override
-	public List<ProductInfo> doQueryAllProducts(int recordSize,int curPage) {
+	public List<ProductInfosVo> doQueryAllProducts(int recordSize,int curPage) {
 		return productOperatorDao.queryAllProducts(recordSize,curPage);
 	}
 	
@@ -72,6 +73,11 @@ public class ProductOperatorService implements IProductOperatorService{
 	@Override
 	public List<ProductInfo> queryProductByType(int proType) {
 		return productOperatorDao.doQueryProductsByType(proType);
+	}
+	
+	@Override
+	public int doQueryProductCount() {
+		return productOperatorDao.countProducts();
 	}
 	
 	public ProductInfo getProductId() {

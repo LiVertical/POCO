@@ -46,14 +46,8 @@ public class UserDao extends BaseDao{
 	}
 
 	public List<Users> queryUserInfo(int recordSize, int currentPage){
-		if (recordSize == 0){
-			recordSize = 10;
-		}
-		if (currentPage == 0){
-			currentPage = 1;
-		}
 		String hql = "FROM Users";
-		List<Users> list = getSession().createQuery(hql).setFirstResult(0).setMaxResults(recordSize).list();
+		List<Users> list = getSession().createQuery(hql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
 		return list;
 	}
 
@@ -69,6 +63,13 @@ public class UserDao extends BaseDao{
 		} catch (HibernateException e) {
 			logger.error("更新用户密码异常", e);
 		}
+	}
+
+	public int getCountUser() {
+		String sql = "FROM Users";
+		int size = 0;
+		size = getSession().createQuery(sql).list().size();
+		return size;
 	}
 
 

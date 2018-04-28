@@ -2,9 +2,11 @@ package com.constants;
 
 public class ActivityConstants {
 	
-	private static int ACTIVITY_STATUS_PASSED = 1; //已通过
+	public static int ACTIVITY_STATUS_PASSED = 1; //已通过
 	
-	private static int ACTIVITY_STATUS_NOT_PASSED = -1;//未通过
+	public static int ACTIVITY_STATUS_NOT_PASSED = 0;//未通过
 	
-	private static int ACTIVITY_STATUS_PENDING = 0;//待审核
+	public static int ACTIVITY_AUDIT_STATUS_ALREADY = 1;//已审核
+	
+	public static int ACTIVITY_AUDIT_STATUS_WAITED = 0;//待审核
 }

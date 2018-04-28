@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
+import com.constants.ActivityConstants;
 import com.entities.Activities;
 import com.util.DateUtil;
 import com.util.UUIDUtil;
@@ -64,6 +65,7 @@ public class ActivityDao extends BaseDao {
 			activity.setActivityDesc(activityDesc);
 			activity.setEndTime(DateUtil.convertStringToDate(endTime));
 			activity.setCreateTime(DateUtil.convertStringToDate(createTime));
+			activity.setApplyTime(new Date());
 			this.getSession().save(activity);
 		} catch (ParseException e) {
 			logger.error("格式化时间异常", e);
@@ -74,7 +76,11 @@ public class ActivityDao extends BaseDao {
 
 
 	public void auditActivity(String activityId, int curStatus) {
-		String hql = "UPDATE Activities a SET a.curStatus="+curStatus;
+		int status = ActivityConstants.ACTIVITY_STATUS_NOT_PASSED;
+		if(curStatus == ActivityConstants.ACTIVITY_STATUS_PASSED){
+			status = ActivityConstants.ACTIVITY_STATUS_PASSED;
+		}
+		String hql = "UPDATE Activities SET curStatus="+status+", auditStatus=" + ActivityConstants.ACTIVITY_AUDIT_STATUS_ALREADY;
 		getSession().createQuery(hql).executeUpdate();
 	}
 
@@ -86,6 +92,18 @@ public class ActivityDao extends BaseDao {
 
 	public Activities queryActivityInfos(String activityId) {
 		return (Activities) getSession().createQuery("FROM Activities").list().get(0);
+	}
+
+
+	public List<Activities> doQueryAllActivities() {
+		return getSession().createQuery("FROM Activities").list();
+	}
+
+
+	public int doQueryAllActivitiesCount() {
+		int size = 0;
+		size = getSession().createQuery("FROM Activities").list().size();
+		return size;
 	}
 	
 }

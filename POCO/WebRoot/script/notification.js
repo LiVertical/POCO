@@ -18,7 +18,9 @@ function queryAllNotificationsByUserId(page){
 				if (result.notificationTotalCount > 0) {
 					var pageSize = (result.notificationList.length > recordSize ? recordSize: result.notificationList.length);
 					 for (var i = 0; i < pageSize; i++) {
-						htm += "<li><a href='"+getRootPath()+"/user/showDetial.action?notificationId="+result.notificationList[i].notificationId+"'>" + result.notificationList[i].notificationTitle + "</a>"
+						htm += "<li><button class='on' onclick='queryNotificationInfo(&quot;"+result.notificationList[i].notificationId+"&quot;)'>点击查看详情</button>"
+									+"<div class='nfsInfo' id='nfsInfo"+result.notificationList[i].notificationId+"'></div>"
+									+ result.notificationList[i].notificationTitle + "</a>"
 									+"<div style='display:none;background:#000;' id='infoBox'>" + result.notificationList[i].notificationTitle + "</div>"
 									+ "<p>" + result.notificationList[i].updateTime.substring(0,16)
 									+"<img style='height:30px;width:44px' src='"+getRootPath()+"/img/icons/delete.jpg' class='delBtn' onclick='deleteNotification(&quot;"+result.notificationList[i].notificationId+"&quot;)'></p></li>";
@@ -54,4 +56,21 @@ function deleteNotification(notificationId){
 	});
 	
 };
+
+function queryNotificationInfo(notificationId){
+	$.post(getRootPath() + "/user/showNotification.action?notificationId="+notificationId , function(data){
+		var on = "#nfsInfo"+notificationId;
+		var off = "#off" + notificationId;
+		if(data.returnCode == '00'){
+			$(on).show();
+			var html = "<p style='float:left'>"+data.notificationInfos.notificationInfo+"</p>"
+							+"<button class='off' id='off"+notificationId+"'>点击收起</button>";
+			$(on).html(html);
+			$(off).click(function(){
+				$(on).hide();
+			});
+		}
+	});
+	
+} 
 

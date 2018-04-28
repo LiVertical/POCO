@@ -14,7 +14,7 @@ public class UploadFileUtil {
 	
 	private static final int BUFFER_SIZE = 1024 * 1024;
 	
-	public void uploadImgs(File srcFile,File dstFile) throws Exception{
+	public void uploadImgs(File srcFile, File dstFile) throws Exception{
 		copy(srcFile, dstFile);
 	}
 	

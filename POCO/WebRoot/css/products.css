@@ -1,6 +1,8 @@
 .navContainer{
 	height:60px;
 	background:	#919191;
+	margin: 25px auto;
+    width: 90%;
 }
 .nav li{
 	float:left;

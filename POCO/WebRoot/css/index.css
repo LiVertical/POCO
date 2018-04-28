@@ -1,3 +1,6 @@
+button{
+	outline:none;
+}
 .recommend{
 	height:50px;
 	width:90%;
@@ -19,20 +22,20 @@
 	line-height: 50px;
 	margin-left: 3%;
 }
-#like{
+.like{
 	background:#76c192;
 	border:none;
 	height:30px;
-	width:50px;
+	width:80px;
 	border-radius:3px;
 	color:#fff;
 	margin-top:20px;
 }
-#noLike{
+.noLike{
 	background:#888;
 	border:none;
 	height:30px;
-	width:50px;
+	width:80px;
 	border-radius:3px;
 	color:#fff;
 	margin-left:30px;

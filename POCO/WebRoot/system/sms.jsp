@@ -9,8 +9,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
     <title>用户管理</title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -22,7 +20,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
 	<script src="<%=basePath%>/control/js/common.js"></script>
 	<script src="<%=basePath%>/js/jquery.pagination.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/script/custom.js"></script>
 	 
 	<script>
 		 function loadSrc(src,id){
@@ -37,27 +34,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 				window.parent.window.iframeHeight();
 		  }
-		
 	</script>	 
  </head>
 <body>
 	<script>	
 		$(function() {
-			initUserData(0);
+			initUserData(1);
 		});
 
-		var initUserData = function(isFirst) {
-			var recordSize = 6;
-			var currentPage = 1;
-			$.getJSON(getRootPath()+"/admin/user-queryUserDetails.action?currentPage="+ currentPage + "&recordSize=" + recordSize,
-					function(result) {
-						$("#dataDisplay").empty();
-						console.log("userInfos:" + result.userInfos);
-						if (result.returnCode == "00") {
-							var tbody = '';
-							$("#dataDisplay div:gt(0)").remove();
+		var initUserData = function(page) {
+			var recordSize = 8;
+			var currentPage = page;
+			$.getJSON(getRootPath()+"/admin/user-queryUserDetails.action?currentPage="+ currentPage + "&recordSize=" + recordSize, function(result) {
+				 $("#dataDisplay").empty();
+				  var pageSize = (result.userInfos.length > recordSize ? recordSize: result.userInfos.length);
+				  console.log("userInfos:" + result.userInfos);
+				  if (result.returnCode == "00") {
+						var tbody = '';
 							if (result.userInfos.length > 0) {
-								var pageSize = (result.userInfos.length > recordSize ? recordSize: result.userInfos.length);
 								for (var i = 0; i < pageSize; i++) {
 									if(result.userInfos[i].role != '2'){
 										var sex = result.userInfos[i].sex;
@@ -81,21 +75,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												+ "<td>" + result.userInfos[i].email + "</td>" 
 												+ "<td><img style='height:30px;width:44px' src='" + getRootPath() + "/img/icons/delete.jpg' class='delBtn' onclick='deleteUser(&quot;"+result.userInfos[i].userId+"&quot;)'></td></tr>";
 											}
-										}
 									}
-									$("#dataDisplay").append(tbody);
-									if (isFirst == 0) {
-										$("#page").pagination(result.totalCountPro,{
-													callback : function(index) {
-													 if (isFirst == 1) {queryUsers(index,1);}},
-														prev_text : '上一页', //上一页按钮里text
-														next_text : '下一页', //下一页按钮里text
-														items_per_page : recordSize, //显示条数
-														num_display_entries : 6, //连续分页主体部分分页条目数
-														num_edge_entries : 2
+								}
+								$("#dataDisplay").append(tbody);
+										$("#page").pagination(result.usersCount,{
+												callback : function(index) {
+													initUserData(index+1);
+												},
+												prev_text : '上一页', //上一页按钮里text
+												next_text : '下一页', //下一页按钮里text
+												items_per_page : pageSize, //显示条数
+												current_page:currentPage-1,
+												num_display_entries : 6, //连续分页主体部分分页条目数
+												num_edge_entries : 2
 													//两侧首尾分页条目数
-													});
-									}
+										});
 									window.parent.window.iframeHeight();
 								}
 							});
@@ -123,7 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="p_content">
 			<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
 				<thead>
-					<tr>
+					<tr class="tr_head">
 						<td>编号</td>
 						<td>头像</td>
 						<td>账户名</td>

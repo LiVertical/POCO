@@ -17,7 +17,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/mySpace.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/custom.css">
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/css/pagination.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/list.css">
 	<script src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
 	<script src="<%=basePath%>/js/jquery.cookie.js"></script>
@@ -51,9 +50,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div class="header">
 		<ul>
 			<li><a href="<%=basePath%>/index.jsp">POCO首页</a></li>
-			<li><a href="<%=basePath%>/views/activities.jsp?userId=${sessionScope.userId }">活动</a></li>
-			<li><a href="<%=basePath%>/views/myWorks.jsp">论坛</a></li>
-			<li><a href="<%=basePath%>/views/myStores.jsp">问答</a></li>
+			<li><a href="<%=basePath%>/views/activities.jsp">活动</a></li>
+			<li><a href="<%=basePath%>/views/works.jsp">作品集锦</a></li>
 	 	</ul>
 
 	 	<ul style="float:right;padding-right:66px">
@@ -61,8 +59,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li><a href="login-input.action">登录</a></li>
 			 </s:if>
 			 <s:else>
-			 	<li><span id="userName">${sessionScope.loginName }</span></li>
-			 	<li><span id="userId">${sessionScope.userId }</span></li>
 			 	<li onclick="gotoUpload()">发作品</li>
 				<li><span id="userImg" style='height:30px;'></span>
 					<div class="loginCenter" style="display:none">

@@ -103,7 +103,9 @@ public class ActivityAction extends ActionSupport{
 		logger.info("ActivityAction.queryAllActivities start·····");
 		result = new JSONObject();
 		try {
-			result.put("activitiesInfos", activityService.queryAllActivitiesByCondition(currentPage, pageSize));
+			JsonConfig jsonConfig = new JsonConfig();
+			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
+			result.put("activitiesInfos", JSONArray.fromObject(activityService.queryAllActivitiesByCondition(), jsonConfig));
 			result.put("totalActivitiesCount", activityService.queryAllActivitiesCount());
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询成功");

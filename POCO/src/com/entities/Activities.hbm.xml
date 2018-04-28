@@ -7,11 +7,11 @@
 <hibernate-mapping>
     <class name="com.entities.Activities" table="activities" catalog="bywork">
         <id name="activityId" type="string">
-            <column name="activityId" length="32" />
+            <column name="activityId" length="32"/>
             <generator class="uuid" />
         </id>
         <property name="activityInfo" type="string">
-            <column name="activityInfo" length="512">
+            <column name="activityInfo" length="512" not-null="true">
                 <comment>活动详情</comment>
             </column>
         </property>
@@ -40,9 +40,19 @@
                 <comment>用户id</comment>
             </column>
         </property>
+        <property name="userName" type="string">
+            <column name="userName" length="32" not-null="true">
+                <comment>用户名</comment>
+            </column>
+        </property>
         <property name="curStatus" type="integer">
-            <column name="curStatus">
+            <column name="curStatus" not-null="true">
                 <comment>1：进行中，2：已结束，3：未通过审核</comment>
+            </column>
+        </property>
+        <property name="auditStatus" type="integer">
+            <column name="auditStatus" not-null="true">
+                <comment>1:通过审核，0：待审核；2：未通过审核</comment>
             </column>
         </property>
         <property name="activityGroupId" type="string">
@@ -53,6 +63,11 @@
         <property name="productId" type="string">
             <column name="productId" length="32">
                 <comment>作品id</comment>
+            </column>
+        </property>
+        <property name="applyTime" type="timestamp">
+            <column name="applyTime" length="0"  not-null="true">
+                <comment>申请时间</comment>
             </column>
         </property>
     </class>

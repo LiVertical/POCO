@@ -26,9 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=basePath%>/script/custom.js"></script>
   </head>
   
-<body data-user_name = '${sessionScope.loginName }' 
-	  data-user_img ='${sessionScope.userImg }'
-	  data-user_id ='${sessionScope.userId }'>
+<body>
 
  <div class="main">
 	<div class="p_content">

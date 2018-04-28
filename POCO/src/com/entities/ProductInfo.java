@@ -21,6 +21,7 @@ public class ProductInfo implements java.io.Serializable {
 	private String productUser;
 	private String productGroupId;
 	private Integer productDel;
+	private String activityId;
 
 	// Constructors
 
@@ -28,11 +29,12 @@ public class ProductInfo implements java.io.Serializable {
 	public ProductInfo() {
 	}
 
-	/** full constructor */
-	public ProductInfo(String productName, Date uploadTime, String productPath,
-			String productDesc, Integer productTypes, Integer productOrder,
-			String workId, String productUser, String productRemark,
-			Integer productDel) {
+	public ProductInfo(String productId, String productName, Date uploadTime,
+			String productPath, String productDesc, Integer productTypes,
+			Integer productOrder, String workId, String productUser,
+			String productGroupId, Integer productDel, String activityId) {
+		super();
+		this.productId = productId;
 		this.productName = productName;
 		this.uploadTime = uploadTime;
 		this.productPath = productPath;
@@ -43,12 +45,11 @@ public class ProductInfo implements java.io.Serializable {
 		this.productUser = productUser;
 		this.productGroupId = productGroupId;
 		this.productDel = productDel;
+		this.activityId = activityId;
 	}
 
-	// Property accessors
-
 	public String getProductId() {
-		return this.productId;
+		return productId;
 	}
 
 	public void setProductId(String productId) {
@@ -56,7 +57,7 @@ public class ProductInfo implements java.io.Serializable {
 	}
 
 	public String getProductName() {
-		return this.productName;
+		return productName;
 	}
 
 	public void setProductName(String productName) {
@@ -64,7 +65,7 @@ public class ProductInfo implements java.io.Serializable {
 	}
 
 	public Date getUploadTime() {
-		return this.uploadTime;
+		return uploadTime;
 	}
 
 	public void setUploadTime(Date uploadTime) {
@@ -72,7 +73,7 @@ public class ProductInfo implements java.io.Serializable {
 	}
 
 	public String getProductPath() {
-		return this.productPath;
+		return productPath;
 	}
 
 	public void setProductPath(String productPath) {
@@ -80,7 +81,7 @@ public class ProductInfo implements java.io.Serializable {
 	}
 
 	public String getProductDesc() {
-		return this.productDesc;
+		return productDesc;
 	}
 
 	public void setProductDesc(String productDesc) {
@@ -88,7 +89,7 @@ public class ProductInfo implements java.io.Serializable {
 	}
 
 	public Integer getProductTypes() {
-		return this.productTypes;
+		return productTypes;
 	}
 
 	public void setProductTypes(Integer productTypes) {
@@ -96,7 +97,7 @@ public class ProductInfo implements java.io.Serializable {
 	}
 
 	public Integer getProductOrder() {
-		return this.productOrder;
+		return productOrder;
 	}
 
 	public void setProductOrder(Integer productOrder) {
@@ -104,7 +105,7 @@ public class ProductInfo implements java.io.Serializable {
 	}
 
 	public String getWorkId() {
-		return this.workId;
+		return workId;
 	}
 
 	public void setWorkId(String workId) {
@@ -112,7 +113,7 @@ public class ProductInfo implements java.io.Serializable {
 	}
 
 	public String getProductUser() {
-		return this.productUser;
+		return productUser;
 	}
 
 	public void setProductUser(String productUser) {
@@ -128,11 +129,19 @@ public class ProductInfo implements java.io.Serializable {
 	}
 
 	public Integer getProductDel() {
-		return this.productDel;
+		return productDel;
 	}
 
 	public void setProductDel(Integer productDel) {
 		this.productDel = productDel;
+	}
+
+	public String getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(String activityId) {
+		this.activityId = activityId;
 	}
 
 }

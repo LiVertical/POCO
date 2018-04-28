@@ -9,11 +9,11 @@ var initUserData = function(page) {
 			$("#dataDisplay").empty();
 			if (result.returnCode == "00") {
 				var tbody = '';
-				$("#dataDisplay").remove();
+				$("#dataDisplay").empty();
 				if (result.productInfos.length > 0) {
 					var pageSize = (result.productInfos.length > recordSize ? recordSize: result.productInfos.length);
 					 for (var i = 0; i < pageSize; i++) {		
-						var productType = "";
+						var productType = "LOMO";
 						switch(result.productInfos[i].productTypes){
 							 case 1: productType = "花鸟";
 							 break;
@@ -29,22 +29,25 @@ var initUserData = function(page) {
 							break;
 						}
 						 tbody += "<tr><td>"+ (i+1) + "</td>"
-						              + "<td><img class='product' src='" + getRootPath() + "/" + result.productInfos[i].productPath + "'</td>"
-									  + "<td style='word-break'>" + result.productInfos[i].productDesc + "</td>"
+						              + "<td style='height:150px;width:150px;'><img class='product' src='" + getRootPath() + "/" + result.productInfos[i].productPath + "'></td>"
+						              + "<td style='word-break'>" + result.productInfos[i].productName + "</td>"
+						              + "<td style='word-break'>" + result.productInfos[i].productDesc + "</td>"
 									  + "<td>" + result.productInfos[i].uploadTime.substring(0,16) + "</td>"
 									  + "<td>" + productType+ "</td>" 
-									  + "<td>" + result.productInfos[i].productUser + "</td>" 
+									  + "<td>" + result.productInfos[i].productUserName + "</td>" 
 									  + "<td><img style='height:30px;width:44px' src='"+getRootPath()+"/img/icons/delete.jpg' class='delBtn' onclick='deleteProduct("+result.productInfos[i].productId+")'></td></tr>";
-						}
+					 }
+				}else{
+					tbody = "<td>暂时还没有任何作品</td>";
 				}
-				$("#dataDisplay").append(tbody);
-				$("#page").pagination(result.productInfos.length,{
+				$("#dataDisplay").html(tbody);
+				$("#page").pagination(result.productsCount,{
 						callback : function(index) {
-										 initUserData(index,1);
+										 initUserData(index+1);
 									 },
 						prev_text : '上一页', //上一页按钮里text
 						next_text : '下一页', //下一页按钮里text
-						items_per_page : recordSize, //显示条数
+						items_per_page : pageSize, //显示条数
 						current_page:currentPage-1,
 						num_display_entries : 6, //连续分页主体部分分页条目数
 						num_edge_entries : 2//两侧首尾分页条目数

@@ -13,3 +13,8 @@ $(document).ready(function(){
 	});
 
 });
+
+function gotoUpload(){
+	var uuid = guid();
+	window.location = getRootPath() + "/views/productUpload.jsp?productGroupId="+uuid;
+}

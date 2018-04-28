@@ -61,6 +61,7 @@ public class ProductOperatorAction extends ActionSupport {
 	private UUIDUtil uuidUtil;
 	private String userName;
 	private String productGroupId;
+	private String activityId;
 	
 	Logger logger = Logger.getLogger(this.getClass());
 
@@ -98,13 +99,9 @@ public class ProductOperatorAction extends ActionSupport {
 				proInfo.setProductDesc(productDesc);
 				proInfo.setProductUser(productUser);
 				proInfo.setProductGroupId(productGroupId);
+				proInfo.setActivityId(activityId);
 				productOperatorService.save(proInfo);
 			}
-			result.put("productName", productName);
-			result.put("productType", proType);
-			result.put("productPath", url);
-			result.put("productDesc", productDesc);
-			result.put("productUser", productUser);
 			result.put("returnCode", "00");
 			result.put("returnMsg", "操作成功");
 		} catch (IOException e) {
@@ -166,16 +163,13 @@ public class ProductOperatorAction extends ActionSupport {
 		
 		/**
 		 * @return
-		 * 作品详情页,根据userName查询作品
+		 * 查询所有图片（管理员侧）
 		 * 
 		 * */
 	public String queryAllProducts(){	
 		logger.info("ProductOperatorAction.queryAllProducts start·····");
 		result = new JSONObject();
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession();
-		String userName = session.getAttribute("loginName").toString();
-		if(StringUtils.isBlank(userName)||StringUtils.isBlank(String.valueOf(currentPage))||StringUtils.isBlank(String.valueOf(recordSize))){
+		if(StringUtils.isBlank(String.valueOf(currentPage))||StringUtils.isBlank(String.valueOf(recordSize))){
 			result.put("returnCode", "10");
 			result.put("returnMsg", "参数错误");
 			return SUCCESS;
@@ -183,8 +177,8 @@ public class ProductOperatorAction extends ActionSupport {
 		try {
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
-			List<ProductInfo> productInfos = productOperatorService.doQueryAllProducts(recordSize,currentPage);
-			result.put("productInfos", JSONArray.fromObject(productInfos, jsonConfig));
+			result.put("productInfos", JSONArray.fromObject(productOperatorService.doQueryAllProducts(recordSize,currentPage), jsonConfig));
+			result.put("productsCount",productOperatorService.doQueryProductCount()); 
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询成功");
 		} catch (Exception e) {
@@ -495,4 +489,13 @@ public class ProductOperatorAction extends ActionSupport {
 		public void setImage(File image) {
 			this.image = image;
 		}
+
+		public String getActivityId() {
+			return activityId;
+		}
+
+		public void setActivityId(String activityId) {
+			this.activityId = activityId;
+		}
+		
 }

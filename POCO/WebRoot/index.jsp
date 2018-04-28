@@ -33,13 +33,14 @@
 	<div class="header">
 		<ul>
 			<li><a href="<%=basePath%>views/activities.jsp">活动</a></li>
+			<li><a href="<%=basePath%>views/works.jsp">作品集锦</a></li>
 	 	</ul>
 	 	<ul style="float:right;padding-right:66px">
 			 <s:if test="%{#session.isEmpty()}">
 				<li><a href="<%=basePath%>user/userLogin.action">登录</a></li>
 			 </s:if>
 			 <s:else>
-			 	<li><a href="<%=basePath%>views/productUpload.jsp">发作品</a></li>
+			 	<li onclick="gotoUpload()">发作品</li>
 				<li><img id="userImg" style="height:30px;width:30px;margin-top:9px;" src="<%=basePath%>${sessionScope.APP_USERINFO_SESSION_KEY.userImg}">
 						<ul class="loginCenter" style="display:none">
 								<li><a href="<%=basePath%>views/mySpace.jsp">我的空间</a></li>

@@ -32,27 +32,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	<div class="header">
 		<ul>
-			<li><a onclick="gotoMyWorks('${sessionScope.loginName }')">我的空间</a></li>
-			<li><a href="">系统通知</a></li>
-			<li><a href="<%=basePath%>/views/myWorks.jsp">我的评论</a></li>
-			<li><a href="<%=basePath%>/views/myStores.jsp">我的收藏</a></li>
-			<li><a href="<%=basePath%>/views/productUpload.jsp">发作品</a></li>
+			<li><a href="<%=basePath%>/index.jsp">POCO首页</a></li>
+			<li><a href="<%=basePath%>/views/activities.jsp">活动</a></li>
 	 	</ul>
-	 	<ul style="float:right;margin-right:20px">
-			 <s:if test="#session.user.username== null">
-				<li><a href="<%=basePath%>/user/login-userLogin.action">登录</a></li>
+	 	<ul style="float:right;padding-right:66px">
+			 <s:if test="%{#session.isEmpty()}">
+				<li><a href="<%=basePath%>user/userLogin.action">登录</a></li>
 			 </s:if>
 			 <s:else>
-				<li><span id="userImg"></span>
-					<div class="loginCenter" style='display:none'>
-						<div><a href="">我的空间</a></div>
-						<div><a href="">设置</a></div>
-						<div><a href="">帮助</a></div>
-						<div><a href="">我的空间</a></div>
-						<div><a href="">退出</a></div>
-					</div>
+			 	<li onclick="gotoUpload()">发作品</li>
+				<li><img id="userImg" style="height:30px;width:30px;margin-top:9px;" src="<%=basePath%>/${sessionScope.APP_USERINFO_SESSION_KEY.userImg}">
+						<ul class="loginCenter" style="display:none">
+								<li><a href="<%=basePath%>/views/mySpace.jsp">我的空间</a></li>
+								<li><a href="<%=basePath%>/views/accountManage.jsp">账号管理</a></li>
+								<li><a href="<%=basePath%>/views/notifications.jsp">系统通知</a></li>
+								<li><a href="<%=basePath%>/user/loginOut.action">退出登录</a></li>
+						</ul>
 				</li>
-			 </s:else>
+			</s:else>
 	 	</ul>
 	</div>
 

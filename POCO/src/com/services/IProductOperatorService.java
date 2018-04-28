@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.entities.ProductInfo;
+import com.vo.ProductInfosVo;
 
 public interface IProductOperatorService {
 	//上传作品
@@ -26,12 +27,14 @@ public interface IProductOperatorService {
 	
 	int getTotalRecordsByUser(String userId);
 
-	List<ProductInfo> doQueryAllProducts(int recordSize, int curPage);
+	List<ProductInfosVo> doQueryAllProducts(int recordSize, int curPage);
 
 	void doDeleteProductInfo(String productId);
 
 	List<ProductInfo> doQueryProductInfosByProductId(String productId);
 
 	List<ProductInfo> queryProductByType(int proType);
+
+	int doQueryProductCount();
 
 }

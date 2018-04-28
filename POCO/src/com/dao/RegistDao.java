@@ -22,23 +22,20 @@ public class RegistDao extends BaseDao{
 	//用户名是否已经存在
 	public boolean isOrNotHasUserName(String username){
 		boolean b = false;		
-		Query query = getSession().createQuery("FROM User WHERE username=?");
-		query.setParameter(0, username);
-		List<Users> list = query.list();
-		System.out.println("size="+list.size());
+		List<Users> list =  getSession().createQuery("FROM Users WHERE loginName='" + username + "'").list();
 		if(list.size()>0){
 			b = true;
 		}
 		return b;		
 	}
 	
-	public void doAdminUserRegist(String loginName, String loginPwd, String userName) {
+	public void doAdminUserRegist(String loginName, String userName) {
 		try {
 			Users user = new Users();
 			user.setUserId(UUIDUtil.generateUUID());
 			user.setLoginName(loginName);
 			user.setRole(1);
-			user.setLoginPass(MD5.getMD5ofString(loginPwd));
+			user.setLoginPass(MD5.getMD5ofString("123456"));
 			user.setUserName(userName);
 			user.setCreateTime(new Date());
 			user.setCurStatus(1);

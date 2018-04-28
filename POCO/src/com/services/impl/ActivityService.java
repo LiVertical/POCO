@@ -26,15 +26,13 @@ public class ActivityService implements IActivityService {
 	}
 	
 	@Override
-	public List<Activities> queryAllActivitiesByCondition(int currentPage,int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Activities> queryAllActivitiesByCondition() {
+		return activityDao.doQueryAllActivities();
 	}
 
 	@Override
 	public int queryAllActivitiesCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return activityDao.doQueryAllActivitiesCount();
 	}
 	
 	//审批活动

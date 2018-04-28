@@ -41,9 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>	 
   </head>
   
-<body data-user_name = '${sessionScope.loginName }' 
-	  data-user_img ='${sessionScope.userImg }'
-	  data-user_id ='${sessionScope.userId }'>
+<body>
 	<div class="main">
 	   	<ul id="p_content"></ul>
 	 	<div class="pagination" id="page"></div>

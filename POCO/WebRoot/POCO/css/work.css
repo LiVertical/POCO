@@ -1,0 +1,47 @@
+.topTitle{
+	margin-top:30px;
+	text-align:center;
+	font-size:20px;
+}
+.topTitle span{
+	color:red;
+} 
+.content{
+	margin:30px auto;
+	width:92%;
+	min-height:500px;
+	border:1px solid green;
+	text-align:center;
+}
+.content ul li{
+	height:200px;
+	width:90%;
+	border:1px solid red;
+}
+.leftDiv{
+	height:100%;
+	width:20%;
+	border:1px solid blue;
+	float:left;
+}
+.leftDiv img{
+	height:100%;
+	width:100%;
+}
+.rightDiv{
+	width:70%;
+	float:left;
+	border:1px solid;
+	height:100%;
+}
+.rightDiv p{
+	margin-top:20px;
+	text-align:left;
+	margin-left:30px;
+}
+.rightDiv a{
+	margin-top:20px;
+	float: left;
+	margin-left:30px;
+	text-decoration:none;
+}

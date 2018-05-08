@@ -9,7 +9,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
     
     <title>注册登录</title>
     
@@ -118,16 +117,21 @@ function ok_or_errorByRegister(r) {
 	}
 }
 
-function barter_btn(bb) {
-	$(bb).parent().parent().fadeOut(1000);
-	$(bb).parent().parent().siblings().fadeIn(2000);
+function gotoRegist() {
+	$("#login_div").hide();
+	$("#regist_div").show();
+}
+
+function gotoLogin() {
+	$("#login_div").show();
+	$("#regist_div").hide();
 }
 
     </script>
   </head>
 
-  <body class="login_body">
-    <div class="login_div">
+  <body>
+    <div class="login_div" id="login_div">
       <form action="<%=basePath%>user/userLogin.action" method="post">
         <div class="col-xs-12 login_title">登录</div>
         <div class="login">
@@ -166,12 +170,12 @@ function barter_btn(bb) {
             </div>
         </div>
         <div class="col-xs-12 barter_btnDiv">
-            <button class="barter_btn" onClick="javascript:barter_btn(this)">没有账号?前往注册</button>
+            <button class="barter_btn" onclick="gotoRegist()">没有账号?前往注册</button>
         </div>
      </form>
     </div>
 
-    <div class="register_body">
+    <div class="register_body" id="regist_div"> 
         <div class="col-xs-12 register_title">注册</div>
         <form action="regist-save.action" class="register" method="get">
             <div class="nav">
@@ -223,10 +227,9 @@ function barter_btn(bb) {
             </div>
         </form>
         <div class="col-xs-12 barter_register">
-            <button class="barter_registerBtn" onClick="javascript:barter_btn(this)" style="">已有秘籍?返回登录</button>
+            <button class="barter_registerBtn" onclick="gotoLogin()">已有秘籍?返回登录</button>
         </div>
     </div>
-    <div class="container">
-    </div>
+   
 </body>
 </html>

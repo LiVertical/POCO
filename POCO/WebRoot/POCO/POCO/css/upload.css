@@ -1,0 +1,119 @@
+*{
+	margin:0;
+	padding:0;
+}
+.header a:hover{
+	text-decoration:none;
+	color:#fff;
+}
+.productName{
+	height:30px;
+	width:900px;
+	border:1px solid #DEDEDE;
+	border-radius:2px;
+}
+.productDesc{
+	height:100px;
+	width:900px;
+	border:1px solid #DEDEDE;
+	border-radius:2px;
+}
+.upload_box{
+	height:300px;
+	width:200px;
+}
+.type{
+	height:30px;
+	wdith:120px;
+	border:1px solid #ccc;
+}
+.uploadDiv{
+	margin:20px auto;
+	height:400px;
+	width:50%;
+	text-align: left;
+}
+.uploadDiv p{
+	margin-top:12px;
+}
+.img{
+	clear:both;
+	width:70%;
+	border-right:2px solid #f6f6f6;
+	margin:30px auto;
+	display:none;
+	float:left;
+	overflow:hidden;
+}
+.img li {
+	float:left;
+	margin:20px;
+	height:300px;
+	width:200px;
+}
+.uploadBox{
+	float:right;
+	width:25%;
+	height:220px;
+	text-align:left;
+}
+.uploadBox p{
+	margin-top:20px;
+	margin-left:10px;
+}
+.uploadBox input{
+	height:30px;
+	width:240px;
+} 
+#image{
+	height: 11px;
+    width: 23px;
+    position: relative;
+    top: -18px;
+    left: 75px;
+    outline: none;
+}
+.work{
+	clear:both;
+	width:100%;
+	float:left;
+	padding:40px;
+}
+.work p{
+	margin-top:10px;
+	padding-left:50px;
+}
+#workTitle{
+	width:200px;
+	height:40px;
+	font-size:17px;
+}
+#workDesc{
+	width:400px;
+	height:200px;
+	font-size:17px;
+	margin-top:10px;
+	resize:none;
+}
+#submit{
+	float:right;
+	width:100px;
+	height:40px;
+	border-radius:5px;
+	border:none;
+	background:#8DEEEE;
+	color:#fff;
+	font-size:17px;
+	outline:none;
+}
+
+
+
+
+
+
+
+
+
+
+

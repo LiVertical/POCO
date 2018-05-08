@@ -1,0 +1,10 @@
+.img{
+	height:60px;
+	width:60px;
+	float:left;
+	list-style:none;
+}
+.img img{
+	height:100%;
+	width:100%;
+}

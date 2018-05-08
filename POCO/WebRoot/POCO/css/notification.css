@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+ul {
+    list-style: none;
+}
+.tab {
+    width: 100%;
+    background-size: cover;
+}
+.tab .box {
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    height: 550px;
+}
+.tab .box .menus {
+    height: 70px;
+    background: #e2e2e2;
+    float: left;
+    margin-left: 74px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.tab .box .menus li {
+    width: 450px;
+    float:left;
+    background: #e2e2e2;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    line-height: 70px;
+    transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+}
+.tab .box .menus li:nth-child(7) {
+    border-bottom: none;
+}
+.tab .right {
+    float: left;
+    width: 950px;
+    margin-top: 25px;
+    height: 600px;
+    overflow: hidden;
+    margin-left: 50px;
+    border-radius: 10px;
+}
+.tab .tab_right {
+    width: 950px;
+    height: 800px;
+    color: #fff;
+    text-align: center;
+
+    position:relative;
+}
+.tab .tab_right img {
+    width: 100%;
+    position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+}
+.tab .scroll {
+    transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+#p_content{
+	width:90%;
+	margin:10px auto;
+}
+.main{
+	width:90%;
+	border:1px solid;
+	margin:10px auto;
+	height:400px;
+	text-align: left;
+}
+.main p{
+	font-size:17px;
+	color:#000;
+	margin-top:10px;
+}
+.main input{
+	width:300px;
+	height:50px;
+	border:1px solid #e4e4e4;
+	outline:none;
+}
+.send{
+	width:200PX;
+	height:33px;
+	color:#fff;
+	border:none;
+	border-radius:3px;
+	margin-top:20px;
+	background:rgb(0,159,233);
+}
+#notificationInfo{
+	resize:none;
+	height:200px;
+	width:480px;
+	outline:none;
+	font-size:16px;
+}
+.look{
+	width:100px;
+	height:25px;
+	border:none;
+	background:rgb(0,159,233);
+	color:#fff;
+	border-radius:5px;
+}
+#a{
+	display:none;
+}
+#b{
+	display:none;
+}

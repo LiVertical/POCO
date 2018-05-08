@@ -1,0 +1,79 @@
+.main{
+	min-height:400px;
+	width:98%;
+}
+#p_content{
+	text-align: center;
+	min-height:400px;
+	width:90%;
+}
+.content{
+	width:90%;
+	margin:12px auto;
+}
+.left_div{
+	 width:40%;
+    height:300px;
+    overflow:hidden;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    background-size:cover;
+    float:left;
+}
+.right_div{
+	float:left;
+	height:300px;
+	width:40%;
+	text-align: left;
+}
+.right_div p{
+	margin-top:33px;
+}
+#discuss{
+	height:100px;
+	width:70%;
+	margin-left: 67px;
+	outline:none;
+}
+.hotDiscuss{
+	min-height:100px;
+	width:90%;
+	margin:19px auto;
+}
+.commentsInfo{
+	margin-top:6px;
+	border-top:2px solid #f6f6f6;
+}
+.commentsInfo p{
+	color:#428bca;
+	text-align:right;
+}
+.btn{
+	height:30px;
+	width:100px;
+	background:#104E8B;
+	color:#fff;
+	border:none;
+	border-radius:3px;
+	margin-left: 52px;
+	outline:none;
+}
+.hide {
+   visibility: hidden;
+}
+#look{
+	height: 33px;
+    width: 150px;
+    border: 1px solid #428bca;
+    background: #428bca;
+    border-radius: 5px;
+    color: #fff;
+}
+.likesBox{
+	display:block;
+	border:1px solid;
+	height:50px;
+	width:100px;
+}

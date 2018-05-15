@@ -5,7 +5,10 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@ page import="java.util.UUID"%>
+<%
+UUID uuid = UUID.randomUUID(); 
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -24,6 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="<%=basePath%>/script/login.js"></script>
 	<script src="<%=basePath%>/js/common.js"></script>
 </head>
+
 <body>
  <div class="login">
 	<form action="admin/adminUserLogin.action" method="post">
@@ -32,10 +36,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<input class="pwd" type="password" name="loginPass" id="password" placeholder="密码" />
 		<div class="codeBox">
 			<div class="codeInput">
-				<input class="verCode" type="text" id="codeInput" placeholder="请输入验证码" /> 
+				<input class="verCode" type="text" id="codeInput" name="securityCode" placeholder="请输入验证码" /> 
+				<input type="hidden" name="code" value="<%=uuid%>"/>
 			</div>
 			<div class="code">
-				<img src="<%=basePath%>admin/generateCode.action" onclick="this.src=this.src+'?'" title="点击图片刷新验证码" />
+				<img src="<%=basePath%>admin/generateCode.action" onclick="this.src=this.src+'?code=<%=uuid%>'" title="点击图片刷新验证码" />
 			</div>
 		</div>
 		<input class="subBtn" value="登录" type="submit" id="loginBtn">

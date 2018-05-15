@@ -4,6 +4,9 @@ import java.io.InputStream;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang3.StringUtils;
@@ -30,6 +33,8 @@ public class LoginAction extends BaseAction{
 	private String loginPass;
 	private int role;  //0:普通用户1：系统用户
 	private JSONObject result ;
+	private String code;
+	private String securityCode;
 
 	Logger logger = Logger.getLogger(this.getClass());
 
@@ -41,6 +46,8 @@ public class LoginAction extends BaseAction{
 			return "sys";
 		}
 		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			HttpSession session = request.getSession();
 			UserInfo userInfo = new UserInfo();
 			role = loginService.queryUserRole(loginName, loginPass);
 			if(role != 1 && role != 2){
@@ -49,6 +56,10 @@ public class LoginAction extends BaseAction{
 			}
 			Users adminLogin = loginService.doAdminUserLogin(loginName, loginPass, role);
 			if(adminLogin != null){
+				if(!session.getAttribute(code).equals(securityCode)) {
+					logger.info("验证码错误");
+					return "sys";
+				}
 				userInfo.setLoginName(loginName);
 				userInfo.setUserName(adminLogin.getUserName());
 				userInfo.setPassword(loginPass);
@@ -80,6 +91,10 @@ public class LoginAction extends BaseAction{
 			}
 			Users user = loginService.findByUserNameAndUserPass(loginName, loginPass, role);
 			if(user != null){
+//				if(!code.equals(user.getSecurityCode())) {
+//					logger.info("验证码错误");
+//					return "sys";
+//				}
 				cuserInfo.setLoginName(loginName);
 				cuserInfo.setPassword(loginPass);
 				cuserInfo.setRole(role);
@@ -191,6 +206,22 @@ public class LoginAction extends BaseAction{
 
 	public void setLoginPass(String loginPass) {
 		this.loginPass = loginPass;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getSecurityCode() {
+		return securityCode;
+	}
+
+	public void setSecurityCode(String securityCode) {
+		this.securityCode = securityCode;
 	}
 
 }

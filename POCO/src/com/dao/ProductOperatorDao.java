@@ -1,25 +1,46 @@
 package com.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
 import com.entities.ProductInfo;
 import com.entities.Users;
+import com.util.UUIDUtil;
 import com.vo.ProductInfosVo;
 
 public class ProductOperatorDao extends BaseDao {
 
 	Logger logger = Logger.getLogger(this.getClass());
 
-	public void save(ProductInfo productInfo) {
+	public void doSaveProductInfo(String url, String productName, int proType,String productDesc, String productUser, String productGroupId,
+			String activityId, String contestId) {
+		ProductInfo productInfo = new ProductInfo();
+		productInfo.setProductId(UUIDUtil.generateUUID());
+		productInfo.setProductName(productName);
+		productInfo.setProductPath(url);
+		productInfo.setProductTypes(proType);
+		productInfo.setProductDesc(productDesc);
+		productInfo.setUploadTime(new Date());
+		productInfo.setProductUser(productUser);
+		productInfo.setProductGroupId(productGroupId);
+		if(StringUtils.isNotBlank(activityId)){
+			productInfo.setActivityId(activityId);
+			productInfo.setProductGroupId(activityId.substring(0, 15));
+		}
+		if(StringUtils.isNotBlank(contestId)){
+			productInfo.setContestId(contestId);
+			productInfo.setProductGroupId(contestId.substring(0, 15));
+		}
 		this.getSession().save(productInfo);
 	}
-
+	
 	public void delete(String productId) {
 		String hql = "DELETE FROM ProductInfo p WHERE p.productId = ?";
 		getSession().createQuery(hql).setString(0, productId).executeUpdate();
@@ -163,5 +184,5 @@ public class ProductOperatorDao extends BaseDao {
 		}
 		return size;
 	}
-	
+
 }

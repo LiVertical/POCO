@@ -15,11 +15,12 @@ public class ProductOperatorService implements IProductOperatorService{
 	private ProductInfo productId;
 	Logger logger = Logger.getLogger(this.getClass());
 
-	//save
-	public void save(ProductInfo productInfo){
-		this.productOperatorDao.save(productInfo);
+	@Override
+	public void saveProductInfo(String url, String productName, int proType, String productDesc, String productUser, String productGroupId,
+			String activityId, String contestId) {
+		productOperatorDao.doSaveProductInfo(url, productName, proType, productDesc, productUser, productGroupId, activityId, contestId);
 	}
-		
+	
 	//delete
 	@Override
 	public void doDeleteProductInfo(String productId) {

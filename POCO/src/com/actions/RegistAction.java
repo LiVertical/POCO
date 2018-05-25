@@ -28,7 +28,7 @@ public class RegistAction extends ActionSupport{
 	 * 用户注册
 	 * */
 	public String userInfoSave(){
-		logger.info("userInfoSave start·····");
+		logger.info("RegistAction.userInfoSave start·····");
 		result = new JSONObject();
 		role = 0;
 		if(StringUtils.isBlank(loginName)||StringUtils.isBlank(loginPass)){

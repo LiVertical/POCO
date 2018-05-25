@@ -113,6 +113,14 @@
 			</result> 
  		</action>
  		
+ 		 <!-- 大赛 -->
+  		  <action name="getAllContests" class="com.actions.ContestAction" method="getAllContests">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+ 		
  	</package>
  	
  <!-- 普通用户 -->
@@ -313,6 +321,29 @@
 			</result> 
   		 </action>
   		 
+  		 <!-- 大赛 -->
+  		 <action name="queryAllWorksByContestId" class="com.actions.WorkAction" method="queryAllWorksByContestId">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+		</action>
+			
+		<action name="queryContestInfoByContestId" class="com.actions.ContestAction" method="queryContestInfoByContestId">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		</action>
+  		 
+  		 <!-- 投票 -->
+  		  <action name="vote" class="com.actions.VoteAction" method="vote">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
    </package>  
  
  
@@ -409,6 +440,14 @@
  		
  		<!-- 作品 -->
  		<action name="queryAllWorks" class="com.actions.WorkAction" method="queryAllWorks">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+ 		
+ 		<!-- 大赛 -->
+ 		<action name="postContest" class="com.actions.ContestAction" method="postContest">                  
   			<result  type="json" name="success">
 				<param name="root">result</param>
 				<param name="excludeNullProperties">true</param>

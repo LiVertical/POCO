@@ -1,14 +1,17 @@
 package com.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.entities.ProductInfo;
 import com.entities.Users;
 import com.entities.Work;
+import com.util.MyComparator;
 import com.util.UUIDUtil;
 import com.vo.WorksInfos;
 import com.vo.workDescInfoVo;
@@ -17,7 +20,7 @@ public class WorkDao extends BaseDao{
 
 	Logger logger = Logger.getLogger(this.getClass());
 	
-	public void addWork(String userId, String workName, String workComment, String productGroupId, String activityId) {
+	public void addWork(String userId, String workName, String workComment, String productGroupId, String activityId, String contestId) {
 		try {
 			Work work = new Work();
 			work.setWorkId(UUIDUtil.generateUUID());
@@ -26,7 +29,18 @@ public class WorkDao extends BaseDao{
 			work.setProductGroupId(productGroupId);
 			work.setUserId(userId);
 			work.setWorkUploadTime(new Date());
-			work.setActivityId(activityId);
+			if(StringUtils.isNotBlank(activityId)){
+				work.setActivityId(activityId);
+				work.setProductGroupId(activityId.substring(0, 15));
+			}else{
+				work.setActivityId("活动id");
+			}
+			if(StringUtils.isBlank(contestId)){
+				work.setContestId("大赛id");
+			}else{
+				work.setContestId(contestId);
+				work.setProductGroupId(contestId.substring(0, 15));
+			}
 			getSession().save(work);
 		} catch (Exception e) {
 			logger.error("保存作品异常", e);
@@ -105,6 +119,38 @@ public class WorkDao extends BaseDao{
 		worksInfos.setWorkComment(work.getWorkComment());
 		worksInfos.setUserName(user.getUserName());
 		return worksInfos;
+	}
+
+	public List<WorksInfos> queryWorkInfosByContestId(String contestId) {
+		List<WorksInfos> workInfos = new ArrayList<WorksInfos>();
+		try {
+			String sql1 = "FROM Work WHERE contestId='"+contestId+"'";
+			List<Work> work = new ArrayList<Work>();
+			work = getSession().createQuery(sql1).list();
+			for(Work info: work){
+				WorksInfos infos = new WorksInfos();
+				int voteNum = 0;
+				String productGroupId = info.getProductGroupId();
+				String sql2 = "FROM ProductInfo WHERE productGroupId='"+productGroupId+"'";
+				List<ProductInfo> products = getSession().createQuery(sql2).list();
+				String sql3 = "FROM Vote WHERE workId='"+info.getWorkId()+"'";
+				voteNum = getSession().createQuery(sql3).list().size();
+				infos.setProductInfos(products);
+				infos.setVoteNum(voteNum);
+				infos.setWorkName(info.getWorkName());
+				infos.setUserId(info.getUserId());
+				infos.setWorkComment(info.getWorkComment());
+				infos.setWorkId(info.getWorkId());
+				workInfos.add(infos);
+			}
+		} catch (Exception e) {
+			logger.error("查询大赛作品异常", e);
+		}
+		Collections.sort(workInfos);
+		//必须是Comparator中的compare方法和Collections.sort方法配合使用才管用  
+		 MyComparator mc = new MyComparator() ;  
+		 Collections.sort(workInfos, mc) ;
+		 return workInfos;
 	}
 
 }

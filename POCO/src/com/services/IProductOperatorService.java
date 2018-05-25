@@ -7,8 +7,6 @@ import com.entities.ProductInfo;
 import com.vo.ProductInfosVo;
 
 public interface IProductOperatorService {
-	//上传作品
-	void save(ProductInfo productInfo);
 	
 	//展示作品
 	List<ProductInfo> listProductinfo();
@@ -36,5 +34,8 @@ public interface IProductOperatorService {
 	List<ProductInfo> queryProductByType(int proType);
 
 	int doQueryProductCount();
+
+	void saveProductInfo(String url, String productName, int proType, String productDesc, String productUser, String productGroupId,
+			String activityId, String contestId);
 
 }

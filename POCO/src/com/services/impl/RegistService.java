@@ -1,7 +1,5 @@
 package com.services.impl;
 
-import java.io.UnsupportedEncodingException;
-
 import org.apache.log4j.Logger;
 
 import com.dao.RegistDao;
@@ -24,10 +22,10 @@ public class RegistService implements IRegistService{
 		user = new Users();
 		user.setLoginName(loginName);
 		try {
-			user.setLoginPass(MD5.encodeCN(passWord).toString());	
+			user.setLoginPass(MD5.getMD5ofString(passWord).toString());	
 			user.setRole(role);
 			registDao.registSave(user);
-		} catch (UnsupportedEncodingException e) {
+		} catch (Exception e) {
 			logger.error("保存用户信息异常", e);
 		}
 	

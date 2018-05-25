@@ -28,6 +28,7 @@ public class WorkAction extends ActionSupport{
 	private int recordSize;
 	private String activityId;
 	private String workId;
+	private String contestId;
 	
 	public String addWork(){
 		logger.info("WorkAction.addWork start·····");
@@ -39,7 +40,7 @@ public class WorkAction extends ActionSupport{
 			return SUCCESS;
 		}
 		try {
-			workService.doAddWork(userId, workName, workComment, productGroupId, activityId);
+			workService.doAddWork(userId, workName, workComment, productGroupId, activityId,contestId);
 			result.put("returnCode", "00");
 			result.put("returnMsg", "上传作品成功");
 		} catch (Exception e) {
@@ -131,6 +132,26 @@ public class WorkAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	//根据大赛id，查询作品
+	public String queryAllWorksByContestId(){
+		logger.info("WorkAction.queryAllWorksByContestId start·····");
+		result = new JSONObject();
+		if(StringUtils.isBlank(contestId)){
+			result.put("returnCode", "10");
+			result.put("retunMsg", "参数错误");
+			return SUCCESS;
+		}
+		try {
+			result.put("contestsWorkInfo", workService.doQueryWorksInfoByContestId(contestId));
+			result.put("returnCode", "00");
+			result.put("retunMsg", "查询大赛作品成功");
+		} catch (Exception e) {
+			logger.error("查询大赛作品失败", e);
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部服务器异常");
+		}
+		return SUCCESS;
+	}
 	
 	public JSONObject getResult() {
 		return result;
@@ -208,4 +229,13 @@ public class WorkAction extends ActionSupport{
 	public void setWorkId(String workId) {
 		this.workId = workId;
 	}
+
+	public String getContestId() {
+		return contestId;
+	}
+
+	public void setContestId(String contestId) {
+		this.contestId = contestId;
+	}
+	
 }

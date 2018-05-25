@@ -33,6 +33,7 @@
 	<div class="header">
 		<ul>
 			<li><a href="<%=basePath%>views/activities.jsp">活动</a></li>
+			<li><a href="<%=basePath%>views/contest.jsp">大赛</a></li>
 			<li><a href="<%=basePath%>views/works.jsp">作品集锦</a></li>
 	 	</ul>
 	 	<ul style="float:right;padding-right:66px">

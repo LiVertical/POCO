@@ -27,18 +27,7 @@ $(function(){
 		login();
 	});
 
-	/*//点击图片获取验证码
-	$("#verify").click(function() {
-		alert(1);
-		getCode();
-	});*/
-	
 });
-
-/*function getCode(){
-	$('#verify').attr('src', getRootPath() + "/admin/generateCode.action");
-	alert(2);
-};*/
 
 	
 function login() {

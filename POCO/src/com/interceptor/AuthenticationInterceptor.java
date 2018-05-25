@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.actions.LoginAction;
+import com.actions.RegistAction;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 import com.util.LoginUserUtil;
@@ -23,6 +24,10 @@ public class AuthenticationInterceptor extends MethodFilterInterceptor  {
           logger.info("登录接口不进行拦截");
             return actionInvocation.invoke();
         }
+        if (action instanceof RegistAction) {
+            logger.info("注册接口不进行拦截");
+              return actionInvocation.invoke();
+          }
         // 确认Session中是否存在LOGIN
         Map<String, Object> session = actionInvocation.getInvocationContext().getSession();
         Object login = session.get("APP_USERINFO_SESSION_KEY");
@@ -32,7 +37,7 @@ public class AuthenticationInterceptor extends MethodFilterInterceptor  {
         	 logger.info("登录成功!登录账户："+LoginUserUtil.getUserInfo().getUserName());
             return actionInvocation.invoke();
         } else {
-        	if(request.getServletPath().contains("vistor")){
+        	if(request.getServletPath().contains("vistor") || request.getServletPath().contains("user")){
         		logger.info("不需要验证身份");
         		return actionInvocation.invoke();
         	}

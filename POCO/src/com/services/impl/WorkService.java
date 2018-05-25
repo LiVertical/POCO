@@ -1,5 +1,6 @@
 package com.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.dao.UserDao;
@@ -15,8 +16,8 @@ public class WorkService implements IWorkService {
 	private WorkDao workDao;
 	
 	@Override
-	public void doAddWork(String userId, String workName, String workComment,String productGroupId, String activityId) {
-		workDao.addWork(userId, workName, workComment, productGroupId, activityId);
+	public void doAddWork(String userId, String workName, String workComment,String productGroupId, String activityId, String contestId) {
+		workDao.addWork(userId, workName, workComment, productGroupId, activityId, contestId);
 	}
 	
 	@Override
@@ -37,6 +38,11 @@ public class WorkService implements IWorkService {
 	@Override
 	public List<workDescInfoVo> queryWorksInfo(int currentPage, int recordSize) {
 		return workDao.queryAllWorksInfo(currentPage, recordSize);
+	}
+	
+	@Override
+	public List<WorksInfos> doQueryWorksInfoByContestId(String contestId) {
+		return workDao.queryWorkInfosByContestId(contestId);
 	}
 	
 	@Override

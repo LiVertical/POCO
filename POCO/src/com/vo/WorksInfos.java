@@ -1,10 +1,11 @@
 package com.vo;
 
+import java.util.Comparator;
 import java.util.List;
 
 import com.entities.ProductInfo;
 
-public class WorksInfos {
+public class WorksInfos implements Comparable<WorksInfos>{
 	
 	private String workId;
 	private String workName;
@@ -13,13 +14,14 @@ public class WorksInfos {
 	private String userId;
 	private List<ProductInfo> productInfos;
 	private String userName;
+	private int voteNum;
 	
 	public WorksInfos() {
 		super();
 	}
 	
 	public WorksInfos(String workId, String workName, String workUploadTime,
-			String workComment, String userId, List<ProductInfo> productInfos,String userName) {
+			String workComment, String userId, List<ProductInfo> productInfos,String userName, int voteNum) {
 		super();
 		this.workId = workId;
 		this.workName = workName;
@@ -28,6 +30,7 @@ public class WorksInfos {
 		this.userId = userId;
 		this.productInfos = productInfos;
 		this.userName = userName;
+		this.voteNum = voteNum;
 	}
 	
 	public String getWorkId() {
@@ -74,5 +77,24 @@ public class WorksInfos {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
+	public int getVoteNum() {
+		return voteNum;
+	}
+
+	public void setVoteNum(int voteNum) {
+		this.voteNum = voteNum;
+	}
+
+	@Override
+	public int compareTo(WorksInfos o) {
+		if (this.voteNum > o.getVoteNum()) {
+            return -1;
+        } else {
+            return 1;
+        }
+	}
+
+
 	
 }

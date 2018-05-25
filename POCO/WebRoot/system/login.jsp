@@ -40,7 +40,8 @@ UUID uuid = UUID.randomUUID();
 				<input type="hidden" name="code" value="<%=uuid%>"/>
 			</div>
 			<div class="code">
-				<img src="<%=basePath%>admin/generateCode.action" onclick="this.src=this.src+'?code=<%=uuid%>'" title="点击图片刷新验证码" />
+					<img src="<%=basePath%>admin/generateCode.action" onclick="this.src=this.src+'?code=<%=uuid%>'"/>
+					<span style="font-size: 8px;line-height: 63px;float: right;">点击图片刷新</span>
 			</div>
 		</div>
 		<input class="subBtn" value="登录" type="submit" id="loginBtn">

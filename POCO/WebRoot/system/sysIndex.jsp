@@ -77,6 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <li onclick="loadSrc('<%=basePath%>/system/addAdminUser.jsp',this.id)">添加管理员</li>
 		            <li onclick="loadSrc('<%=basePath%>/system/smsActivities.jsp',this.id)">活动管理</li>
 		            <li onclick="loadSrc('<%=basePath%>/system/works.jsp',this.id)">作品管理</li>
+		             <li onclick="loadSrc('<%=basePath%>/system/smsContest.jsp',this.id)">大赛管理</li>
 				</section>
 			</nav>
 	        <div class="rightBody">

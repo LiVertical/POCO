@@ -169,15 +169,15 @@ function gotoLogin() {
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 barter_btnDiv">
+     </form>
+     <div class="col-xs-12 barter_btnDiv">
             <button class="barter_btn" onclick="gotoRegist()">没有账号?前往注册</button>
         </div>
-     </form>
     </div>
 
     <div class="register_body" id="regist_div"> 
         <div class="col-xs-12 register_title">注册</div>
-        <form action="regist-save.action" class="register" method="get">
+        <form action="userInfoSave.action" class="register" method="get">
             <div class="nav">
                 <div class="nav register_nav">
                     <div class="col-xs-4">
@@ -198,7 +198,7 @@ function gotoLogin() {
                         密&nbsp;&nbsp;&nbsp;码:
                     </div>
                     <div class="col-xs-6">
-                        <input type="password" name="passWord" id="password" value="" placeholder="&nbsp;&nbsp;密码" onBlur="javascript:ok_or_errorByRegister(this)" />
+                        <input type="password" name="loginPass" id="password" value="" placeholder="&nbsp;&nbsp;密码" onBlur="javascript:ok_or_errorByRegister(this)" />
                     </div>
                     <div class="col-xs-1 ok_gou">
                         √

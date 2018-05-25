@@ -40,6 +40,11 @@
                 <comment>评论</comment>
             </column>
         </property>
+         <property name="contestId" type="string">
+            <column name="contest_id" length="32">
+                <comment>大赛id</comment>
+            </column>
+        </property>
          <property name="activityId" type="string">
             <column name="activity_id" length="32">
                 <comment>活动id</comment>

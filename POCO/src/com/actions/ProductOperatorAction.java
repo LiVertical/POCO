@@ -62,6 +62,7 @@ public class ProductOperatorAction extends ActionSupport {
 	private String userName;
 	private String productGroupId;
 	private String activityId;
+	private String contestId;
 	
 	Logger logger = Logger.getLogger(this.getClass());
 
@@ -91,16 +92,7 @@ public class ProductOperatorAction extends ActionSupport {
 				uploadFileUtil.uploadImgs(image, file);
 				// 保存路径
 				url = "images" + "/" + newFileName;
-				ProductInfo proInfo = new ProductInfo();
-				proInfo.setProductPath(url);
-				proInfo.setUploadTime(new Date());
-				proInfo.setProductName(productName);
-				proInfo.setProductTypes(proType);
-				proInfo.setProductDesc(productDesc);
-				proInfo.setProductUser(productUser);
-				proInfo.setProductGroupId(productGroupId);
-				proInfo.setActivityId(activityId);
-				productOperatorService.save(proInfo);
+				productOperatorService.saveProductInfo(url, productName, proType, productDesc, productUser, productGroupId, activityId, contestId);
 			}
 			result.put("returnCode", "00");
 			result.put("returnMsg", "操作成功");
@@ -497,5 +489,12 @@ public class ProductOperatorAction extends ActionSupport {
 		public void setActivityId(String activityId) {
 			this.activityId = activityId;
 		}
+
+		public String getContestId() {
+			return contestId;
+		}
 		
+		public void setContestId(String contestId) {
+			this.contestId = contestId;
+		}
 }

@@ -106,5 +106,24 @@
 		<property name="workDao" ref="workDao"></property>
 		<property name="userDao" ref="userDao"></property>
 	</bean>
+	
+	<!-- 大赛 -->
+	<bean id="contestDao" class="com.dao.ContestDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="contestService" class="com.services.impl.ContestService">
+		<property name="contestDao" ref="contestDao"></property>
+	</bean>
+	
+	<!-- 投票 -->
+	<bean id="voteDao" class="com.dao.VoteDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="voteService" class="com.services.impl.VoteService">
+		<property name="voteDao" ref="voteDao"></property>
+	</bean>
+	
 </beans>
 

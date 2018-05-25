@@ -26,7 +26,8 @@ String basePath = request.getScheme()+ "://" + request.getServerName() + ":" +re
 	<script src="<%=basePath%>/script/upload.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/script/custom.js"></script>
    </head>
-<body data-activity_id = '${param.activityId  }'>
+<body data-activity_id = '${param.activityId  }', 
+	data-contest_id = '${param.contestId  }'>
 <div class="header" style="margin-top:-10px">
 		<ul>
 			<li><a href="<%=basePath%>/index.jsp">POCO首页</a></li>
@@ -48,7 +49,6 @@ String basePath = request.getScheme()+ "://" + request.getServerName() + ":" +re
 			</s:else>
 	 	</ul>
 </div>
-<s:debug/>
     <div class="img" id="imgBox"><ul id="pic"></ul></div>
     <div class="uploadBox">
 		<p>图片标题：<input name="productName"></p>

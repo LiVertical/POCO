@@ -29,7 +29,10 @@ function queryAllActivities(activiesStatus,page){
 					+ "<td>" + data.activitiesInfos[i].userName + "</td>" 
 					+ "<td>"+ data.activitiesInfos[i].createTime.substring(0,16) +"--"+data.activitiesInfos[i].endTime.substring(0,16)+"</td>" 
 					if(status == 1){//已审核
+<<<<<<< HEAD
 
+=======
+>>>>>>> b0e4dcf7313e44f4f94f6efb0732394138241a9c
 						var statusDesc = "已通过审核";
 						if(curStatus == 0){
 							statusDesc = "未通过审核";
@@ -40,7 +43,10 @@ function queryAllActivities(activiesStatus,page){
 					}else if(status == 0){
 						htmlA = htmlA + "<td><button class='auditBtn' onclick='pass(&quot;"+data.activitiesInfos[i].activityId+"&quot;)'>通过</button>" 
 						  + "<button style='background:red' class='auditBtn' onclick='out(&quot;"+data.activitiesInfos[i].activityId+"&quot;)'>否决</button></td></tr>";
+<<<<<<< HEAD
 
+=======
+>>>>>>> b0e4dcf7313e44f4f94f6efb0732394138241a9c
 					}
 					$("#dataDisplayA").append(htmlA);
 					

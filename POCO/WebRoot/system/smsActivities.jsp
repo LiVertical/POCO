@@ -56,7 +56,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="pagination" id="pageA"></div>
 		</div>
 		
+<<<<<<< HEAD
 				<!-- <div id="noLicensed" class="box">
+=======
+		
+		<!-- <div id="noLicensed" class="box">
+>>>>>>> b0e4dcf7313e44f4f94f6efb0732394138241a9c
 				<h2>待审核活动</h2>
 				<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
 						<thead>

@@ -109,5 +109,10 @@ public class ActivityDao extends BaseDao {
 		size = getSession().createQuery("FROM Activities").list().size();
 		return size;
 	}
+
+
+	public Activities queryActivityById(String activityId) {
+		return (Activities) getSession().createQuery("FROM Activities WHERE activityId=:activityId").setString("activityId", activityId).list().get(0);
+	}
 	
 }

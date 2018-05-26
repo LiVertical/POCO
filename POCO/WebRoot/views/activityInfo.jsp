@@ -86,8 +86,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</s:else>
 	 	</ul>
 	</div>
-	 <div id="p_content" class="main" style='min-height:450px'></div>
+	 
 	 <div id="content" class="content"></div>
+	 <!-- <div id="p_content"> -->
+	 <div id="p_content" class="main" style='min-height:450px'>
+		<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
+			<thead>
+				<tr class="tr_head">
+					<td style="width:40px">序号</td>
+					<td style="width:100px">作品标题</td>
+					<td style="width:240px">作品内容</td>
+					<td style="width:140px">上传时间</td>
+					<td style="width:240px">作品配图</td>
+					<td style="width:100px">所属用户</td>
+				</tr>
+			</thead>
+			<tbody class="table" id="dataDisplay"></tbody>
+		</table>
+	</div>
+    <div class="pagination" id="page"></div>
+	 	
+	 </div>
+	 
 	 <div class='btn'><button class='joinBtn' id='joinBtn'>点击参加活动</button></div>
  	 <div class="footer" style="margin-top:50px">
 		<a>POCO网违法和不良信息举报电话：13928869007 举报邮箱：kent@poco.cn</a>
@@ -125,10 +145,37 @@ function getActivityInfo(){
 function getAllActivityWorks(){
 	var activityId = GetRequest();
 	$.post(getRootPath() + "/vistor/queryWorksByActivityId.action?activityId="+activityId, function(data){
-		if(data.returnCode == '00'){
-			alert("hidpgnef");
+			$("#dataDisplay").empty();
+//			var pageSize = (data.worksInfos.length > recordSize ? recordSize: data.worksInfos.length);
+			var tbody = "";
+			for(var i = 0; i < data.worksInfos.length; i++){
+				var products = ""; 
+				for(var j = 0; j < data.worksInfos[i].productInfos.length; j++){
+					products +="<li class='img'><img src='" + getRootPath() + "/" + data.worksInfos[i].productInfos[j].productPath+"'></li>"; 
+				}
+				 tbody += "<tr><td>"+ (i+1) + "</td>"
+	              + "<td style='height:150px;width:150px;'>"+ data.worksInfos[i].workName +"</td>"
+	              + "<td style='word-break'>" + data.worksInfos[i].workComment + "</td>"
+	              + "<td style='word-break'>" + data.worksInfos[i].workUploadTime.substring(0,16) + "</td>"
+				  + "<td><ul>" + products + "</ul></td>"
+				  + "<td>" + data.worksInfos[i].userName + "</td>" 
+				  + "<td><img style='height:30px;width:44px' src='"+getRootPath()+"/img/icons/delete.jpg' class='delBtn' onclick='deleteProduct("+data.worksInfos[i].workId+")'></td></tr>";
+			}
+			$("#dataDisplay").html(tbody);
+			$("#page").pagination(data.worksCount,{
+					callback : function(index) {
+									 initUserData(index+1);
+								 },
+					prev_text : '上一页', //上一页按钮里text
+					next_text : '下一页', //下一页按钮里text
+					items_per_page : pageSize, //显示条数
+					current_page:currentPage-1,
+					num_display_entries : 6, //连续分页主体部分分页条目数
+					num_edge_entries : 2//两侧首尾分页条目数
+			});
+			window.parent.window.iframeHeight();
 		}
-	});
+	);
 }
 </script>
 </html>

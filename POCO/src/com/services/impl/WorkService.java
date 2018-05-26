@@ -31,8 +31,8 @@ public class WorkService implements IWorkService {
 	}
 	
 	@Override
-	public int countWorks() {
-		return workDao.doCountWorks();
+	public int countWorks(String workName, String userName, Integer workTypeInteger) {
+		return workDao.doCountWorks(workName,userName,workTypeInteger);
 	}
 
 	@Override

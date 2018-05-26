@@ -119,32 +119,33 @@ public class WorkDao extends BaseDao{
 			
 		}
 				
-//				.setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
-//		for(Object[] work : works){
-//			if(work.getProductGroupId() != null){
-//				
-//				String sql2 = "FROM ProductInfo WHERE productGroupId = '" + work.getProductGroupId() + "'";
-//				List<ProductInfo> products = getSession().createQuery(sql2).list();
-//				Users user = new Users();
-//				String sql3 = "FROM Users WHERE userId = '"+work.getUserId()+"'";
-//				user = (Users) getSession().createQuery(sql3).list().get(0);
-//				workVo.setProductInfos(products);
-//				workVo.setUserName(user.getUserName());
-//				workVo.setWorkId(work.getWorkId());
-//				workVo.setWorkName(work.getWorkName());
-//				workVo.setWorkComment(work.getWorkComment());
-//				workVo.setWorkUploadTime(work.getWorkUploadTime().toString());
-//				workInfos.add(workVo);
-//			}
-//		}
 		return workInfos;
 	}
 
-	public int doCountWorks() {
-		String sql = "FROM Work";
-		int size = 0;
-		size = getSession().createQuery(sql).list().size();
-		return size;
+	public int doCountWorks(String workName, String userName, Integer workTypeInteger) {
+		
+		String sql = "SELECT w.work_id,w.work_name,w.work_comment,w.work_upload_time,w.product_group_id,"
+				+ "us.userName FROM `work` AS w,`users` AS us WHERE w.user_id=us.userId ";
+		if (workTypeInteger != null) {
+			sql = sql +"AND w.work_type="+workTypeInteger;
+		}
+		if (userName != null && !"".equals(userName)) {
+			sql = sql + "AND us.userName like '%"+userName+"%'";
+		}
+		if (workName != null && !"".equals(workName)) {
+			sql = sql +"AND w.work_name like '%"+workName+"%'";
+		}
+		
+		List list = getSession().createSQLQuery(sql)
+		.addScalar("w.work_id",StandardBasicTypes.STRING)
+		.addScalar("w.work_name",StandardBasicTypes.STRING)
+		.addScalar("w.work_comment",StandardBasicTypes.STRING)
+		.addScalar("w.work_upload_time",StandardBasicTypes.DATE)
+		.addScalar("w.product_group_id",StandardBasicTypes.STRING)
+		.addScalar("us.userName",StandardBasicTypes.STRING)
+		.list();
+		 
+		return list.size();
 	}
 
 	public List<workDescInfoVo> queryAllWorksInfo(int currentPage,int recordSize) {

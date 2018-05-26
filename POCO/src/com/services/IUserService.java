@@ -8,7 +8,7 @@ import com.entities.Users;
 public interface IUserService {
 	
 	//分页查询用户信息
-	List<Users> queryUserByCondition(int recordSize, int currentPage);
+	List<Users> queryUserByCondition(int recordSize, int currentPage, String userName);
 
 	//上传用户头像
 	void saveOrUpdateUserImg(String userId, String url);
@@ -24,6 +24,5 @@ public interface IUserService {
 	void doUpdatePass(String userId, String newPass);
 
 	int countUser();
-
 
 }

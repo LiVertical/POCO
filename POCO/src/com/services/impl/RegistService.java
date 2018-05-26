@@ -1,5 +1,7 @@
 package com.services.impl;
 
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 
 import com.dao.RegistDao;
@@ -24,6 +26,7 @@ public class RegistService implements IRegistService{
 		try {
 			user.setLoginPass(MD5.getMD5ofString(passWord).toString());	
 			user.setRole(role);
+			user.setCreateTime(new Date());
 			registDao.registSave(user);
 		} catch (Exception e) {
 			logger.error("保存用户信息异常", e);

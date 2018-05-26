@@ -86,8 +86,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</s:else>
 	 	</ul>
 	</div>
-	 <div id="p_content" class="main" style='min-height:450px'>
-	 </div>
+	 <div id="p_content" class="main" style='min-height:450px'></div>
+	 <div id="content" class="content"></div>
 	 <div class='btn'><button class='joinBtn' id='joinBtn'>点击参加活动</button></div>
  	 <div class="footer" style="margin-top:50px">
 		<a>POCO网违法和不良信息举报电话：13928869007 举报邮箱：kent@poco.cn</a>
@@ -95,17 +95,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 <script>
 $(document).ready(function(){
+	
 	getActivityInfo();
 	
 	$("#joinBtn").click(function(){
 		var activityId = GetRequest();
 		window.location.href = getRootPath() + "/views/productUpload.jsp?activityId="+activityId;
 	});
-	 
+	
+	getAllActivityWorks();
+	
 });
 
 function getActivityInfo(){
-	var activityId =GetRequest();
+	var activityId = GetRequest();
 	$.post(getRootPath()+"/vistor/queryActivityInfo.action?activityId="+activityId, function(data){
 	if(data.returnCode == '00'){
 		console.log(data.activityInfos);
@@ -117,6 +120,15 @@ function getActivityInfo(){
 	  }
 	});
 	
+}
+
+function getAllActivityWorks(){
+	var activityId = GetRequest();
+	$.post(getRootPath() + "/vistor/queryWorksByActivityId.action?activityId="+activityId, function(data){
+		if(data.returnCode == '00'){
+			alert("hidpgnef");
+		}
+	});
 }
 </script>
 </html>

@@ -29,7 +29,7 @@ public class SysNotificationService implements ISysNotificationService {
 		int count = 0;
 		List<Users> userList;
 		try {
-			userList = userDao.queryUserInfo(Integer.MAX_VALUE, 1);
+			userList = userDao.queryUsers();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return count;

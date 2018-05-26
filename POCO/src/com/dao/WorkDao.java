@@ -153,4 +153,28 @@ public class WorkDao extends BaseDao{
 		 return workInfos;
 	}
 
+	public List<WorksInfos> queryWorksByActivityId(String activityId) {
+		List<WorksInfos> workInfos = new ArrayList<WorksInfos>();
+		try {
+			String sql1 = "FROM Work WHERE activityId='"+activityId+"'";
+			List<Work> work = new ArrayList<Work>();
+			work = getSession().createQuery(sql1).list();
+			for(Work info: work){
+				WorksInfos infos = new WorksInfos();
+				String productGroupId = info.getProductGroupId();
+				String sql2 = "FROM ProductInfo WHERE productGroupId='"+productGroupId+"'";
+				List<ProductInfo> products = getSession().createQuery(sql2).list();
+				infos.setProductInfos(products);
+				infos.setWorkName(info.getWorkName());
+				infos.setUserId(info.getUserId());
+				infos.setWorkComment(info.getWorkComment());
+				infos.setWorkId(info.getWorkId());
+				workInfos.add(infos);
+			}
+		} catch (Exception e) {
+			logger.error("查询活动作品异常", e);
+		}
+		return workInfos;
+	}
+
 }

@@ -12,7 +12,7 @@ function upload(){
 	var proType = $("select option:selected").val().trim();
 	var image = document.getElementById("image").files[0];
 	var productDesc = $("input[name='productDesc']").val();
-	var productGroupId = GetRequest();
+	var productGroupId = guid();
 	var activityId = $("body").data().activity_id;
 	var contestId = $("body").data().contest_id;
 	console.log("当前组id:"+productGroupId);

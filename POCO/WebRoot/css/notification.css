@@ -87,9 +87,10 @@ ul {
 }
 .main input{
 	width:300px;
-	height:50px;
+	height:40px;
 	border:1px solid #e4e4e4;
 	outline:none;
+	padding-left:3px;
 }
 .send{
 	width:200PX;

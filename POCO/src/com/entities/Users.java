@@ -20,7 +20,7 @@ public class Users implements java.io.Serializable {
 	private String faceImg;
 	private int role;
 	private Date createTime;
-	private int curStatus;
+	private Date updateTime;
 
 		/** full constructor */
 	
@@ -31,7 +31,7 @@ public class Users implements java.io.Serializable {
 
 		public Users(String userId, String userName, String loginName,
 				String loginPass, int age, String email, int sex,
-				String faceImg, int role, Date createTime, int curStatus) {
+				String faceImg, int role, Date createTime, Date updateTime) {
 			super();
 			this.userId = userId;
 			this.userName = userName;
@@ -43,7 +43,7 @@ public class Users implements java.io.Serializable {
 			this.faceImg = faceImg;
 			this.role = role;
 			this.createTime = createTime;
-			this.curStatus = curStatus;
+			this.updateTime = updateTime;
 		}
 
 		public String getUserId() {
@@ -125,13 +125,12 @@ public class Users implements java.io.Serializable {
 		public void setCreateTime(Date createTime) {
 			this.createTime = createTime;
 		}
-
-		public int getCurStatus() {
-			return curStatus;
+		
+		public Date getUpdateTime() {
+			return updateTime;
 		}
-
-		public void setCurStatus(int curStatus) {
-			this.curStatus = curStatus;
+		
+		public void setUpdateTime(Date updateTime) {
+			this.updateTime = updateTime;
 		}
-
 }

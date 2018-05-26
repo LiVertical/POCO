@@ -66,6 +66,8 @@ public class ActivityDao extends BaseDao {
 			activity.setEndTime(DateUtil.convertStringToDate(endTime));
 			activity.setCreateTime(DateUtil.convertStringToDate(createTime));
 			activity.setApplyTime(new Date());
+			activity.setCurStatus(0);
+			activity.setAuditStatus(0);
 			this.getSession().save(activity);
 		} catch (ParseException e) {
 			logger.error("格式化时间异常", e);

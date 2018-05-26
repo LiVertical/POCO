@@ -72,7 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	<nav id="leftMenu" class="ac_nav" style="float:left;">
 				<section class="ac_menu">
 					<li onclick="loadSrc('<%=basePath%>/system/products.jsp',this.id)" class="on">图片管理</li>
-		            <li onclick="loadSrc('<%=basePath%>/system/sms.jsp',this.id)">用户管理</li>
+		            <li onclick="loadSrc('<%=basePath%>/system/smsUsers.jsp',this.id)">用户管理</li>
 		            <li onclick="loadSrc('<%=basePath%>/system/smsNotification.jsp',this.id)">系统通知</li>
 		            <li onclick="loadSrc('<%=basePath%>/system/addAdminUser.jsp',this.id)">添加管理员</li>
 		            <li onclick="loadSrc('<%=basePath%>/system/smsActivities.jsp',this.id)">活动管理</li>

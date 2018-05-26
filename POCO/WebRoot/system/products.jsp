@@ -23,6 +23,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div class="main">
+  <div class="searchDiv">
+  	<input type="text" id="">
+  </div>
   	<div id="p_content">
 		<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
 			<thead>

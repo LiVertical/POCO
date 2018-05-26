@@ -15,6 +15,7 @@
 	height:30px;
 	width:150px;
 	margin-top:10px;
+	padding-left:2px;
 }
 .desc{
 	height:200px;
@@ -23,6 +24,8 @@
 	resize:none;
 	outline:none;
 	margin-top:20px;
+	text-indent: 2em;
+	padding:3px;
 } 
 .apply{
 	background:#00B2EE;

@@ -51,7 +51,7 @@ String basePath = request.getScheme()+ "://" + request.getServerName() + ":" +re
 </div>
     <div class="img" id="imgBox"><ul id="pic"></ul></div>
     <div class="uploadBox">
-		<p>图片标题：<input name="productName"></p>
+		<p>图片标题：<input name="productName" placeholder="请输入图片标题"></p>
 		<p>图片分类： 
 			<select class="type" name="proType">
 				<option value="">请选择作品分类</option>
@@ -69,7 +69,7 @@ String basePath = request.getScheme()+ "://" + request.getServerName() + ":" +re
 				<option value="8">其他摄影</option>
 			</select>
 		</p>
-		<p>图片描述：<input type="text" name="productDesc"></p>
+		<p>图片描述：<input type="text" name="productDesc" placeholder="请输入图片描述"></p>
 		<p>选择文件：<input type="file" id="image" class="glyphicon glyphicon-folder-open"></p>
 	</div>
 	<div class="work">

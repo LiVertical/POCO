@@ -1,6 +1,5 @@
 package com.vo;
 
-import java.util.Comparator;
 import java.util.List;
 
 import com.entities.ProductInfo;

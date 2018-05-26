@@ -56,8 +56,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	<h1 style="text-align:center">发布大赛</h1>	
 	<div class="container">
-		<p>大赛标题：<input type="text" id="contestName" class='time-input'></p>
-		<p>大赛概述：</p><textarea class="desc" id="contestDesc"></textarea>
+		<p>大赛标题：<input type="text" placeholder="请输入大赛标题" id="contestName" class='time-input'></p>
+		<p>大赛概述：</p><textarea placeholder="请描述大赛....." class="desc" id="contestDesc"></textarea>
 		<p>&nbsp;</p>
 		开始时间：<input id="startTime" class="time-input " type="text"> --
 		结束时间：<input id="endTime" class="time-input " type="text"><br/>

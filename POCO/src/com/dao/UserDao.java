@@ -2,6 +2,7 @@ package com.dao;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -45,8 +46,11 @@ public class UserDao extends BaseDao{
 		return users;		
 	}
 
-	public List<Users> queryUserInfo(int recordSize, int currentPage){
+	public List<Users> queryUserInfo(int recordSize, int currentPage, String userName){
 		String hql = "FROM Users";
+		if(StringUtils.isNotBlank(userName)){
+			hql += " WHERE loginName like '%" + userName + "%'";
+		}
 		List<Users> list = getSession().createQuery(hql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
 		return list;
 	}
@@ -72,5 +76,10 @@ public class UserDao extends BaseDao{
 		return size;
 	}
 
+	public List<Users> queryUsers() {
+		String hql = "FROM Users";
+		List<Users> list = getSession().createQuery(hql).list();
+		return list;
+	}
 
 }

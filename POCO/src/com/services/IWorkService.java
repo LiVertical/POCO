@@ -22,4 +22,6 @@ public interface IWorkService {
 
 	List<WorksInfos> doQueryWorksInfoByContestId(String contestId);
 
+	List<WorksInfos> queryWorksByActivityId(String activityId);
+
 }

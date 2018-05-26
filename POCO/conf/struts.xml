@@ -113,6 +113,13 @@
 			</result> 
  		</action>
  		
+ 		<action name="queryWorksByActivityId" class="com.actions.WorkAction" method="queryWorksByActivityId">
+ 			<result name="success"  type="json">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+ 		</action>
+ 		
  		 <!-- 大赛 -->
   		  <action name="getAllContests" class="com.actions.ContestAction" method="getAllContests">                  
   			<result  type="json" name="success">

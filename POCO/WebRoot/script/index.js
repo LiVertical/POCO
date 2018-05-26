@@ -16,19 +16,22 @@ function queryProducts(page) {
 				if (result.total > 0) {
 					for (var i = 0; i < result.productInfos.length; i++) {
 						tbody += "<li><div class='boxs_middle'> "
-						  + "<img onclick='queryProductInfos(&quot;"+ result.productInfos[i].productId +"&quot;)' src='/POCO/"
-						  + result.productInfos[i].productPath
+						  + "<img onclick='queryProductInfos(&quot;"+ result.productInfos[i].productId +"&quot;)' src='"
+						  + getRootPath() + "/" + result.productInfos[i].productPath
 						  + "'></div><div class='boxs_right'><p style='color:indianred'>***********************</p><p class='title'>标题 "
 						  + result.productInfos[i].productName
 			    		  + "</p><p>作品描述："
 						  + result.productInfos[i].productDesc
 						  + "</p><p>上传时间："
 						  + result.productInfos[i].uploadTime.substring(0,16)
-						  + "</p><p>&nbsp;</p><a href=" + getRootPath() + "/views/productDetails.jsp?productId=" + result.productInfos[i].productId+">点我去评论</a></br>" 
-						  +"<button class='like' id='like"+result.productInfos[i].productId+"' onclick='like(&quot;"+result.productInfos[i].productId+"&quot;,&quot;"+result.productInfos[i].productName+"&quot;"+")'>为我点赞</button>" 
-						  +"<button class='noLike' id='noLike"+result.productInfos[i].productId+"' style='display:none' onclick='nolike(&quot;"+result.productInfos[i].productId+"&quot;,&quot;"+result.productInfos[i].productName+"&quot;"+")'>取消点赞</button></br>"
-						  +"<button id='collect"+result.productInfos[i].productId+"' class='collect' onclick='addCollect(&quot;"+result.productInfos[i].productId+"&quot;,&quot;"+result.productInfos[i].productName+"&quot;"+")'>收藏</button>" 
-						  +"<button style='display:none' id='cancleColl"+result.productInfos[i].productId+"' class='collect' onclick='deleteCollect(&quot;"+result.productInfos[i].productId+"&quot;)'>取消收藏</button></div></li>";
+						  + "</p><p>&nbsp;</p><a href=" + getRootPath() + "/views/productDetails.jsp?productId="
+						  + result.productInfos[i].productId+">点我去评论</a></br>" 
+						  + "<button class='like' id='like"+result.productInfos[i].productId
+						  + "' onclick='like(&quot;"+result.productInfos[i].productId+"&quot;,&quot;"
+						  + result.productInfos[i].productName+"&quot;"+")'>为我点赞</button>" 
+						  + "<button class='noLike' id='noLike"+result.productInfos[i].productId+"' style='display:none' onclick='nolike(&quot;"+result.productInfos[i].productId+"&quot;,&quot;"+result.productInfos[i].productName+"&quot;"+")'>取消点赞</button></br>"
+						  + "<button id='collect"+result.productInfos[i].productId+"' class='collect' onclick='addCollect(&quot;"+result.productInfos[i].productId+"&quot;,&quot;"+result.productInfos[i].productName+"&quot;"+")'>收藏</button>" 
+						  + "<button style='display:none' id='cancleColl"+result.productInfos[i].productId+"' class='collect' onclick='deleteCollect(&quot;"+result.productInfos[i].productId+"&quot;)'>取消收藏</button></div></li>";
 						$("#p_content").html(tbody);
 					}
 				}

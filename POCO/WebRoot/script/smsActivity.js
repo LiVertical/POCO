@@ -22,14 +22,14 @@ function queryAllActivities(){
 						htmlA = "<tr><td>" + data.activitiesInfos[i].activityName + "</td>"
 									  + "<td>" + data.activitiesInfos[i].applyTime.substring(0,16) + "</td>"
 									  + "<td>" + data.activitiesInfos[i].userName + "</td>" 
-									  + "<td>"+ data.activitiesInfos[i].createTime.substring(0,16) +"--"+data.activitiesInfos[i].endTime.substring(0,16)+"</td>" 
+									  + "<td>"+ data.activitiesInfos[i].createTime.substring(0,10) +"--"+data.activitiesInfos[i].endTime.substring(0,10)+"</td>" 
 									  +"<td>" + statusDesc + "</td></tr>";
 					}
 					if(status == 0){//待审核						
 						htmlC= "<tr> <td>" + data.activitiesInfos[i].activityName + "</td>"
 								  + "<td>" + data.activitiesInfos[i].applyTime.substring(0,16) + "</td>"
 								  + "<td>" + data.activitiesInfos[i].userName + "</td>" 
-								  + "<td>"+ data.activitiesInfos[i].createTime.substring(0,16) +"--"+data.activitiesInfos[i].endTime.substring(0,16)+"</td>" 
+								  + "<td>"+ data.activitiesInfos[i].createTime.substring(0,10) +"--"+data.activitiesInfos[i].endTime.substring(0,10)+"</td>" 
 								  + "<td><button class='auditBtn' onclick='pass(&quot;"+data.activitiesInfos[i].activityId+"&quot;)'>通过</button>" 
 								  + "<button style='background:red' class='auditBtn' onclick='out(&quot;"+data.activitiesInfos[i].activityId+"&quot;)'>否决</button></td></tr>";
 					}

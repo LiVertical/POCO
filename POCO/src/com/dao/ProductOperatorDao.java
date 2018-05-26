@@ -19,8 +19,7 @@ public class ProductOperatorDao extends BaseDao {
 
 	Logger logger = Logger.getLogger(this.getClass());
 
-	public void doSaveProductInfo(String url, String productName, int proType,String productDesc, String productUser, String productGroupId,
-			String activityId, String contestId) {
+	public void doSaveProductInfo(String url, String productName, int proType,String productDesc, String productUser, String productGroupId,String activityId, String contestId) {
 		ProductInfo productInfo = new ProductInfo();
 		productInfo.setProductId(UUIDUtil.generateUUID());
 		productInfo.setProductName(productName);
@@ -152,7 +151,7 @@ public class ProductOperatorDao extends BaseDao {
 				productInfosVo.setProductUserName(user.getUserName());
 				productInfoList.add(productInfosVo);
 			}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			logger.error("查询作品所属用户异常", e);
 		}
 		return productInfoList;

@@ -17,17 +17,16 @@ public class Activities implements java.io.Serializable {
 	private Date createTime;
 	private Date endTime;
 	private String userId;
-	private String userName;
 	private Integer curStatus;
 	private Integer	auditStatus;// 1:通过审核，0：待审核；-1：未通过审核
 	private String activityGroupId;
-	private String productId;
 	private Date applyTime; //申请时间
+
 
 	public Activities(String activityId, String activityInfo,
 			String activityName, String activityDesc, Date createTime,
-			Date endTime, String userId, String userName,Integer curStatus, Integer auditStatus,
-			String activityGroupId, String productId,Date applyTime) {
+			Date endTime, String userId, Integer curStatus,
+			Integer auditStatus, String activityGroupId, Date applyTime) {
 		super();
 		this.activityId = activityId;
 		this.activityInfo = activityInfo;
@@ -36,11 +35,9 @@ public class Activities implements java.io.Serializable {
 		this.createTime = createTime;
 		this.endTime = endTime;
 		this.userId = userId;
-		this.userName = userName;
 		this.curStatus = curStatus;
 		this.auditStatus = auditStatus;
 		this.activityGroupId = activityGroupId;
-		this.productId = productId;
 		this.applyTime = applyTime;
 	}
 
@@ -49,7 +46,7 @@ public class Activities implements java.io.Serializable {
 	}
 
 	public String getActivityId() {
-		return this.activityId;
+		return activityId;
 	}
 
 	public void setActivityId(String activityId) {
@@ -57,7 +54,7 @@ public class Activities implements java.io.Serializable {
 	}
 
 	public String getActivityInfo() {
-		return this.activityInfo;
+		return activityInfo;
 	}
 
 	public void setActivityInfo(String activityInfo) {
@@ -65,7 +62,7 @@ public class Activities implements java.io.Serializable {
 	}
 
 	public String getActivityName() {
-		return this.activityName;
+		return activityName;
 	}
 
 	public void setActivityName(String activityName) {
@@ -73,7 +70,7 @@ public class Activities implements java.io.Serializable {
 	}
 
 	public String getActivityDesc() {
-		return this.activityDesc;
+		return activityDesc;
 	}
 
 	public void setActivityDesc(String activityDesc) {
@@ -81,7 +78,7 @@ public class Activities implements java.io.Serializable {
 	}
 
 	public Date getCreateTime() {
-		return this.createTime;
+		return createTime;
 	}
 
 	public void setCreateTime(Date createTime) {
@@ -89,7 +86,7 @@ public class Activities implements java.io.Serializable {
 	}
 
 	public Date getEndTime() {
-		return this.endTime;
+		return endTime;
 	}
 
 	public void setEndTime(Date endTime) {
@@ -97,7 +94,7 @@ public class Activities implements java.io.Serializable {
 	}
 
 	public String getUserId() {
-		return this.userId;
+		return userId;
 	}
 
 	public void setUserId(String userId) {
@@ -105,27 +102,11 @@ public class Activities implements java.io.Serializable {
 	}
 
 	public Integer getCurStatus() {
-		return this.curStatus;
+		return curStatus;
 	}
 
 	public void setCurStatus(Integer curStatus) {
 		this.curStatus = curStatus;
-	}
-
-	public String getActivityGroupId() {
-		return this.activityGroupId;
-	}
-
-	public void setActivityGroupId(String activityGroupId) {
-		this.activityGroupId = activityGroupId;
-	}
-
-	public String getProductId() {
-		return this.productId;
-	}
-
-	public void setProductId(String productId) {
-		this.productId = productId;
 	}
 
 	public Integer getAuditStatus() {
@@ -136,6 +117,14 @@ public class Activities implements java.io.Serializable {
 		this.auditStatus = auditStatus;
 	}
 
+	public String getActivityGroupId() {
+		return activityGroupId;
+	}
+
+	public void setActivityGroupId(String activityGroupId) {
+		this.activityGroupId = activityGroupId;
+	}
+
 	public Date getApplyTime() {
 		return applyTime;
 	}
@@ -144,12 +133,5 @@ public class Activities implements java.io.Serializable {
 		this.applyTime = applyTime;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 
 }

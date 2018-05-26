@@ -153,6 +153,24 @@ public class WorkAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	//根据活动id查询作品
+	public String queryWorksByActivityId(){
+		logger.info("WorkAction.queryWorksByActivityId start·····");
+		result = new JSONObject();
+		if(StringUtils.isBlank(activityId)){
+			result.put("returnCode", "10");
+			result.put("returnMsg", "查询活动作品信息异常");
+		}
+		try {
+			result.put("worksInfos", workService.queryWorksByActivityId(activityId));
+		} catch (Exception e) {
+			logger.error("查询活动作品信息异常", e);
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部服务器异常");
+		}
+		return SUCCESS;
+	}
+	
 	public JSONObject getResult() {
 		return result;
 	}

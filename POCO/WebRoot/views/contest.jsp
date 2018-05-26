@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>大赛详情</title>
+    <title>大赛</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -77,6 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="header">
 		<ul>
 			<li><a href="<%=basePath%>/views/activities.jsp">活动</a></li>
+			<li><a href="<%=basePath%>/views/activities.jsp">大赛作品top3</a></li>
 	 	</ul>
 	 	<ul style="float:right;padding-right:66px">
 		 <s:if test="%{#session.isEmpty()}">

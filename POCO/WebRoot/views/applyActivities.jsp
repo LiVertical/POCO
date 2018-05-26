@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=basePath%>/js/jquery-ui.js"></script> 
   </head>
   
-<body>
+<body data-user_id='${param.userId  }'>
 <div class="header">
 		<ul>
 			<li><a href="<%=basePath%>/views/activities.jsp">活动</a></li>

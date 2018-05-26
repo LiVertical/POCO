@@ -136,8 +136,6 @@ public class ActivityAction extends ActionSupport{
 			return SUCCESS;
 		}
 	
-	//参加活动
-	
 	//展示活动详情
 		public String queryActivityInfo(){
 			logger.info("ActivityAction.queryActivityInfo start·····");
@@ -160,7 +158,6 @@ public class ActivityAction extends ActionSupport{
 			}
 			return SUCCESS;
 		}
-	//
 
 
 	public String getActivityId() {

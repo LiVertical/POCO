@@ -20,9 +20,9 @@ public class RegistDao extends BaseDao{
 		}
 	}
 	//用户名是否已经存在
-	public boolean isOrNotHasUserName(String username){
+	public boolean isOrNotHasUserName(String loginName){
 		boolean b = false;		
-		List<Users> list =  getSession().createQuery("FROM Users WHERE loginName='" + username + "'").list();
+		List<Users> list =  getSession().createQuery("FROM Users WHERE loginName='" + loginName + "'").list();
 		if(list.size()>0){
 			b = true;
 		}
@@ -38,7 +38,6 @@ public class RegistDao extends BaseDao{
 			user.setLoginPass(MD5.getMD5ofString("123456"));
 			user.setUserName(userName);
 			user.setCreateTime(new Date());
-			user.setCurStatus(1);
 			getSession().save(user);
 		} catch (Exception e) {
 			logger.error("添加系统管理员异常", e);

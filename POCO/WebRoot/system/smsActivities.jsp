@@ -41,7 +41,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<div class="container">
 		<div id="passed" class="box">
-				<h2>已通过审核活动</h2>
 				<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
 						<thead>
 							<tr class='tr_head'>
@@ -59,7 +58,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		
 		<div id="noLicensed" class="box">
-				<h2>待审核活动</h2>
 				<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
 						<thead>
 							<tr class='tr_head'>

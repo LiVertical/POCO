@@ -13,8 +13,8 @@ public class UserService implements IUserService{
 	private UserDao userDao;
 	Logger logger = Logger.getLogger(this.getClass());
 	
-	public List<Users> queryUserByCondition(int recordSize, int currentPage){
-		List<Users> userInfos =  userDao.queryUserInfo(recordSize, currentPage);
+	public List<Users> queryUserByCondition(int recordSize, int currentPage,String userName){
+		List<Users> userInfos =  userDao.queryUserInfo(recordSize, currentPage, userName);
 	    return userInfos;
 	}
 	

@@ -91,10 +91,6 @@ public class LoginAction extends BaseAction{
 			}
 			Users user = loginService.findByUserNameAndUserPass(loginName, loginPass, role);
 			if(user != null){
-//				if(!code.equals(user.getSecurityCode())) {
-//					logger.info("验证码错误");
-//					return "sys";
-//				}
 				cuserInfo.setLoginName(loginName);
 				cuserInfo.setPassword(loginPass);
 				cuserInfo.setRole(role);

@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
+import com.constants.FileConstants;
 import com.entities.ProductInfo;
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.IProductOperatorService;
@@ -82,16 +83,17 @@ public class ProductOperatorAction extends ActionSupport {
 				String ext = imageFileName.substring(imageFileName.lastIndexOf(".") + 1);
 				// 更改源文件的名称+时间
 				String newFileName = new Date().getTime() + "." + ext;
-				File file = new File(ServletActionContext.getServletContext().getRealPath("/images") + "/" + newFileName);
-				logger.info("file:" + image);
-				// 如果不存在此文件夹，则自动创建
-				if (!file.exists() || !file.isFile()) {
-					file.createNewFile();
-				}
-				UploadFileUtil uploadFileUtil = new UploadFileUtil();
-				uploadFileUtil.uploadImgs(image, file);
-				// 保存路径
 				url = "images" + "/" + newFileName;
+				File file = new File(FileConstants.FILE_STORE_PATH);
+				//如果文件夹不存在则创建
+				if(file.isDirectory() && file.exists()==false){
+					file.mkdir();
+		        }
+				logger.info("file:" + image);
+				File img = new File(FileConstants.FILE_STORE_PATH + "/"+newFileName);
+				UploadFileUtil uploadFileUtil = new UploadFileUtil();
+				uploadFileUtil.uploadImgs(image, img);
+				// 保存路径
 				productOperatorService.saveProductInfo(url, productName, proType, productDesc, productUser, productGroupId, activityId, contestId);
 			}
 			result.put("returnCode", "00");

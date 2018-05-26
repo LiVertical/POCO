@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
+import com.constants.FileConstants;
 import com.entities.Users;
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.IUserService;
@@ -55,7 +56,7 @@ public class UserAction extends ActionSupport{
 		try {
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
-			result.put("userInfos", JSONArray.fromObject(userService.queryUserByCondition(recordSize, currentPage), jsonConfig));
+			result.put("userInfos", JSONArray.fromObject(userService.queryUserByCondition(recordSize, currentPage,userName), jsonConfig));
 			result.put("usersCount", userService.countUser());
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询用户信息成功");
@@ -137,15 +138,16 @@ public class UserAction extends ActionSupport{
 			//得到新的图片名
 			String newFileName = new Date().getTime()+"."+arrix;
 			logger.info("新文件名：:"+newFileName);
-			File file = new File(ServletActionContext.getServletContext().getRealPath("/images"));
-			//如果文件夹不存在则创建
-			if(!file.exists() && !file.isDirectory()){
-				file.mkdirs();
-			}
-			//把文件复制过去
-			UploadFileUtil uploadFileUtil = new UploadFileUtil();
-			uploadFileUtil.uploadImgs(upload, file);
 			url = "images"+ "/"+newFileName;	
+			File file = new File(FileConstants.FILE_STORE_PATH);
+			//如果文件夹不存在则创建
+			if(file.isDirectory() && file.exists()==false){
+				file.mkdir();
+	        }
+			//把文件复制过去
+			File img = new File(FileConstants.FILE_STORE_PATH + "/"+newFileName);
+			UploadFileUtil uploadFileUtil = new UploadFileUtil();
+			uploadFileUtil.uploadImgs(upload, img);
 			userService.saveOrUpdateUserImg(userId, url);	
 			result.put("returnCode", "00");
 			result.put("returnMsg", "保存用户头像成功");

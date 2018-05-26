@@ -1,4 +1,6 @@
+var uuid;
 $(document).ready(function(){
+	uuid = guid();
 	$("#image").on("change", function(){
 		upload();
 	});
@@ -12,8 +14,8 @@ function upload(){
 	var proType = $("select option:selected").val().trim();
 	var image = document.getElementById("image").files[0];
 	var productDesc = $("input[name='productDesc']").val();
-	var productGroupId = guid();
-	var activityId = $("body").data().activity_id;
+	var productGroupId = uuid;
+	var activityId = GetRequest();
 	var contestId = $("body").data().contest_id;
 	console.log("当前组id:"+productGroupId);
 	console.log("活动id:"+activityId+"；大赛id："+contestId);
@@ -102,7 +104,8 @@ function getObjectURL(file) {
 function uploadWork(){
 	var workName = $("#workTitle").val();
 	var workComment = $('#summernote').summernote('code');
-	var productGroupId = GetRequest();
+	var productGroupId = uuid;
+	var activityId = GetRequest();
 	var contestId = $("body").data().contest_id;
 	if(workName == ''){
 		alert("请输入作品标题");
@@ -117,6 +120,7 @@ function uploadWork(){
 			workComment : workComment,
 			productGroupId:productGroupId,
 			contestId:contestId,
+			activityId:activityId,
 	};
 	$.post(getRootPath()+"/user/addWork.action", params, function(data){
 		if(data.returnCode == '00'){

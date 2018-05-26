@@ -95,8 +95,10 @@ public class ActivityDao extends BaseDao {
 	}
 
 
-	public List<Activities> doQueryAllActivities() {
-		return getSession().createQuery("FROM Activities").list();
+	public List<Activities> doQueryAllActivities(int currentPage,int recordSize,Integer auditStatus) {
+		return getSession().createQuery("FROM Activities WHERE auditStatus="+auditStatus)
+				.setFirstResult((currentPage-1)*recordSize)
+				.setMaxResults(recordSize).list();
 	}
 
 

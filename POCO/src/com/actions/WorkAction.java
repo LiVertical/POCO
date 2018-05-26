@@ -111,7 +111,7 @@ public class WorkAction extends ActionSupport{
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
 			result.put("worksInfo", JSONArray.fromObject(workService.queryWorksInfo(currentPage, recordSize), jsonConfig));
-			result.put("worksCount", workService.countWorks());
+			result.put("worksCount", workService.countWorks(null,null,null));
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询作品成功");
 		} catch (Exception e) {

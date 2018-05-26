@@ -34,14 +34,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	<div class="topNav">
 			 <ul class="menu">
-                <li class="on"><a href="#passed">已审核活动</a></li>
-                 <li><a href="#noLicensed">待审核活动</a></li>
+                <li class="on"><a type="button" onclick="queryAllActivities(1)">已审核活动</a></li>
+                 <li><a type="button" onclick="queryAllActivities(0)">待审核活动</a></li>
             </ul>
 	</div>
 	
 	<div class="container">
 		<div id="passed" class="box">
-				<h2>已通过审核活动</h2>
 				<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
 						<thead>
 							<tr class='tr_head'>
@@ -49,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td style="width:130px">申请时间</td>
 								<td style="width:80px">申请人</td>
 								<td style="width:210px">活动有效期</td>
-								<td style="width:80px">审核结果</td>
+								<td style="width:80px">操作</td>
 							</tr>
 						</thead>
 						<tbody class="table" id="dataDisplayA"></tbody>
@@ -58,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		
 		
-		<div id="noLicensed" class="box">
+		<!-- <div id="noLicensed" class="box">
 				<h2>待审核活动</h2>
 				<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
 						<thead>
@@ -73,7 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tbody class="table" id="dataDisplayC"></tbody>
 					</table>
 					<div class="pagination" id="pageC"></div>
-		</div>
+		</div> -->
 		
 	</div>
 	

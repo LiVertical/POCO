@@ -13,7 +13,7 @@ public interface IActivityService {
 			String activityDesc, String activityInfo, String createTime,
 			String endTime);
 
-	List<Activities> queryAllActivitiesByCondition();
+	List<Activities> queryAllActivitiesByCondition(int currentPage,int recordSize, Integer auditStatus);
 
 	int queryAllActivitiesCount();
 

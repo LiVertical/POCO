@@ -21,13 +21,13 @@ public class WorkService implements IWorkService {
 	}
 	
 	@Override
-	public List<Work> queryProductByWorkType(int workType) {
+	public List<Work> queryProductByWorkType(Integer workType) {
 		return workDao.getWorksByWorkType(workType);
 	}
 	
 	@Override
-	public List<WorksInfos> queryWorks(int currentPage, int recordSize) {
-		return workDao.doQueryAllWorksInfo(currentPage, recordSize);
+	public List<WorksInfos> queryWorks(int currentPage, int recordSize, String workName, String userName, Integer workType) {
+		return workDao.doQueryAllWorksInfo(currentPage, recordSize,workName,userName,workType);
 	}
 	
 	@Override

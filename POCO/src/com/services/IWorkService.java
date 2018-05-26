@@ -10,7 +10,7 @@ public interface IWorkService {
 
 	void doAddWork(String userId, String workName, String workComment, String productGroupId, String activityId, String contestId);
 
-	List<Work> queryProductByWorkType(int workType);
+	List<Work> queryProductByWorkType(Integer workType);
 
 	int countWorks();
 
@@ -18,7 +18,7 @@ public interface IWorkService {
 
 	WorksInfos queryWorksInfoByWorkId(String workId);
 
-	List<WorksInfos> queryWorks(int currentPage, int recordSize);
+	List<WorksInfos> queryWorks(int currentPage, int recordSize, String workName, String userName, Integer workType);
 
 	List<WorksInfos> doQueryWorksInfoByContestId(String contestId);
 

@@ -5,9 +5,15 @@ $(function(){
 function getAllWorksInfos(page){
 	var currentPage = page;
 	var recordSize = 8;
+	var workName = $("#workName").val();
+	var userName = $("#userName").val();
+	var workType = $("#workType").val();
 	var params = {
 			currentPage : currentPage,
 			recordSize : recordSize,
+			workName:workName,
+			userName:userName,
+			workType:workType
 	};
 	$.post(getRootPath() + "/admin/queryAllWorks.action", params, function(data){
 		if(data.returnCode == '00'){

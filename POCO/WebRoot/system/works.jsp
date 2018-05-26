@@ -40,6 +40,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<div id="p_content">
 		<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
 			<thead>
+				<tr>
+					<span>作品名：</span>
+					<input type="text" name="workName" id="workName"/>
+					<span>用户名：</span>
+					<input type="text" name="userName" id="userName"/>
+					<span>作品分类：</span>
+					<select class="type" name="workType" id="workType">
+						<option value="">请选择作品分类</option>
+						<option value="0">人像摄影</option>
+						<option value="1">生态摄影</option>
+						<option value="2">运动摄影</option>
+						<option value="3">生活摄影</option>
+						<option value="4">夜景摄影</option>
+						<option value="5">风景摄影</option>
+						<option value="6">纪实摄影</option>
+						<option value="7">人体摄影</option>
+						<option value="9">自拍摄影</option>
+						<option value="10">商业摄影</option>
+						<option value="11">LOMO</option>
+						<option value="8">其他摄影</option>
+					</select>
+					<input type="button" value="查询" onclick="getAllWorksInfos(1)"/>
+				</tr>
 				<tr class="tr_head">
 					<td style="width:40px">序号</td>
 					<td style="width:100px">作品标题</td>

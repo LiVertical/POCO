@@ -1,6 +1,7 @@
 package com.actions;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -13,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.services.IWorkService;
 import com.util.JsonDateValueProcessor;
 import com.util.LoginUserUtil;
+import com.vo.WorksInfos;
 
 public class WorkAction extends ActionSupport{
 	
@@ -23,12 +25,13 @@ public class WorkAction extends ActionSupport{
 	private String productGroupId;
 	private String workName;
 	private String workComment;
-	private int workType;
+	private String workType;
 	private int currentPage;
 	private int recordSize;
 	private String activityId;
 	private String workId;
 	private String contestId;
+	private String userName;
 	
 	public String addWork(){
 		logger.info("WorkAction.addWork start·····");
@@ -58,10 +61,14 @@ public class WorkAction extends ActionSupport{
 	public String queryWorksByType() {
 		logger.info("ProductOperatorAction.queryProductByType start·····");
 		try {
+			Integer workTypeInteger = null ;
+			if (workType != null && "".equals(workType)) {
+				workTypeInteger = Integer.valueOf(workType);
+			}
 			result = new JSONObject();
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
-			result.put("works", JSONArray.fromObject(workService.queryProductByWorkType(workType), jsonConfig));
+			result.put("works", JSONArray.fromObject(workService.queryProductByWorkType(workTypeInteger), jsonConfig));
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询成功");
 		} catch (Exception e) {
@@ -77,9 +84,14 @@ public class WorkAction extends ActionSupport{
 		logger.info("WorkAction.queryAllWorks start ······");
 		result = new JSONObject();
 		try {
+			Integer workTypeInteger = null ;
+			if (workType != null && !"".equals(workType)) {
+				workTypeInteger = Integer.valueOf(workType);
+			}
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
-			result.put("worksInfo", JSONArray.fromObject(workService.queryWorks(currentPage, recordSize), jsonConfig));
+			List<WorksInfos> queryWorks = workService.queryWorks(currentPage, recordSize,workName,userName,workTypeInteger);
+			result.put("worksInfo", JSONArray.fromObject(queryWorks, jsonConfig));
 			result.put("worksCount", workService.countWorks());
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询作品成功");
@@ -190,11 +202,11 @@ public class WorkAction extends ActionSupport{
 		this.workComment = workComment;
 	}
 
-	public int getWorkType() {
+	public String getWorkType() {
 		return workType;
 	}
 
-	public void setWorkType(int workType) {
+	public void setWorkType(String workType) {
 		this.workType = workType;
 	}
 
@@ -236,6 +248,14 @@ public class WorkAction extends ActionSupport{
 
 	public void setContestId(String contestId) {
 		this.contestId = contestId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 }

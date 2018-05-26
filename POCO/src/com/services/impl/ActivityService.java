@@ -26,8 +26,8 @@ public class ActivityService implements IActivityService {
 	}
 	
 	@Override
-	public List<Activities> queryAllActivitiesByCondition() {
-		return activityDao.doQueryAllActivities();
+	public List<Activities> queryAllActivitiesByCondition(int currentPage,int recordSize,Integer auditStatus) {
+		return activityDao.doQueryAllActivities(currentPage,recordSize,auditStatus);
 	}
 
 	@Override

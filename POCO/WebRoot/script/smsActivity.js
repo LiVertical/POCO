@@ -1,40 +1,62 @@
 $(function(){
-	queryAllActivities();
+	queryAllActivities(1,1);
 });
-
-function queryAllActivities(){
-	$.post(getRootPath() + "/admin/queryAllActivities.action",  function(data){
+var activiesStatus;
+function queryAllActivities(activiesStatus,page){
+	activiesStatus = activiesStatus;
+	var currentPage = page;
+	var recordSize = 6;
+	params = {
+			currentPage : currentPage,
+			recordSize : recordSize,
+			auditStatus : activiesStatus,
+	};
+	
+	$.post(getRootPath() + "/admin/queryAllActivities.action",params,  function(data){
 		if(data.returnCode == '00'){
 			$("#dataDisplayA").empty();
-			$("#dataDisplayB").empty();
-			$("#dataDisplayC").empty();
+//			$("#dataDisplayB").empty();
+//			$("#dataDisplayC").empty();
 			if(data.activitiesInfos.length > 0){
-				var htmlA="";
-				var htmlC="";
-				for(var i = 0; i < data.activitiesInfos.length; i++){
+//				var htmlC="";
+				var pageSize = (data.activitiesInfos.length > recordSize ? recordSize: data.activitiesInfos.length);
+				for(var i = 0; i < pageSize; i++){
+					var htmlA="";
 					var status = data.activitiesInfos[i].auditStatus;
 					var curStatus = data.activitiesInfos[i].curStatus;
-					var statusDesc = "已通过审核";
-					if(curStatus == 0){
-						statusDesc = "未通过审核";
-					}
+					htmlA = "<tr><td>" + data.activitiesInfos[i].activityName + "</td>"
+					+ "<td>" + data.activitiesInfos[i].applyTime.substring(0,16) + "</td>"
+					+ "<td>" + data.activitiesInfos[i].userName + "</td>" 
+					+ "<td>"+ data.activitiesInfos[i].createTime.substring(0,16) +"--"+data.activitiesInfos[i].endTime.substring(0,16)+"</td>" 
 					if(status == 1){//已审核
-						htmlA = "<tr><td>" + data.activitiesInfos[i].activityName + "</td>"
-									  + "<td>" + data.activitiesInfos[i].applyTime.substring(0,16) + "</td>"
-									  + "<td>" + data.activitiesInfos[i].userName + "</td>" 
-									  + "<td>"+ data.activitiesInfos[i].createTime.substring(0,10) +"--"+data.activitiesInfos[i].endTime.substring(0,10)+"</td>" 
-									  +"<td>" + statusDesc + "</td></tr>";
-					}
-					if(status == 0){//待审核						
-						htmlC= "<tr> <td>" + data.activitiesInfos[i].activityName + "</td>"
-								  + "<td>" + data.activitiesInfos[i].applyTime.substring(0,16) + "</td>"
-								  + "<td>" + data.activitiesInfos[i].userName + "</td>" 
-								  + "<td>"+ data.activitiesInfos[i].createTime.substring(0,10) +"--"+data.activitiesInfos[i].endTime.substring(0,10)+"</td>" 
-								  + "<td><button class='auditBtn' onclick='pass(&quot;"+data.activitiesInfos[i].activityId+"&quot;)'>通过</button>" 
-								  + "<button style='background:red' class='auditBtn' onclick='out(&quot;"+data.activitiesInfos[i].activityId+"&quot;)'>否决</button></td></tr>";
+
+						var statusDesc = "已通过审核";
+						if(curStatus == 0){
+							statusDesc = "未通过审核";
+						}
+						
+						htmlA = htmlA +"<td>" + statusDesc + "</td></tr>";
+						
+					}else if(status == 0){
+						htmlA = htmlA + "<td><button class='auditBtn' onclick='pass(&quot;"+data.activitiesInfos[i].activityId+"&quot;)'>通过</button>" 
+						  + "<button style='background:red' class='auditBtn' onclick='out(&quot;"+data.activitiesInfos[i].activityId+"&quot;)'>否决</button></td></tr>";
+
 					}
 					$("#dataDisplayA").append(htmlA);
-					$("#dataDisplayC").append(htmlC);
+					
+				}
+				 if ($("#pageA").html() == '') {
+			           $("#pageA").pagination(data.totalActivitiesCount, {
+			                callback: function (index) {
+			                	queryAllActivities(activiesStatus,index+1);
+			                },
+			                prev_text: '上一页',       //上一页按钮里text
+			                next_text: '下一页',       //下一页按钮里text
+			                items_per_page: recordSize, 
+			                current_page:currentPage-1,
+			                num_display_entries: 6,    //连续分页主体部分分页条目数
+			                num_edge_entries: 2        //两侧首尾分页条目数
+			           });
 				}
 			}
 		}

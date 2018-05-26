@@ -31,8 +31,10 @@ public class ActivityAction extends ActionSupport{
 	private JSONObject result; 
 	private IActivityService activityService;
 	private int currentPage;
+	private int recordSize;
 	private int pageSize;
 	private int curStatus;
+	private Integer auditStatus;
 	
 	//用户申请活动
 	public String applyActivity(){
@@ -105,7 +107,7 @@ public class ActivityAction extends ActionSupport{
 		try {
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
-			result.put("activitiesInfos", JSONArray.fromObject(activityService.queryAllActivitiesByCondition(), jsonConfig));
+			result.put("activitiesInfos", JSONArray.fromObject(activityService.queryAllActivitiesByCondition(currentPage,recordSize,auditStatus), jsonConfig));
 			result.put("totalActivitiesCount", activityService.queryAllActivitiesCount());
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询成功");
@@ -279,5 +281,22 @@ public class ActivityAction extends ActionSupport{
 	public void setCurStatus(int curStatus) {
 		this.curStatus = curStatus;
 	}
+
+	public Integer getAuditStatus() {
+		return auditStatus;
+	}
+
+	public void setAuditStatus(Integer auditStatus) {
+		this.auditStatus = auditStatus;
+	}
+
+	public int getRecordSize() {
+		return recordSize;
+	}
+
+	public void setRecordSize(int recordSize) {
+		this.recordSize = recordSize;
+	}
+	
 	
 }

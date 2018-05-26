@@ -7,6 +7,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.type.StandardBasicTypes;
 
 import com.entities.ProductInfo;
 import com.entities.Users;
@@ -47,40 +50,102 @@ public class WorkDao extends BaseDao{
 		}
 	}
 
-	public List<Work> getWorksByWorkType(int workType) {
-		String sql = "FROM Work WHERE workType = '"+ workType +"'";
+	public List<Work> getWorksByWorkType(Integer workType) {
+		
+		String sql = "FROM Work WHERE 1=1";
+		if (workType != null) {
+			sql = sql +"workType = '"+ workType +"'";
+		}
 		return getSession().createQuery(sql).list();
 	}
 
-	public List<WorksInfos> doQueryAllWorksInfo(int currentPage, int recordSize) {
+	public List<WorksInfos> doQueryAllWorksInfo(int currentPage, int recordSize, String workName, String userName, Integer workType) {
 		List<WorksInfos> workInfos = new ArrayList<WorksInfos>();
-		String sql = "FROM Work";
-		List<Work> works = getSession().createQuery(sql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
-		for(Work work : works){
-			if(work.getProductGroupId() != null){
+		ArrayList<Users> users = new ArrayList<Users>();
+//		String sqll = "FROM Work ";
+//		String sql = "FROM Work w,User WHERE workType = :workType";
+//		if (workName != null && "".equals(workName)) {
+//			sql = sql + "AND workName LIKE :workNname";
+//		}
+//		if (userName != null && "".equals(userName)) {
+//			String userSql = "FORM Users WHERE userName LIKE :userName";
+//			users = (ArrayList<Users>) getSession().createQuery(userSql).setString("userName", "%"+userName+"%").list();
+//			sql = sql + "AND userId in {}";
+//		}
+		
+		
+		String sql = "SELECT w.work_id,w.work_name,w.work_comment,w.work_upload_time,w.product_group_id,"
+				+ "us.userName FROM `work` AS w,`users` AS us WHERE w.user_id=us.userId ";
+		if (workType != null) {
+			sql = sql +"AND w.work_type="+workType;
+		}
+		if (userName != null && !"".equals(userName)) {
+			sql = sql + "AND us.userName like '%"+userName+"%'";
+		}
+		if (workName != null && !"".equals(workName)) {
+			sql = sql +"AND w.work_name like '%"+workName+"%'";
+		}
+		
+		List list = getSession().createSQLQuery(sql)
+		.addScalar("w.work_id",StandardBasicTypes.STRING)
+		.addScalar("w.work_name",StandardBasicTypes.STRING)
+		.addScalar("w.work_comment",StandardBasicTypes.STRING)
+		.addScalar("w.work_upload_time",StandardBasicTypes.DATE)
+		.addScalar("w.product_group_id",StandardBasicTypes.STRING)
+		.addScalar("us.userName",StandardBasicTypes.STRING)
+		.setFirstResult((currentPage-1)*recordSize)
+		.setMaxResults(recordSize).list();
+		
+		for (Object obj : list) {
+			Object[] objs = (Object[]) obj;
+			String workIdStr = (String) objs[0];
+			String workNameStr = (String) objs[1];
+			String workCommentStr = (String) objs[2];
+			Date workUploadTime = (Date) objs[3];
+			String productGroupIdStr = (String) objs[4];
+			String userNameStr = (String) objs[5];
+			if (productGroupIdStr != null && !"".equals(productGroupIdStr)) {
 				WorksInfos workVo = new WorksInfos();
-				String sql2 = "FROM ProductInfo WHERE productGroupId = '" + work.getProductGroupId() + "'";
+				String sql2 = "FROM ProductInfo WHERE productGroupId = '" + productGroupIdStr + "'";
 				List<ProductInfo> products = getSession().createQuery(sql2).list();
-				Users user = new Users();
-				String sql3 = "FROM Users WHERE userId = '"+work.getUserId()+"'";
-				user = (Users) getSession().createQuery(sql3).list().get(0);
 				workVo.setProductInfos(products);
-				workVo.setUserName(user.getUserName());
-				workVo.setWorkId(work.getWorkId());
-				workVo.setWorkName(work.getWorkName());
-				workVo.setWorkComment(work.getWorkComment());
-				workVo.setWorkUploadTime(work.getWorkUploadTime().toString());
+				workVo.setUserName(userNameStr);
+				workVo.setWorkId(workIdStr);
+				workVo.setWorkName(workNameStr);
+				workVo.setWorkComment(workCommentStr);
+				workVo.setWorkUploadTime(workUploadTime.toString());
 				workInfos.add(workVo);
 			}
+			
 		}
+				
 		return workInfos;
 	}
 
-	public int doCountWorks() {
-		String sql = "FROM Work";
-		int size = 0;
-		size = getSession().createQuery(sql).list().size();
-		return size;
+	public int doCountWorks(String workName, String userName, Integer workTypeInteger) {
+		
+		String sql = "SELECT w.work_id,w.work_name,w.work_comment,w.work_upload_time,w.product_group_id,"
+				+ "us.userName FROM `work` AS w,`users` AS us WHERE w.user_id=us.userId ";
+		if (workTypeInteger != null) {
+			sql = sql +"AND w.work_type="+workTypeInteger;
+		}
+		if (userName != null && !"".equals(userName)) {
+			sql = sql + "AND us.userName like '%"+userName+"%'";
+		}
+		if (workName != null && !"".equals(workName)) {
+			sql = sql +"AND w.work_name like '%"+workName+"%'";
+		}
+		
+		List list = getSession().createSQLQuery(sql)
+		.addScalar("w.work_id",StandardBasicTypes.STRING)
+		.addScalar("w.work_name",StandardBasicTypes.STRING)
+		.addScalar("w.work_comment",StandardBasicTypes.STRING)
+		.addScalar("w.work_upload_time",StandardBasicTypes.DATE)
+		.addScalar("w.product_group_id",StandardBasicTypes.STRING)
+		.addScalar("us.userName",StandardBasicTypes.STRING)
+		.list();
+		 
+		return list.size();
 	}
 
 	public List<workDescInfoVo> queryAllWorksInfo(int currentPage,int recordSize) {

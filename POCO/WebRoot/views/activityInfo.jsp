@@ -60,6 +60,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		margin-top:40px;
 		margin-bottom:30px;
 	}
+	
+	.work{
+		height:300px;
+		width:90%;
+		margin-top:20px;
+		border-top:2px solid #969696;
+	}
+	.img{
+		height:100%;
+		width:100%;
+	}
+	.right{
+		float:left;
+		width:57%;
+		height:100%;
+		overflow:hidden;
+	}
+	.right ul li{
+		height:150px;
+		width:130px;
+		float:left;
+	}
+	.vote{
+		background:red;
+		color:#fff;
+		border:none;
+		border-radius:2px;
+		height:30px;
+		width:100px;
+		outline:none;
+	}
+	.contest{
+		text-align:center;
+		min-height:200px;
+		border-bottom:10px solid #e6e6e6;
+		border-top:20px solid #e6e6e6;
+	}
 </style>
 </head>
 <body>
@@ -90,19 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 <div id="content" class="content"></div>
 	 <!-- <div id="p_content"> -->
 	 <div id="p_content" class="main" style='min-height:450px'>
-		<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
-			<thead>
-				<tr class="tr_head">
-					<td style="width:40px">序号</td>
-					<td style="width:100px">作品标题</td>
-					<td style="width:240px">作品内容</td>
-					<td style="width:140px">上传时间</td>
-					<td style="width:240px">作品配图</td>
-					<td style="width:100px">所属用户</td>
-				</tr>
-			</thead>
-			<tbody class="table" id="dataDisplay"></tbody>
-		</table>
+		
 	</div>
     <div class="pagination" id="page"></div>
 	 	
@@ -134,6 +159,7 @@ function getActivityInfo(){
 		console.log(data.activityInfos);
 		var html = "<h1>"+data.activityInfos[0].activityName+"</h1>"
 						+"<div class='desc'><p>"+data.activityInfos[0].activityDesc+"</p></div>"
+						+"<div id='t_content'></div>"
 						+"<div class='time'>活动期限："+data.activityInfos[0].createTime.substring(0,10)+"--"+data.activityInfos[0].endTime.substring(0,10)
 						+"</div>";
 		$("#p_content").append(html);
@@ -146,35 +172,23 @@ function getAllActivityWorks(){
 	var activityId = GetRequest();
 	console.log("活动id:"+activityId);
 	$.post(getRootPath() + "/vistor/queryWorksByActivityId.action?activityId="+activityId, function(data){
-			$("#dataDisplay").empty();
-//			var pageSize = (data.worksInfos.length > recordSize ? recordSize: data.worksInfos.length);
-			var tbody = "";
-			for(var i = 0; i < data.worksInfos.length; i++){
-				var products = ""; 
-				for(var j = 0; j < data.worksInfos[i].productInfos.length; j++){
-					products +="<li class='img'><img src='" + getRootPath() + "/" + data.worksInfos[i].productInfos[j].productPath+"'></li>"; 
+			$("#t_content").empty();
+			
+			console.log(data.worksInfos);
+			var html = "";
+			for(var i=0; i < data.worksInfos.length; i++){
+				var vote = "vote"+data.worksInfos[i].workId;
+				console.log(vote);
+				var htm1 = "";
+				for(var j = 0; j < data.worksInfos[i].productInfos.length;j++){
+					htm1 += "<li><img  class='img' src='"+getRootPath()+"/"+data.worksInfos[i].productInfos[j].productPath+"'></li>";
 				}
-				 tbody += "<tr><td>"+ (i+1) + "</td>"
-	              + "<td style='height:150px;width:150px;'>"+ data.worksInfos[i].workName +"</td>"
-	              + "<td style='word-break'>" + data.worksInfos[i].workComment + "</td>"
-	              + "<td style='word-break'>" + data.worksInfos[i].workUploadTime.substring(0,16) + "</td>"
-				  + "<td><ul>" + products + "</ul></td>"
-				  + "<td>" + data.worksInfos[i].userName + "</td>" 
-				  + "<td><img style='height:30px;width:44px' src='"+getRootPath()+"/img/icons/delete.jpg' class='delBtn' onclick='deleteProduct("+data.worksInfos[i].workId+")'></td></tr>";
+				html += "<li class='work'><div class='desc'><h5 style='text-align:center;padding:10px'>"+data.worksInfos[i].workName+"</h5>"
+				+data.worksInfos[i].workComment+"</div>"
+				+"<div class='right'><ul>"+htm1+"</ul></div>"
+				+"</li>";
 			}
-			$("#dataDisplay").html(tbody);
-			$("#page").pagination(data.worksCount,{
-					callback : function(index) {
-									 initUserData(index+1);
-								 },
-					prev_text : '上一页', //上一页按钮里text
-					next_text : '下一页', //下一页按钮里text
-					items_per_page : pageSize, //显示条数
-					current_page:currentPage-1,
-					num_display_entries : 6, //连续分页主体部分分页条目数
-					num_edge_entries : 2//两侧首尾分页条目数
-			});
-			window.parent.window.iframeHeight();
+			$("#t_content").append(html);
 		}
 	);
 }

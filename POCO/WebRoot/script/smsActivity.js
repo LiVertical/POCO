@@ -1,26 +1,37 @@
+var auditStatus = 1;
 $(function(){
 	queryAllActivities(1);
+	
+	$("#ready").click(function(){
+		auditStatus = 1;
+		queryAllActivities(1);
+	});
+	
+	$("#wait").click(function(){
+		auditStatus = 0;
+		queryAllActivities(1);
+	});
+	
 });
-var activiesStatus;
-function queryAllActivities(activiesStatus,page){
+
+function queryAllActivities(page){
 	var currentPage = page;
 	var recordSize = 6;
-	var auditStatus = 
 	params = {
 			currentPage : currentPage,
 			recordSize : recordSize,
-			auditStatus : activiesStatus,
+			auditStatus : auditStatus,
 	};
 	$.post(getRootPath() + "/admin/queryAllActivities.action", params,  function(data){
 		if(data.returnCode == '00'){
-			$("#dataDisplayA").empty();
+			$("#dataDisplay").empty();
 			if(data.activitiesInfos.length > 0){
-				var pageSize = (data.activitiesInfos.length > recordSize ? recordSize: data.activitiesInfos.length);
+				var pageSize = data.activitiesInfos.length > recordSize ? recordSize: data.activitiesInfos.length;
 				for(var i = 0; i < pageSize; i++){
-					var htmlA="";
+					var html="";
 					var status = data.activitiesInfos[i].auditStatus;
 					var curStatus = data.activitiesInfos[i].curStatus;
-					htmlA = "<tr><td>" + data.activitiesInfos[i].activityName + "</td>"
+					html = "<tr><td>" + data.activitiesInfos[i].activityName + "</td>"
 					+ "<td>" + data.activitiesInfos[i].applyTime.substring(0,16) + "</td>"
 					+ "<td>" + data.activitiesInfos[i].activityDesc + "</td>" 
 					+ "<td>"+ data.activitiesInfos[i].createTime.substring(0,16) +"--"+data.activitiesInfos[i].endTime.substring(0,16)+"</td>" 
@@ -29,15 +40,15 @@ function queryAllActivities(activiesStatus,page){
 						if(curStatus == 0){
 							statusDesc = "未通过审核";
 						}
-						htmlA = htmlA +"<td>" + statusDesc + "</td></tr>";
+						html += "<td>" + statusDesc + "</td></tr>";
 					}else if(status == 0){
-						htmlA = htmlA + "<td><button class='auditBtn' onclick='pass(&quot;"+data.activitiesInfos[i].activityId+"&quot;)'>通过</button>" 
+						html += "<td><button class='auditBtn' onclick='pass(&quot;"+data.activitiesInfos[i].activityId+"&quot;)'>通过</button>" 
 						  + "<button style='background:red' class='auditBtn' onclick='out(&quot;"+data.activitiesInfos[i].activityId+"&quot;)'>否决</button></td></tr>";
 					}
-					$("#dataDisplayA").append(htmlA);
+					$("#dataDisplay").append(html);
 				}
-				 if ($("#pageA").html() == '') {
-			           $("#pageA").pagination(data.totalActivitiesCount, {
+				 if ($("#page").html() == '') {
+			           $("#page").pagination(data.totalActivitiesCount, {
 			                callback: function (index) {
 			                	queryAllActivities(index+1);
 			                },

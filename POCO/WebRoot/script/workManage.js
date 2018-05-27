@@ -18,7 +18,7 @@ function getAllWorksInfos(page){
 	$.post(getRootPath() + "/admin/queryAllWorks.action", params, function(data){
 		if(data.returnCode == '00'){
 			$("#dataDisplay").empty();
-			var pageSize = (data.worksInfo.length > recordSize ? recordSize: data.worksInfo.length);
+			var pageSize = data.worksInfo.length > recordSize ? recordSize: data.worksInfo.length;
 			var tbody = "";
 			for(var i = 0; i < pageSize; i++){
 				var products = ""; 
@@ -36,14 +36,14 @@ function getAllWorksInfos(page){
 			$("#dataDisplay").html(tbody);
 			$("#page").pagination(data.worksCount,{
 					callback : function(index) {
-									 initUserData(index+1);
+						getAllWorksInfos(index+1);
 								 },
-					prev_text : '上一页', //上一页按钮里text
-					next_text : '下一页', //下一页按钮里text
-					items_per_page : pageSize, //显示条数
-					current_page:currentPage-1,
-					num_display_entries : 6, //连续分页主体部分分页条目数
-					num_edge_entries : 2//两侧首尾分页条目数
+								 prev_text: '上一页',       //上一页按钮里text
+					             next_text: '下一页',       //下一页按钮里text
+					             items_per_page: recordSize, 
+					             current_page:currentPage-1,
+					             num_display_entries: 6,    //连续分页主体部分分页条目数
+					             num_edge_entries: 2        //两侧首尾分页条目数
 			});
 			window.parent.window.iframeHeight();
 		}

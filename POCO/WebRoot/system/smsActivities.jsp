@@ -34,8 +34,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	<div class="topNav">
 			 <ul class="menu">
-                <li class="on"><a type="button" onclick="queryAllActivities(1)" id="ready">已审核活动</a></li>
-                 <li><a type="button" onclick="queryAllActivities(0)">待审核活动</a></li>
+                <li class="on"><button class="btn" id="ready">已审核活动</button></li>
+                 <li><button id="wait" class="btn">待审核活动</button></li>
             </ul>
 	</div>
 	
@@ -51,9 +51,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td style="width:80px">操作</td>
 							</tr>
 						</thead>
-						<tbody class="table" id="dataDisplayA"></tbody>
+						<tbody class="table" id="dataDisplay"></tbody>
 					</table>
-					<div class="pagination" id="pageA"></div>
+					<div class="pagination" id="page"></div>
 		</div>
 	</div>
 	

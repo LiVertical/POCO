@@ -55,3 +55,9 @@
 #noLicensed table tr td{
 	height:50px;
 }
+.btn{
+	border:none;
+	background:none;
+	color:#fff;
+	outline:none;
+}

@@ -12,13 +12,13 @@ public interface IWorkService {
 
 	List<Work> queryProductByWorkType(Integer workType);
 
-	int countWorks(String workName, String userName, Integer workTypeInteger);
+	int countWorks(String workName, String userName,String userId, Integer workTypeInteger);
 
 	List<workDescInfoVo> queryWorksInfo(int currentPage, int recordSize);
 
 	WorksInfos queryWorksInfoByWorkId(String workId);
 
-	List<WorksInfos> queryWorks(int currentPage, int recordSize, String workName, String userName, Integer workType);
+	List<WorksInfos> queryWorks(int currentPage, int recordSize, String workName, String userName,String userId, Integer workType);
 
 	List<WorksInfos> doQueryWorksInfoByContestId(String contestId);
 

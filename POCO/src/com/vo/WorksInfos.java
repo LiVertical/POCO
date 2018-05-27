@@ -14,7 +14,16 @@ public class WorksInfos implements Comparable<WorksInfos>{
 	private List<ProductInfo> productInfos;
 	private String userName;
 	private int voteNum;
+	private int workType;
 	
+	public int getWorkType() {
+		return workType;
+	}
+
+	public void setWorkType(int workType) {
+		this.workType = workType;
+	}
+
 	public WorksInfos() {
 		super();
 	}

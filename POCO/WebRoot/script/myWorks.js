@@ -21,34 +21,54 @@ $(function(){
 function queryProducts(page) {
 	var recordSize = 6;
 	var currentPage = page;
-	$.getJSON(getRootPath() + "/user/product-queryProductByUser.action?currentPage="+currentPage+"&recordSize="+recordSize,function(result) {
+	$.getJSON(getRootPath() + "/user/product-queryProductByUser.action?currentPage="+currentPage+"&recordSize="+recordSize,function(data) {
 		$("#p_content").empty();
 		$("#page").empty();
-		console.log("productInfos:"+result.productInfos);
-		if (result.returnCode == "00") {
+		console.log("productInfos:"+data.worksInfo);
+		if (data.returnCode == "00") {
 			var tbody = '';
-			var pageSize = (result.productInfos.length > recordSize ? recordSize: result.productInfos.length);
-			if (result.totals > 0) {
-				for (var i = 0; i < pageSize; i++) {
-				  if(i%2 == 0){
-							tbody += "<tr class='tr_even'>";
+			var pageSize = (data.worksInfo.length > recordSize ? recordSize: data.worksInfo.length);
+			if (data.totals > 0) {
+				for(var i = 0; i < pageSize; i++){
+					if(i%2 == 0){
+						tbody += "<tr class='tr_even'>";
 					}else{
 							tbody += "<tr class='tr_odd'>";
 					}
-					tbody += "<td><input class='hide' name='product' type='checkbox' value='"+result.productInfos[i].productId+"'></td><td>"
-							  + result.productInfos[i].productName+"</td> "
-							  + "<td><img style='height:50px;width:50px' src='/POCO/" + result.productInfos[i].productPath+ "'></td>" 
-							  +"<td>"+ result.productInfos[i].productDesc+ "</td>"
-							  +"<td>"+ types(result.productInfos[i].productTypes)+ "</td>"
-							  + "<td>"+ result.productInfos[i].uploadTime.substring(0,16) + "</td>"
-							  +"<td><button class='button' onclick='delBatch()'>删除</button></td>";
-					 }
+					var products = ""; 
+					for(var j = 0; j < data.worksInfo[i].productInfos.length; j++){
+						products +="<li class='img'><img src='" + getRootPath() + "/" + data.worksInfo[i].productInfos[j].productPath+"'></li>"; 
+					}
+					 tbody += "<tr><td><input class='hide' name='product' type='checkbox' value='"+data.worksInfo[i].workId+"'></td>"
+		              + "<td style='height:150px;width:150px;'>"+ data.worksInfo[i].workName +"</td>"
+		              + "<td><ul>" + products + "</ul></td>"
+		              + "<td style='word-break'>" + data.worksInfo[i].workComment + "</td>"
+		              + "<td style='word-break'>" + types(data.worksInfo[i].workType) + "</td>"
+					  
+					  + "<td style='word-break'>" + data.worksInfo[i].workUploadTime.substring(0,16) + "</td>"
+					  + "<td><img style='height:30px;width:44px' src='"+getRootPath()+"/img/icons/delete.jpg' class='delBtn' onclick='deleteProduct(&quot;"+data.worksInfo[i].workId+"&quot;)'></td></tr>";
+				}
+				
+//				for (var i = 0; i < pageSize; i++) {
+//				  if(i%2 == 0){
+//							tbody += "<tr class='tr_even'>";
+//					}else{
+//							tbody += "<tr class='tr_odd'>";
+//					}
+//					tbody += "<td><input class='hide' name='product' type='checkbox' value='"+result.productInfos[i].productId+"'></td><td>"
+//							  + result.productInfos[i].productName+"</td> "
+//							  + "<td><img style='height:50px;width:50px' src='/POCO/" + result.productInfos[i].productPath+ "'></td>" 
+//							  +"<td>"+ result.productInfos[i].productDesc+ "</td>"
+//							  +"<td>"+ types(result.productInfos[i].productTypes)+ "</td>"
+//							  + "<td>"+ result.productInfos[i].uploadTime.substring(0,16) + "</td>"
+//							  +"<td><button class='button' onclick='delBatch()'>删除</button></td>";
+//					 }
 				 }else{
 						tbody="<tr class='tr_even'  style='color:969696'><td colspan='"+($(".tr_head").children().length)+"'>暂无作品</td></tr>";
 				}
 				$("#dataDisplay").html(tbody);
 				if ($("#page").html() == '') {
-	                  $("#page").pagination(result.totals, {
+	                  $("#page").pagination(data.totals, {
 	                        callback: function (index) {
 		                        queryProducts(index+1);
 	                        },
@@ -134,14 +154,27 @@ var deleteCollect = function(productId){
 //判断作品类型
 function types(type){
 	 switch(type){
-	 case 1: return "山水";break;
-	 case 2: return "花鸟";break;
-	 case 3: return "人物";break;
-	 case 4: return "建筑";break;
-	 case 5: return "生态";break;
-	 case 6: return "纪实";break;
-	 case 7: return "LOMO";break;
-	 case 8: return "风景";break;
+	 case 0:return "人像摄影";break;
+	 case 1:return "生态摄影";break;
+	 case 2:return "运动摄影";break;
+	 case 3:return "生活摄影";break;
+	 case 4:return "夜景摄影";break;
+	 case 5:return "风景摄影";break;
+	 case 6:return "纪实摄影";break;
+	 case 7:return "人体摄影";break;
+	 case 8:return "其他摄影";break;
+	 case 9:return "自拍摄影";break;
+	 case 10:return "商业摄影";break;
+	 case 11:return "LOMO";break;
+//	 case 1: return "山水";break;
+//	 case 2: return "花鸟";break;
+//	 case 3: return "人物";break;
+//	 case 4: return "建筑";break;
+//	 case 5: return "生态";break;
+//	 case 6: return "纪实";break;
+//	 case 7: return "LOMO";break;
+//	 case 8: return "风景";break;
+	 
  }
 }
 

@@ -59,25 +59,16 @@ public class WorkDao extends BaseDao{
 		return getSession().createQuery(sql).list();
 	}
 
-	public List<WorksInfos> doQueryAllWorksInfo(int currentPage, int recordSize, String workName, String userName, Integer workType) {
+	public List<WorksInfos> doQueryAllWorksInfo(int currentPage, int recordSize, String workName, String userName,String userId, Integer workType) {
 		List<WorksInfos> workInfos = new ArrayList<WorksInfos>();
-		ArrayList<Users> users = new ArrayList<Users>();
-//		String sqll = "FROM Work ";
-//		String sql = "FROM Work w,User WHERE workType = :workType";
-//		if (workName != null && "".equals(workName)) {
-//			sql = sql + "AND workName LIKE :workNname";
-//		}
-//		if (userName != null && "".equals(userName)) {
-//			String userSql = "FORM Users WHERE userName LIKE :userName";
-//			users = (ArrayList<Users>) getSession().createQuery(userSql).setString("userName", "%"+userName+"%").list();
-//			sql = sql + "AND userId in {}";
-//		}
-		
 		
 		String sql = "SELECT w.work_id,w.work_name,w.work_comment,w.work_upload_time,w.product_group_id,"
-				+ "us.user_name FROM `work` AS w,`users` AS us WHERE w.user_id=us.user_id ";
+				+ "w.work_type,us.user_name FROM `work` AS w,`users` AS us WHERE w.user_id=us.user_id ";
 		if (workType != null) {
 			sql = sql +"AND w.work_type="+workType;
+		}
+		if (userId != null && !"".equals(userId)) {
+			sql = sql +"AND us.user_id='"+userId+"'";
 		}
 		if (userName != null && !"".equals(userName)) {
 			sql = sql + "AND us.user_name like '%"+userName+"%'";
@@ -92,6 +83,7 @@ public class WorkDao extends BaseDao{
 		.addScalar("w.work_comment",StandardBasicTypes.STRING)
 		.addScalar("w.work_upload_time",StandardBasicTypes.DATE)
 		.addScalar("w.product_group_id",StandardBasicTypes.STRING)
+		.addScalar("w.work_type",StandardBasicTypes.INTEGER)
 		.addScalar("us.user_name",StandardBasicTypes.STRING)
 		.setFirstResult((currentPage-1)*recordSize)
 		.setMaxResults(recordSize).list();
@@ -103,7 +95,8 @@ public class WorkDao extends BaseDao{
 			String workCommentStr = (String) objs[2];
 			Date workUploadTime = (Date) objs[3];
 			String productGroupIdStr = (String) objs[4];
-			String userNameStr = (String) objs[5];
+			Integer workType2 = (Integer) objs[5];
+			String userNameStr = (String) objs[6];
 			if (productGroupIdStr != null && !"".equals(productGroupIdStr)) {
 				WorksInfos workVo = new WorksInfos();
 				String sql2 = "FROM ProductInfo WHERE productGroupId = '" + productGroupIdStr + "'";
@@ -114,18 +107,22 @@ public class WorkDao extends BaseDao{
 				workVo.setWorkName(workNameStr);
 				workVo.setWorkComment(workCommentStr);
 				workVo.setWorkUploadTime(workUploadTime.toString());
+				workVo.setWorkType(workType2);
 				workInfos.add(workVo);
 			}
 		}
 		return workInfos;
 	}
 
-	public int doCountWorks(String workName, String userName, Integer workTypeInteger) {
+	public int doCountWorks(String workName, String userName,String userId, Integer workTypeInteger) {
 		
 		String sql = "SELECT w.work_id,w.work_name,w.work_comment,w.work_upload_time,w.product_group_id,"
 				+ "us.user_name FROM `work` AS w,`users` AS us WHERE w.user_id=us.user_id ";
 		if (workTypeInteger != null) {
 			sql = sql +"AND w.work_type="+workTypeInteger;
+		}
+		if (userId != null && !"".equals(userId)) {
+			sql = sql +"AND us.user_id='"+userId+"'";
 		}
 		if (userName != null && !"".equals(userName)) {
 			sql = sql + "AND us.user_name like '%"+userName+"%'";

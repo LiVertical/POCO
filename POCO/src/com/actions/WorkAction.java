@@ -90,9 +90,9 @@ public class WorkAction extends ActionSupport{
 			}
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
-			List<WorksInfos> queryWorks = workService.queryWorks(currentPage, recordSize,workName,userName,workTypeInteger);
+			List<WorksInfos> queryWorks = workService.queryWorks(currentPage, recordSize,workName,userName,null,workTypeInteger);
 			result.put("worksInfo", JSONArray.fromObject(queryWorks, jsonConfig));
-			result.put("worksCount", workService.countWorks(workName,userName,workTypeInteger));
+			result.put("worksCount", workService.countWorks(workName,userName,null,workTypeInteger));
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询作品成功");
 		} catch (Exception e) {
@@ -111,7 +111,7 @@ public class WorkAction extends ActionSupport{
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
 			result.put("worksInfo", JSONArray.fromObject(workService.queryWorksInfo(currentPage, recordSize), jsonConfig));
-			result.put("worksCount", workService.countWorks(null,null,null));
+			result.put("worksCount", workService.countWorks(null,null,null,null));
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询作品成功");
 		} catch (Exception e) {

@@ -22,10 +22,12 @@ import com.constants.FileConstants;
 import com.entities.ProductInfo;
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.IProductOperatorService;
+import com.services.IWorkService;
 import com.util.JsonDateValueProcessor;
 import com.util.LoginUserUtil;
 import com.util.UUIDUtil;
 import com.util.UploadFileUtil;
+import com.vo.WorksInfos;
 
 /**
  * 使用List上传多个文件
@@ -64,6 +66,7 @@ public class ProductOperatorAction extends ActionSupport {
 	private String productGroupId;
 	private String activityId;
 	private String contestId;
+	private IWorkService workService;
 	
 	Logger logger = Logger.getLogger(this.getClass());
 
@@ -244,11 +247,14 @@ public class ProductOperatorAction extends ActionSupport {
 					result.put("returnCode", "10");
 					result.put("returnMsg", "参数错误");
 				}
-				List<ProductInfo> proList = productOperatorService.queryPorductByUser(userId,recordSize,currentPage);
-				int totalCountPro = productOperatorService.getTotalRecordsByUser(userId);
-				JSONArray productInfos = JSONArray.fromObject(proList, jsonConfig);
-				result.put("productInfos", productInfos);
-				result.put("totals", totalCountPro);
+//				List<ProductInfo> proList = productOperatorService.queryPorductByUser(userId,recordSize,currentPage);
+//				int totalCountPro = productOperatorService.getTotalRecordsByUser(userId);
+				List<WorksInfos> queryWorks = workService.queryWorks(currentPage, recordSize, null, null, userId, null);
+				int countWorks = workService.countWorks(null, null, userId, null);
+				
+				JSONArray productInfos = JSONArray.fromObject(queryWorks, jsonConfig);
+				result.put("worksInfo", productInfos);
+				result.put("totals", countWorks);
 				result.put("returnCode", "00");
 				result.put("returnMsg", "根据用户名查询作品成功");
 			} catch (Exception e) {
@@ -500,4 +506,13 @@ public class ProductOperatorAction extends ActionSupport {
 		public void setContestId(String contestId) {
 			this.contestId = contestId;
 		}
+
+		public IWorkService getWorkService() {
+			return workService;
+		}
+
+		public void setWorkService(IWorkService workService) {
+			this.workService = workService;
+		}
+		
 }

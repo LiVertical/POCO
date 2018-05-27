@@ -25,13 +25,13 @@ public class WorkService implements IWorkService {
 	}
 	
 	@Override
-	public List<WorksInfos> queryWorks(int currentPage, int recordSize, String workName, String userName, Integer workType) {
-		return workDao.doQueryAllWorksInfo(currentPage, recordSize,workName,userName,workType);
+	public List<WorksInfos> queryWorks(int currentPage, int recordSize, String workName, String userName,String userId, Integer workType) {
+		return workDao.doQueryAllWorksInfo(currentPage, recordSize,workName,userName,userId,workType);
 	}
 	
 	@Override
-	public int countWorks(String workName, String userName, Integer workTypeInteger) {
-		return workDao.doCountWorks(workName,userName,workTypeInteger);
+	public int countWorks(String workName, String userName,String userId, Integer workTypeInteger) {
+		return workDao.doCountWorks(workName,userName,userId,workTypeInteger);
 	}
 
 	@Override

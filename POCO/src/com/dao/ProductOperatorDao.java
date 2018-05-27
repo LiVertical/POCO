@@ -143,7 +143,12 @@ public class ProductOperatorDao extends BaseDao {
 				ProductInfosVo productInfosVo = new ProductInfosVo();
 				String userId = list.getProductUser();
 				String sql = "FROM Users WHERE userId = '" + userId + "'";
-				Users user = (Users) getSession().createQuery(sql).list().get(0);
+				List<Users> users = getSession().createQuery(sql).list();
+				Users user = null;
+				if(users.size() > 0){
+					user = users.get(0);
+					productInfosVo.setProductUserName(user.getUserName());
+				}
 				productInfosVo.setProductId(list.getProductId());
 				productInfosVo.setProductName(list.getProductName());
 				productInfosVo.setProductDesc(list.getProductDesc());
@@ -151,7 +156,7 @@ public class ProductOperatorDao extends BaseDao {
 				productInfosVo.setProductTypes(list.getProductTypes());
 				productInfosVo.setWorkId(list.getWorkId());
 				productInfosVo.setUploadTime(list.getUploadTime());
-				productInfosVo.setProductUserName(user.getUserName());
+				
 				productInfoList.add(productInfosVo);
 			}
 		} catch (Exception e) {

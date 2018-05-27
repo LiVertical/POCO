@@ -31,7 +31,7 @@ function getAllWorksInfos(page){
 	              + "<td style='word-break'>" + data.worksInfo[i].workUploadTime.substring(0,16) + "</td>"
 				  + "<td><ul>" + products + "</ul></td>"
 				  + "<td>" + data.worksInfo[i].userName + "</td>" 
-				  + "<td><img style='height:30px;width:44px' src='"+getRootPath()+"/img/icons/delete.jpg' class='delBtn' onclick='deleteProduct("+data.worksInfo[i].workId+")'></td></tr>";
+				  + "<td><img style='height:30px;width:44px' src='"+getRootPath()+"/img/icons/delete.jpg' class='delBtn' onclick='deleteProduct(&quot;"+data.worksInfo[i].workId+"&quot;)'></td></tr>";
 			}
 			$("#dataDisplay").html(tbody);
 			$("#page").pagination(data.worksCount,{

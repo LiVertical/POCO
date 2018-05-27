@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	data: {},
 		    	success : function(json) {
 		    		if (json.returnCode == "00") {
-		    			$("#mainFrame").attr("src",'<%=basePath%>/system/works.jsp');
+		    			$("#mainFrame").attr("src",'<%=basePath%>/system/products.jsp');
 		    			$("#mainFrame").attr("height",100);
 		    		}else{
 		    			logout();

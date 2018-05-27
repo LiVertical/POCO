@@ -46,7 +46,7 @@ var initUserData = function(page) {
 									  + "<td>" + result.productInfos[i].uploadTime.substring(0,16) + "</td>"
 									  + "<td>" + productType+ "</td>" 
 									  + "<td>" + result.productInfos[i].productUserName + "</td>" 
-									  + "<td><img style='height:30px;width:44px' src='"+getRootPath()+"/img/icons/delete.jpg' class='delBtn' onclick='deleteProduct("+result.productInfos[i].productId+")'></td></tr>";
+									  + "<td><img style='height:30px;width:44px' src='"+getRootPath()+"/img/icons/delete.jpg' class='delBtn' onclick='deleteProduct(&quot;"+result.productInfos[i].productId+"&quot;)'></td></tr>";
 					 }
 				}else{
 					tbody = "<td>暂时还没有任何作品</td>";

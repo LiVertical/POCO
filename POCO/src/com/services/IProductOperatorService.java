@@ -25,7 +25,7 @@ public interface IProductOperatorService {
 	
 	int getTotalRecordsByUser(String userId);
 
-	List<ProductInfosVo> doQueryAllProducts(int recordSize, int curPage);
+	List<ProductInfosVo> doQueryAllProducts(int recordSize, int curPage, String productName);
 
 	void doDeleteProductInfo(String productId);
 

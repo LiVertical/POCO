@@ -124,6 +124,7 @@ function getActivityInfo(){
 
 function getAllActivityWorks(){
 	var activityId = GetRequest();
+	console.log("活动id:"+activityId);
 	$.post(getRootPath() + "/vistor/queryWorksByActivityId.action?activityId="+activityId, function(data){
 		if(data.returnCode == '00'){
 			alert("hidpgnef");

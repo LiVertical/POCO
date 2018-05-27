@@ -75,12 +75,12 @@ public class WorkDao extends BaseDao{
 		
 		
 		String sql = "SELECT w.work_id,w.work_name,w.work_comment,w.work_upload_time,w.product_group_id,"
-				+ "us.userName FROM `work` AS w,`users` AS us WHERE w.user_id=us.userId ";
+				+ "us.user_name FROM `work` AS w,`users` AS us WHERE w.user_id=us.user_id ";
 		if (workType != null) {
 			sql = sql +"AND w.work_type="+workType;
 		}
 		if (userName != null && !"".equals(userName)) {
-			sql = sql + "AND us.userName like '%"+userName+"%'";
+			sql = sql + "AND us.user_name like '%"+userName+"%'";
 		}
 		if (workName != null && !"".equals(workName)) {
 			sql = sql +"AND w.work_name like '%"+workName+"%'";
@@ -92,7 +92,7 @@ public class WorkDao extends BaseDao{
 		.addScalar("w.work_comment",StandardBasicTypes.STRING)
 		.addScalar("w.work_upload_time",StandardBasicTypes.DATE)
 		.addScalar("w.product_group_id",StandardBasicTypes.STRING)
-		.addScalar("us.userName",StandardBasicTypes.STRING)
+		.addScalar("us.user_name",StandardBasicTypes.STRING)
 		.setFirstResult((currentPage-1)*recordSize)
 		.setMaxResults(recordSize).list();
 		
@@ -116,21 +116,19 @@ public class WorkDao extends BaseDao{
 				workVo.setWorkUploadTime(workUploadTime.toString());
 				workInfos.add(workVo);
 			}
-			
 		}
-				
 		return workInfos;
 	}
 
 	public int doCountWorks(String workName, String userName, Integer workTypeInteger) {
 		
 		String sql = "SELECT w.work_id,w.work_name,w.work_comment,w.work_upload_time,w.product_group_id,"
-				+ "us.userName FROM `work` AS w,`users` AS us WHERE w.user_id=us.userId ";
+				+ "us.user_name FROM `work` AS w,`users` AS us WHERE w.user_id=us.user_id ";
 		if (workTypeInteger != null) {
 			sql = sql +"AND w.work_type="+workTypeInteger;
 		}
 		if (userName != null && !"".equals(userName)) {
-			sql = sql + "AND us.userName like '%"+userName+"%'";
+			sql = sql + "AND us.user_name like '%"+userName+"%'";
 		}
 		if (workName != null && !"".equals(workName)) {
 			sql = sql +"AND w.work_name like '%"+workName+"%'";
@@ -142,7 +140,7 @@ public class WorkDao extends BaseDao{
 		.addScalar("w.work_comment",StandardBasicTypes.STRING)
 		.addScalar("w.work_upload_time",StandardBasicTypes.DATE)
 		.addScalar("w.product_group_id",StandardBasicTypes.STRING)
-		.addScalar("us.userName",StandardBasicTypes.STRING)
+		.addScalar("us.user_name",StandardBasicTypes.STRING)
 		.list();
 		 
 		return list.size();

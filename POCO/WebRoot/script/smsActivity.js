@@ -1,24 +1,20 @@
 $(function(){
-	queryAllActivities(1,1);
+	queryAllActivities(1);
 });
 var activiesStatus;
 function queryAllActivities(activiesStatus,page){
-	activiesStatus = activiesStatus;
 	var currentPage = page;
 	var recordSize = 6;
+	var auditStatus = 
 	params = {
 			currentPage : currentPage,
 			recordSize : recordSize,
 			auditStatus : activiesStatus,
 	};
-	
-	$.post(getRootPath() + "/admin/queryAllActivities.action",params,  function(data){
+	$.post(getRootPath() + "/admin/queryAllActivities.action", params,  function(data){
 		if(data.returnCode == '00'){
 			$("#dataDisplayA").empty();
-//			$("#dataDisplayB").empty();
-//			$("#dataDisplayC").empty();
 			if(data.activitiesInfos.length > 0){
-//				var htmlC="";
 				var pageSize = (data.activitiesInfos.length > recordSize ? recordSize: data.activitiesInfos.length);
 				for(var i = 0; i < pageSize; i++){
 					var htmlA="";
@@ -26,35 +22,24 @@ function queryAllActivities(activiesStatus,page){
 					var curStatus = data.activitiesInfos[i].curStatus;
 					htmlA = "<tr><td>" + data.activitiesInfos[i].activityName + "</td>"
 					+ "<td>" + data.activitiesInfos[i].applyTime.substring(0,16) + "</td>"
-					+ "<td>" + data.activitiesInfos[i].userName + "</td>" 
+					+ "<td>" + data.activitiesInfos[i].activityDesc + "</td>" 
 					+ "<td>"+ data.activitiesInfos[i].createTime.substring(0,16) +"--"+data.activitiesInfos[i].endTime.substring(0,16)+"</td>" 
 					if(status == 1){//已审核
-<<<<<<< HEAD
-
-=======
->>>>>>> b0e4dcf7313e44f4f94f6efb0732394138241a9c
 						var statusDesc = "已通过审核";
 						if(curStatus == 0){
 							statusDesc = "未通过审核";
 						}
-						
 						htmlA = htmlA +"<td>" + statusDesc + "</td></tr>";
-						
 					}else if(status == 0){
 						htmlA = htmlA + "<td><button class='auditBtn' onclick='pass(&quot;"+data.activitiesInfos[i].activityId+"&quot;)'>通过</button>" 
 						  + "<button style='background:red' class='auditBtn' onclick='out(&quot;"+data.activitiesInfos[i].activityId+"&quot;)'>否决</button></td></tr>";
-<<<<<<< HEAD
-
-=======
->>>>>>> b0e4dcf7313e44f4f94f6efb0732394138241a9c
 					}
 					$("#dataDisplayA").append(htmlA);
-					
 				}
 				 if ($("#pageA").html() == '') {
 			           $("#pageA").pagination(data.totalActivitiesCount, {
 			                callback: function (index) {
-			                	queryAllActivities(activiesStatus,index+1);
+			                	queryAllActivities(index+1);
 			                },
 			                prev_text: '上一页',       //上一页按钮里text
 			                next_text: '下一页',       //下一页按钮里text

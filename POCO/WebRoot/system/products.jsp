@@ -24,7 +24,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <div class="main">
   <div class="searchDiv">
-  	<input type="text" id="">
+  	<input type="text" id="productName" placeholder="请输入图片名称">
+  	<button id="search" class="search">查询</button>
   </div>
   	<div id="p_content">
 		<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">

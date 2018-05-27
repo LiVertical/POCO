@@ -62,8 +62,8 @@ public class ProductOperatorService implements IProductOperatorService{
 	}
 	
 	@Override
-	public List<ProductInfosVo> doQueryAllProducts(int recordSize,int curPage) {
-		return productOperatorDao.queryAllProducts(recordSize,curPage);
+	public List<ProductInfosVo> doQueryAllProducts(int recordSize,int curPage, String productName) {
+		return productOperatorDao.queryAllProducts(recordSize,curPage, productName);
 	}
 	
 	@Override

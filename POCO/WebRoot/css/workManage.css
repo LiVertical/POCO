@@ -8,3 +8,23 @@
 	height:100%;
 	width:100%;
 }
+.searchDiv{
+	border:1px solid;
+	height:50px;
+	width:100%;
+	line-height:50px;
+}
+.searchDiv input{
+	border:1px solid;
+	height:25px;
+	width:100px;
+	margin-left:30px;
+	outline:none;
+}
+.sBtn{
+	border:none;
+	height:30px;
+	width:80px;
+	color:#fff;
+	background:#06438f;
+}

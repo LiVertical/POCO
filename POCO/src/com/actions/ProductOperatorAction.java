@@ -1,4 +1,4 @@
- package com.actions;
+package com.actions;
 
 import java.io.File;
 import java.io.IOException;
@@ -171,7 +171,8 @@ public class ProductOperatorAction extends ActionSupport {
 		try {
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
-			result.put("productInfos", JSONArray.fromObject(productOperatorService.doQueryAllProducts(recordSize,currentPage), jsonConfig));
+			productName = new String(productName.getBytes("ISO-8859-1"),"UTF-8");
+			result.put("productInfos", JSONArray.fromObject(productOperatorService.doQueryAllProducts(recordSize,currentPage,productName), jsonConfig));
 			result.put("productsCount",productOperatorService.doQueryProductCount()); 
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询成功");

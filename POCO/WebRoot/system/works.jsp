@@ -37,10 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>	 
   <body>
   <div class="main">
-  	<div id="p_content">
-		<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
-			<thead>
-				<tr>
+  	<div class="searchDiv">
 					<span>作品名：</span>
 					<input type="text" name="workName" id="workName"/>
 					<span>用户名：</span>
@@ -61,8 +58,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<option value="11">LOMO</option>
 						<option value="8">其他摄影</option>
 					</select>
-					<input type="button" value="查询" onclick="getAllWorksInfos(1)"/>
-				</tr>
+					<button class="sBtn" onclick="getAllWorksInfos(1)">查询</button>
+				</div>
+  	<div id="p_content">
+		<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
+			<thead>
 				<tr class="tr_head">
 					<td style="width:40px">序号</td>
 					<td style="width:100px">作品标题</td>

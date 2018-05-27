@@ -1,11 +1,22 @@
 $(function() {
 	initUserData(1);
+	
+	$("#search").click(function(){
+		initUserData(1);
+	});
+	
 });
 
 var initUserData = function(page) {
 	var recordSize = 6;
 	var currentPage = page;
-	$.getJSON(getRootPath()+"/user/product-queryAllProducts.action?currentPage="+ currentPage + "&recordSize=" + recordSize,function(result) {
+	var name = $("#productName").val();
+	var params = {
+			recordSize : recordSize, 
+			currentPage : page,
+			productName : name,
+	};
+	$.getJSON(getRootPath()+"/user/product-queryAllProducts.action", params, function(result) {
 			$("#dataDisplay").empty();
 			if (result.returnCode == "00") {
 				var tbody = '';
@@ -44,7 +55,7 @@ var initUserData = function(page) {
 				$("#page").pagination(result.productsCount,{
 						callback : function(index) {
 										 initUserData(index+1);
-									 },
+									},
 						prev_text : '上一页', //上一页按钮里text
 						next_text : '下一页', //下一页按钮里text
 						items_per_page : pageSize, //显示条数

@@ -131,8 +131,11 @@ public class ProductOperatorDao extends BaseDao {
 		}
 	}
 	
-	public List<ProductInfosVo> queryAllProducts(int recordSize,int curPage){
+	public List<ProductInfosVo> queryAllProducts(int recordSize,int curPage, String productName){
 		String hql = "FROM ProductInfo";
+		if(StringUtils.isNotBlank(productName)){
+			hql += " WHERE productName like '%" + productName + "%'";
+		}
 		List<ProductInfo> lists = getSession().createQuery(hql).setFirstResult((curPage-1)*recordSize).setMaxResults(recordSize).list();
 		List<ProductInfosVo> productInfoList = new ArrayList<ProductInfosVo> ();
 		try {

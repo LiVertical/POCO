@@ -1,13 +1,16 @@
 $(function(){
 	queryAllWors(1);
+	
 });
 
 function queryAllWors(page){
 	var currentPage = page;
 	var recordSize = 5;
+	var productName = $("#productName").val();
 	var params = {
 			currentPage : currentPage,
 			recordSize : recordSize,
+			productName : productName,
 	};
 	$.post(getRootPath() + "/user/queryWorks.action", params, function(data){
 		if(data.returnCode == '00'){

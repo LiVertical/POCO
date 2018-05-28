@@ -19,7 +19,7 @@ $(function(){
 });
 
 function queryProducts(page) {
-	var recordSize = 6;
+	var recordSize = 3;
 	var currentPage = page;
 	$.getJSON(getRootPath() + "/user/product-queryProductByUser.action?currentPage="+currentPage+"&recordSize="+recordSize,function(data) {
 		$("#p_content").empty();
@@ -27,7 +27,7 @@ function queryProducts(page) {
 		console.log("productInfos:"+data.worksInfo);
 		if (data.returnCode == "00") {
 			var tbody = '';
-			var pageSize = (data.worksInfo.length > recordSize ? recordSize: data.worksInfo.length);
+			var pageSize = data.worksInfo.length > recordSize ? recordSize: data.worksInfo.length;
 			if (data.totals > 0) {
 				for(var i = 0; i < pageSize; i++){
 					if(i%2 == 0){
@@ -39,7 +39,7 @@ function queryProducts(page) {
 					for(var j = 0; j < data.worksInfo[i].productInfos.length; j++){
 						products +="<li class='img'><img src='" + getRootPath() + "/" + data.worksInfo[i].productInfos[j].productPath+"'></li>"; 
 					}
-					 tbody += "<tr><td><input class='hide' name='product' type='checkbox' value='"+data.worksInfo[i].workId+"'></td>"
+					 tbody += "<td><input class='hide' name='product' type='checkbox' value='"+data.worksInfo[i].workId+"'></td>"
 		              + "<td style='height:150px;width:150px;'>"+ data.worksInfo[i].workName +"</td>"
 		              + "<td><ul>" + products + "</ul></td>"
 		              + "<td style='word-break'>" + data.worksInfo[i].workComment + "</td>"

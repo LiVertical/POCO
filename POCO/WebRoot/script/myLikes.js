@@ -28,3 +28,19 @@ var gotoMyWorks = function(userName){
 	window.location = getPath() + "/POCO/views/myWorks.jsp";
 }; 
 
+//删除点赞作品
+function cancleLike(productId){
+	var url = getRootPath() + "/user/cancleLike.action";
+	var param = {
+			productId:productId,
+	};
+	$.post(url, param, function(data){
+		if(data.returnCode == '00'){
+			alert("删除成功");
+			window.location.reload();
+		}else{
+			alert("删除失败");
+		}
+	},'json');
+};
+

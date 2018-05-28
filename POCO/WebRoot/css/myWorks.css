@@ -68,6 +68,14 @@ td{
     background-color: #F5F5F5;
     height: 56px;
 }
-
+.img{
+	height:30px;
+	width:30px;
+	float:left;
+}
+.img img{
+	height:100%;
+	width:100%;
+}
 
 

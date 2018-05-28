@@ -76,5 +76,5 @@ var deleteProduct = function(productId){
       	     }else{
            		alert("删除失败");
         	 }
-   		 },'json');
+   		},'json');
 };

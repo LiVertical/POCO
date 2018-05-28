@@ -34,7 +34,6 @@ public class WorkDao extends BaseDao{
 			work.setWorkUploadTime(new Date());
 			if(StringUtils.isNotBlank(activityId)){
 				work.setActivityId(activityId);
-				work.setProductGroupId(activityId.substring(0, 15));
 			}else{
 				work.setActivityId("活动id");
 			}
@@ -42,7 +41,6 @@ public class WorkDao extends BaseDao{
 				work.setContestId("大赛id");
 			}else{
 				work.setContestId(contestId);
-				work.setProductGroupId(contestId.substring(0, 15));
 			}
 			getSession().save(work);
 		} catch (Exception e) {
@@ -235,6 +233,11 @@ public class WorkDao extends BaseDao{
 			logger.error("查询活动作品异常", e);
 		}
 		return workInfos;
+	}
+	
+	public void deleteWorkByWorkId(String workId) {
+		String sql = "DELETE FROM Work WHERE workId='" + workId + "'";
+		getSession().createQuery(sql).executeUpdate();
 	}
 
 }

@@ -1,6 +1,5 @@
 $(function(){
 	queryProductsMyCollects();
-	
 });
 
 function queryProductsMyCollects() {
@@ -11,10 +10,11 @@ function queryProductsMyCollects() {
 				var tbody = '';
 				 if (result.collectInfos.length > 0) {
 					 for (var i = 0; i < result.collectInfos.length; i++) {
-						tbody += "<li><a target='_blank' href='"+getRootPath() +"/views/productDetails.jsp?productId="+result.collectInfos[i].productId+"'>"+result.collectInfos[i].productName.substring(0,16)+"</a>"
-								+"<p>"+result.collectInfos[i].createTime.substring(0,16)+"</p>"
-								+"<img onclick='delCollectByCollectId("+result.collectInfos[i].productId+")' style='height:30px;width:34px' src='"+getRootPath() +"/img/icons/delete.png'>"
-							  	+"</li>";
+						tbody += "<li><a target='_blank' href='"+getRootPath() +"/views/productDetails.jsp?productId="+result.collectInfos[i].productId+"'>"
+								  + result.collectInfos[i].productName.substring(0,16)+"</a>"
+								  + "<p>"+result.collectInfos[i].createTime.substring(0,16)+"</p>"
+								  + "<img onclick='delCollectByCollectId(&quot;"+result.collectInfos[i].productId+"&quot;)' style='height:30px;width:34px' src='"+getRootPath() +"/img/icons/delete.png'>"
+							  	  + "</li>";
 					 }
 				 }else{
 					 tbody="<p style='text-align: center;margin-top:30px'>暂时还未收藏任何作品！</p>";

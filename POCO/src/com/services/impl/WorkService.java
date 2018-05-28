@@ -53,6 +53,11 @@ public class WorkService implements IWorkService {
 	public List<WorksInfos> queryWorksByActivityId(String activityId) {
 		return workDao.queryWorksByActivityId(activityId);
 	}
+	
+	@Override
+	public void deleteWorkByWorkId(String workId) {
+		workDao.deleteWorkByWorkId(workId);
+	}
 
 	public UserDao getUserDao() {
 		return userDao;

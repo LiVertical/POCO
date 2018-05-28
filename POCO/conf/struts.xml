@@ -452,6 +452,13 @@
 				<param name="excludeNullProperties">true</param>
 			</result> 
   		 </action>
+  		 
+  		 <action name="deleteWorkByWorkId" class="com.actions.WorkAction" method="deleteWorkByWorkId">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
  		
  		<!-- 大赛 -->
  		<action name="postContest" class="com.actions.ContestAction" method="postContest">                  

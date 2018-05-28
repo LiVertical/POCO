@@ -31,11 +31,9 @@ public class ProductOperatorDao extends BaseDao {
 		productInfo.setProductGroupId(productGroupId);
 		if(StringUtils.isNotBlank(activityId)){
 			productInfo.setActivityId(activityId);
-			productInfo.setProductGroupId(activityId.substring(0, 15));
 		}
 		if(StringUtils.isNotBlank(contestId)){
 			productInfo.setContestId(contestId);
-			productInfo.setProductGroupId(contestId.substring(0, 15));
 		}
 		this.getSession().save(productInfo);
 	}

@@ -49,3 +49,14 @@ function getAllWorksInfos(page){
 		}
 	});
 }
+
+function deleteProduct(id){
+	$.post(getRootPath()+"/admin/deleteWorkByWorkId.action?workId="+id, function(data){
+		if(data.returnCode == '00'){
+			alert("删除成功");
+			getAllWorksInfos(1);
+		}else{
+			alert("删除失败");
+		}
+	});
+}

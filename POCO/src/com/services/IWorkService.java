@@ -24,4 +24,6 @@ public interface IWorkService {
 
 	List<WorksInfos> queryWorksByActivityId(String activityId);
 
+	void deleteWorkByWorkId(String workId);
+
 }

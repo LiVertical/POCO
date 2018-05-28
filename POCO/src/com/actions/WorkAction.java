@@ -183,6 +183,26 @@ public class WorkAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	public String deleteWorkByWorkId(){
+		logger.info("WorkAction.deleteWorkByWorkId start·····");
+		result = new JSONObject();
+		if(StringUtils.isBlank(workId)){
+			result.put("returnCode", "10");
+			result.put("returnMsg", "参数错误");
+			return SUCCESS;
+		}
+		try {
+			workService.deleteWorkByWorkId(workId);
+			result.put("returnCode", "00");
+			result.put("returnMsg", "删除成功");
+		} catch (Exception e) {
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部服务器异常");
+			logger.error("根据作品Id,删除作品失败", e);
+		}
+		return SUCCESS;
+	}
+	
 	public JSONObject getResult() {
 		return result;
 	}

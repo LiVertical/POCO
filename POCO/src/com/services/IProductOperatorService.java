@@ -33,7 +33,7 @@ public interface IProductOperatorService {
 
 	List<ProductInfo> queryProductByType(int proType);
 
-	int doQueryProductCount();
+	int doQueryProductCount(int recordSize, int currentPage, String productName);
 
 	void saveProductInfo(String url, String productName, int proType, String productDesc, String productUser, String productGroupId,
 			String activityId, String contestId);

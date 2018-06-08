@@ -39,6 +39,11 @@ public class CollectService implements ICollectService{
 		collects = collectDao.queryCollectsByUserId(userId);
 		return collects;
 	}
+	
+	@Override
+	public boolean isRepeatCollect(String userId, String productId) {
+		return collectDao.isRepeatCollect(userId, productId);
+	}
 
 	public CollectDao getCollectDao() {
 		return collectDao;

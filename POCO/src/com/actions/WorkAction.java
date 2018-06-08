@@ -32,6 +32,7 @@ public class WorkAction extends ActionSupport{
 	private String workId;
 	private String contestId;
 	private String userName;
+	private String workIds;
 	
 	public String addWork(){
 		logger.info("WorkAction.addWork start·····");
@@ -203,6 +204,28 @@ public class WorkAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	//批量删除
+	public String delBatch() {
+		logger.info("WorkAction.delBatch start·····");
+		result = new JSONObject();
+		if(StringUtils.isBlank(workIds)){
+			result.put("returnCode", "10");
+			result.put("returnMsg", "参数异常");
+			return SUCCESS;
+		}
+		try {
+			String[] proArrayStr = workIds.split(",");
+			workService.delWorks(proArrayStr);
+			result.put("returnCode", "00");
+			result.put("returnMsg", "删除成功");
+		} catch(Exception e){
+			logger.error("删除异常" , e);
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "内部服务器异常");
+		}
+		return SUCCESS;
+	}
+	
 	public JSONObject getResult() {
 		return result;
 	}
@@ -294,6 +317,14 @@ public class WorkAction extends ActionSupport{
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getWorkIds() {
+		return workIds;
+	}
+
+	public void setWorkIds(String workIds) {
+		this.workIds = workIds;
 	}
 	
 }

@@ -46,23 +46,8 @@ function queryProducts(page) {
 		              + "<td style='word-break'>" + types(data.worksInfo[i].workType) + "</td>"
 					  
 					  + "<td style='word-break'>" + data.worksInfo[i].workUploadTime.substring(0,16) + "</td>"
-					  + "<td><img style='height:30px;width:44px' src='"+getRootPath()+"/img/icons/delete.jpg' class='delBtn' onclick='deleteProduct(&quot;"+data.worksInfo[i].workId+"&quot;)'></td></tr>";
+					  + "<td><img style='height:30px;width:44px' src='"+getRootPath()+"/img/icons/delete.jpg' class='delBtn' onclick='deleteWork(&quot;"+data.worksInfo[i].workId+"&quot;)'></td></tr>";
 				}
-				
-//				for (var i = 0; i < pageSize; i++) {
-//				  if(i%2 == 0){
-//							tbody += "<tr class='tr_even'>";
-//					}else{
-//							tbody += "<tr class='tr_odd'>";
-//					}
-//					tbody += "<td><input class='hide' name='product' type='checkbox' value='"+result.productInfos[i].productId+"'></td><td>"
-//							  + result.productInfos[i].productName+"</td> "
-//							  + "<td><img style='height:50px;width:50px' src='/POCO/" + result.productInfos[i].productPath+ "'></td>" 
-//							  +"<td>"+ result.productInfos[i].productDesc+ "</td>"
-//							  +"<td>"+ types(result.productInfos[i].productTypes)+ "</td>"
-//							  + "<td>"+ result.productInfos[i].uploadTime.substring(0,16) + "</td>"
-//							  +"<td><button class='button' onclick='delBatch()'>删除</button></td>";
-//					 }
 				 }else{
 						tbody="<tr class='tr_even'  style='color:969696'><td colspan='"+($(".tr_head").children().length)+"'>暂无作品</td></tr>";
 				}
@@ -105,9 +90,9 @@ function delBatch(){
 		}
 		idLists = idLists.substring(1,idLists.length);
 	params = {
-			productIds:idLists,
+			workIds:idLists,
 	};
-	$.post(getRootPath() + '/user/product-delBatch.action', params, function(msg){
+	$.post(getRootPath() + '/user/delBatch.action', params, function(msg){
 			console.log(msg);
 			if(msg.returnCode=='00'){
 				alert("删除成功!");
@@ -119,6 +104,17 @@ function delBatch(){
 		},'json');
 	}
 } 
+
+function deleteWork(id){
+	$.post(getRootPath()+"/user/deleteWorkByWorkId.action?workId="+id, function(data){
+		if(data.returnCode == '00'){
+			alert("删除成功！");
+			queryProducts(1);
+		}else{
+			alert("删除失败！");
+		}
+	});
+}
  
 var gotoCompleteUserInfo = function(){
 		window.location = getRootPath() + "/pages/userInfoEdit.jsp";

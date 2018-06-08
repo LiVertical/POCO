@@ -76,11 +76,6 @@ public class ProductOperatorService implements IProductOperatorService{
 		return productOperatorDao.doQueryProductsByType(proType);
 	}
 	
-	@Override
-	public int doQueryProductCount() {
-		return productOperatorDao.countProducts();
-	}
-	
 	public ProductInfo getProductId() {
 		return productId;
 	}
@@ -94,6 +89,11 @@ public class ProductOperatorService implements IProductOperatorService{
 
 	public void setproductOperatorDao(ProductOperatorDao productOperatorDao) {
 		this.productOperatorDao = productOperatorDao;
+	}
+
+	@Override
+	public int doQueryProductCount(int recordSize, int currentPage, String productName) {
+		return productOperatorDao.countProducts(recordSize, currentPage, productName );
 	}
 
 }

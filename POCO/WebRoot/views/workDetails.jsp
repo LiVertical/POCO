@@ -28,6 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body data-work_id =  '${param.workId }'>
 	<div class="header">
 		<ul>
+			<li><a href="<%=basePath%>/index.jsp">POCO首页</a></li>
 			<li><a href="<%=basePath%>/views/activities.jsp">活动</a></li>
 			<li><a href="<%=basePath%>/views/works.jsp">作品集锦</a></li>
 	 	</ul>

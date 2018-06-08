@@ -26,4 +26,6 @@ public interface IWorkService {
 
 	void deleteWorkByWorkId(String workId);
 
+	void delWorks(String[] proArrayStr);
+
 }

@@ -35,7 +35,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="header">
 		<ul>
 			<li><a href="<%=basePath%>/views/activities.jsp">活动</a></li>
-			<li><a href="<%=basePath%>/views/myWorks.jsp">论坛</a></li>
 	 	</ul>
 	 	<ul style="float:right;padding-right:66px">
 		 <s:if test="%{#session.isEmpty()}">

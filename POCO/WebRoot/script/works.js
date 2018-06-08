@@ -60,8 +60,8 @@ var initUserData = function(page) {
 						next_text : '下一页', //下一页按钮里text
 						items_per_page : pageSize, //显示条数
 						current_page:currentPage-1,
-						num_display_entries : 6, //连续分页主体部分分页条目数
-						num_edge_entries : 2//两侧首尾分页条目数
+						num_display_entries : 3, //连续分页主体部分分页条目数
+						num_edge_entries : 1//两侧首尾分页条目数
 				});
 				window.parent.window.iframeHeight();
 			}

@@ -29,6 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	<div class="header">
 		<ul>
+			<li><a href="<%=basePath%>/index.jsp">POCO首页</a></li>
 			<li><a href="<%=basePath%>/views/activities.jsp">活动</a></li>
 			<li><a href="<%=basePath%>/views/contest.jsp">大赛</a></li>
 	 	</ul>

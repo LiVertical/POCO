@@ -27,7 +27,6 @@ public class CollectDao extends BaseDao{
 			collects.setId(UUIDUtil.generateUUID());
 			collects.setUserId(userId);
 			collects.setProductId(productId);
-			
 			collects.setProductName(productName);
 			collects.setCreateTime(new Date());
 			getSession().save(collects);
@@ -44,6 +43,17 @@ public class CollectDao extends BaseDao{
 	public List<Collects> queryCollectsByUserId(String userId) {
 		String hql = "FROM Collects where userId='" + userId + "'";
 		return getSession().createQuery(hql).list();
+	}
+
+	//判断是否重复收藏
+	public boolean isRepeatCollect(String userId, String productId) {
+		boolean isRepeat = false;
+		String sql = "FROM Collects WHERE userId = '" + userId + "' AND productId = '" + productId + "'";
+		List<Collects> collects = getSession().createQuery(sql).list();
+		if(collects.size() > 0){
+			isRepeat = true;
+		}
+		return isRepeat;
 	}
 
 }

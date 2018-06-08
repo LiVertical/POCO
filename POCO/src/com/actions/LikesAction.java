@@ -36,7 +36,7 @@ public class LikesAction extends ActionSupport{
 			return SUCCESS;
 		}
 		try {
-			likeService.setTags(userId, productId, productName);
+			result.put("msg", likeService.setTags(userId, productId, productName));
 			result.put("returnCode", "00");
 			result.put("returnMsg", "点赞成功!");
 		} catch (Exception e) {

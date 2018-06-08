@@ -76,8 +76,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <div class="header">
 		<ul>
+			<li><a href="<%=basePath%>/index.jsp">POCO首页</a></li>
 			<li><a href="<%=basePath%>/views/activities.jsp">活动</a></li>
-			<li><a href="<%=basePath%>/views/activities.jsp">大赛作品top3</a></li>
 	 	</ul>
 	 	<ul style="float:right;padding-right:66px">
 		 <s:if test="%{#session.isEmpty()}">

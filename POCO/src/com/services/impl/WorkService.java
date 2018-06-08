@@ -58,6 +58,12 @@ public class WorkService implements IWorkService {
 	public void deleteWorkByWorkId(String workId) {
 		workDao.deleteWorkByWorkId(workId);
 	}
+	
+	//批量删除
+	@Override
+	public void delWorks(String[] proArrayStr) {
+		workDao.delWorks(proArrayStr);
+	}
 
 	public UserDao getUserDao() {
 		return userDao;

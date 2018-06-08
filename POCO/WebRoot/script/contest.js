@@ -1,3 +1,5 @@
+var startTime;
+var endTime;
 $(document).ready(function(){
 	getWorkInfosByContestId();
 	queryContestInfo();
@@ -14,6 +16,8 @@ function queryContestInfo(){
 	var contestId =GetRequest();
 	$.post(getRootPath()+"/user/queryContestInfoByContestId.action?contestId="+contestId, function(data){
 		if(data.returnCode == '00'){
+			startTime = data.contestInfo[0].startTime;
+			endTime = data.contestInfo[0].endTime;
 			var htm = "<h1>大赛概述：</h1><p>&nbsp;</p><h2>"+data.contestInfo[0].contestName+"</h2>"
 						   + "<p>&nbsp;</p><p>"+data.contestInfo[0].contestDesc+"</p>";
 			$("#contest").html(htm);
@@ -38,14 +42,21 @@ function getWorkInfosByContestId(){
 			+data.contestsWorkInfo[i].workComment+"</div>"
 			+"<div class='right'><ul>"+htm1+"</ul></div>"
 			+"<div class='right3'>当前获赞数目：<span id='voteNum'>"+data.contestsWorkInfo[i].voteNum+"</span>"
-			+"<p>&nbsp;</p><button class='vote' onclick='vote(&quot;"+data.contestsWorkInfo[i].workId+"&quot;)'>点击投票</button></div></li>";
+			+"<p>&nbsp;</p><button class='vote'  onclick='vote(&quot;"+data.contestsWorkInfo[i].workId+"&quot;)'>点击投票</button></div></li>";
 		}
 		$("#p_content").append(html);
+		if(isDelay(startTime, endTime)){
+			$("#joinBtn").hide();
+		}
 	  }
 	});
 }
 
 function vote(id){
+	if(isDelay){
+		alert("大赛已过期");
+		return false;
+	}
 	var params = {
 			workId : id,
 	};
@@ -64,4 +75,12 @@ function vote(id){
 function getVoteNum(){
 	$.post(getRootPath() + "/user/getVoteNum.action");
 }
+
+function isDelay(sTime, eTime){
+	var date = new Date();
+	now = date.valueOf();
+	if((now < Date.parse(sTime)) || (now > Date.parse(eTime))){
+		return true;
+	};
+};
 

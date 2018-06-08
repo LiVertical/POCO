@@ -114,8 +114,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <div class="header">
 		<ul>
+			<li><a href="<%=basePath%>/index.jsp">POCO首页</a></li>
 			<li><a href="<%=basePath%>/views/activities.jsp">活动</a></li>
-			<li><a href="<%=basePath%>/views/myWorks.jsp">论坛</a></li>
 			<li><a href="<%=basePath%>/views/applyActivities.jsp?userId=${sessionScope.APP_USERINFO_SESSION_KEY.userId }">申请发起活动</a></li>
 	 	</ul>
 	 	<ul style="float:right;padding-right:66px">
@@ -163,6 +163,7 @@ function getActivityInfo(){
 	$.post(getRootPath()+"/vistor/queryActivityInfo.action?activityId="+activityId, function(data){
 	if(data.returnCode == '00'){
 		console.log(data.activityInfos);
+		isDelay(data.activityInfos[0].createTime, data.activityInfos[0].endTime);
 		var html = "<div class='desc'><h1>"+data.activityInfos[0].activityName+"</h1>"
 						+"<p>"+data.activityInfos[0].activityDesc+"</p></div>"
 						+"<div id='t_content' class='t_content'></div>"
@@ -195,5 +196,17 @@ function getAllActivityWorks(){
 		}
 	);
 }
+
+function isDelay(sTime, eTime){
+	var date = new Date();
+	now = date.valueOf();
+	if((now < Date.parse(sTime)) || (now > Date.parse(eTime))){
+		$("#joinBtn").hide();
+	}
+}
+
+//判断活动是否过期
+
+
 </script>
 </html>

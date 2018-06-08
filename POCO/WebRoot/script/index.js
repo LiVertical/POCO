@@ -17,7 +17,7 @@ function queryProducts(page) {
 					for (var i = 0; i < result.productInfos.length; i++) {
 						tbody += "<li><div class='boxs_middle'> "
 						  + "<img onclick='queryProductInfos(&quot;"+ result.productInfos[i].productId +"&quot;)' src='"
-						  + getRootPath() + "/" + result.productInfos[i].productPath
+						  + getRootPath()+ "/" + result.productInfos[i].productPath
 						  + "'></div><div class='boxs_right'><p style='color:indianred'>***********************</p><p class='title'>标题 "
 						  + result.productInfos[i].productName
 			    		  + "</p><p>作品描述："
@@ -35,8 +35,6 @@ function queryProducts(page) {
 						$("#p_content").html(tbody);
 					}
 				}
-			}else{
-				window.location.href= getRootPath() + "/views/userLogin.jsp";
 			}
 	});
 };
@@ -56,9 +54,13 @@ var like = function(productId,productName){
 	var noLike = "#noLike"+productId;
 	$.post(url, param, function(data){
 		if(data.returnCode == '00'){
-			alert("点赞成功");
-			$(like).hide();
-			$(noLike).show();
+			if(data.msg.length>0){
+				alert("您已经为该作品点赞了！");
+			}else{
+				alert("点赞成功");
+				$(like).hide();
+				$(noLike).show();
+			}
 		}else{
 			alert("点赞失败");
 		}
@@ -90,10 +92,14 @@ function addCollect(productId,productName){
 	var canColl = "#cancleColl"+productId;
 	$.post(getRootPath() + "/user/addToCollect.action?productId="+productId+"&productName="+productName, function(data){
 		if(data.returnCode == '00'){
-			alert("收藏成功！");
-			$(coll).attr("disabled", true);
-			$(coll).hide();
-			$(canColl).show();
+			if(data.msg == '02'){
+				alert("您已经收藏过该作品");
+			}else{
+				alert("收藏成功！");
+				$(coll).attr("disabled", true);
+				$(coll).hide();
+				$(canColl).show();
+			}
 		}else{
 			alert("收藏失败");
 		}

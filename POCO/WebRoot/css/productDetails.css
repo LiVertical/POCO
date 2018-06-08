@@ -27,6 +27,7 @@
 	height:300px;
 	width:40%;
 	text-align: left;
+	margin-left:30px;
 }
 .right_div p{
 	margin-top:33px;
@@ -36,6 +37,7 @@
 	width:70%;
 	margin-left: 67px;
 	outline:none;
+	text-indent:25px;
 }
 .hotDiscuss{
 	min-height:100px;

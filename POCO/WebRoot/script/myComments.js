@@ -19,7 +19,7 @@ function queryAllComments(page){
 				for(var i = 0; i < commentList.length; i++){
 					html = "<li><p>"+commentList[i].commentDesc
 								+"</p><span>"+commentList[i].createTime.substring(0,16)
-								+"<button class='delBtn' onclick='deleteComment("+commentList[i].commentId+")'>删除</button></span></li>";
+								+"<button class='delBtn' onclick='deleteComment(&quot;"+commentList[i].commentId+"&quot;)'>删除</button></span></li>";
 					$("#dataDisplay").append(html);
 				}
 			}else{
@@ -42,7 +42,7 @@ function queryAllComments(page){
 	},'json');
 }
 
-function deleteComment(commnetId){
+function deleteComment(commentId){
 	$.post(getRootPath()+"/user/deleteCommentByCommentId.action?commentId="+commentId, function(data){
 		if(data.returnCode='00'){
 			alert("删除成功！");

@@ -12,4 +12,6 @@ public interface ICollectService {
 
 	List<Collects> doQueryCollectByUserId(String userId);
 
+	boolean isRepeatCollect(String userId, String productId);
+
 }

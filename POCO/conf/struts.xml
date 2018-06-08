@@ -328,6 +328,20 @@
 			</result> 
   		 </action>
   		 
+  		  <action name="deleteWorkByWorkId" class="com.actions.WorkAction" method="deleteWorkByWorkId">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
+  		 <action name="delBatch" class="com.actions.WorkAction" method="delBatch">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
   		 <!-- 大赛 -->
   		 <action name="queryAllWorksByContestId" class="com.actions.WorkAction" method="queryAllWorksByContestId">                  
   			<result  type="json" name="success">

@@ -15,14 +15,19 @@ public class LikeDao extends BaseDao{
 	
 	Logger logger = Logger.getLogger(this.getClass());
 	
-	public void doSave(String userId, String productId, String productName) {
-		Likes likes = new Likes();
-		likes.setId(UUIDUtil.generateUUID());
-		likes.setUserId(userId);
-		likes.setProductId(productId);
-		likes.setProductName(productName);
-		likes.setCreateTime(new Date());
-		this.getSession().save(likes);
+	public List<Likes> doSave(String userId, String productId, String productName) {
+		String sql = "FROM Likes WHERE userId ='" + userId + "' AND productId = '" + productId + "'";
+		List<Likes> ls = getSession().createQuery(sql).list();
+		if(ls.size() < 1){
+			Likes likes = new Likes();
+			likes.setId(UUIDUtil.generateUUID());
+			likes.setUserId(userId);
+			likes.setProductId(productId);
+			likes.setProductName(productName);
+			likes.setCreateTime(new Date());
+			this.getSession().save(likes);
+		}
+		return ls;
 	}
 
 	public void doDelete(String id) {

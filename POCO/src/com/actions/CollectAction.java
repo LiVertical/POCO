@@ -39,7 +39,11 @@ public class CollectAction extends ActionSupport{
 			return SUCCESS;
 		}
 		try {
+		   boolean isRepeat = collectService.isRepeatCollect(userId, productId);
 			collectService.doAddCollect(userId, productId);
+			if(isRepeat){
+				result.put("msg", "02");
+			}
 			result.put("returnCode", "00");
 			result.put("returnMsg", "收藏成功!");
 		} catch (Exception e) {

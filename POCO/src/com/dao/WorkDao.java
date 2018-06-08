@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.type.StandardBasicTypes;
 
@@ -149,8 +150,12 @@ public class WorkDao extends BaseDao{
 			if(work.getProductGroupId() != null){
 				workDescInfoVo workVo = new workDescInfoVo();
 				String hql = "FROM ProductInfo WHERE productGroupId = '" + work.getProductGroupId() + "'";
-				ProductInfo productInfo = (ProductInfo) getSession().createQuery(hql).list().get(0);
-				workVo.setProductPath(productInfo.getProductPath());
+				List<ProductInfo> productInfos = getSession().createQuery(hql).list();
+				ProductInfo productInfo = null;
+				if(productInfos.size()>0){
+					productInfo = productInfos.get(0);
+					workVo.setProductPath(productInfo.getProductPath());
+				}
 				workVo.setUploadTime(work.getWorkUploadTime().toString());
 				workVo.setWorkId(work.getWorkId());
 				workVo.setWorkName(work.getWorkName());
@@ -161,21 +166,29 @@ public class WorkDao extends BaseDao{
 	}
 
 	public WorksInfos queryWorkInfosByWorkId(String workId) {
-		WorksInfos worksInfos = new WorksInfos();
-		String sql = "FROM Work WHERE workId = '"+workId+"'";
-		Work work = (Work) getSession().createQuery(sql).list().get(0);
-		String sql2 = "FROM ProductInfo WHERE productGroupId = '"+work.getProductGroupId()+"'";
-		Users user = new Users();
-		String sql3 = "FROM Users WHERE userId = '"+work.getUserId()+"'";
-		user = (Users) getSession().createQuery(sql3).list().get(0);
-		List<ProductInfo> products = new ArrayList<ProductInfo>();
-		products = getSession().createQuery(sql2).list();
-		worksInfos.setProductInfos(products);
-		worksInfos.setWorkName(work.getWorkName());
-		worksInfos.setUserId(work.getUserId());
-		worksInfos.setWorkUploadTime(work.getWorkUploadTime().toString());
-		worksInfos.setWorkComment(work.getWorkComment());
-		worksInfos.setUserName(user.getUserName());
+			WorksInfos worksInfos = new WorksInfos();
+			try {
+				String sql = "FROM Work WHERE workId = '"+workId+"'";
+			Work work = (Work) getSession().createQuery(sql).list().get(0);
+				String sql2 = "FROM ProductInfo WHERE productGroupId = '"+work.getProductGroupId()+"'";
+				Users user = new Users();
+				String sql3 = "FROM Users WHERE userId = '"+work.getUserId()+"'";
+				List<Users> users = getSession().createQuery(sql3).list();
+				if(users.size()>0){
+					user = users.get(0);
+					worksInfos.setUserName(user.getUserName());
+				}
+				List<ProductInfo> products = new ArrayList<ProductInfo>();
+				products = getSession().createQuery(sql2).list();
+				worksInfos.setProductInfos(products);
+				worksInfos.setWorkName(work.getWorkName());
+				worksInfos.setUserId(work.getUserId());
+				worksInfos.setWorkUploadTime(work.getWorkUploadTime().toString());
+				worksInfos.setWorkComment(work.getWorkComment());
+				
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
 		return worksInfos;
 	}
 
@@ -239,5 +252,19 @@ public class WorkDao extends BaseDao{
 		String sql = "DELETE FROM Work WHERE workId='" + workId + "'";
 		getSession().createQuery(sql).executeUpdate();
 	}
+
+	public void delWorks(String[] proArrayStr) {
+		String sql = "";
+		for(String work:proArrayStr){
+			List<Work> works = new ArrayList<Work>();
+			sql = "FROM Work WHERE workId = '" + work + "'";
+			works = getSession().createQuery(sql).list();
+			if(works.size()>0){
+				sql = "DELETE FROM Work WHERE workId = '" + work + "'";
+				this.getSession().createQuery(sql).executeUpdate();
+			}
+		}
+	}
+
 
 }

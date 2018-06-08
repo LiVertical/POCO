@@ -12,7 +12,7 @@ public interface ILikeService {
 
 	int doGetLikesNum(String productId);
 
-	void setTags(String userId, String productId, String productName);
+	List<Likes> setTags(String userId, String productId, String productName);
 
 	List<Likes> queryProductByUserId(String userId);
 

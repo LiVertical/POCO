@@ -151,7 +151,7 @@ public class ProductOperatorAction extends ActionSupport {
 			result.put("returnCode", "00");
 			result.put("returnMsg", "删除成功");
 		} catch(Exception e){
-			logger.error("删除图片异常" , e);
+			logger.error("删除异常" , e);
 			result.put("returnCode", "-1");
 			result.put("returnMsg", "服务器异常");
 		}
@@ -176,7 +176,7 @@ public class ProductOperatorAction extends ActionSupport {
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
 			productName = new String(productName.getBytes("ISO-8859-1"),"UTF-8");
 			result.put("productInfos", JSONArray.fromObject(productOperatorService.doQueryAllProducts(recordSize,currentPage,productName), jsonConfig));
-			result.put("productsCount",productOperatorService.doQueryProductCount()); 
+			result.put("productsCount",productOperatorService.doQueryProductCount(recordSize,currentPage,productName)); 
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询成功");
 		} catch (Exception e) {

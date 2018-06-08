@@ -11,8 +11,8 @@ public class LikeService implements ILikeService{
 	private LikeDao likeDao;
 
 	@Override
-	public void setTags(String userId, String productId, String productName) {
-		likeDao.doSave(userId,productId, productName);
+	public List<Likes> setTags(String userId, String productId, String productName) {
+		return likeDao.doSave(userId,productId, productName);
 	}
 	
 	//获取作品的点赞数目

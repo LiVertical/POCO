@@ -179,15 +179,17 @@ public class ProductOperatorDao extends BaseDao {
 		return getSession().createQuery(hql).list();
 	}
 
-	public int countProducts() {
+	public int countProducts(int recordSize, int currentPage, String productName) {
 		int size = 0;
 		try {
 			String hql = "FROM ProductInfo";
+			if(StringUtils.isNotBlank(productName)){
+				hql += " WHERE productName like '%" + productName + "%'";
+			}
 			size = getSession().createQuery(hql).list().size();
 		} catch (HibernateException e) {
 			logger.error("查询图片数目异常", e);
 		}
 		return size;
 	}
-
 }

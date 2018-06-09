@@ -24,28 +24,59 @@ public class WorkTypeAction extends ActionSupport{
 	private String typeValue;
 	
 	public String page() {
-		logger.info("WorkAction.queryAllWorks start ······");
+		logger.info("WorkTypeAction.page start ······");
 		result = new JSONObject();
-		
-		Page<WorkType> workTypes = workTypeService.findPage(currentPage,recordSize);
-		
-		result.put("", workTypes.getData());
-		result.put("", workTypes.getCount());
+		try {
+			Page<WorkType> workTypes = workTypeService.findPage(currentPage,recordSize);
+			result.put("", workTypes.getData());
+			result.put("", workTypes.getCount());
+		} catch (Exception e) {
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "查询失败");
+			return ERROR;
+		}
 		return SUCCESS;
 	}
 	
 	public String list(){
-		List<WorkType> workTypesEs = workTypeService.findList(typeValue);
+		logger.info("WorkTypeAction.list start·····");
+		result = new JSONObject();
+		try {
+			List<WorkType> wts = workTypeService.findList(typeValue);
+			result.put("", wts);
+		} catch (Exception e) {
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "查询失败");
+			return ERROR;
+		}
 		return SUCCESS;
 	}
 	
 	public String find(){
-		WorkType workType = workTypeService.find(typeValue);
+		logger.info("WorkTypeAction.list start·····");
+		result = new JSONObject();
+		try {
+			WorkType wt = workTypeService.find(typeValue);
+			result.put("", wt);
+		} catch (Exception e) {
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "查询失败");
+			return ERROR;
+		}
 		return SUCCESS;
 	}
 	
 	public String findListFather(){
-		List<WorkType> workTypes = workTypeService.findListFather();
+		logger.info("WorkTypeAction.list start·····");
+		result = new JSONObject();
+		try {
+			List<WorkType> wts = workTypeService.findListFather();
+			result.put("", wts);
+		} catch (Exception e) {
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "查询失败");
+			return ERROR;
+		}
 		return SUCCESS;
 	}
 	public String add(){

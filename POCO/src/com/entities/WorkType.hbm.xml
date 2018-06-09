@@ -15,7 +15,7 @@
                 <comment>作品名字</comment>
             </column>
         </property>
-        <property name="typeValue" type="timestamp">
+        <property name="typeValue" type="string">
             <column name="type_value" length="32">
                 <comment>上传时间</comment>
             </column>
@@ -28,8 +28,8 @@
         <property name="createTime" type="timestamp">
                 <column name="create_time" length="0" />
         </property>
-        <property name="fatherType" type="String">
-            <column name="father_type">
+        <property name="fatherType" type="string">
+            <column name="father_type" length="32">
                 <comment>父类别</comment>
             </column>
         </property>

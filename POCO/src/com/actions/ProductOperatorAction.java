@@ -250,11 +250,11 @@ public class ProductOperatorAction extends ActionSupport {
 //				List<ProductInfo> proList = productOperatorService.queryPorductByUser(userId,recordSize,currentPage);
 //				int totalCountPro = productOperatorService.getTotalRecordsByUser(userId);
 				List<WorksInfos> queryWorks = workService.queryWorks(currentPage, recordSize, null, null, userId, null,null,null);
-				int countWorks = workService.countWorks(null, null, userId, null,null,null);
+				//int countWorks = workService.countWorks(null, null, userId, null,null,null);
 				
 				JSONArray productInfos = JSONArray.fromObject(queryWorks, jsonConfig);
 				result.put("worksInfo", productInfos);
-				result.put("totals", countWorks);
+				//result.put("totals", countWorks);
 				result.put("returnCode", "00");
 				result.put("returnMsg", "根据用户名查询作品成功");
 			} catch (Exception e) {

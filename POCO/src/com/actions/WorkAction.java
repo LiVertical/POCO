@@ -93,15 +93,21 @@ public class WorkAction extends ActionSupport{
 			if (workType != null && !"".equals(workType)) {
 				workTypeInteger = Integer.valueOf(workType);
 			}
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
-			Calendar rightNow = Calendar.getInstance();
-			rightNow.setTime(format.parse(endDate));
-			rightNow.add(Calendar.DATE, 1);
+//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			Date bigindate = null;
+//			Date enddate = null;
+			if (biginDate != null && !"".equals(biginDate)) {
+				biginDate = biginDate+" 00:00:00";
+			}
+			if (biginDate != null && !"".equals(endDate)) {
+				endDate = endDate+" 23:59:59";
+			}
+			
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
-			List<WorksInfos> queryWorks = workService.queryWorks(currentPage, recordSize,workName,userName,null,workTypeInteger,format.parse(biginDate),rightNow.getTime());
+			List<WorksInfos> queryWorks = workService.queryWorks(currentPage, recordSize,workName,userName,null,workTypeInteger,biginDate,endDate);
 			result.put("worksInfo", JSONArray.fromObject(queryWorks, jsonConfig));
-			result.put("worksCount", workService.countWorks(workName,userName,null,workTypeInteger));
+			result.put("worksCount", workService.countWorks(workName,userName,null,workTypeInteger,biginDate,endDate));
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询作品成功");
 		} catch (Exception e) {
@@ -120,7 +126,7 @@ public class WorkAction extends ActionSupport{
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
 			result.put("worksInfo", JSONArray.fromObject(workService.queryWorksInfo(currentPage, recordSize), jsonConfig));
-			result.put("worksCount", workService.countWorks(null,null,null,null));
+			result.put("worksCount", workService.countWorks(null,null,null,null,null,null));
 			result.put("returnCode", "00");
 			result.put("returnMsg", "查询作品成功");
 		} catch (Exception e) {

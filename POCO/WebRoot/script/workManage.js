@@ -7,12 +7,16 @@ function getAllWorksInfos(page){
 	var recordSize = 8;
 	var workName = $("#workName").val();
 	var userName = $("#userName").val();
+	var biginDate = $("#biginDate").val();
+	var endDate = $("#endDate").val();
 	var workType = $("#workType").val();
 	var params = {
 			currentPage : currentPage,
 			recordSize : recordSize,
 			workName:workName,
 			userName:userName,
+			biginDate:biginDate,
+			endDate:endDate,
 			workType:workType
 	};
 	$.post(getRootPath() + "/admin/queryAllWorks.action", params, function(data){

@@ -42,6 +42,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input type="text" name="workName" id="workName"/>
 					<span>用户名：</span>
 					<input type="text" name="userName" id="userName"/>
+					<span>开始时间：</span>
+					<input type="date" name="biginDate" id="biginDate"/>
+					<span>结束时间：</span>
+					<input type="date" name="endDate" id="endDate"/>
 					<span>作品分类：</span>
 					<select class="type" name="workType" id="workType">
 						<option value="">请选择作品分类</option>

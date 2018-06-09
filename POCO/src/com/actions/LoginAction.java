@@ -43,7 +43,7 @@ public class LoginAction extends BaseAction{
 		result = new JSONObject();
 		if(StringUtils.isBlank(loginName)||StringUtils.isBlank(loginPass)){
 			logger.info("参数错误");
-			return "sys";
+			return "adminUserJsp";
 		}
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest();
@@ -52,13 +52,13 @@ public class LoginAction extends BaseAction{
 			role = loginService.queryUserRole(loginName, loginPass);
 			if(role != 1 && role != 2){
 				logger.info("权限错误");
-				return "sys";
+				return "adminUserJsp";
 			}
 			Users adminLogin = loginService.doAdminUserLogin(loginName, loginPass, role);
 			if(adminLogin != null){
 				if(!session.getAttribute(code).equals(securityCode)) {
 					logger.info("验证码错误");
-					return "sys";
+					return "adminUserJsp";
 				}
 				userInfo.setLoginName(loginName);
 				userInfo.setUserName(adminLogin.getUserName());

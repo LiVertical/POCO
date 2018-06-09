@@ -20,6 +20,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=basePath%>/control/js/common.js"></script>
 	<script src="<%=basePath%>/js/jquery.pagination.js"></script>
 	<script src="<%=basePath%>/script/workManage.js"></script>
+	<style>
+	.time-input{
+  		height:30px;
+  		width:200px;
+  		border:1px solid;
+  		border-radius:5px;
+  		outline:none;
+  		padding-left:3px;
+  	}
+	</style>
   </head>
   	<script>
 		 function loadSrc(src,id){
@@ -43,9 +53,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<span>用户名：</span>
 					<input type="text" name="userName" id="userName"/>
 					<span>开始时间：</span>
-					<input type="date" name="biginDate" id="biginDate"/>
+					<input class="time-input " type="text" name="biginDate" id="biginDate"/>
 					<span>结束时间：</span>
-					<input type="date" name="endDate" id="endDate"/>
+					<input class="time-input " type="text" name="endDate" id="endDate"/>
 					<span>作品分类：</span>
 					<select class="type" name="workType" id="workType">
 						<option value="">请选择作品分类</option>

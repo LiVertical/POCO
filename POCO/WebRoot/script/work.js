@@ -19,7 +19,7 @@ function queryAllWors(page){
 			if(data.worksInfo.length>0){
 				var html = "";
 				for(var i = 0;i < pageSize; i++){
-					html += "<li><div class='leftDiv'><img src='" + getRootPath() +"/"+  data.worksInfo[i].productPath+"'></div>"
+					html += "<li><div class='leftDiv'><img src='/"+  data.worksInfo[i].productPath+"'></div>"
 							 +"<div class='rightDiv'><p>作品名称："+ data.worksInfo[i].workName+"</p>"
 							 +"<p>上传时间："+data.worksInfo[i].uploadTime.substring(0,16)+"</p>"
 							 +"<a href='" +getRootPath() + "/views/workDetails.jsp?workId="+data.worksInfo[i].workId+"'>点击查看作品详情</a></div></li>";

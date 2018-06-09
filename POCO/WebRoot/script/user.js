@@ -23,7 +23,7 @@ var initUserInfo = function(){
 			console.log("success");
 			if(data.role != '2'){
 			$("#userId").val(data.userId);
-			 $("img").attr("src", getRootPath()+"/"+data.userImg);
+			 $("img").attr("src", "/"+data.userImg);
 			$("#userName").val(data.userName);
 			$("#userAge").val(data.userAge);
 			$("#userEmail").val(data.userEmail);

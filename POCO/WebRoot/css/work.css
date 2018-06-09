@@ -10,18 +10,18 @@
 	margin:30px auto;
 	width:92%;
 	min-height:500px;
-	border:1px solid green;
 	text-align:center;
 }
 .content ul li{
 	height:200px;
 	width:90%;
-	border:1px solid red;
+	border-top: 2px solid #3B3B3B;
+    margin-top: 20px;
+    padding:10px;
 }
 .leftDiv{
 	height:100%;
 	width:20%;
-	border:1px solid blue;
 	float:left;
 }
 .leftDiv img{
@@ -31,7 +31,6 @@
 .rightDiv{
 	width:70%;
 	float:left;
-	border:1px solid;
 	height:100%;
 }
 .rightDiv p{

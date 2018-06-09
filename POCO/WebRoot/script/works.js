@@ -40,7 +40,7 @@ var initUserData = function(page) {
 							break;
 						}
 						 tbody += "<tr><td>"+ (i+1) + "</td>"
-						              + "<td style='height:150px;width:150px;'><img class='product' src='" + getRootPath() + "/" + result.productInfos[i].productPath + "'></td>"
+						              + "<td style='height:150px;width:150px;'><img class='product' src='/" + result.productInfos[i].productPath + "'></td>"
 						              + "<td style='word-break'>" + result.productInfos[i].productName + "</td>"
 						              + "<td style='word-break'>" + result.productInfos[i].productDesc + "</td>"
 									  + "<td>" + result.productInfos[i].uploadTime.substring(0,16) + "</td>"

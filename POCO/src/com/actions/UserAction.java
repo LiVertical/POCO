@@ -109,13 +109,13 @@ public class UserAction extends ActionSupport{
 				return SUCCESS;
 			}
 			result.put("userInfos", userService.getUserById(userId));
+			result.put("returnCode", "00");
+			result.put("returnMsg", "查询用户信息成功");
 		} catch (Exception e) {
 			result.put("returnCode", "-1");
 			result.put("returnMsg", "内部服务器异常");
 			logger.info("查询用户信息异常！", e);
 		}
-		result.put("returnCode", "00");
-		result.put("returnMsg", "查询用户信息成功");
 		return SUCCESS;
 	}
 	
@@ -175,7 +175,7 @@ public class UserAction extends ActionSupport{
 			return SUCCESS;
 		}
 		try {
-			userService.doSaveOrUpdateUserInfo(userId, age, email, sex);
+			userService.doSaveOrUpdateUserInfo(userId, userName, age, email, sex);
 			result.put("returnCode", "00");
 			result.put("returnMsg", "更新用户信息异常！");
 		} catch (Exception e) {

@@ -23,7 +23,7 @@ function getAllWorksInfos(page){
 			for(var i = 0; i < pageSize; i++){
 				var products = ""; 
 				for(var j = 0; j < data.worksInfo[i].productInfos.length; j++){
-					products +="<li class='img'><img src='" + getRootPath() + "/" + data.worksInfo[i].productInfos[j].productPath+"'></li>"; 
+					products +="<li class='img'><img src='/" + data.worksInfo[i].productInfos[j].productPath+"'></li>"; 
 				}
 				 tbody += "<tr><td>"+ (i+1) + "</td>"
 	              + "<td style='height:150px;width:150px;'>"+ data.worksInfo[i].workName +"</td>"

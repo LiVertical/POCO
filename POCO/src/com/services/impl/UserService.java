@@ -40,8 +40,8 @@ public class UserService implements IUserService{
 	
 	
 	@Override
-	public void doSaveOrUpdateUserInfo(String userId, int age, String email, int sex) {
-		userDao.saveOrUpdateUserInfo(userId, age, email,sex);
+	public void doSaveOrUpdateUserInfo(String userId,String userName, int age, String email, int sex) {
+		userDao.saveOrUpdateUserInfo(userId, userName, age, email,sex);
 	}
 	
 	//获取所有用户

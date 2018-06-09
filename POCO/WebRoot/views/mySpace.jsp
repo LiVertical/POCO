@@ -3,7 +3,7 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%
 String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -54,22 +54,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 	</ul>
 
 	 	<ul style="float:right;padding-right:66px">
-			 <s:if test="#session.user.username== null">
-				<li><a href="login-input.action">登录</a></li>
+			 <s:if test="%{#session.isEmpty()}">
+				<li><a href="<%=basePath%>user/userLogin.action">登录</a></li>
 			 </s:if>
 			 <s:else>
 			 	<li onclick="gotoUpload()">发作品</li>
-				<li><span id="userImg" style='height:30px;'></span>
-					<div class="loginCenter" style="display:none">
-						<ul class="menus">
-							<li><a href="">设置</a></li>
-							<li><a href="">帮助</a></li>
-							<li><a onclick="gotoCompleteUserInfo()">完善资料</a></li>
-							<li><a href="<%=basePath%>/user/login-loginOut.action">退出登陆</a></li>
+				<li><img id="userImg" style="height:30px;width:30px;margin-top:9px;" src="<%=basePath%>${sessionScope.APP_USERINFO_SESSION_KEY.userImg}">
+						<ul class="loginCenter" style="display:none">
+								<li><a href="<%=basePath%>views/mySpace.jsp">我的空间</a></li>
+								<li><a href="<%=basePath%>views/accountManage.jsp">账号管理</a></li>
+								<li><a href="<%=basePath%>views/notifications.jsp">系统通知</a></li>
+								<li><a href="<%=basePath%>user/loginOut.action">退出登录</a></li>
 						</ul>
-					</div>
 				</li>
-			 </s:else>
+			</s:else>
 	 	</ul>
 	</div>
  <div class="main">

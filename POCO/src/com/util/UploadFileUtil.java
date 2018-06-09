@@ -40,6 +40,7 @@ public class UploadFileUtil {
 				if (null != in) {
 					try {
 						in.close();
+						out.flush();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -47,6 +48,7 @@ public class UploadFileUtil {
 				if (null != out) {
 					try {
 						out.close();
+						out.flush();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

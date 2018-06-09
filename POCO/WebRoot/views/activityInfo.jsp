@@ -3,7 +3,7 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%
 String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -185,7 +185,7 @@ function getAllActivityWorks(){
 			for(var i=0; i < data.worksInfos.length; i++){
 				var htm1 = "";
 				for(var j = 0; j < data.worksInfos[i].productInfos.length;j++){
-					htm1 += "<li><img  class='img' src='"+getRootPath()+"/"+data.worksInfos[i].productInfos[j].productPath+"'></li>";
+					htm1 += "<li><img  class='img' src='/"+data.worksInfos[i].productInfos[j].productPath+"'></li>";
 				}
 				html += "<li class='work'><div class='leftDiv'><h5 style='text-align:center;padding:10px'>"+data.worksInfos[i].workName+"</h5><p>"
 				+data.worksInfos[i].workComment+"</p></div>"

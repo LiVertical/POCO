@@ -25,7 +25,7 @@ function queryProductsByType(){
 		if(data.returnCode == '00'){	
 			var html = "";
 			for(var i = 0;i < data.products.length;i++){
-				html += "<li><div class='boxImg'><img src='"+getRootPath()+"/"+data.products[i].productPath+"'></div>" 
+				html += "<li><div class='boxImg'><img src='/"+data.products[i].productPath+"'></div>" 
 						 +"<div class='contentBox'><ul>"
 						 +"<li><p>图片名称："+data.products[i].productName+"</p></li>"
 						 +"<li><p>图片描述："+data.products[i].productDesc+"</p></li>"
@@ -44,7 +44,7 @@ function queryProductsByType(){
 				var html = "";
 				if(data.products.length>0){
 					for(var i = 0;i < data.products.length;i++){
-						html += "<li><div class='boxImg'><img src='"+getRootPath()+"/"+data.products[i].productPath+"'></div>" 
+						html += "<li><div class='boxImg'><img src='/"+data.products[i].productPath+"'></div>" 
 								 +"<div class='contentBox'><ul>"
 								 +"<li><p>图片名称："+data.products[i].productName+"</p></li>"
 								 +"<li><p>图片描述："+data.products[i].productDesc+"</p></li>"

@@ -27,6 +27,7 @@ public class RegistService implements IRegistService{
 			user.setLoginPass(MD5.getMD5ofString(passWord).toString());	
 			user.setRole(role);
 			user.setCreateTime(new Date());
+			user.setFaceImg("/img/icons/default.jpg");
 			registDao.registSave(user);
 		} catch (Exception e) {
 			logger.error("保存用户信息异常", e);

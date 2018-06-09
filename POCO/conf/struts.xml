@@ -135,11 +135,7 @@
   
   	<!-- 普通用户注册 -->
   	<action name="userInfoSave" class="com.actions.RegistAction" method="userInfoSave">
-  		<result type="json">
-			<param name="root">result</param>
-			<param name="excludeNullProperties">true</param>
-		</result> 
-  		<interceptor-ref name="pocoStack"></interceptor-ref>
+  		<result name="userLogin">/views/userLogin.jsp</result> 
   	</action> 
   	
   	<!--登录 -->

@@ -36,7 +36,7 @@ function getWorkInfosByContestId(){
 			console.log(vote);
 			var htm1 = "";
 			for(var j = 0; j < data.contestsWorkInfo[i].productInfos.length;j++){
-				htm1 += "<li><img  class='img' src='"+getRootPath()+"/"+data.contestsWorkInfo[i].productInfos[j].productPath+"'></li>";
+				htm1 += "<li><img  class='img' src='/"+data.contestsWorkInfo[i].productInfos[j].productPath+"'></li>";
 			}
 			html += "<li class='work'><div class='desc'><h5 style='text-align:center;padding:10px'>"+data.contestsWorkInfo[i].workName+"</h5>"
 			+data.contestsWorkInfo[i].workComment+"</div>"
@@ -53,7 +53,7 @@ function getWorkInfosByContestId(){
 }
 
 function vote(id){
-	if(isDelay){
+	if(isDelay(startTime, endTime)){
 		alert("大赛已过期");
 		return false;
 	}

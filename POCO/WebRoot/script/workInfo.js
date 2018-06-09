@@ -11,7 +11,7 @@ function getAllWorkInfos(){
 			if(data.worksInfos[0].productInfos.length>0){
 				var pHtml = "";
 				for(var i = 0; i < data.worksInfos[0].productInfos.length; i++){
-					pHtml += "<li><img src='"+getRootPath()+"/"+data.worksInfos[0].productInfos[i].productPath+"'></li>"; 
+					pHtml += "<li><img src='/"+data.worksInfos[0].productInfos[i].productPath+"'></li>"; 
 				}
 				$("#products").html(pHtml);
 			}

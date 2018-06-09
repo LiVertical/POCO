@@ -121,6 +121,7 @@ public class LoginAction extends BaseAction{
             	session.remove("APP_USERINFO_SESSION_KEY");
             }
             session.remove("USERINFO_SESSION_KEY");
+            session.clear();
 		} catch (Exception e) {
 			logger.error("清除session异常", e);
 		}

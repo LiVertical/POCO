@@ -88,7 +88,7 @@ public class ActivityDao extends BaseDao {
 
 
 	public List<Activities> getAllActivities() {
-		return getSession().createQuery("FROM Activities").list();
+		return getSession().createQuery("FROM Activities ORDER BY createTime DESC").list();
 	}
 
 

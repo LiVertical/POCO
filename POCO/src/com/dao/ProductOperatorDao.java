@@ -175,7 +175,11 @@ public class ProductOperatorDao extends BaseDao {
 	}
 
 	public List<ProductInfo> doQueryProductsByType(int proType) {
-		String hql = "FROM ProductInfo WHERE productTypes= '" + proType + "'";
+		String hql = "";
+		hql = "FROM ProductInfo WHERE productTypes= '" + proType + "'";
+		if(proType == 100){
+			hql =  "FROM ProductInfo";
+		}
 		return getSession().createQuery(hql).list();
 	}
 

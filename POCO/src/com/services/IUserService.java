@@ -18,7 +18,7 @@ public interface IUserService {
 	void doDeleteUserInfo(String userId);
 
 	//更新用户信息
-	void doSaveOrUpdateUserInfo(String userId, int age, String email, int sex);
+	void doSaveOrUpdateUserInfo(String userId, String userName, int age, String email, int sex);
 
 	//更新用户密码
 	void doUpdatePass(String userId, String newPass);

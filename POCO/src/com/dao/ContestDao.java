@@ -22,7 +22,7 @@ public class ContestDao extends BaseDao{
 	}
 
 	public List<Contests> queryAllContest() {
-		String sql = "FROM Contests";
+		String sql = "FROM Contests ORDER BY startTime DESC";
 		return getSession().createQuery(sql).list();
 	}
 

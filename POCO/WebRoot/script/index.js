@@ -17,7 +17,8 @@ function queryProducts(page) {
 					for (var i = 0; i < result.productInfos.length; i++) {
 						tbody += "<li><div class='boxs_middle'> "
 						  + "<img onclick='queryProductInfos(&quot;"+ result.productInfos[i].productId +"&quot;)' src='"
-						  + getRootPath()+ "/" + result.productInfos[i].productPath
+						  /*+ getRootPath()*/
+						  + "/" + result.productInfos[i].productPath
 						  + "'></div><div class='boxs_right'><p style='color:indianred'>***********************</p><p class='title'>标题 "
 						  + result.productInfos[i].productName
 			    		  + "</p><p>作品描述："

@@ -41,19 +41,11 @@ public class RegistAction extends ActionSupport{
 			isExist = registService.findUserByLoginName(loginName);
 			if(!isExist){
 				registService.saveUserInfo(loginName, loginPass, role);
-				result.put("returnCode", "00");
-				result.put("returnMsg", "用户注册成功");
-			}
-			else{
-				result.put("returnCode", "20");
-				result.put("returnMsg", "该用户名已存在");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			result.put("returnCode", "10");
-			result.put("returnMsg", "用户信息注册异常");
+			logger.error("用户注册失败", e);
 		}
-		return SUCCESS;		
+		return "userLogin";		
 	}
 	
 	/***

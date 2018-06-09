@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				} 
 		  }
 	       $(function(){
-		     loadSrc('<%=basePath%>/system/works.jsp');
+		     loadSrc('<%=basePath%>/system/products.jsp');
 		     $.ajax({
 		    	url: '<%=basePath%>/admin/checkIsLogin.action',
 		    	type: 'post',

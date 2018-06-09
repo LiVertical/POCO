@@ -169,13 +169,16 @@ public class WorkDao extends BaseDao{
 			WorksInfos worksInfos = new WorksInfos();
 			try {
 				String sql = "FROM Work WHERE workId = '"+workId+"'";
-			Work work = (Work) getSession().createQuery(sql).list().get(0);
+				Work work = (Work) getSession().createQuery(sql).list().get(0);
 				String sql2 = "FROM ProductInfo WHERE productGroupId = '"+work.getProductGroupId()+"'";
 				Users user = new Users();
 				String sql3 = "FROM Users WHERE userId = '"+work.getUserId()+"'";
 				List<Users> users = getSession().createQuery(sql3).list();
 				if(users.size()>0){
 					user = users.get(0);
+					if(user.getUserName() == null){
+						worksInfos.setUserName(user.getLoginName());
+					}
 					worksInfos.setUserName(user.getUserName());
 				}
 				List<ProductInfo> products = new ArrayList<ProductInfo>();

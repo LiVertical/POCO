@@ -62,6 +62,7 @@ function updateProFile(){
 	$.post(getRootPath()+"/user/saveOrUpdateUserInfo.action", params, function(data){
 		if(data.returnCode == '00'){
 			alert("更新资料成功！");
+			getUserInfo();
 		}else{
 			alert("更新资料失败");
 		}
@@ -69,32 +70,26 @@ function updateProFile(){
 }
 
 function getUserInfo(){
-	$.ajax({
-        type:'POST',
-        url: getRootPath() + "/user/getUserInfo.action",
-        contentType:undefined,
-        processData:false,
-        mimeType:"multipart/form-data",
-        success:function(data){
-    		if(data.returnCode == '00'){
-    			if(data.userInfos.userName != ''){
-    				$("#userName").val(data.userInfos.userName);
-    			}
-    			if(data.userInfos.age != 0){
-    				$("#userAge").val(data.userInfos.age);
-    			}
-    			if(data.userInfos.email != ''){
-    				$("#userEmail").val(data.userInfos.email);
-    			}
-    			if(data.userInfos.sex == 0){
-    				$("#women").attr("checked",true);
-    			}else{
-    				$("#women").attr("checked",false);
-    			}
-    		}
-        }
-     });
- }
+	$.post(getRootPath() + "/user/getUserInfo.action", function(data){
+		if(data.returnCode == '00'){
+			if(data.userInfos.userName != ''){
+				$("#userName").val(data.userInfos.userName);
+			}
+			if(data.userInfos.age != 0){
+				$("#userAge").val(data.userInfos.age);
+			}
+			if(data.userInfos.email != ''){
+				$("#userEmail").val(data.userInfos.email);
+			}
+			if(data.userInfos.sex == 0){
+				$("#women").attr("checked",true);
+			}else{
+				$("#women").attr("checked",false);
+			}
+		}
+	});
+}
+
 	
 	function updatePass(){
 		var oldPass = $("#oldPass").val();

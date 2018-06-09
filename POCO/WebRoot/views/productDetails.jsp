@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 	</ul>
 	 	<ul style="float:right;padding-right:66px">
 			 <s:if test="%{#session.isEmpty()}">
-				<li><a href="<%=basePath%>user/userLogin.action">登录</a></li>
+				<li><a href="<%=basePath%>/user/userLogin.action">登录</a></li>
 			 </s:if>
 			 <s:else>
 			 	<li onclick="gotoUpload()">发作品</li>

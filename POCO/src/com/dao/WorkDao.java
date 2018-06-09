@@ -282,5 +282,28 @@ public class WorkDao extends BaseDao{
 		}
 	}
 
+	public List<WorksInfos> doQueryWorksInfosByUser(int currentPage, int recordSize, String userId) {
+		String sql = "FROM Work WHERE userId = '" + userId + "'";
+		List<WorksInfos> worksInfos = new ArrayList<WorksInfos>();
+		List<Work> works = new ArrayList<Work>();
+		works = getSession().createQuery(sql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
+		for(Work info: works){
+			WorksInfos infos = new WorksInfos();
+			String productGroupId = info.getProductGroupId();
+			String sql2 = "FROM ProductInfo WHERE productGroupId='"+productGroupId+"'";
+			List<ProductInfo> products = getSession().createQuery(sql2).list();
+			infos.setProductInfos(products);
+			worksInfos.add(infos);
+		}
+		return worksInfos;
+	}
+
+	public int doCountWorksSize(String userId) {
+		int size = 0;
+		String sql = "FROM Work WHERE userId = '" + userId + "'";
+		size = getSession().createQuery(sql).list().size();
+		return size;
+	}
+
 
 }

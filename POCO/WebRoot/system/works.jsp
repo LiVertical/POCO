@@ -16,10 +16,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/workManage.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/admin.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/css/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/css/css/red-datepicker.css">
 	<script type="text/javascript" src="<%=basePath%>/js/jquery-1.9.1.min.js"></script>
 	<script src="<%=basePath%>/control/js/common.js"></script>
 	<script src="<%=basePath%>/js/jquery.pagination.js"></script>
 	<script src="<%=basePath%>/script/workManage.js"></script>
+	<script src="<%=basePath%>/js/jquery-ui.js"></script> 
 	<style>
 	.time-input{
   		height:30px;

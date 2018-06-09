@@ -64,6 +64,18 @@ public class WorkService implements IWorkService {
 	public void delWorks(String[] proArrayStr) {
 		workDao.delWorks(proArrayStr);
 	}
+	
+	@Override
+	public List<WorksInfos> doQueryWorksByUser(int currentPage, int recordSize,String userId) {
+		return workDao.doQueryWorksInfosByUser(currentPage, recordSize, userId);
+	}
+
+	@Override
+	public int doCountWorks(String userId) {
+		return workDao.doCountWorksSize(userId);
+	}
+
+	
 
 	public UserDao getUserDao() {
 		return userDao;
@@ -77,5 +89,6 @@ public class WorkService implements IWorkService {
 	public void setWorkDao(WorkDao workDao) {
 		this.workDao = workDao;
 	}
+
 
 }

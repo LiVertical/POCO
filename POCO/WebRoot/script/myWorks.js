@@ -21,7 +21,7 @@ $(function(){
 function queryProducts(page) {
 	var recordSize = 3;
 	var currentPage = page;
-	$.getJSON(getRootPath() + "/user/product-queryProductByUser.action?currentPage="+currentPage+"&recordSize="+recordSize,function(data) {
+	$.getJSON(getRootPath() + "/user/queryWorksInfosByUser.action?currentPage="+currentPage+"&recordSize="+recordSize,function(data) {
 		$("#p_content").empty();
 		$("#page").empty();
 		console.log("productInfos:"+data.worksInfo);

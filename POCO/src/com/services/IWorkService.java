@@ -29,4 +29,8 @@ public interface IWorkService {
 
 	void delWorks(String[] proArrayStr);
 
+	List<WorksInfos> doQueryWorksByUser(int currentPage, int recordSize, String userId);
+
+	int doCountWorks(String userId);
+
 }

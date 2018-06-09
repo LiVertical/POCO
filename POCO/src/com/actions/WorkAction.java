@@ -240,6 +240,31 @@ public class WorkAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	//根据用户查询作品（用户侧）
+	public String queryWorksInfosByUser(){
+		logger.info("WorkAction.queryWorksInfosByUser start ....");
+		try {
+			result = new JSONObject();
+			JsonConfig jsonConfig = new JsonConfig();
+			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
+			String userId = LoginUserUtil.getUserInfo().getUserId();
+			if(StringUtils.isBlank(userId)){  
+				result.put("returnCode", "10");
+				result.put("returnMsg", "参数错误");
+			}
+			result.put("worksInfo", JSONArray.fromObject(workService.doQueryWorksByUser(currentPage, recordSize, userId), jsonConfig));
+			result.put("totals", workService.doCountWorks( userId));
+			result.put("returnCode", "00");
+			result.put("returnMsg", "根据用户名查询作品成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.put("returnCode", "-1");
+			result.put("returnMsg", "根据用户名查询作品失败,内部服务器异常");
+		}
+		return SUCCESS;
+	}
+	
+	
 	public JSONObject getResult() {
 		return result;
 	}

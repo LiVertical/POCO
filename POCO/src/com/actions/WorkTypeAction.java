@@ -23,6 +23,10 @@ public class WorkTypeAction extends ActionSupport{
 	private int recordSize;
 	private String typeValue;
 	
+	/**
+	 * 分页查询列表
+	 * @return
+	 */
 	public String page() {
 		logger.info("WorkTypeAction.page start ······");
 		result = new JSONObject();
@@ -38,6 +42,10 @@ public class WorkTypeAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	/**
+	 * 根据父类型查询集合
+	 * @return
+	 */
 	public String list(){
 		logger.info("WorkTypeAction.list start·····");
 		result = new JSONObject();
@@ -52,6 +60,10 @@ public class WorkTypeAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	/**
+	 * 根据类型查询
+	 * @return
+	 */
 	public String find(){
 		logger.info("WorkTypeAction.list start·····");
 		result = new JSONObject();
@@ -66,6 +78,10 @@ public class WorkTypeAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	/**
+	 * 查询一级类型集合 （没有父类型的为一级类型）
+	 * @return
+	 */
 	public String findListFather(){
 		logger.info("WorkTypeAction.list start·····");
 		result = new JSONObject();
@@ -79,6 +95,11 @@ public class WorkTypeAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
+	
+	/**
+	 * 新增
+	 * @return
+	 */
 	public String add(){
 		logger.info("WorkTypeAction.add start·····");
 		result = new JSONObject();
@@ -89,6 +110,7 @@ public class WorkTypeAction extends ActionSupport{
 			return ERROR;
 		}
 		try {
+			//类型值不能重复，如果重复，则不保存
 			WorkType wt = workTypeService.find(workType.getTypeValue());
 			if (wt != null) {
 				throw new Exception();
@@ -104,7 +126,10 @@ public class WorkTypeAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
-	
+	/**
+	 * 修改
+	 * @return
+	 */
 	public String update(){
 		logger.info("WorkTypeAction.update start·····");
 		result = new JSONObject();
@@ -115,6 +140,7 @@ public class WorkTypeAction extends ActionSupport{
 			return ERROR;
 		}
 		try {
+			//类型值不能重复，如果重复，则不修改
 			WorkType wt = workTypeService.find(workType.getTypeValue());
 			if (wt != null) {
 				throw new Exception();
@@ -130,6 +156,10 @@ public class WorkTypeAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	/**
+	 * 删除
+	 * @return
+	 */
 	public String delete(){
 		logger.info("WorkTypeAction.delete start·····");
 		result = new JSONObject();

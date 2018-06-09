@@ -58,7 +58,7 @@ public class WorkDao extends BaseDao{
 		return getSession().createQuery(sql).list();
 	}
 
-	public List<WorksInfos> doQueryAllWorksInfo(int currentPage, int recordSize, String workName, String userName,String userId, Integer workType) {
+	public List<WorksInfos> doQueryAllWorksInfo(int currentPage, int recordSize, String workName, String userName,String userId, Integer workType,Date biginDate,Date endDate) {
 		List<WorksInfos> workInfos = new ArrayList<WorksInfos>();
 		
 		String sql = "SELECT w.work_id,w.work_name,w.work_comment,w.work_upload_time,w.product_group_id,"
@@ -75,6 +75,13 @@ public class WorkDao extends BaseDao{
 		if (workName != null && !"".equals(workName)) {
 			sql = sql +"AND w.work_name like '%"+workName+"%'";
 		}
+		if (biginDate != null) {
+			sql = sql +"AND w.work_upload_time > '"+biginDate+"'";
+		}
+		if (endDate != null) {
+			sql = sql +"AND w.work_upload_time < '"+endDate+"'";
+		}
+		
 		
 		List list = getSession().createSQLQuery(sql)
 		.addScalar("w.work_id",StandardBasicTypes.STRING)

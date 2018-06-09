@@ -1,5 +1,6 @@
 package com.services;
 
+import java.util.Date;
 import java.util.List;
 
 import com.entities.Work;
@@ -18,7 +19,7 @@ public interface IWorkService {
 
 	WorksInfos queryWorksInfoByWorkId(String workId);
 
-	List<WorksInfos> queryWorks(int currentPage, int recordSize, String workName, String userName,String userId, Integer workType);
+	List<WorksInfos> queryWorks(int currentPage, int recordSize, String workName, String userName,String userId, Integer workType,Date biginDate,Date enDate);
 
 	List<WorksInfos> doQueryWorksInfoByContestId(String contestId);
 

@@ -1,5 +1,6 @@
 package com.services.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.dao.UserDao;
@@ -25,8 +26,8 @@ public class WorkService implements IWorkService {
 	}
 	
 	@Override
-	public List<WorksInfos> queryWorks(int currentPage, int recordSize, String workName, String userName,String userId, Integer workType) {
-		return workDao.doQueryAllWorksInfo(currentPage, recordSize,workName,userName,userId,workType);
+	public List<WorksInfos> queryWorks(int currentPage, int recordSize, String workName, String userName,String userId, Integer workType,Date biginDate,Date endDate) {
+		return workDao.doQueryAllWorksInfo(currentPage, recordSize,workName,userName,userId,workType,biginDate,endDate);
 	}
 	
 	@Override

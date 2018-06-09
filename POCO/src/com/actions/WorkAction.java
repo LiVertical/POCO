@@ -1,5 +1,7 @@
 package com.actions;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +35,8 @@ public class WorkAction extends ActionSupport{
 	private String contestId;
 	private String userName;
 	private String workIds;
+	private String biginDate;
+	private String endDate;
 	
 	public String addWork(){
 		logger.info("WorkAction.addWork start·····");
@@ -89,9 +93,13 @@ public class WorkAction extends ActionSupport{
 			if (workType != null && !"".equals(workType)) {
 				workTypeInteger = Integer.valueOf(workType);
 			}
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+			Calendar rightNow = Calendar.getInstance();
+			rightNow.setTime(format.parse(endDate));
+			rightNow.add(Calendar.DATE, 1);
 			JsonConfig jsonConfig = new JsonConfig();
 			jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor());
-			List<WorksInfos> queryWorks = workService.queryWorks(currentPage, recordSize,workName,userName,null,workTypeInteger);
+			List<WorksInfos> queryWorks = workService.queryWorks(currentPage, recordSize,workName,userName,null,workTypeInteger,format.parse(biginDate),rightNow.getTime());
 			result.put("worksInfo", JSONArray.fromObject(queryWorks, jsonConfig));
 			result.put("worksCount", workService.countWorks(workName,userName,null,workTypeInteger));
 			result.put("returnCode", "00");
@@ -325,6 +333,22 @@ public class WorkAction extends ActionSupport{
 
 	public void setWorkIds(String workIds) {
 		this.workIds = workIds;
+	}
+
+	public String getBiginDate() {
+		return biginDate;
+	}
+
+	public void setBiginDate(String biginDate) {
+		this.biginDate = biginDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 	
 }

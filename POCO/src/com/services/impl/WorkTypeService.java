@@ -47,6 +47,13 @@ public class WorkTypeService implements IWorkTypeService{
 	public List<WorkType> findListFather() {
 		return workTypeDao.findListFather();
 	}
-	
+
+	public WorkTypeDao getWorkTypeDao() {
+		return workTypeDao;
+	}
+
+	public void setWorkTypeDao(WorkTypeDao workTypeDao) {
+		this.workTypeDao = workTypeDao;
+	}
 
 }

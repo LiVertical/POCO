@@ -493,6 +493,21 @@
 				<param name="excludeNullProperties">true</param>
 			</result> 
   		 </action>
+  		 
+  		 <!-- 作品类别管理 -->
+  		 <action name="queryAllWorkTypeInfo" class="com.actions.WorkTypeAction" method="queryAllWorkTypeInfo">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
+  		 <action name="addNewWorkType" class="com.actions.WorkTypeAction" method="addNewWorkType">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
  		
    </package>
 </struts>

@@ -11,7 +11,6 @@ import com.entities.WorkType;
 import com.opensymphony.xwork2.ActionSupport;
 import com.services.IWorkTypeService;
 import com.util.LoginUserUtil;
-import com.util.Page;
 
 public class WorkTypeAction extends ActionSupport{
 
@@ -27,17 +26,18 @@ public class WorkTypeAction extends ActionSupport{
 	 * 分页查询列表
 	 * @return
 	 */
-	public String page() {
+	public String queryAllWorkTypeInfo() {
 		logger.info("WorkTypeAction.page start ······");
 		result = new JSONObject();
 		try {
-			Page<WorkType> workTypes = workTypeService.findPage(currentPage,recordSize);
-			result.put("", workTypes.getData());
-			result.put("", workTypes.getCount());
+			result.put("workTypeInfo", workTypeService.findPage(currentPage,recordSize).getData());
+			result.put("workTypeCount", workTypeService.findPage(currentPage,recordSize).getCount());
+			result.put("returnCode", "00");
+			result.put("returnMsg", "查询作品分类信息成功");
 		} catch (Exception e) {
+			logger.error("查询作品分类信息失败", e);
 			result.put("returnCode", "-1");
-			result.put("returnMsg", "查询失败");
-			return ERROR;
+			result.put("returnMsg", "内部服务器异常");
 		}
 		return SUCCESS;
 	}
@@ -100,20 +100,22 @@ public class WorkTypeAction extends ActionSupport{
 	 * 新增
 	 * @return
 	 */
-	public String add(){
-		logger.info("WorkTypeAction.add start·····");
+	public String addNewWorkType(){
+		logger.info("WorkTypeAction.addNewWorkType start·····");
 		result = new JSONObject();
 		String userId = LoginUserUtil.getUserInfo().getUserId();
 		if(StringUtils.isBlank(userId)){
 			result.put("returnCode", "10");
 			result.put("returnMsg", "参数错误");
-			return ERROR;
+			return SUCCESS;
 		}
 		try {
 			//类型值不能重复，如果重复，则不保存
-			WorkType wt = workTypeService.find(workType.getTypeValue());
+			WorkType wt = workTypeService.find(typeValue);
 			if (wt != null) {
-				throw new Exception();
+				result.put("returnCode", "02");
+				result.put("returnMsg", "该类型已经存在");
+				return SUCCESS;
 			}
 			workTypeService.save(workType);
 			result.put("returnCode", "00");
@@ -121,7 +123,7 @@ public class WorkTypeAction extends ActionSupport{
 		} catch (Exception e) {
 			result.put("returnCode", "-1");
 			result.put("returnMsg", "保存失败");
-			return ERROR;
+			logger.error("保存新类型异常");
 		}
 		return SUCCESS;
 	}
@@ -180,6 +182,53 @@ public class WorkTypeAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-	
+
+	public JSONObject getResult() {
+		return result;
+	}
+
+	public void setResult(JSONObject result) {
+		this.result = result;
+	}
+
+	public WorkType getWorkType() {
+		return workType;
+	}
+
+	public void setWorkType(WorkType workType) {
+		this.workType = workType;
+	}
+
+	public IWorkTypeService getWorkTypeService() {
+		return workTypeService;
+	}
+
+	public void setWorkTypeService(IWorkTypeService workTypeService) {
+		this.workTypeService = workTypeService;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public int getRecordSize() {
+		return recordSize;
+	}
+
+	public void setRecordSize(int recordSize) {
+		this.recordSize = recordSize;
+	}
+
+	public String getTypeValue() {
+		return typeValue;
+	}
+
+	public void setTypeValue(String typeValue) {
+		this.typeValue = typeValue;
+	}
 	
 }

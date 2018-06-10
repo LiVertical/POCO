@@ -1,14 +1,22 @@
 package com.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.HibernateException;
 
 import com.entities.WorkType;
 
 public class WorkTypeDao extends BaseDao{
 
 	public List<WorkType> findList(int currentPage, int recordSize) {
-		String hql = "FORM WorkType";
-		List<WorkType> list = getSession().createQuery(hql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
+		List<WorkType> list = new ArrayList<WorkType>();
+		try {
+			String hql = "FROM WorkType";
+			list = getSession().createQuery(hql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
 		return list;
 	}
 
@@ -30,17 +38,22 @@ public class WorkTypeDao extends BaseDao{
 
 	public List<WorkType> findList(String typeValue) {
 //		WorkType find = find(typeValue);
-		String hql = "FORM WorkType WHERE fatherType ='"+typeValue+"'";
+		String hql = "FROM WorkType WHERE fatherType ='"+typeValue+"'";
 		return getSession().createQuery(hql).list();
 	}
 
 	public WorkType find(String typeValue) {
-		String hql = "FORM WorkType WHERE typeValue ='"+typeValue+"'";
-		return (WorkType) getSession().createQuery(hql).list().get(0);
+		String hql = "FROM WorkType WHERE typeValue ='"+typeValue+"'";
+		List<WorkType> workTypes =  getSession().createQuery(hql).list();
+		WorkType workType = null;
+		if(workTypes.size() > 0){
+			workType = workTypes.get(0);
+		}
+		return workType;
 	}
 
 	public List<WorkType> findListFather() {
-		String hql = "FORM WorkType WHERE fatherType is null";
+		String hql = "FROM WorkType WHERE fatherType is null";
 		return getSession().createQuery(hql).list();
 	}
 

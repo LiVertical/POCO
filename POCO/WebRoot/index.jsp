@@ -63,17 +63,7 @@
 	   <div class="pagination" id="page"></div>
     </div>
     <div class="container">
-    	<ul class="nav">
-	    	<li onclick="queryProductsByType(100)"><p>全部类型</p></li>
-			<li onclick="queryProductsByType(1)"><p>花鸟</p></li>
-			<li onclick="queryProductsByType(2)"><p>人物</p></li>
-			<li onclick="queryProductsByType(3)"><p>山水</p></li>
-			<li onclick="queryProductsByType(4)"><p>建筑</p></li>
-			<li onclick="queryProductsByType(5)"><p>生态</p></li>
-			<li onclick="queryProductsByType(6)"><p>纪实</p></li>
-			<li onclick="queryProductsByType(7)"><p>LOMO</p></li>
-			<li onclick="queryProductsByType(8)"><p>风景</p></li>
-		</ul>
+    	<ul class="nav" id="nav"></ul>
     </div>
 	<div class="footer">
 		<a>POCO网违法和不良信息举报电话：13928869007 举报邮箱：kent@poco.cn</a>

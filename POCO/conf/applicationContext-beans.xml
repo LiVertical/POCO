@@ -126,12 +126,12 @@
 	</bean>
 	
 	<!-- 作品类别管理 -->
-	<bean id="workTypeDao" class="com.dao.WorkTypeDao">
+	<bean id="typeOperatorDao" class="com.dao.TypeOperatorDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
-	<bean id="workTypeService" class="com.services.impl.WorkTypeService">
-		<property name="workTypeDao" ref="workTypeDao"></property>
+	<bean id="typeOperatorService" class="com.services.impl.TypeOperatorService">
+		<property name="typeOperatorDao" ref="typeOperatorDao"></property>
 	</bean>
 	
 </beans>

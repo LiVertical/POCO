@@ -53,21 +53,7 @@ String basePath = request.getScheme()+ "://" + request.getServerName() + ":" +re
     <div class="uploadBox">
 		<p>图片标题：<input name="productName" placeholder="请输入图片标题"></p>
 		<p>图片分类： 
-			<select class="type" name="proType">
-				<option value="">请选择作品分类</option>
-				<option value="0">人像摄影</option>
-				<option value="1">生态摄影</option>
-				<option value="2">运动摄影</option>
-				<option value="3">生活摄影</option>
-				<option value="4">夜景摄影</option>
-				<option value="5">风景摄影</option>
-				<option value="6">纪实摄影</option>
-				<option value="7">人体摄影</option>
-				<option value="9">自拍摄影</option>
-				<option value="10">商业摄影</option>
-				<option value="11">LOMO</option>
-				<option value="8">其他摄影</option>
-			</select>
+			<select class="type" name="proType" id="workType"></select>
 		</p>
 		<p>图片描述：<input type="text" name="productDesc" placeholder="请输入图片描述"></p>
 		<p>选择文件：<input type="file" id="image" class="glyphicon glyphicon-folder-open"></p>

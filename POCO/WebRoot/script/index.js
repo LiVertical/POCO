@@ -2,7 +2,6 @@ $(document).ready(function() {
 	queryProducts(1);
 });
 
-//解析json   
 function queryProducts(page) {
 	var recordSize = 6;
 	var currentPage = page;
@@ -126,4 +125,11 @@ function deleteCollect(productId){
 //分类查看作品
 function queryProductsByType(type){
 	window.location.href = getRootPath() + "/views/products.jsp?productType="+type;
+}
+
+//查询作品类型
+function queryWorkTypeInfo(){
+	$.post(getRootPath() + "/vistor/querySonTypeByFatherType.action?typeValue="+work, function(data){
+		
+	});
 }

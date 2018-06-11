@@ -16,6 +16,8 @@ $(document).ready(function(){
         });  
         
         queryProductsByType();
+        
+        queryWorkTypes();
 });
 
 function queryProductsByType(){
@@ -58,3 +60,17 @@ function queryProductsByType(){
 				$("#p_content").html(html);
 		});
 	};
+	
+	//查询作品类别
+	function queryWorkTypes(){
+		$.post(getRootPath() + "/user/querySonTypeOfWork.action", function(data){
+			if(data.returnCode == '00'){
+				var html = "";
+				for(var i = 0; i < data.sonTypeInfos.length; i++){
+					html += "<li onclick='queryProductsByProductType(&quot;" + data.sonTypeInfos[i].typeId+ "&quot;)'><p>"
+						 + data.sonTypeInfos[i].typeName +"</p></li>";
+				}
+				$("#nav").html(html);
+			}
+		});
+	}

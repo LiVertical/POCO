@@ -64,6 +64,7 @@ public class LoginAction extends BaseAction{
 				userInfo.setUserName(adminLogin.getUserName());
 				userInfo.setPassword(loginPass);
 				userInfo.setRole(role);
+				userInfo.setUserImg(adminLogin.getFaceImg());
 				userInfo.setUserId(adminLogin.getUserId());
 				LoginUserUtil.saveUserInfo(getContext(), userInfo);
 			}else{

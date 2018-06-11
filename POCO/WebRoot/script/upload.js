@@ -132,4 +132,18 @@ function uploadWork(){
 	});
 }
 
+//查询类别 
+function queryWorkTypes(){
+	$.post(getRootPath() + "/user/querySonTypeOfWork.action", function(data){
+		if(data.returnCode == '00'){
+			var html = "";
+			for(var i = 0; i < data.sonTypeInfos.length; i++){
+				html += "<option value='" + data.sonTypeInfos[i].typeId +"'>" 
+					 + data.sonTypeInfos[i].typeName + "</option>";
+			}
+			$("#workType").html(html);
+		}
+	});
+}
+
 

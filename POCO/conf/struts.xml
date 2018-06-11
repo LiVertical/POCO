@@ -135,6 +135,14 @@
 				<param name="excludeNullProperties">true</param>
 			</result> 
   		 </action>
+  		 
+  		 <!-- 类型管理 -->
+  		  <action name="querySonTypeByFatherType" class="com.actions.TypeOperatorAction" method="querySonTypeByFatherType">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
  		
  	</package>
  	
@@ -377,6 +385,14 @@
 			</result> 
   		 </action>
   		 
+  		 <!-- 类别管理 -->
+  		 <action name="querySonTypeOfWork" class="com.actions.TypeOperatorAction" method="querySonTypeOfWork">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
    </package>  
  
  
@@ -495,20 +511,48 @@
   		 </action>
   		 
   		 <!-- 作品类别管理 -->
-  		 <action name="queryAllWorkTypeInfo" class="com.actions.WorkTypeAction" method="queryAllWorkTypeInfo">                  
+  		 <action name="queryAllWorkTypeInfo" class="com.actions.TypeOperatorAction" method="queryAllWorkTypeInfo">                  
   			<result  type="json" name="success">
 				<param name="root">result</param>
 				<param name="excludeNullProperties">true</param>
 			</result> 
   		 </action>
   		 
-  		 <action name="addNewWorkType" class="com.actions.WorkTypeAction" method="addNewWorkType">                  
+  		 <action name="addNewWorkType" class="com.actions.TypeOperatorAction" method="addNewWorkType">                  
   			<result  type="json" name="success">
 				<param name="root">result</param>
 				<param name="excludeNullProperties">true</param>
 			</result> 
   		 </action>
- 		
+  		 
+  		  <action name="findListFather" class="com.actions.TypeOperatorAction" method="findListFather">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+
+ 		<action name="deleteWorkTypeByWorkId" class="com.actions.TypeOperatorAction" method="deleteWorkTypeByWorkId">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
+  		 <action name="updateTypeInfoByTypeId" class="com.actions.TypeOperatorAction" method="updateTypeInfoByTypeId">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
+  		  <action name="queryTypeInfoByTypeId" class="com.actions.TypeOperatorAction" method="queryTypeInfoByTypeId">                  
+  			<result  type="json" name="success">
+				<param name="root">result</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+  		 </action>
+  		 
    </package>
 </struts>
 

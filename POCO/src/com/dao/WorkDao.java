@@ -82,7 +82,6 @@ public class WorkDao extends BaseDao{
 			sql = sql +"AND w.work_upload_time < '"+endDate+"'";
 		}
 		
-		
 		List list = getSession().createSQLQuery(sql)
 		.addScalar("w.work_id",StandardBasicTypes.STRING)
 		.addScalar("w.work_name",StandardBasicTypes.STRING)

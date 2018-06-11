@@ -6,28 +6,30 @@ import java.util.Date;
  * Work entity. @author MyEclipse Persistence Tools
  */
 
-public class WorkType implements java.io.Serializable {
+public class Types implements java.io.Serializable {
 	
 	private String typeId;
 	private String typeName;
 	private String typeValue;
 	private int typeOrder;
-	private Date createTime;
 	private String fatherType;
+	private Date createTime;
+	private Date updateTime;
 	
-	public WorkType() {
+	public Types() {
 		super();
 	}
 	
-	public WorkType(String typeId, String typeName, String typeValue,
-			int typeOrder, Date createTime, String fatherType) {
+	public Types(String typeId, String typeName, String typeValue,
+			int typeOrder, String fatherType, Date createTime, Date updateTime) {
 		super();
 		this.typeId = typeId;
 		this.typeName = typeName;
 		this.typeValue = typeValue;
 		this.typeOrder = typeOrder;
-		this.createTime = createTime;
 		this.fatherType = fatherType;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
 	}
 	
 	public String getTypeId() {
@@ -66,8 +68,14 @@ public class WorkType implements java.io.Serializable {
 	public void setFatherType(String fatherType) {
 		this.fatherType = fatherType;
 	}
-	
-	
 
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+	
 
 }

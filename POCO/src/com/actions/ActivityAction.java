@@ -88,7 +88,7 @@ public class ActivityAction extends ActionSupport{
 			return SUCCESS;
 		}
 		try {
-			 activityService.doAuditActivity(activityId, curStatus);
+			activityService.doAuditActivity(activityId, curStatus);
 			result.put("returnCode", "00");
 			result.put("returnMsg", "审批活动成功");
 		} catch (Exception e) {

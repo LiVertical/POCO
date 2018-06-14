@@ -44,11 +44,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<table cellpadding="0" cellspacing="0" width="100%" style="table-layout:fixed;">
 						<thead>
 							<tr class='tr_head'>
-								<td style="width:130px">活动标题</td>
+								<td style="width:80px">活动标题</td>
+								<td style="width:180px">活动详情</td>
 								<td style="width:130px">申请时间</td>
 								<td style="width:80px">申请人</td>
 								<td style="width:210px">活动有效期</td>
-								<td style="width:80px">操作</td>
+								<td style="width:80px">审核结果</td>
 							</tr>
 						</thead>
 						<tbody class="table" id="dataDisplay"></tbody>

@@ -63,12 +63,12 @@ function queryProductsByType(){
 	
 	//查询作品类别
 	function queryWorkTypes(){
-		$.post(getRootPath() + "/user/querySonTypeOfWork.action", function(data){
+		$.post(getRootPath() + "/vistor/querySonTypeByFatherType.action?typeValue=work", function(data){
 			if(data.returnCode == '00'){
 				var html = "";
-				for(var i = 0; i < data.sonTypeInfos.length; i++){
-					html += "<li onclick='queryProductsByProductType(&quot;" + data.sonTypeInfos[i].typeId+ "&quot;)'><p>"
-						 + data.sonTypeInfos[i].typeName +"</p></li>";
+				for(var i = 0; i < data.typeInfo.length; i++){
+					html += "<li onclick='queryProductsByProductType(&quot;" + data.typeInfo[i].typeId+ "&quot;)'><p>"
+						 + data.typeInfo[i].typeName +"</p></li>";
 				}
 				$("#nav").html(html);
 			}

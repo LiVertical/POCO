@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 #p_content li {
 	border-bottom: 1px solid cornflowerblue;
-	height: 100px;
+	min-height: 130px;
 	width: 90%;
 	float: left;
 	margin-top: 20px;

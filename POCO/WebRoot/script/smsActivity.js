@@ -32,9 +32,10 @@ function queryAllActivities(page){
 					var status = data.activitiesInfos[i].auditStatus;
 					var curStatus = data.activitiesInfos[i].curStatus;
 					html = "<tr><td>" + data.activitiesInfos[i].activityName + "</td>"
-					+ "<td>" + data.activitiesInfos[i].applyTime.substring(0,16) + "</td>"
-					+ "<td>" + data.activitiesInfos[i].activityDesc + "</td>" 
-					+ "<td>"+ data.activitiesInfos[i].createTime.substring(0,16) +"--"+data.activitiesInfos[i].endTime.substring(0,16)+"</td>" 
+						 + "<td>" + data.activitiesInfos[i].activityDesc + "</td>"
+						 + "<td>" + data.activitiesInfos[i].applyTime.substring(0,16) + "</td>"
+						 + "<td>" + data.activitiesInfos[i].activityUser + "</td>" 
+						 + "<td>"+ data.activitiesInfos[i].startTime.substring(0,16) +"--"+data.activitiesInfos[i].endTime.substring(0,16)+"</td>";
 					if(status == 1){//已审核
 						var statusDesc = "已通过审核";
 						if(curStatus == 0){

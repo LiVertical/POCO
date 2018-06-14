@@ -11,16 +11,18 @@ button{
 }
 .nav{
 	margin:10px auto;
-	width:90%;
 	height:50px;
+	min-width:600px;
+	max-width:1000px;
 	background:#f6f6f6;
 	text-align:center;
 }
 .nav li{
 	float:left;
-	width:8%;
 	line-height: 50px;
 	margin-left: 3%;
+	min-width:100px;
+	max-width:150px;
 }
 .like{
 	background:#76c192;

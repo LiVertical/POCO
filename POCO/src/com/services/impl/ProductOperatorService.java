@@ -16,7 +16,7 @@ public class ProductOperatorService implements IProductOperatorService{
 	Logger logger = Logger.getLogger(this.getClass());
 
 	@Override
-	public void saveProductInfo(String url, String productName, int proType, String productDesc, String productUser, String productGroupId,
+	public void saveProductInfo(String url, String productName, String proType, String productDesc, String productUser, String productGroupId,
 			String activityId, String contestId) {
 		productOperatorDao.doSaveProductInfo(url, productName, proType, productDesc, productUser, productGroupId, activityId, contestId);
 	}
@@ -41,7 +41,7 @@ public class ProductOperatorService implements IProductOperatorService{
 	}
 
 	//根据条件查询
-	public List<Map> queryProductByCondition(int proType,int recordSize,int currentPage){
+	public List<Map> queryProductByCondition(String proType,int recordSize,int currentPage){
 		List<Map> productInfos =  productOperatorDao.queryProductByCondition(proType, recordSize, currentPage);
 		logger.info("ProductOperatorService中的对象"+productInfos);
 		return productInfos;
@@ -52,7 +52,7 @@ public class ProductOperatorService implements IProductOperatorService{
 	}
 	
 	
-	public int getTotalRecords(int proType){
+	public int getTotalRecords(String proType){
 		return productOperatorDao.getTotalRecords(proType);
 	}
 	
@@ -72,7 +72,7 @@ public class ProductOperatorService implements IProductOperatorService{
 	}
 	
 	@Override
-	public List<ProductInfo> queryProductByType(int proType) {
+	public List<ProductInfo> queryProductByType(String proType) {
 		return productOperatorDao.doQueryProductsByType(proType);
 	}
 	

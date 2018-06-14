@@ -49,7 +49,7 @@ var initUserData = function(page) {
 									  + "<td><img style='height:30px;width:44px' src='"+getRootPath()+"/img/icons/delete.jpg' class='delBtn' onclick='deleteProduct(&quot;"+result.productInfos[i].productId+"&quot;)'></td></tr>";
 					 }
 				}else{
-					tbody = "<td>暂时还没有任何作品</td>";
+					tbody = "<tr><td colspan='8'>暂时还没有任何作品配图信息</td></tr>";
 				}
 				$("#dataDisplay").html(tbody);
 				$("#page").pagination(result.productsCount,{

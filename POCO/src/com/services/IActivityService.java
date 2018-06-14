@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import com.entities.Activities;
+import com.vo.ActivityInfoVo;
 
 public interface IActivityService {
 
@@ -13,7 +14,7 @@ public interface IActivityService {
 			String activityDesc, String activityInfo, String createTime,
 			String endTime);
 
-	List<Activities> queryAllActivitiesByCondition(int currentPage,int recordSize, Integer auditStatus);
+	List<ActivityInfoVo> queryAllActivitiesByCondition(int currentPage,int recordSize, Integer auditStatus);
 
 	int queryAllActivitiesCount();
 

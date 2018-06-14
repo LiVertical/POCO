@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	queryProducts(1);
+	queryWorkTypeInfo();
 });
 
 function queryProducts(page) {
@@ -16,7 +17,6 @@ function queryProducts(page) {
 					for (var i = 0; i < result.productInfos.length; i++) {
 						tbody += "<li><div class='boxs_middle'> "
 						  + "<img onclick='queryProductInfos(&quot;"+ result.productInfos[i].productId +"&quot;)' src='"
-						  /*+ getRootPath()*/
 						  + "/" + result.productInfos[i].productPath
 						  + "'></div><div class='boxs_right'><p style='color:indianred'>***********************</p><p class='title'>标题 "
 						  + result.productInfos[i].productName
@@ -129,7 +129,13 @@ function queryProductsByType(type){
 
 //查询作品类型
 function queryWorkTypeInfo(){
-	$.post(getRootPath() + "/vistor/querySonTypeByFatherType.action?typeValue="+work, function(data){
-		
+	$.post(getRootPath() + "/vistor/querySonTypeByFatherType.action?typeValue=work", function(data){
+		if(data.returnCode == '00'){
+			var html = "";
+			for(var i = 0; i < data.typeInfo.length; i++){
+				html += "<li onclick='queryProductsByType(&quot;" + data.typeInfo[i].typeId + "&quot;)'><p>" + data.typeInfo[i].typeName + "</p></li>"; 
+			}
+			$("#nav").html(html);
+		}
 	});
 }

@@ -19,7 +19,7 @@ public class ProductOperatorDao extends BaseDao {
 
 	Logger logger = Logger.getLogger(this.getClass());
 
-	public void doSaveProductInfo(String url, String productName, int proType,String productDesc, String productUser, String productGroupId,String activityId, String contestId) {
+	public void doSaveProductInfo(String url, String productName, String proType,String productDesc, String productUser, String productGroupId,String activityId, String contestId) {
 		ProductInfo productInfo = new ProductInfo();
 		productInfo.setProductId(UUIDUtil.generateUUID());
 		productInfo.setProductName(productName);
@@ -78,13 +78,10 @@ public class ProductOperatorDao extends BaseDao {
 	}
 	
 	//按类型查询
-	public List<Map> queryProductByCondition(int proType, int recordSize,int currentPage) {
+	public List<Map> queryProductByCondition(String proType, int recordSize,int currentPage) {
 		List<Map> list = null;
-		if ((proType <= 0 || proType > 8) && proType != 100) {
-			return null;
-		}
 		String hql = "FROM ProductInfo";
-		if (proType != 100) {
+		if(!proType.equals("100")) {
 			hql += " WHERE  productTypes = '" + proType + "'";
 			list = getSession().createQuery(hql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
 		}else{
@@ -93,24 +90,14 @@ public class ProductOperatorDao extends BaseDao {
 		return list;
 	}
 	
-	public int getTotalRecords(int proType){
+	public int getTotalRecords(String proType){
 		String hql = "FROM ProductInfo";		
 		int totalRecords = 0;	
-		Query query;
-		List<ProductInfo> list;
-		if((proType<=0 || proType>8) && proType!=100)
-			return 0;
-			if(proType==100){
-				query = getSession().createQuery(hql);		
-				list = query.list();
-				totalRecords = list.size();
-			}else{
-				hql+=" WHERE productTypes='"+proType+"'";
-				query = getSession().createQuery(hql);
-				list = query.list();
-				totalRecords = list.size();
-			}
-		logger.info("作品数量:"+totalRecords);
+		List<ProductInfo> list = new ArrayList<ProductInfo>();
+		if(!proType.equals("100")){
+			hql+=" WHERE productTypes='"+proType+"'";
+		}
+		totalRecords = getSession().createQuery(hql).list().size();
 		return totalRecords;
 	}
 	
@@ -174,10 +161,10 @@ public class ProductOperatorDao extends BaseDao {
 		return productInfos;
 	}
 
-	public List<ProductInfo> doQueryProductsByType(int proType) {
+	public List<ProductInfo> doQueryProductsByType(String proType) {
 		String hql = "";
 		hql = "FROM ProductInfo WHERE productTypes= '" + proType + "'";
-		if(proType == 100){
+		if(proType == null){
 			hql =  "FROM ProductInfo";
 		}
 		return getSession().createQuery(hql).list();

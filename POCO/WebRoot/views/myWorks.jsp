@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>标题</td>
 						<td>作品</td>
 						<td>作品描述</td>
-						<td>作品类型</td>
+						<!-- <td>作品类型</td> -->
 						<td>上传时间</td>
 						<td>操作</td>
 					</tr>

@@ -184,7 +184,7 @@ function gotoLogin() {
                         账号:
                     </div>
                     <div class="col-xs-6">
-                        <input type="text" name="loginName" id="username" value="" placeholder="&nbsp;&nbsp;邮箱/手机号" onBlur="javascript:ok_or_errorByRegister(this)" />
+                        <input type="text" name="loginName" id="username" value="" placeholder="&nbsp;&nbsp;1-8位英文字符" onBlur="javascript:ok_or_errorByRegister(this)" />
                     </div>
                     <div class="col-xs-1 ok_gou">
                         √

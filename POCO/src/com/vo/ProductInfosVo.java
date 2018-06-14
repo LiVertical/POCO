@@ -9,7 +9,7 @@ public class ProductInfosVo {
 	private Date uploadTime;
 	private String productPath;
 	private String productDesc;
-	private Integer productTypes;
+	private String productTypes;
 	private Integer productOrder;
 	private String workId;
 	private String productUserName;
@@ -21,7 +21,7 @@ public class ProductInfosVo {
 
 	public ProductInfosVo(String productId, String productName,
 			Date uploadTime, String productPath, String productDesc,
-			Integer productTypes, Integer productOrder, String workId,
+			String productTypes, Integer productOrder, String workId,
 			String productUserName, String productGroupId) {
 		super();
 		this.productId = productId;
@@ -65,12 +65,13 @@ public class ProductInfosVo {
 	public void setProductDesc(String productDesc) {
 		this.productDesc = productDesc;
 	}
-	public Integer getProductTypes() {
+	public String getProductTypes() {
 		return productTypes;
 	}
-	public void setProductTypes(Integer productTypes) {
+	public void setProductTypes(String productTypes) {
 		this.productTypes = productTypes;
 	}
+
 	public Integer getProductOrder() {
 		return productOrder;
 	}

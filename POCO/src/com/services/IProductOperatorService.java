@@ -17,11 +17,11 @@ public interface IProductOperatorService {
 	//根据Id查询作品
 	ProductInfo findById(String productId);
 	
-	List<Map> queryProductByCondition(int proType,int recordSize,int currentPage);
+	List<Map> queryProductByCondition(String proType,int recordSize,int currentPage);
 	
 	List<ProductInfo> queryPorductByUser(String userId,int recordSize,int curPage);
 
-	int getTotalRecords(int proType);
+	int getTotalRecords(String proType);
 	
 	int getTotalRecordsByUser(String userId);
 
@@ -31,11 +31,11 @@ public interface IProductOperatorService {
 
 	List<ProductInfo> doQueryProductInfosByProductId(String productId);
 
-	List<ProductInfo> queryProductByType(int proType);
+	List<ProductInfo> queryProductByType(String proType);
 
 	int doQueryProductCount(int recordSize, int currentPage, String productName);
 
-	void saveProductInfo(String url, String productName, int proType, String productDesc, String productUser, String productGroupId,
+	void saveProductInfo(String url, String productName, String proType, String productDesc, String productUser, String productGroupId,
 			String activityId, String contestId);
 
 }

@@ -7,6 +7,7 @@ import com.dao.ActivityDao;
 import com.dao.UserDao;
 import com.entities.Activities;
 import com.services.IActivityService;
+import com.vo.ActivityInfoVo;
 
 public class ActivityService implements IActivityService {
 	private UserDao userDao;
@@ -26,7 +27,7 @@ public class ActivityService implements IActivityService {
 	}
 	
 	@Override
-	public List<Activities> queryAllActivitiesByCondition(int currentPage,int recordSize,Integer auditStatus) {
+	public List<ActivityInfoVo> queryAllActivitiesByCondition(int currentPage,int recordSize,Integer auditStatus) {
 		return activityDao.doQueryAllActivities(currentPage,recordSize,auditStatus);
 	}
 

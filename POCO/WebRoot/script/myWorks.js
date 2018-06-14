@@ -43,7 +43,7 @@ function queryProducts(page) {
 		              + "<td style='height:150px;width:150px;'>"+ data.worksInfo[i].workName +"</td>"
 		              + "<td><ul>" + products + "</ul></td>"
 		              + "<td style='word-break'>" + data.worksInfo[i].workComment + "</td>"
-		              + "<td style='word-break'>" + types(data.worksInfo[i].workType) + "</td>"
+		              //+ "<td style='word-break'>" + types(data.worksInfo[i].workType) + "</td>"
 					  
 					  + "<td style='word-break'>" + data.worksInfo[i].workUploadTime.substring(0,16) + "</td>"
 					  + "<td><img style='height:30px;width:44px' src='"+getRootPath()+"/img/icons/delete.jpg' class='delBtn' onclick='deleteWork(&quot;"+data.worksInfo[i].workId+"&quot;)'></td></tr>";

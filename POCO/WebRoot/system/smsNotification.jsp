@@ -190,7 +190,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				 <p> 标题：</p>
   				 <input type="text" placeholder="请输入标题" id="notificationTitle" name="notificationTitle"><br/>
  				 <p>通知内容：</p>
- 				 <textarea id="notificationInfo" placeholder="请输入活动介绍" maxlength="100" name="notificationInfo" cols="30" rows="3" align="center"></textarea>
+ 				 <textarea id="notificationInfo" placeholder="请输入活动介绍" style="" maxlength="100" name="notificationInfo" cols="30" rows="3" align="center"></textarea>
  				 <br/>
   				 <button class="send" id="submit">发布</button>
   				</div>

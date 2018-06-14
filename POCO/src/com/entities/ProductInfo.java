@@ -15,7 +15,7 @@ public class ProductInfo implements java.io.Serializable {
 	private Date uploadTime;
 	private String productPath;
 	private String productDesc;
-	private Integer productTypes;
+	private String productTypes;
 	private Integer productOrder;
 	private String workId;
 	private String productUser;
@@ -31,7 +31,7 @@ public class ProductInfo implements java.io.Serializable {
 	}
 
 	public ProductInfo(String productId, String productName, Date uploadTime,
-			String productPath, String productDesc, Integer productTypes,
+			String productPath, String productDesc, String productTypes,
 			Integer productOrder, String workId, String productUser,
 			String productGroupId, Integer productDel, String activityId, String contestId) {
 		super();
@@ -90,11 +90,11 @@ public class ProductInfo implements java.io.Serializable {
 		this.productDesc = productDesc;
 	}
 
-	public Integer getProductTypes() {
+	public String getProductTypes() {
 		return productTypes;
 	}
 
-	public void setProductTypes(Integer productTypes) {
+	public void setProductTypes(String productTypes) {
 		this.productTypes = productTypes;
 	}
 
@@ -153,5 +153,6 @@ public class ProductInfo implements java.io.Serializable {
 	public void setContestId(String contestId) {
 		this.contestId = contestId;
 	}
+
 
 }

@@ -79,6 +79,7 @@ $(function(){
 		$.post(getRootPath()+"/user/applyActivity.action", params, function(data){
 			if(data.returnCode == '00'){
 				alert("申请成功");
+				window.location.reload();
 			}else{
 				alert("申请失败");
 			}

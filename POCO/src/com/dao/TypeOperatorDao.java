@@ -26,8 +26,15 @@ public class TypeOperatorDao extends BaseDao{
 	}
 
 	public List<Types> findList(String typeValue) {
-		String hql = "FROM Types WHERE fatherType ='"+typeValue+"'";
-		return getSession().createQuery(hql).list();
+		String hql = "FROM Types WHERE typeValue ='"+typeValue+"'";
+		List<Types> types = new ArrayList<Types>();
+		types = getSession().createQuery(hql).list();
+		Types type = new Types();
+		if(types.size() > 0){
+			type = types.get(0);
+		}
+		String sql2 = "FROM Types WHERE fatherType='"+type.getTypeId()+"'";
+		return getSession().createQuery(sql2).list();
 	}
 
 	public Types find(String typeValue) {

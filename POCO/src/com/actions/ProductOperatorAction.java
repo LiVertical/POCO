@@ -55,7 +55,7 @@ public class ProductOperatorAction extends ActionSupport {
 	private InputStream inputStream;
 	private String productIds;
 	private List<ProductInfo> productInfos;
-	private int proType;
+	private String proType;
 	private int currentPage;
 	private int recordSize;
 	private String condition;
@@ -467,11 +467,11 @@ public class ProductOperatorAction extends ActionSupport {
 			this.userName = userName;
 		}
 
-		public int getProType() {
+		public String getProType() {
 			return proType;
 		}
 
-		public void setProType(int proType) {
+		public void setProType(String proType) {
 			this.proType = proType;
 		}
 

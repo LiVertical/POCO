@@ -34,7 +34,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		min-height:300px;
 		width:30%;
 		text-align:left;
-		float:left;
 	}
 	.desc p{
 		padding:20px;

@@ -104,9 +104,6 @@ public class SysNotificationAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-	public String showDetial(){
-		return "detail";
-	}
 	/**
 	 * 查看一条通知
 	 * @return

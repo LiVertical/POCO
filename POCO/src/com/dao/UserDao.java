@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
+import com.constants.UserConstants;
 import com.entities.Users;
 import com.util.MD5;
 
@@ -77,7 +78,7 @@ public class UserDao extends BaseDao{
 	}
 
 	public List<Users> queryUsers() {
-		String hql = "FROM Users";
+		String hql = "FROM Users WHERE role = "+ UserConstants.COMMON_USER_ROLE;
 		List<Users> list = getSession().createQuery(hql).list();
 		return list;
 	}

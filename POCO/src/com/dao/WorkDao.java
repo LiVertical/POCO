@@ -291,7 +291,12 @@ public class WorkDao extends BaseDao{
 			String productGroupId = info.getProductGroupId();
 			String sql2 = "FROM ProductInfo WHERE productGroupId='"+productGroupId+"'";
 			List<ProductInfo> products = getSession().createQuery(sql2).list();
+			infos.setWorkId(info.getWorkId());
 			infos.setProductInfos(products);
+			infos.setUserId(info.getUserId());
+			infos.setWorkName(info.getWorkName());
+			infos.setWorkType(info.getWorkType());
+			info.setWorkComment(info.getWorkComment());
 			worksInfos.add(infos);
 		}
 		return worksInfos;

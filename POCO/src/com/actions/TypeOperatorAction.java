@@ -58,8 +58,8 @@ public class TypeOperatorAction extends ActionSupport{
 				result.put("returnCode", "10");
 				result.put("returnMsg", "参数错误");
 			}
-			result.put("workTypeInfo", typeOperatorService.findList(typeValue));
-			result.put("retunCode", "00");
+			result.put("typeInfo", typeOperatorService.findList(typeValue));
+			result.put("returnCode", "00");
 			result.put("returnMsg", "查询成功！");
 		} catch (Exception e) {
 			logger.error("查询子类信息失败", e);

@@ -2,6 +2,7 @@ package com.dao;
 
 import java.io.File;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,9 +11,11 @@ import org.apache.struts2.ServletActionContext;
 
 import com.constants.ActivityConstants;
 import com.entities.Activities;
+import com.entities.Users;
 import com.util.DateUtil;
 import com.util.UUIDUtil;
 import com.util.UploadFileUtil;
+import com.vo.ActivityInfoVo;
 
 public class ActivityDao extends BaseDao {
 	
@@ -82,7 +85,7 @@ public class ActivityDao extends BaseDao {
 		if(curStatus == ActivityConstants.ACTIVITY_STATUS_PASSED){
 			status = ActivityConstants.ACTIVITY_STATUS_PASSED;
 		}
-		String hql = "UPDATE Activities SET curStatus="+status+", auditStatus=" + ActivityConstants.ACTIVITY_AUDIT_STATUS_ALREADY;
+		String hql = "UPDATE Activities SET curStatus="+status+", auditStatus=" + ActivityConstants.ACTIVITY_AUDIT_STATUS_ALREADY + "WHERE activityId ='"+activityId+"'";
 		getSession().createQuery(hql).executeUpdate();
 	}
 
@@ -97,10 +100,32 @@ public class ActivityDao extends BaseDao {
 	}
 
 
-	public List<Activities> doQueryAllActivities(int currentPage,int recordSize,Integer auditStatus) {
-		return getSession().createQuery("FROM Activities WHERE auditStatus="+auditStatus)
-				.setFirstResult((currentPage-1)*recordSize)
-				.setMaxResults(recordSize).list();
+	public List<ActivityInfoVo> doQueryAllActivities(int currentPage,int recordSize,Integer auditStatus) {
+		List<ActivityInfoVo> activitysInfoVo = new ArrayList<ActivityInfoVo>();
+		List<Activities> activities = new ArrayList<Activities>();
+		String sql = "FROM Activities WHERE auditStatus="+auditStatus;
+		activities = getSession().createQuery(sql).setFirstResult((currentPage-1)*recordSize).setMaxResults(recordSize).list();
+		for(Activities  activityInfo : activities){
+			ActivityInfoVo activityInfoVo = new ActivityInfoVo();
+			String sql2 = "FROM Users WHERE userId = '" + activityInfo.getUserId() + "'";
+			List<Users> users = new ArrayList<Users>();
+			users = getSession().createQuery(sql2).list();
+			Users user = new Users();
+			if(users.size() > 0){
+				user = users.get(0);
+				activityInfoVo.setActivityUser(user.getUserName());
+			}
+			activityInfoVo.setActivityId(activityInfo.getActivityId());
+			activityInfoVo.setActivityName(activityInfo.getActivityName());
+			activityInfoVo.setActivityDesc(activityInfo.getActivityDesc());
+			activityInfoVo.setAuditStatus(activityInfo.getAuditStatus());
+			activityInfoVo.setApplyTime(activityInfo.getApplyTime());
+			activityInfoVo.setStartTime(activityInfo.getCreateTime());
+			activityInfoVo.setCurStatus(activityInfo.getCurStatus());
+			activityInfoVo.setEndTime(activityInfo.getEndTime());
+			activitysInfoVo.add(activityInfoVo);
+		}
+		return activitysInfoVo;
 	}
 
 

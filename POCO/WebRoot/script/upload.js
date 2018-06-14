@@ -8,6 +8,7 @@ $(document).ready(function(){
 	//初始化文本编辑器
 	 $('#summernote').summernote();
 
+	 queryWorkTypes();
 
 function upload(){
 	var productName = $("input[name='productName']").val().trim();
@@ -134,12 +135,12 @@ function uploadWork(){
 
 //查询类别 
 function queryWorkTypes(){
-	$.post(getRootPath() + "/user/querySonTypeOfWork.action", function(data){
+	$.post(getRootPath() + "/vistor/querySonTypeByFatherType.action?typeValue=work", function(data){
 		if(data.returnCode == '00'){
 			var html = "";
-			for(var i = 0; i < data.sonTypeInfos.length; i++){
-				html += "<option value='" + data.sonTypeInfos[i].typeId +"'>" 
-					 + data.sonTypeInfos[i].typeName + "</option>";
+			for(var i = 0; i < data.typeInfo.length; i++){
+				html += "<option value='" + data.typeInfo[i].typeId +"'>" 
+					 + data.typeInfo[i].typeName + "</option>";
 			}
 			$("#workType").html(html);
 		}
